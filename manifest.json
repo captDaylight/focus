@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "Focus",
+  "description": "productivity",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": {
+      "19": "focus.png",
+      "38": "focus38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
