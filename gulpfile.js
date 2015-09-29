@@ -7,7 +7,7 @@ gulp.task('default',
 	[
 		// 'copy', 			// copy images and fonts to the public folder
 		'style', 
-		'javascript'
+		'javascript',
 		// 'watch',
 	]);
 

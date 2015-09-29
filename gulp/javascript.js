@@ -10,19 +10,20 @@ var envify     = require('envify/custom');
 var livereload = require('gulp-livereload');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
+var argv = require('yargs').argv; // take values from command line
 
-
+console.log(argv.jsfile);
 gulp.task('javascript', function () {
 	// set up the browserify instance on a task basis
 	var b = browserify({
-		entries: './src/js/background.js',
+		entries: `./src/js/${argv.jsfile}.js`,
 		debug: true,
 		// defining transforms here will avoid crashing your stream
 		transform: [babel,reactify]
 	});
 
 	return b.bundle()
-		.pipe(source('background.js'))
+		.pipe(source(`${argv.jsfile}.js`))
 		.pipe(buffer())
 		.pipe(sourcemaps.init({loadMaps: true}))
 			// Add transformation tasks to the pipeline here.
@@ -30,4 +31,8 @@ gulp.task('javascript', function () {
 			.on('error', gutil.log)
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/js/'));
+
+  // gulp.src('./src/js/*.js')
+  //   .pipe(uglify())
+  //   .pipe(gulp.dest('dist/js'));
 });

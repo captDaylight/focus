@@ -32,7 +32,8 @@
     "require-dir": "^0.3.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "vinyl-transform": "^1.0.0"
+    "vinyl-transform": "^1.0.0",
+    "yargs": "^3.26.0"
   },
   "engine": "node 4.1.1"
 }

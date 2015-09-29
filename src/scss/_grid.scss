@@ -1,38 +1,38 @@
 @import "neat/neat";
 
-$gutter: 30px;
-$max-container: 980px;
-$laptop: new-breakpoint(max-width ($max-container + ($gutter * 2)) 4);
-$tablet: new-breakpoint(max-width 775px 4);
-$mobile: new-breakpoint(max-width 480px 4);
+// $gutter: 30px;
+// $max-container: 980px;
+// $laptop: new-breakpoint(max-width ($max-container + ($gutter * 2)) 4);
+// $tablet: new-breakpoint(max-width 775px 4);
+// $mobile: new-breakpoint(max-width 480px 4);
 
-.container{
-	@include outer-container($max-container);
+// .container{
+// 	@include outer-container($max-container);
 
-	@include media($laptop) {
-		box-sizing: border-box;
-		margin-right: $gutter;
-		margin-left: $gutter;
-	}
-	@include media($tablet) {
-		.fourth {
-			@include span-columns(2);
-			margin-bottom: 20px;
-			&.nope{
-				margin-right: 0px;
-			}
-		}
-	}
-}
-.third {
-	@include span-columns(4);
-}
-.fourth {
-	@include span-columns(3);
-}
-.half-third{
-	@include span-columns(2 of 4);
-}
-.last {
-	@include omega;
-}
+// 	@include media($laptop) {
+// 		box-sizing: border-box;
+// 		margin-right: $gutter;
+// 		margin-left: $gutter;
+// 	}
+// 	@include media($tablet) {
+// 		.fourth {
+// 			@include span-columns(2);
+// 			margin-bottom: 20px;
+// 			&.nope{
+// 				margin-right: 0px;
+// 			}
+// 		}
+// 	}
+// }
+// .third {
+// 	@include span-columns(4);
+// }
+// .fourth {
+// 	@include span-columns(3);
+// }
+// .half-third{
+// 	@include span-columns(2 of 4);
+// }
+// .last {
+// 	@include omega;
+// }

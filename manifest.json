@@ -16,13 +16,13 @@
     "activeTab"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["dist/js/background.js"],
     "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"]
+      "js": ["dist/js/content.js"]
     }
   ]
 }
