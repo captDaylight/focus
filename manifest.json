@@ -23,7 +23,11 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["dist/js/content.js"]
+      "js": ["dist/js/content.js"],
+      "run_at": "document_start"
     }
-  ]
+  ],
+  "chrome_url_overrides" : {
+    "newtab": "newtab.html"
+  }
 }
