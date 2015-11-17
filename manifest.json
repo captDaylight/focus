@@ -7,13 +7,14 @@
 
   "browser_action": {
     "default_icon": {
-      "19": "focus.png",
-      "38": "focus38.png"
+      "19": "dist/img/focus.png",
+      "38": "dist/img/focus38.png"
     },
     "default_popup": "popup.html"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "background": {
     "scripts": ["dist/js/background.js"],

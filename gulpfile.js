@@ -5,10 +5,10 @@ var requireDir = require('require-dir')('./gulp');
 
 gulp.task('default', 
 	[
-		// 'copy', 			// copy images and fonts to the public folder
+		'image', 			// copy images and fonts to the public folder
 		'style', 
 		'javascript',
-		// 'watch',
+		'watch',
 	]);
 
 // gulp.task('build', 

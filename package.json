@@ -35,5 +35,8 @@
     "vinyl-transform": "^1.0.0",
     "yargs": "^3.26.0"
   },
-  "engine": "node 4.1.1"
+  "engine": "node 4.1.1",
+  "dependencies": {
+    "redux": "^3.0.4"
+  }
 }

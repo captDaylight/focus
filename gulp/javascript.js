@@ -19,7 +19,7 @@ gulp.task('javascript', function () {
 		entries: `./src/js/${argv.jsfile}.js`,
 		debug: true,
 		// defining transforms here will avoid crashing your stream
-		transform: [babel,reactify]
+		transform: [[babel, { "stage": "2" }],reactify]
 	});
 
 	return b.bundle()
