@@ -6,8 +6,8 @@ const store = createStore(rootReducer);
 store.subscribe(() =>
 	console.log(store.getState())
 )
-
-chrome.storage.sync.set({store: store});
+console.log(store);
+chrome.storage.sync.set({state: store.getState()});
 
 store.dispatch(addAWebsite('www.google.com'));
 // store.dispatch(addAWebsite('www.test.com'));
