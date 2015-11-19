@@ -37,6 +37,7 @@
   },
   "engine": "node 4.1.1",
   "dependencies": {
+    "react-dom": "^0.14.3",
     "redux": "^3.0.4",
     "url": "^0.11.0"
   }

@@ -16,6 +16,6 @@ console.log('paul');
 
 console.log(chrome);
 console.log(chrome.storage);
-chrome.storage.sync.get('test', val => {
-	console.log(val);
+chrome.storage.sync.get('store', store => {
+	console.log(store);
 });

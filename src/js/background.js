@@ -7,12 +7,12 @@ store.subscribe(() =>
 	console.log(store.getState())
 )
 
+chrome.storage.sync.set({store: store});
+
 store.dispatch(addAWebsite('www.google.com'));
 // store.dispatch(addAWebsite('www.test.com'));
 
-chrome.storage.sync.set({test: true}, () => {
-	console.log('test set');
-});
+
 
 // chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 // 	switch(request.type) {
