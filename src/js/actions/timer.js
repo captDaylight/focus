@@ -5,3 +5,10 @@ export function setTimer(date) {
 		date
 	}
 }
+
+export const CLEAR_TIMER = 'CLEAR_TIMER';
+export function clearTimer() {
+	return {
+		type: CLEAR_TIMER,
+	}
+}

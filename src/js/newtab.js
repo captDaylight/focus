@@ -20,9 +20,10 @@ chrome.storage.sync.get('state', state => {
 	  document.getElementById('mount-point')
 	);
 
-	store.subscribe(() =>
-		console.log('store updated',store.getState())
-	)
+	store.subscribe(() => {
+		console.log('store updated',store.getState());
+		chrome.storage.sync.set({state: store.getState()});
+	})
 });
 
 

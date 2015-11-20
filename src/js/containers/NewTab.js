@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { setTimer } from '../actions/timer';
+import { 
+	setTimer,
+	clearTimer,
+} from '../actions/timer';
 
 export default class NewTab extends Component {
+	componentWillMount() {
+		const { date } = this.props.timer;
+		const { clearTimer } = this.props.actions;
+		console.log('hmm');
+		if (date < Date.now()) {
+			clearTimer();
+		}
+	}
 	render() {
 		const { date } = this.props.timer;
 		const { setTimer } = this.props.actions;
@@ -33,6 +44,7 @@ function mapActionsToProps(dispatch) {
   return {
     actions: bindActionCreators({
     	setTimer,
+    	clearTimer,
     }, dispatch)
   }
 }
