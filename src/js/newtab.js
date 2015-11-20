@@ -19,9 +19,10 @@ chrome.storage.sync.get('state', state => {
 		</Provider>,
 	  document.getElementById('mount-point')
 	);
+
+	store.subscribe(() =>
+		console.log('store updated',store.getState())
+	)
 });
 
 
-// store.subscribe(() =>
-// 	console.log(store.getState())
-// )
