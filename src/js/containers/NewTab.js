@@ -5,29 +5,39 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds'
 import { 
 	setTimer,
 	clearTimer,
+	countDown,
 } from '../actions/timer';
 
 export default class NewTab extends Component {
 	componentWillMount() {
 		const { date } = this.props.timer;
-		const { clearTimer } = this.props.actions;
+		const { clearTimer, countDown } = this.props.actions;
 		
 		if (date < Date.now()) {
 			clearTimer();
+		} else {
+			countDown(date);
 		}
 	}
+	handleSetTimer() {
+		const { setTimer, countDown } = this.props.actions;
+		const countDownTil = Date.now() + 5000;
+
+		setTimer(countDownTil);
+		countDown(countDownTil);
+	}
 	render() {
-		const { date } = this.props.timer;
-		const { setTimer } = this.props.actions;
+		const { date, minutes, seconds } = this.props.timer;
+		
 		return (
 			<section>
 				<h1>FOCUS</h1>
 				{
 					date
 					?
-						<MinutesAndSeconds date={date} />
+						<MinutesAndSeconds minutes={minutes} seconds={seconds} />
 					: (
-						<button onClick={() => setTimer(Date.now() + 180000)}> 
+						<button onClick={this.handleSetTimer.bind(this)}> 
 							Set Timer
 						</button>	
 					)
@@ -49,6 +59,7 @@ function mapActionsToProps(dispatch) {
     actions: bindActionCreators({
     	setTimer,
     	clearTimer,
+    	countDown,
     }, dispatch)
   }
 }
