@@ -27,7 +27,8 @@ chrome.storage.sync.get('state', state => {
 
 	store.subscribe(() => {
 		console.log('store updated',store.getState());
-		chrome.storage.sync.set({state: store.getState()});
+		// should not be deing this every second like I was...
+		// chrome.storage.sync.set({state: store.getState()});
 	})
 });
 

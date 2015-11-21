@@ -47,22 +47,23 @@ function doubleDigit(amount) {
 
 export function countDown(date) {
 	return dispatch => {
-		const setTime = () => {
+		const setTime = (interval) => {
 			const fromNow = date - Date.now();
 			if (fromNow >= 0) {
 				const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
 				const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
 				dispatch(setTimeLeft(minutes, seconds));				
 			} else {
+				clearInterval(interval);
 				dispatch(clearCountdownInterval())
 			}
 		};
 
-		setTime();
-
 		const countdownInterval = setInterval(() => {
-			setTime();
+			setTime(countdownInterval);
 		}, 1000);
+
+		setTime(countdownInterval);
 
 		dispatch(setCountdownInterval(countdownInterval));
 	}
