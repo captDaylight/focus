@@ -27,7 +27,7 @@ export default class NewTab extends Component {
 					?
 						<MinutesAndSeconds date={date} />
 					: (
-						<button onClick={() => setTimer(Date.now() + 120000)}> 
+						<button onClick={() => setTimer(Date.now() + 180000)}> 
 							Set Timer
 						</button>	
 					)
