@@ -5,6 +5,7 @@ import {
 
 const initialState = {
 	date: null,
+	timeRemaining: null,
 };
 
 export default function timer(state=initialState, action) {

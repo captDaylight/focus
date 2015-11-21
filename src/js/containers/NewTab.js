@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import MinutesAndSeconds from '../components/MinutesAndSeconds'
 import { 
 	setTimer,
 	clearTimer,
@@ -10,7 +11,7 @@ export default class NewTab extends Component {
 	componentWillMount() {
 		const { date } = this.props.timer;
 		const { clearTimer } = this.props.actions;
-		console.log('hmm');
+		
 		if (date < Date.now()) {
 			clearTimer();
 		}
@@ -24,9 +25,12 @@ export default class NewTab extends Component {
 				{
 					date
 					?
-					date
-					: 
-					<button onClick={() => setTimer(Date.now())}>Set Timer</button>	
+						<MinutesAndSeconds date={date} />
+					: (
+						<button onClick={() => setTimer(Date.now() + 120000)}> 
+							Set Timer
+						</button>	
+					)
 				}
 				
 			</section>
