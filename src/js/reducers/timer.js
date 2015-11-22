@@ -25,8 +25,6 @@ export default function timer(state=initialState, action) {
 
 		case SET_TIME_LEFT:
 			const { minutes, seconds } = action;
-			console.log('setting time left', minutes, seconds);
-			console.log({...state, minutes, seconds });
 			return {...state, minutes, seconds };
 
 		case SET_COUNTDOWN_INTERVAL:
@@ -34,7 +32,7 @@ export default function timer(state=initialState, action) {
 
 		case CLEAR_COUNTDOWN_INTERVAL:
 			return initialState;
-			
+
 		default:
 			return state;
 	}

@@ -59,12 +59,20 @@ export function countDown(date) {
 			}
 		};
 
-		const countdownInterval = setInterval(() => {
-			setTime(countdownInterval);
-		}, 1000);
+		// start interval when you are on top of a second, otherwise you might
+		// open the browser mid second and have timers that are out of sync
+		setTimeout(() => {
+			// set time everysecond
+			const countdownInterval = setInterval(() => {
+				setTime(countdownInterval); // set times each interval
+			}, 1000);			
+			
+			setTime(countdownInterval); // set time first after timeout
+			dispatch(setCountdownInterval(countdownInterval));
+		}, (date - Date.now()) % SECOND ); 
 
-		setTime(countdownInterval);
+		setTime(); // initial time before timeout
 
-		dispatch(setCountdownInterval(countdownInterval));
+
 	}
 }

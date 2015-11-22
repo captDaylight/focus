@@ -17,7 +17,7 @@ chrome.storage.sync.get('state', state => {
 	)(createStore);
 
 	const store = createAndComposeStore(rootReducer, state.state);
-
+	console.log('INIT',state.state);
 	ReactDOM.render(
 		<Provider store={store}>
 			<NewTab /> 
@@ -25,10 +25,15 @@ chrome.storage.sync.get('state', state => {
 	  document.getElementById('mount-point')
 	);
 
+	let date = state.state.timer.date;
 	store.subscribe(() => {
-		console.log('store updated',store.getState());
-		// should not be deing this every second like I was...
-		// chrome.storage.sync.set({state: store.getState()});
+		// only update each time a new time is set
+		// hourly max set quota is 1800, or once every 2 seconds
+		if (date !== store.getState().timer.date) {
+			// should not be deing this every second like I was...
+			chrome.storage.sync.set({state: store.getState()});
+			date = store.getState().timer.date;
+		}
 	})
 });
 
