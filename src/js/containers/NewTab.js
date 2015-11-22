@@ -21,7 +21,7 @@ export default class NewTab extends Component {
 	}
 	handleSetTimer() {
 		const { setTimer, countDown } = this.props.actions;
-		const countDownTil = Date.now() + 70000;
+		const countDownTil = Date.now() + 5000;
 
 		setTimer(countDownTil);
 		countDown(countDownTil);
@@ -42,6 +42,11 @@ export default class NewTab extends Component {
 						</button>	
 					)
 				}
+
+				<form>
+					<input type="text" placeholder="website to block" /> 
+					<button>Add website</button>
+				</form>
 				
 			</section>
 		);
