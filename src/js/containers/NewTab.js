@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Formsy, { Form } from 'formsy-react';
 import FocusInput from '../components/FocusInput';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
+import WebsiteList from '../components/WebsiteList';
 import { 
 	setTimer,
 	clearTimer,
@@ -46,33 +47,16 @@ export default class NewTab extends Component {
 				<h1>FOCUS</h1>
 				{
 					date
-					?
-						<MinutesAndSeconds minutes={minutes} seconds={seconds} />
-					: (
-						<button onClick={this.handleSetTimer.bind(this)}> 
-							Set Timer
-						</button>	
-					)
+					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+					: <button onClick={this.handleSetTimer.bind(this)}>Set Timer</button>
 				}
 
-				<Form onSubmit={this.handleSubmit.bind(this)}>
+				<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
 					<FocusInput name="website" placeholder="Website" />
 					<button>Submit</button>
 				</Form>
-				<ul>
-				{
-					items.map((website, idx) => {
-						return (
-							<li key={idx}>
-								{website.name}
-								<button onClick={removeWebsite.bind(null, website.id)}>
-									Remove Website
-								</button>
-							</li>
-						);
-					})
-				}
-				</ul>
+
+				<WebsiteList websites={items} removeWebsite={removeWebsite} />
 			</section>
 		);
 	}

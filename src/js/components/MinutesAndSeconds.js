@@ -11,4 +11,3 @@ export default function MinutesAndSeconds(props) {
 		</div>
 	)	
 }
-

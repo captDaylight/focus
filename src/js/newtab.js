@@ -15,7 +15,7 @@ chrome.storage.sync.get('state', state => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
-
+	console.log(state.state);
 	const store = createAndComposeStore(rootReducer, state.state);
 	
 	ReactDOM.render(
