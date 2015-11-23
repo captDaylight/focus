@@ -10,7 +10,8 @@ import {
 	countDown,
 } from '../actions/timer';
 import {
-	addAWebsite,
+	addWebsite,
+	removeWebsite,
 } from '../actions/websites';
 
 export default class NewTab extends Component {
@@ -32,10 +33,13 @@ export default class NewTab extends Component {
 		countDown(countDownTil);
 	}
 	handleSubmit(data) {
-		console.log('website submit:', data);
+		const { addWebsite } = this.props.actions;
+		addWebsite(data.website);
 	}
 	render() {
 		const { date, minutes, seconds } = this.props.timer;
+		const { removeWebsite } = this.props.actions;
+		const { items } = this.props.websites;
 		
 		return (
 			<section>
@@ -55,7 +59,20 @@ export default class NewTab extends Component {
 					<FocusInput name="website" placeholder="Website" />
 					<button>Submit</button>
 				</Form>
-				
+				<ul>
+				{
+					items.map((website, idx) => {
+						return (
+							<li key={idx}>
+								{website.name}
+								<button onClick={removeWebsite.bind(null, website.id)}>
+									Remove Website
+								</button>
+							</li>
+						);
+					})
+				}
+				</ul>
 			</section>
 		);
 	}
@@ -63,7 +80,8 @@ export default class NewTab extends Component {
 
 function mapStateToProps(state) {
   return {
-    timer: state.timer
+    timer: state.timer,
+    websites: state.websites,
   }
 }
 
@@ -73,7 +91,8 @@ function mapActionsToProps(dispatch) {
     	setTimer,
     	clearTimer,
     	countDown,
-    	addAWebsite
+    	addWebsite,
+    	removeWebsite,
     }, dispatch)
   }
 }
