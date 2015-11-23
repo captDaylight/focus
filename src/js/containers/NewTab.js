@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Formsy, { Form } from 'formsy-react';
+import url from 'url';
 import FocusInput from '../components/FocusInput';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteList from '../components/WebsiteList';
@@ -35,7 +36,11 @@ export default class NewTab extends Component {
 	}
 	handleSubmit(data) {
 		const { addWebsite } = this.props.actions;
-		addWebsite(data.website);
+		const urlParse = url.parse(data.website);
+		const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
+		
+		addWebsite(hostname);
+		this.refs.form.reset();
 	}
 	render() {
 		const { date, minutes, seconds } = this.props.timer;
