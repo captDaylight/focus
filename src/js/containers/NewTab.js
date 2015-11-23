@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Formsy, { Form } from 'formsy-react';
 import url from 'url';
+import takeRight from 'lodash/array/takeRight';
 import FocusInput from '../components/FocusInput';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteList from '../components/WebsiteList';
@@ -38,8 +39,10 @@ export default class NewTab extends Component {
 		const { addWebsite } = this.props.actions;
 		const urlParse = url.parse(data.website);
 		const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
-		
-		addWebsite(hostname);
+		// turn www.facebook.com into facebook.com
+		const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
+
+		addWebsite(parsedHostname);
 		this.refs.form.reset();
 	}
 	render() {
