@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MinutesAndSeconds from '../components/MinutesAndSeconds'
+import Formsy, { Form } from 'formsy-react';
+import FocusInput from '../components/FocusInput';
+import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import { 
 	setTimer,
 	clearTimer,
 	countDown,
 } from '../actions/timer';
+import {
+	addAWebsite,
+} from '../actions/websites';
 
 export default class NewTab extends Component {
 	componentWillMount() {
@@ -26,6 +31,9 @@ export default class NewTab extends Component {
 		setTimer(countDownTil);
 		countDown(countDownTil);
 	}
+	handleSubmit(data) {
+		console.log('website submit:', data);
+	}
 	render() {
 		const { date, minutes, seconds } = this.props.timer;
 		
@@ -43,10 +51,10 @@ export default class NewTab extends Component {
 					)
 				}
 
-				<form>
-					<input type="text" placeholder="website to block" /> 
-					<button>Add website</button>
-				</form>
+				<Form onSubmit={this.handleSubmit.bind(this)}>
+					<FocusInput name="website" placeholder="Website" />
+					<button>Submit</button>
+				</Form>
 				
 			</section>
 		);
@@ -65,6 +73,7 @@ function mapActionsToProps(dispatch) {
     	setTimer,
     	clearTimer,
     	countDown,
+    	addAWebsite
     }, dispatch)
   }
 }
