@@ -12,6 +12,7 @@ import NewTab from './containers/NewTab'
 // store.dispatch(addAWebsite('www.google.com'));
 
 chrome.storage.sync.get('state', state => {
+	console.log('---');
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);

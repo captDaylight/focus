@@ -1,21 +1,15 @@
 import url from 'url';
+import findIndex from 'lodash/array/findIndex';
 
 const urlData = url.parse(window.location.href);
-console.log(urlData);
-console.log(urlData.hostname);
-console.log('paul');
-// let count = 0;
-// window.addEventListener("load", function() {
-// 		chrome.extension.sendMessage({
-// 				type: "hostname", 
-// 				data: {
-// 						myProperty: "value"
-// 				}
-// 		});
-// }, true);
 
-console.log(chrome);
-console.log(chrome.storage);
-chrome.storage.sync.get('store', store => {
-	console.log(store);
+chrome.storage.sync.get('state', state => {
+	const blockedSites = state.state.websites.items;
+	const idxOfSite = findIndex(blockedSites, site => urlData.href.indexOf(site.name));
+
+	if (idxOfSite >= 0) {
+		console.log('index found');
+	} else {
+		console.log('index not found');
+	}
 });
