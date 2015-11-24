@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Formsy, { Form } from 'formsy-react';
-import url from 'url';
-import takeRight from 'lodash/array/takeRight';
-import FocusInput from '../components/FocusInput';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
+import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
 import { 
 	setTimer,
@@ -35,19 +32,9 @@ export default class NewTab extends Component {
 		setTimer(countDownTil);
 		countDown(countDownTil);
 	}
-	handleSubmit(data) {
-		const { addWebsite } = this.props.actions;
-		const urlParse = url.parse(data.website);
-		const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
-		// turn www.facebook.com into facebook.com
-		const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
-
-		addWebsite(parsedHostname);
-		this.refs.form.reset();
-	}
 	render() {
 		const { date, minutes, seconds } = this.props.timer;
-		const { removeWebsite } = this.props.actions;
+		const { addWebsite, removeWebsite } = this.props.actions;
 		const { items } = this.props.websites;
 		
 		return (
@@ -58,12 +45,7 @@ export default class NewTab extends Component {
 					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 					: <button onClick={this.handleSetTimer.bind(this)}>Set Timer</button>
 				}
-
-				<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
-					<FocusInput name="website" placeholder="Website" />
-					<button>Submit</button>
-				</Form>
-
+				<WebsiteForm addWebsite={addWebsite} />
 				<WebsiteList websites={items} removeWebsite={removeWebsite} />
 			</section>
 		);
