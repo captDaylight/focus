@@ -12,11 +12,10 @@ import NewTab from './containers/NewTab'
 // store.dispatch(addAWebsite('www.google.com'));
 
 chrome.storage.sync.get('state', state => {
-	console.log('---');
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
-	console.log(state.state);
+	
 	const store = createAndComposeStore(rootReducer, state.state);
 	
 	ReactDOM.render(
