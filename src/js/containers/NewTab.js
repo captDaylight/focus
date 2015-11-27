@@ -19,15 +19,15 @@ export default class NewTab extends Component {
 		const { date } = this.props.timer;
 		const { clearTimer, countDown } = this.props.actions;
 		
-		if (date < Date.now()) {
-			clearTimer();
-		} else {
+		if (date > Date.now()) {
+		// 	clearTimer();
+		// } else {
 			countDown(date);
 		}
 	}
 	handleSetTimer() {
 		const { setTimer, countDown } = this.props.actions;
-		const countDownTil = Date.now() + 120000;
+		const countDownTil = Date.now() + 60000;
 
 		setTimer(countDownTil);
 		countDown(countDownTil);
@@ -41,7 +41,7 @@ export default class NewTab extends Component {
 			<section>
 				<h1>FOCUS</h1>
 				{
-					date
+					date && date > Date.now()
 					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 					: <button onClick={this.handleSetTimer.bind(this)}>Set Timer</button>
 				}
