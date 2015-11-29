@@ -20,7 +20,7 @@ chrome.storage.sync.get('state', state => {
 	
 	ReactDOM.render(
 		<Provider store={store}>
-			<NewTab /> 
+			<NewTab />
 		</Provider>,
 	  document.getElementById('mount-point')
 	);
@@ -44,5 +44,7 @@ chrome.storage.sync.get('state', state => {
 		prevState = currentState;
 	})
 });
+
+chrome.storage.onChanged.addListener(change => console.log('SOMETHING CHANGED:',change));
 
 

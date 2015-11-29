@@ -19,9 +19,6 @@ export default function timer(state=initialState, action) {
 		case SET_TIMER:
 			return {...state, date: action.date};
 
-		case CLEAR_TIMER:
-			return {...state, date: null};
-
 		case SET_TIME_LEFT:
 			const { minutes, seconds } = action;
 			return {...state, minutes, seconds };
