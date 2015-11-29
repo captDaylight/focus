@@ -7,10 +7,6 @@ import rootReducer from './reducers';
 import {addAWebsite} from './actions/websites';
 import NewTab from './containers/NewTab'
 
-// chrome.storage.sync.set({state: store.getState()});
-
-// store.dispatch(addAWebsite('www.google.com'));
-
 chrome.storage.sync.get('state', state => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
