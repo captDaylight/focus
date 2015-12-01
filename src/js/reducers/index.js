@@ -7,16 +7,14 @@ import { HYDRATE_STATE } from '../actions/hydrate';
 // ability to hydrate the state at anypoint, ie when changes com in on storage
 // on change listener
 function makeHydratable(reducer, hydrateActionType) {
-  return function (state, action) {
-  	console.log(action.type);
-    switch (action.type) {
-    case hydrateActionType:
-    	console.log('hydrating state', action.state, action);
-      return reducer(action.state, action);
-    default:
-      return reducer(state, action);
-    } 
-  }
+	return function (state, action) {
+		switch (action.type) {
+		case hydrateActionType:
+			return reducer(action.state, action);
+		default:
+			return reducer(state, action);
+		} 
+	}
 }
 
 const rootReducer = combineReducers({

@@ -4,9 +4,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import { addAWebsite } from './actions/websites';
 import NewTab from './containers/NewTab'
 import { HYDRATE_STATE } from './actions/hydrate';
+import { countDown } from './actions/timer';
 
 chrome.storage.sync.get('state', state => {
 	const createAndComposeStore = compose(
@@ -41,12 +41,17 @@ chrome.storage.sync.get('state', state => {
 		prevState = currentState;
 	})
 
-	chrome.storage.onChanged.addListener(state => {
-		console.log('changing state: ', state);
+	chrome.storage.onChanged.addListener(data => {
+		const { newValue, oldValue } = data.state;
 		store.dispatch({
 			type: HYDRATE_STATE,
-			state: state.state.newValue,
+			state: newValue,
 		});
+
+		if (newValue.timer.date !== oldValue.timer.date) {
+			console.log('countDown',store.getState().timer.date);
+			store.dispatch(countDown(store.getState().timer.date));
+		}
 	});
 });
 
