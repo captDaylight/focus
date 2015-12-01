@@ -5,11 +5,12 @@ import ReactDOM from 'react-dom';
 
 const urlData = url.parse(window.location.href);
 
-chrome.storage.sync.get('state', state => {
-	console.log('state', state.state);
-	const blockedSites = state.state.websites.items;
-	const idxOfSite = findIndex(blockedSites, site => urlData.href.indexOf(site.name));
-	const date = state.state.timer.date;
+chrome.storage.sync.get('state', data => {
+	const blockedSites = data.state.websites.items;
+	const checkIfIsSite = site => urlData.href.indexOf(site.name) > -1;
+	const idxOfSite = findIndex(blockedSites, checkIfIsSite);
+	const date = data.state.timer.date;
+
 	if (date) {
 		if (date > Date.now() && idxOfSite >= 0) {
 			const body = document.createElement('body');
@@ -22,7 +23,7 @@ chrome.storage.sync.get('state', state => {
 			ReactDOM.render(
 				<div>
 					Focus
-					{state.state.timer.date}
+					{data.state.timer.date}
 				</div>,
 			  document.getElementById('mount-point')
 			);

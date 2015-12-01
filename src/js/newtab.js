@@ -59,7 +59,6 @@ chrome.storage.sync.get('state', data => {
 	// not issued by this instance
 	chrome.storage.onChanged.addListener(data => {
 		// check if issuer id matches this instance
-		console.log('listener', data);
 		if (data.issuer.newValue.split('-')[0] !== ISSUER_ID) {
 			const { newValue, oldValue } = data.state;
 			store.dispatch({
@@ -67,6 +66,7 @@ chrome.storage.sync.get('state', data => {
 				state: newValue,
 			});
 
+			// if the time has changed, kickstart the countdown
 			if (newValue.timer.date !== oldValue.timer.date) {
 				store.dispatch(countDown(store.getState().timer.date));
 			}

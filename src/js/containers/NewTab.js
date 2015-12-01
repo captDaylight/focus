@@ -25,7 +25,7 @@ export default class NewTab extends Component {
 	}
 	handleSetTimer() {
 		const { setTimer, countDown } = this.props.actions;
-		const countDownTil = Date.now() + 60000;
+		const countDownTil = Date.now() + 10000;
 
 		setTimer(countDownTil);
 		countDown(countDownTil);
