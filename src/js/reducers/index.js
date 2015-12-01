@@ -8,8 +8,10 @@ import { HYDRATE_STATE } from '../actions/hydrate';
 // on change listener
 function makeHydratable(reducer, hydrateActionType) {
   return function (state, action) {
+  	console.log(action.type);
     switch (action.type) {
     case hydrateActionType:
+    	console.log('hydrating state', action.state, action);
       return reducer(action.state, action);
     default:
       return reducer(state, action);

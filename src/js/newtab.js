@@ -40,14 +40,13 @@ chrome.storage.sync.get('state', state => {
 		// set previous state
 		prevState = currentState;
 	})
-});
 
-chrome.storage.onChanged.addListener(state => {
-	console.log('SOMETHING CHANGED:',state)
-	store.dispatch({
-	  type: HYDRATE_STATE,
-	  state: state
+	chrome.storage.onChanged.addListener(state => {
+		console.log('changing state: ', state);
+		store.dispatch({
+			type: HYDRATE_STATE,
+			state: state.state.newValue,
+		});
 	});
 });
-
 
