@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import websites from './websites';
 import timer from './timer';
+import { HYDRATE_STATE } from '../actions/hydrate';
 
 // this was pulled directly from https://github.com/rackt/redux/pull/658
 // ability to hydrate the state at anypoint, ie when changes com in on storage
@@ -16,10 +17,9 @@ function makeHydratable(reducer, hydrateActionType) {
   }
 }
 
-const HYDRATE_STATE = 'HYDRATE_STATE';
 const rootReducer = combineReducers({
 	websites,
 	timer, 
 });
-console.log('ya');
+
 export default makeHydratable(rootReducer, HYDRATE_STATE);

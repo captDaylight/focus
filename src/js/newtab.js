@@ -4,8 +4,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import {addAWebsite} from './actions/websites';
+import { addAWebsite } from './actions/websites';
 import NewTab from './containers/NewTab'
+import { HYDRATE_STATE } from './actions/hydrate';
 
 chrome.storage.sync.get('state', state => {
 	const createAndComposeStore = compose(
@@ -41,6 +42,12 @@ chrome.storage.sync.get('state', state => {
 	})
 });
 
-chrome.storage.onChanged.addListener(change => console.log('SOMETHING CHANGED:',change));
+chrome.storage.onChanged.addListener(state => {
+	console.log('SOMETHING CHANGED:',state)
+	store.dispatch({
+	  type: HYDRATE_STATE,
+	  state: state
+	});
+});
 
 
