@@ -8,12 +8,17 @@ import NewTab from './containers/NewTab'
 import { HYDRATE_STATE } from './actions/hydrate';
 import { countDown } from './actions/timer';
 
-chrome.storage.sync.get('state', state => {
+// each element that is updated will have an issuer id
+// this way, any thing that makes a change can be tested 
+// so that the storage listener doesn't trigger an update on the issuer
+const ISSUER_ID = `${Date.now()}`;
+
+chrome.storage.sync.get('state', data => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
 	
-	const store = createAndComposeStore(rootReducer, state.state);
+	const store = createAndComposeStore(rootReducer, data.state);
 	
 	ReactDOM.render(
 		<Provider store={store}>
@@ -31,26 +36,40 @@ chrome.storage.sync.get('state', state => {
 		if (currentState.timer !== prevState.timer) {
 			if (currentState.timer.date !== prevState.timer.date) {
 				// should not be deing this every second like I was...
-				chrome.storage.sync.set({state: store.getState()});
+				chrome.storage.sync.set({
+					state: store.getState(),
+					issuer: ISSUER_ID,
+				});
 			}
 		} else {
-			chrome.storage.sync.set({state: store.getState()});
+			// adding current time at the end of issuer so that it updates if issued 
+			// from the same issuer, otherwise multiple from the same issuer won't 
+			// come through
+			chrome.storage.sync.set({
+				state: store.getState(),
+				issuer: `${ISSUER_ID}-${Date.now()}`,
+			});
 		}
 
 		// set previous state
 		prevState = currentState;
 	})
 
+	// update state when a change comes through that was 
+	// not issued by this instance
 	chrome.storage.onChanged.addListener(data => {
-		const { newValue, oldValue } = data.state;
-		store.dispatch({
-			type: HYDRATE_STATE,
-			state: newValue,
-		});
+		// check if issuer id matches this instance
+		console.log('listener', data);
+		if (data.issuer.newValue.split('-')[0] !== ISSUER_ID) {
+			const { newValue, oldValue } = data.state;
+			store.dispatch({
+				type: HYDRATE_STATE,
+				state: newValue,
+			});
 
-		if (newValue.timer.date !== oldValue.timer.date) {
-			console.log('countDown',store.getState().timer.date);
-			store.dispatch(countDown(store.getState().timer.date));
+			if (newValue.timer.date !== oldValue.timer.date) {
+				store.dispatch(countDown(store.getState().timer.date));
+			}
 		}
 	});
 });

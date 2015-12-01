@@ -46,7 +46,6 @@ function doubleDigit(amount) {
 }
 
 export function countDown(date) {
-	console.log('in countdown');
 	return dispatch => {
 		const setTime = (interval) => {
 			const fromNow = date - Date.now();
