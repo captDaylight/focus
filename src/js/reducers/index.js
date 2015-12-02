@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import websites from './websites';
 import timer from './timer';
-import hydrate from './hydrate';
 import { HYDRATE_STATE } from '../actions/hydrate';
 
 // this was pulled directly from https://github.com/rackt/redux/pull/658
@@ -21,7 +20,6 @@ function makeHydratable(reducer, hydrateActionType) {
 const rootReducer = combineReducers({
 	websites,
 	timer, 
-	hydrate,
 });
 
 export default makeHydratable(rootReducer, HYDRATE_STATE);
