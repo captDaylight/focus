@@ -4,9 +4,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import FocusContainer from './containers/FocusContainer'
-import { HYDRATE_STATE } from './actions/hydrate';
-import { countDown } from './actions/timer';
+import FocusContainer from './containers/FocusContainer';
+import storageListener from './utils/storageListener';
 
 // each element that is updated will have an issuer id
 // this way, any thing that makes a change can be tested 
@@ -38,7 +37,7 @@ chrome.storage.sync.get('state', data => {
 				// should not be deing this every second like I was...
 				chrome.storage.sync.set({
 					state: store.getState(),
-					issuer: ISSUER_ID,
+					issuer: `${ISSUER_ID}-${Date.now()}`,
 				});
 			}
 		} else {
@@ -57,20 +56,6 @@ chrome.storage.sync.get('state', data => {
 
 	// update state when a change comes through that was 
 	// not issued by this instance
-	chrome.storage.onChanged.addListener(data => {
-		// check if issuer id matches this instance
-		if (data.issuer.newValue.split('-')[0] !== ISSUER_ID) {
-			const { newValue, oldValue } = data.state;
-			store.dispatch({
-				type: HYDRATE_STATE,
-				state: newValue,
-			});
-
-			// if the time has changed, kickstart the countdown
-			if (newValue.timer.date !== oldValue.timer.date) {
-				store.dispatch(countDown(store.getState().timer.date));
-			}
-		}
-	});
+	chrome.storage.onChanged.addListener(storageListener(store, ISSUER_ID));
 });
 
