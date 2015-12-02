@@ -53,4 +53,3 @@ chrome.storage.sync.get('state', data => {
 	// not issued by this instance
 	chrome.storage.onChanged.addListener(storageListener(store, ISSUER_ID));
 });
-
