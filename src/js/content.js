@@ -7,7 +7,11 @@ import url from 'url';
 import findIndex from 'lodash/array/findIndex';
 import rootReducer from './reducers';
 import FocusContainer from './containers/FocusContainer';
+import storageSync from './utils/storageSync';
+import storageListener from './utils/storageListener';
+
 const urlData = url.parse(window.location.href);
+const ISSUER_ID = `${Date.now()}`;
 
 chrome.storage.sync.get('state', data => {
 	const blockedSites = data.state.websites.items;
@@ -40,4 +44,9 @@ chrome.storage.sync.get('state', data => {
 			);
 		}
 	}
+
+	// sync storage
+	store.subscribe(storageSync(store, ISSUER_ID));
+	// listen for changes on store
+	chrome.storage.onChanged.addListener(storageListener(store, ISSUER_ID));
 });

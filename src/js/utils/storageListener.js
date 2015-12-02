@@ -1,4 +1,4 @@
-import { HYDRATE_STATE } from '../actions/hydrate';
+import { HYDRATE_STATE, unflagHydrate } from '../actions/hydrate';
 import { countDown } from '../actions/timer';
 
 export default function storageListener(store, issuerID) {
@@ -6,10 +6,12 @@ export default function storageListener(store, issuerID) {
 		// each sync is sent with the id combined with a current time
 		// stamp, this ensures that there is always a new issuer value
 		const eventIssuerID = data.issuer.newValue.split('-')[0];
-
+	
 		// check if issuer id matches this instance
 		if (eventIssuerID !== issuerID && 'state' in data) {
 			const { newValue, oldValue } = data.state;
+			console.log('event', newValue.timer.date);
+			debugger;
 			store.dispatch({
 				type: HYDRATE_STATE,
 				state: newValue,
@@ -20,5 +22,5 @@ export default function storageListener(store, issuerID) {
 				store.dispatch(countDown(store.getState().timer.date));
 			}
 		}
-	};	
+	};
 }

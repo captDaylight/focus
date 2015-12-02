@@ -17,14 +17,14 @@ chrome.storage.sync.get('state', data => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
-	
+	console.log(data.state);
 	const store = createAndComposeStore(rootReducer, data.state);
 	
 	ReactDOM.render(
 		<Provider store={store}>
 			<FocusContainer />
 		</Provider>,
-	  document.getElementById('mount-point')
+		document.getElementById('mount-point')
 	);
 	
 	// sync storage
