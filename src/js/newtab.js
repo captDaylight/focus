@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import NewTab from './containers/NewTab'
+import FocusContainer from './containers/FocusContainer'
 import { HYDRATE_STATE } from './actions/hydrate';
 import { countDown } from './actions/timer';
 
@@ -22,7 +22,7 @@ chrome.storage.sync.get('state', data => {
 	
 	ReactDOM.render(
 		<Provider store={store}>
-			<NewTab />
+			<FocusContainer />
 		</Provider>,
 	  document.getElementById('mount-point')
 	);

@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 import url from 'url';
 import findIndex from 'lodash/array/findIndex';
 import rootReducer from './reducers';
-import Content from './containers/Content';
+import FocusContainer from './containers/FocusContainer';
 const urlData = url.parse(window.location.href);
 
 chrome.storage.sync.get('state', data => {
@@ -34,7 +34,7 @@ chrome.storage.sync.get('state', data => {
 		
 			ReactDOM.render(
 				<Provider store={store}>
-					<Content />
+					<FocusContainer />
 				</Provider>,
 			  document.getElementById('mount-point')
 			);
