@@ -28,30 +28,25 @@ chrome.storage.sync.get('state', data => {
 	
 	let prevState = store.getState();
 	store.subscribe(() => {
-		const currentState = store.getState();
+		// issuer appended with current time stamp, so that issuer key is 
+		// always passed as new value
+		const objSync = {
+			state: store.getState(),
+			issuer: `${ISSUER_ID}-${Date.now()}`,
+		};
 
 		// hourly max set quota is 1800, or once every 2 seconds
 		// have to make sure not to overpost, ie, each second with the timer
-		if (currentState.timer !== prevState.timer) {
-			if (currentState.timer.date !== prevState.timer.date) {
-				// should not be deing this every second like I was...
-				chrome.storage.sync.set({
-					state: store.getState(),
-					issuer: `${ISSUER_ID}-${Date.now()}`,
-				});
+		if (objSync.state.timer !== prevState.timer) {
+			if (objSync.state.timer.date !== prevState.timer.date) {
+				chrome.storage.sync.set(objSync);
 			}
 		} else {
-			// adding current time at the end of issuer so that it updates if issued 
-			// from the same issuer, otherwise multiple from the same issuer won't 
-			// come through
-			chrome.storage.sync.set({
-				state: store.getState(),
-				issuer: `${ISSUER_ID}-${Date.now()}`,
-			});
+			chrome.storage.sync.set(objSync);
 		}
 
 		// set previous state
-		prevState = currentState;
+		prevState = objSync.state;
 	})
 
 	// update state when a change comes through that was 
