@@ -4,11 +4,14 @@ import FocusContainer from './containers/FocusContainer';
 
 import { setTimer } from './actions/timer';
 
+// chrome.runtime.sendMessage({ type: 'ACTION', data: setTimer(Date.now()) });
+
 console.log('new tab');
 
 chrome.storage.sync.get('state', data => {
+	console.log('initial storage sync', data);
 	ReactDOM.render(
-		<div>hello this is new tab</div>,
-		document.getElementById('mount-point');
+		<FocusContainer state={data.state} />,
+		document.getElementById('mount-point')
 	);
 });

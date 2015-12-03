@@ -1,9 +1,9 @@
-export default function storageSync(store) {
-	let prevState = store.getState();
+export default function storageSync(initState) {
+	let prevState = initState;
 
-	return () => {
+	return state => {
 		const objSync = {
-			state: store.getState(),
+			state,
 		};
 
 		// hourly max set quota is 1800, or once every 2 seconds
