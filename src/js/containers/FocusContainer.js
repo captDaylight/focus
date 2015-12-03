@@ -47,6 +47,10 @@ export default class FocusContainer extends Component {
 		// setTimer(countDownTil);
 		// countDown(countDownTil);
 	}
+	sendMessage() {
+		console.log('sending message');
+		chrome.runtime.sendMessage({ type: 'ACTION', data: setTimer(Date.now()) });
+	}
 	render() {
 		// const { date, minutes, seconds } = this.props.timer;
 		// const { addWebsite, removeWebsite } = this.props.actions;
@@ -55,7 +59,8 @@ export default class FocusContainer extends Component {
 		return (
 			<section>
 				<h1>FOCUS</h1>
-				<button onClick={chrome.runtime.sendMessage.bind(null, ({ type: 'ACTION', data: setTimer(Date.now()) }) )}>click me</button>
+				{this.state.timer.date}
+				<button onClick={this.sendMessage}>click me</button>
 			</section>
 		);
 	}
