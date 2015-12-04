@@ -12,6 +12,26 @@ import {
 	removeWebsite,
 } from '../actions/websites';
 
+function wrapActionsWithMessanger(actions) {
+	return Object.keys(actions).reduce((prev, key) => {
+		prev[key] = (...args) => {
+			return chrome.runtime.sendMessage({ 
+				type: 'ACTION', 
+				data: setTimer(...args), 
+			});
+		};
+		return prev;
+	}, {});
+}
+
+const actions = wrapActionsWithMessanger({
+	setTimer,
+	clearTimer,
+	countDown,
+	addWebsite,
+	removeWebsite,
+});
+
 export default class FocusContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -40,31 +60,20 @@ export default class FocusContainer extends Component {
 		// 	countDown(date);
 		// }
 	}
-	handleSetTimer() {
-		// const { setTimer, countDown } = this.props.actions;
-		// const countDownTil = Date.now() + 10000;
-
-		// setTimer(countDownTil);
-		// countDown(countDownTil);
-	}
-	sendMessage() {
-		console.log('sending message');
-		chrome.runtime.sendMessage({ type: 'ACTION', data: setTimer(Date.now()) });
-	}
 	render() {
-		// const { date, minutes, seconds } = this.props.timer;
-		// const { addWebsite, removeWebsite } = this.props.actions;
-		// const { items } = this.props.websites;
-		console.log('render', this.state);
+		const { setTimer } = actions;
+
 		return (
 			<section>
 				<h1>FOCUS</h1>
 				{this.state.timer.date}
-				<button onClick={this.sendMessage}>click me</button>
+				<button onClick={setTimer.bind(null, Date.now())}>click me</button>
 			</section>
 		);
 	}
 }
+
+
 
 				// {
 				// 	date && date > Date.now()
