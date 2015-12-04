@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger'
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
@@ -11,19 +12,7 @@ import {
 	addWebsite,
 	removeWebsite,
 } from '../actions/websites';
-
-function wrapActionsWithMessanger(actions) {
-	return Object.keys(actions).reduce((prev, key) => {
-		prev[key] = (...args) => {
-			return chrome.runtime.sendMessage({ 
-				type: 'ACTION', 
-				data: setTimer(...args), 
-			});
-		};
-		return prev;
-	}, {});
-}
-
+console.log(wrapActionsWithMessanger);
 const actions = wrapActionsWithMessanger({
 	setTimer,
 	clearTimer,
@@ -31,7 +20,7 @@ const actions = wrapActionsWithMessanger({
 	addWebsite,
 	removeWebsite,
 });
-
+console.log(actions);
 export default class FocusContainer extends Component {
 	constructor(props) {
 		super(props);
