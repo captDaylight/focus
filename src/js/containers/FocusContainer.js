@@ -38,7 +38,7 @@ export default class FocusContainer extends Component {
 				{ date } 
 				{ minutes ? `${minutes} : ${seconds}` : null }
 				
-				<button onClick={() => countDown(Date.now())}>click me</button>
+				<button onClick={() => countDown(Date.now() + 30000)}>click me</button>
 			</section>
 		);
 	}
