@@ -3,6 +3,9 @@ import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
 import addWebsite from './actions/websites';
 import createStorageSync from './utils/storageSync';
+import * as timer from './actions/timer';
+
+console.log(timer);
 
 const createAndComposeStore = compose(
 	applyMiddleware(thunkMiddleware)
@@ -15,7 +18,6 @@ storageSync(store.getState());
 // subscribe to store and sync chrome state
 store.subscribe(() => {
 	const state = store.getState();
-	console.log('.', state);
 	storageSync(state);
 	chrome.runtime.sendMessage({ type: 'STATE_UPDATE', data: state });
 });
@@ -23,7 +25,10 @@ store.subscribe(() => {
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	console.log('background listener', req);
 	if (req.type === 'ACTION') {
-		store.dispatch(req.data);
+		console.log(timer[req.action]);
+		console.log(...req.data);
+		
+		store.dispatch(timer[req.action](...req.data));
 	}
 	
 	return true;

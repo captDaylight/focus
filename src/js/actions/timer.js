@@ -47,6 +47,8 @@ function doubleDigit(amount) {
 
 export function countDown(date) {
 	return dispatch => {
+		dispatch(setTimer(date));
+
 		const setTime = (interval) => {
 			const fromNow = date - Date.now();
 			if (fromNow >= 0) {
