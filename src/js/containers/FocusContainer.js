@@ -31,14 +31,17 @@ export default class FocusContainer extends Component {
 	render() {
 		const { countDown } = actions;
 		const { date, minutes, seconds } = this.state.timer;
-		console.log(actions);
+		console.log(date);
 		return (
 			<section>
 				<h1>FOCUS</h1>
 				{ date } 
-				{ minutes ? `${minutes} : ${seconds}` : null }
 				
-				<button onClick={() => countDown(Date.now() + 30000)}>click me</button>
+				{
+					minutes
+					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+					: <button onClick={() => countDown(Date.now() + 30000)}>Set Timer</button>
+				}				
 			</section>
 		);
 	}
@@ -46,10 +49,6 @@ export default class FocusContainer extends Component {
 
 
 
-				// {
-				// 	date && date > Date.now()
-				// 	? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-				// 	: <button onClick={this.handleSetTimer.bind(this)}>Set Timer</button>
-				// }
+
 				// <WebsiteForm addWebsite={addWebsite} />
 				// <WebsiteList websites={items} removeWebsite={removeWebsite} />

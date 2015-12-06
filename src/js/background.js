@@ -21,13 +21,14 @@ store.subscribe(() => {
 	storageSync(state);
 	chrome.runtime.sendMessage({ type: 'STATE_UPDATE', data: state });
 });
-
+// TODO: switch this to long-lived connection
+// https://developer.chrome.com/extensions/messaging#connect
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	console.log('background listener', req);
 	if (req.type === 'ACTION') {
 		console.log(timer[req.action]);
 		console.log(...req.data);
-		
+
 		store.dispatch(timer[req.action](...req.data));
 	}
 	

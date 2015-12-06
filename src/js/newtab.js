@@ -8,7 +8,6 @@ import { setTimer } from './actions/timer';
 
 
 chrome.storage.sync.get('state', data => {
-	console.log('initial storage sync', data);
 	ReactDOM.render(
 		<FocusContainer state={data.state} />,
 		document.getElementById('mount-point')
