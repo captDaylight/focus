@@ -6,6 +6,12 @@ import FocusContainer from './containers/FocusContainer';
 
 const urlData = url.parse(window.location.href);
 
+var port = chrome.runtime.connect({name: 'focus'});
+port.postMessage({myProperty: 'value'});
+port.onMessage.addListener(function(msg) {
+    console.log('changed dectede on new tab', msg);
+});
+window.setTimeout(() => port.postMessage({myProperty: Date.now()}),5000);
 
 chrome.storage.sync.get('state', data => {
 	const blockedSites = data.state.websites.items;
@@ -25,7 +31,10 @@ chrome.storage.sync.get('state', data => {
 			document.getElementsByTagName('html')[0].appendChild(body);
 		
 			ReactDOM.render(
-				<FocusContainer state={data.state} />,
+				<FocusContainer 
+					state={data.state} 
+					listener={chrome.runtime} 
+				/>,
 			  document.getElementById('mount-point')
 			);
 		}

@@ -4,36 +4,37 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
 
-const actions = wrapActionsWithMessanger([
-	'clearTimer',
-	'countDown',
-	'addWebsite',
-	'removeWebsite',
-]);
+
 
 export default class FocusContainer extends Component {
 	constructor(props) {
 		super(props);
-		this.state = props.state;
+		const actions = wrapActionsWithMessanger([
+			'clearTimer',
+			'countDown',
+			'addWebsite',
+			'removeWebsite',
+		], this.props.port);
+		this.state = {...props.state, actions};
 	}
 	updateState(newState) {
 		this.setState(newState);
 	}
 	componentWillMount() {
 		const { updateState } = this;
-		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-			
-			if (req.type === 'STATE_UPDATE') {
-				updateState.call(this, req.data);
+		
+		this.props.port.onMessage.addListener(msg => {
+			if (msg.type === 'STATE_UPDATE') {
+				updateState.call(this, msg.data);
 			}
 			return true;
 		});
 	}
 	render() {
-		const { countDown, addWebsite, removeWebsite } = actions;
+		const { countDown, addWebsite, removeWebsite } = this.state.actions;
 		const { date, minutes, seconds } = this.state.timer;
 		const { items } = this.state.websites;
-		
+
 		return (
 			<section>
 				<h1>FOCUS</h1>
