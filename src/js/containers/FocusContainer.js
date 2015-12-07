@@ -22,6 +22,7 @@ export default class FocusContainer extends Component {
 	componentWillMount() {
 		const { updateState } = this;
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
+			
 			if (req.type === 'STATE_UPDATE') {
 				updateState.call(this, req.data);
 			}
@@ -32,7 +33,7 @@ export default class FocusContainer extends Component {
 		const { countDown, addWebsite, removeWebsite } = actions;
 		const { date, minutes, seconds } = this.state.timer;
 		const { items } = this.state.websites;
-		console.log(date);
+		
 		return (
 			<section>
 				<h1>FOCUS</h1>

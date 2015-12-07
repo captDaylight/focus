@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import addWebsite from './actions/websites';
 import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
 import * as websites from './actions/websites';
@@ -12,6 +11,8 @@ const createAndComposeStore = compose(
 
 const store = createAndComposeStore(rootReducer);
 const storageSync = createStorageSync(store.getState());
+
+store.dispatch(websites.addWebsite('read.com'));
 
 // on init, sync state
 storageSync(store.getState());

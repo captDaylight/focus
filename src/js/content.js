@@ -1,17 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
 import url from 'url';
 import findIndex from 'lodash/array/findIndex';
-import rootReducer from './reducers';
 import FocusContainer from './containers/FocusContainer';
-import storageSync from './utils/storageSync';
-import storageListener from './utils/storageListener';
 
 const urlData = url.parse(window.location.href);
-const ISSUER_ID = `${Date.now()}`;
+
 
 chrome.storage.sync.get('state', data => {
 	const blockedSites = data.state.websites.items;
@@ -19,12 +13,6 @@ chrome.storage.sync.get('state', data => {
 	const idxOfSite = findIndex(blockedSites, checkIfIsSite);
 	const date = data.state.timer.date;
 
-	// set up store
-	const createAndComposeStore = compose(
-		applyMiddleware(thunkMiddleware)
-	)(createStore);
-
-	const store = createAndComposeStore(rootReducer, data.state);
 
 	if (date) {
 		if (date > Date.now() && idxOfSite >= 0) {
@@ -37,16 +25,9 @@ chrome.storage.sync.get('state', data => {
 			document.getElementsByTagName('html')[0].appendChild(body);
 		
 			ReactDOM.render(
-				<Provider store={store}>
-					<FocusContainer />
-				</Provider>,
+				<FocusContainer state={data.state} />,
 			  document.getElementById('mount-point')
 			);
 		}
 	}
-
-	// sync storage
-	store.subscribe(storageSync(store, ISSUER_ID));
-	// listen for changes on store
-	chrome.storage.onChanged.addListener(storageListener(store, ISSUER_ID));
 });
