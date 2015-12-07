@@ -29,26 +29,21 @@ export default class FocusContainer extends Component {
 		});
 	}
 	render() {
-		const { countDown } = actions;
+		const { countDown, addWebsite, removeWebsite } = actions;
 		const { date, minutes, seconds } = this.state.timer;
+		const { items } = this.state.websites;
 		console.log(date);
 		return (
 			<section>
 				<h1>FOCUS</h1>
-				{ date } 
-				
 				{
 					minutes
 					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 					: <button onClick={() => countDown(Date.now() + 30000)}>Set Timer</button>
-				}				
+				}
+				<WebsiteForm addWebsite={addWebsite} />
+				<WebsiteList websites={items} removeWebsite={removeWebsite} />
 			</section>
 		);
 	}
 }
-
-
-
-
-				// <WebsiteForm addWebsite={addWebsite} />
-				// <WebsiteList websites={items} removeWebsite={removeWebsite} />

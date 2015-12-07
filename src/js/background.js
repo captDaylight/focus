@@ -4,12 +4,12 @@ import rootReducer from './reducers';
 import addWebsite from './actions/websites';
 import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
-
-console.log(timer);
+import * as websites from './actions/websites';
 
 const createAndComposeStore = compose(
 	applyMiddleware(thunkMiddleware)
 )(createStore);
+
 const store = createAndComposeStore(rootReducer);
 const storageSync = createStorageSync(store.getState());
 
@@ -21,16 +21,13 @@ store.subscribe(() => {
 	storageSync(state);
 	chrome.runtime.sendMessage({ type: 'STATE_UPDATE', data: state });
 });
+
 // TODO: switch this to long-lived connection
 // https://developer.chrome.com/extensions/messaging#connect
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-	console.log('background listener', req);
+	const actions = {...timer, ...websites};
 	if (req.type === 'ACTION') {
-		console.log(timer[req.action]);
-		console.log(...req.data);
-
-		store.dispatch(timer[req.action](...req.data));
+		store.dispatch(actions[req.action](...req.data));
 	}
-	
 	return true;
 });

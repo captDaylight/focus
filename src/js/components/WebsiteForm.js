@@ -10,6 +10,7 @@ export default class WebsiteForm extends Component {
 		const urlParse = url.parse(data.website);
 		const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
 		// turn www.facebook.com into facebook.com
+		// TODO: a website like google.co.uk won't work with this solution, it'll return co.uk
 		const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
 
 		addWebsite(parsedHostname);

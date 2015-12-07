@@ -10,7 +10,7 @@ export default function WebsiteList(props) {
 				return (
 					<li key={idx}>
 						{website.name}
-						<button onClick={removeWebsite.bind(null, website.id)}>
+						<button onClick={() => removeWebsite(website.id)}>
 							Remove Website
 						</button>
 					</li>
