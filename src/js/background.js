@@ -28,6 +28,15 @@ store.subscribe(() => {
 	)
 });
 
+chrome.tabs.onActivated.addListener((info) => {
+	const state = store.getState();
+	const statePayload = { type: 'STATE_UPDATE', data: state };
+	const tabId = info.tabId;
+	const windowId = info.windowId;
+	console.log('activate', tabId, statePayload, info);
+	chrome.tabs.sendMessage(tabId, statePayload);
+});
+
 // TODO: switch this to long-lived connection
 // https://developer.chrome.com/extensions/messaging#connect
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
