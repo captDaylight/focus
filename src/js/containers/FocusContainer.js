@@ -22,7 +22,6 @@ export default class FocusContainer extends Component {
 	componentWillMount() {
 		const { updateState } = this;
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-			
 			if (req.type === 'STATE_UPDATE') {
 				updateState.call(this, req.data);
 			}

@@ -19,8 +19,13 @@ storageSync(store.getState());
 // subscribe to store and sync chrome state
 store.subscribe(() => {
 	const state = store.getState();
+	const statePayload = { type: 'STATE_UPDATE', data: state };
 	storageSync(state);
-	chrome.runtime.sendMessage({ type: 'STATE_UPDATE', data: state });
+	chrome.runtime.sendMessage(statePayload);
+	chrome.tabs.query(
+		{currentWindow: true, active : true},
+		tab => chrome.tabs.sendMessage(tab[0].id, statePayload)
+	)
 });
 
 // TODO: switch this to long-lived connection
