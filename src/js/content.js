@@ -18,10 +18,8 @@ chrome.storage.sync.get('state', data => {
 	}
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
-		console.log('received message');
 		if (msg.type === 'STATE_UPDATE') {
 			const date = msg.data.timer.date;
-			console.log(date);
 			if (date && date > Date.now() && shouldBlockSite && !mounted) {
 				mountBlocker(msg.data);
 			}

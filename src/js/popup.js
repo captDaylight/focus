@@ -1,20 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var checkPageButton = document.getElementById('checkPage');
-  checkPageButton.addEventListener('click', function() {
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-    chrome.tabs.getSelected(null, function(tab) {
-      d = document;
-
-      var f = d.createElement('form');
-      f.action = 'http://gtmetrix.com/analyze.html?bm';
-      f.method = 'post';
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
-      f.submit();
-    });
-  }, false);
-}, false);
+chrome.storage.sync.get('state', data => {
+  console.log(data);
+  ReactDOM.render(
+    <div>
+      <h1>Focus what??</h1>
+      {data.state.websites.items.map((site) => {
+        return <li>{site.name}</li>
+      })}
+      <button>Add site to block list</button>
+      <button>Start Working</button>
+    </div>,
+    document.getElementById('mount-point')
+  );
+});
