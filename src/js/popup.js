@@ -16,7 +16,7 @@ chrome.storage.sync.get('state', data => {
         return <li>{site.name}</li>
       })}
       <button>Add site to block list</button>
-      <button onClick={actions.countDown(Date.now() + 30000)}>Start Working</button>
+      <button onClick={() => actions.countDown(Date.now() + 30000)}>Start Working</button>
     </div>,
     document.getElementById('mount-point')
   );
