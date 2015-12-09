@@ -24,7 +24,11 @@ store.subscribe(() => {
 	chrome.runtime.sendMessage(statePayload);
 	chrome.tabs.query(
 		{currentWindow: true, active : true},
-		tab => chrome.tabs.sendMessage(tab[0].id, statePayload)
+		tab => {
+			if (tab.length !== 0) {
+				chrome.tabs.sendMessage(tab[0].id, statePayload)
+			}
+		}
 	)
 });
 

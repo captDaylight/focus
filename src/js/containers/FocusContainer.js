@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger'
+import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';

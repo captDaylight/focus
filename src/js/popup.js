@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import wrapActionsWithMessanger from './utils/wrapActionsWithMessanger';
+
+const actions = wrapActionsWithMessanger([
+  'countDown',
+  'addWebsite',
+]);
 
 chrome.storage.sync.get('state', data => {
-  console.log(data);
+  chrome.extension.getBackgroundPage().console.log('from the popup',data);
   ReactDOM.render(
     <div>
       <h1>Focus what??</h1>
@@ -10,7 +16,7 @@ chrome.storage.sync.get('state', data => {
         return <li>{site.name}</li>
       })}
       <button>Add site to block list</button>
-      <button>Start Working</button>
+      <button onClick={actions.countDown(Date.now() + 30000)}>Start Working</button>
     </div>,
     document.getElementById('mount-point')
   );
