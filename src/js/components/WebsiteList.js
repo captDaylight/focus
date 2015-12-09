@@ -9,6 +9,7 @@ export default function WebsiteList(props) {
 			websites.map((website, idx) => {
 				return (
 					<li key={idx}>
+						<img src={website.favicon} />
 						{website.name}
 						<button onClick={() => removeWebsite(website.id)}>
 							Remove Website

@@ -12,7 +12,7 @@ const createAndComposeStore = compose(
 const store = createAndComposeStore(rootReducer);
 const storageSync = createStorageSync(store.getState());
 
-store.dispatch(websites.addWebsite('read.com'));
+// store.dispatch(websites.addWebsite('read.com'));
 
 // on init, sync state
 storageSync(store.getState());
@@ -37,7 +37,7 @@ chrome.tabs.onActivated.addListener((info) => {
 	const statePayload = { type: 'STATE_UPDATE', data: state };
 	const tabId = info.tabId;
 	const windowId = info.windowId;
-	console.log('activate', tabId, statePayload, info);
+	
 	chrome.tabs.sendMessage(tabId, statePayload);
 });
 
@@ -46,6 +46,7 @@ chrome.tabs.onActivated.addListener((info) => {
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	const actions = {...timer, ...websites};
 	if (req.type === 'ACTION') {
+		console.log('action coming in', req);
 		store.dispatch(actions[req.action](...req.data));
 	}
 	return true;
