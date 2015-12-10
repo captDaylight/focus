@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import url from 'url';
-import findIndex from 'lodash/array/findIndex';
 import FocusContainer from './containers/FocusContainer';
+import checkShouldBlock from './utils/checkShouldBlock';
 
 let mounted = false;
 const checker = checkShouldBlock(url.parse(window.location.href))
@@ -52,14 +52,4 @@ function dismountBlocker() {
 
 	mountPoint.parentNode.removeChild(mountPoint);
 	mounted = false;
-}
-
-function checkIfIsSite(site) {
-	return urlData.href.indexOf(site.name) > -1;
-}
-
-function checkShouldBlock(urlData) {
-	return (sites) => {
-		return findIndex(blockedSites, checkIfIsSite) >= 0;
-	};
 }
