@@ -4,13 +4,11 @@ import url from 'url';
 import findIndex from 'lodash/array/findIndex';
 import FocusContainer from './containers/FocusContainer';
 
-const urlData = url.parse(window.location.href);
 let mounted = false;
+const checker = checkShouldBlock(url.parse(window.location.href))
 
 chrome.storage.sync.get('state', data => {
-	const blockedSites = data.state.websites.items;
-	const checkIfIsSite = site => urlData.href.indexOf(site.name) > -1;
-	const shouldBlockSite = findIndex(blockedSites, checkIfIsSite) >= 0;
+	const shouldBlockSite = checker(data.state.websites.items);
 	const date = data.state.timer.date;
 
 	if (date && date > Date.now() && shouldBlockSite && !mounted) {
@@ -29,6 +27,7 @@ chrome.storage.sync.get('state', data => {
 		}
 	});
 });
+
 
 function mountBlocker(state) {
 	// set up mount point
@@ -53,4 +52,14 @@ function dismountBlocker() {
 
 	mountPoint.parentNode.removeChild(mountPoint);
 	mounted = false;
+}
+
+function checkIfIsSite(site) {
+	return urlData.href.indexOf(site.name) > -1;
+}
+
+function checkShouldBlock(urlData) {
+	return (sites) => {
+		return findIndex(blockedSites, checkIfIsSite) >= 0;
+	};
 }
