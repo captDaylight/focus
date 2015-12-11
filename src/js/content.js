@@ -4,15 +4,19 @@ import url from 'url';
 import FocusContainer from './containers/FocusContainer';
 import checkShouldBlock from './utils/checkShouldBlock';
 
+let mounted = false;
+
 function mountOrNot(siteChecker) {
-	let mounted = false;
 	return (siteList, date, state) => {
 		const shouldBlockSite = siteChecker(siteList);
 
-		if (date && date > Date.now() && shouldBlockSite && !mounted) {
-			mountBlocker(state);
+		if (date && date > Date.now()) {
+			if (shouldBlockSite && !mounted) {
+				mountBlocker(state);	
+			}
+		} else if (mounted) {
+			dismountBlocker();
 		}
-
 	};
 }
 
@@ -29,17 +33,20 @@ chrome.storage.sync.get('state', data => {
 		// 	mountBlocker(data.state);
 		// }
 
-	// chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
-	// 	if (msg.type === 'STATE_UPDATE') {
-	// 		const date = msg.data.timer.date;
-	// 		if (date && date > Date.now() && shouldBlockSite && !mounted) {
-	// 			mountBlocker(msg.data);
-	// 		}
-	// 		if (!date && mounted) {
-	// 			dismountBlocker();
-	// 		}
-	// 	}
-	// });
+	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
+		if (msg.type === 'STATE_UPDATE') {
+			const { websites, timer } = msg.data;
+			checkShouldMountOrNot(websites.items, timer.date, msg.data);
+
+			// const date = msg.data.timer.date;
+			// if (date && date > Date.now() && shouldBlockSite && !mounted) {
+			// 	mountBlocker(msg.data);
+			// }
+			// if (!date && mounted) {
+			// 	dismountBlocker();
+			// }
+		}
+	});
 });
 
 
