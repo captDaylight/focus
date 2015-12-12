@@ -19,7 +19,7 @@
 	font-size: 4em;
 }
 
-.start-focusing {
+.focus-button {
   padding: 20px 30px;
   font-size: 2em;
   background-color: lighten($blue, 10%);
@@ -32,5 +32,10 @@
   	background-color: darken($blue, 15%);
   	border: 0px solid darken($blue, 20%);
   	@include transform(translateY(5px));
+  }
+  &.smaller {
+  	font-size: 1em;
+  	padding: 10px 15px;
+  	letter-spacing: 0.05em;
   }
 }

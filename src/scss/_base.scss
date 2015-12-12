@@ -49,6 +49,13 @@ img {
 	display: block;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 #mount-point {
   height:100%;
   width: 100%;
