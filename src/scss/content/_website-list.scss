@@ -1,0 +1,16 @@
+#website-list {
+
+}
+
+.website-item {
+	margin-bottom: 10px;
+	@include display(flex);
+	img {
+		width: 25px;
+		height: 25px;
+		border-radius: 3px;
+	}
+	img, span {
+		margin-right: 5px;
+	}
+}

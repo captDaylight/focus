@@ -4,13 +4,13 @@ export default function WebsiteList(props) {
 	const { websites, removeWebsite } = props;
 
 	return (
-		<ul>
+		<ul id="website-list">
 		{
 			websites.map((website, idx) => {
 				return (
-					<li key={idx}>
+					<li className="website-item" key={idx}>
 						<img src={website.favicon} />
-						{website.name}
+						<span>{website.name}</span>
 						<button onClick={() => removeWebsite(website.id)}>
 							Remove Website
 						</button>

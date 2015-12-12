@@ -1,0 +1,32 @@
+#focus-container {
+	height: 100%;
+	width: 100%;
+	padding: 30px;
+	background-color: lighten($blue, 20%);
+	color: darken($blue, 10%);
+	@include transition(all 0.15s ease-in-out);
+	&.focusing {
+		background-color: lighten($red, 20%);
+		color: darken($red, 10%);
+	}
+}
+
+#main-action {
+	height: 100px;
+}
+
+#clock {
+	font-size: 2em;
+}
+
+.start-focusing {
+  padding: 20px 30px;
+  font-size: 2em;
+  background-color: darken($blue, 10%);
+  color: white;
+  text-transform: uppercase;
+  @include transition(all 0.15s ease-in-out);
+  &:hover {
+  	background-color: darken($blue, 15%);
+  }
+}

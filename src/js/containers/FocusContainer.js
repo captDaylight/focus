@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
@@ -34,14 +35,15 @@ export default class FocusContainer extends Component {
 		const { items } = this.state.websites;
 		
 		return (
-			<section>
-				<h1>FOCUS</h1>
-				{
-					minutes
-					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-					: <button onClick={() => countDown(Date.now() + 30000)}>Set Timer</button>
-				}
-				<WebsiteForm addWebsite={addWebsite} />
+			<section id="focus-container" className={classnames({focusing: minutes})}>
+				<div id="main-action">
+					{
+						minutes
+						? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+						: <button className="start-focusing" onClick={() => countDown(Date.now() + 30000)}>Set Timer</button>
+					}
+				</div>
+
 				<WebsiteList websites={items} removeWebsite={removeWebsite} />
 			</section>
 		);
