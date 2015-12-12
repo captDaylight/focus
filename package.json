@@ -37,6 +37,7 @@
   },
   "engine": "node 4.1.1",
   "dependencies": {
+    "classnames": "^2.2.1",
     "formsy-react": "^0.17.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",

@@ -1,18 +1,17 @@
-// vendor
-@import "bourbon/bourbon";
-@import "neat/neat";
+//  ______     __         __     ______     ______    
+// /\  ___\   /\ \       /\ \   /\  ___\   /\  ___\   
+// \ \___  \  \ \ \____  \ \ \  \ \ \____  \ \  __\   
+//  \/\_____\  \ \_____\  \ \_\  \ \_____\  \ \_____\ 
+//   \/_____/   \/_____/   \/_/   \/_____/   \/_____/ 
 
-// base
-@import "grid";
-@import "fonts";
-@import "variables";
-@import "base";
-@import "forms";
+// ext libs
+@import 'bourbon/bourbon';
+
+// setup
+@import 'mixins';
+@import 'variables';
+@import 'base';
+@import 'buttons';
+@import 'forms';
 
 // content
-// @import "content/app";
-// @import "content/header";
-// @import "content/footer";
-// @import "content/landing";
-// @import "content/marxGifEmbed";
-// @import "content/marx";

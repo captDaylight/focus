@@ -1,0 +1,59 @@
+/*
+  Maintain ratio mixin.
+  @param {List} [$ratio] Ratio the element needs to maintain. A 16:9 ratio would look like this:
+                         .element { @include maintain-ratio(16 9); }
+*/
+// found here https://gist.github.com/stoplion/3777538
+@mixin maintain-ratio($ratio: 1 1) {
+  $width: 100%;
+  $height: percentage(nth($ratio, 2) / nth($ratio, 1));
+  
+  width: $width;
+  height: 0;
+  padding-bottom: $height;
+}
+
+// ARROW GENERATOR
+@mixin arrow(
+  $box-edge: top, 
+  $arrow-size: 10px, 
+  $border-width: 4px,
+  $background-color: white,
+  $border-color: black,
+  $arrow-offset: 50% ) {
+
+  position: relative;
+  background: $background-color;
+  border: $border-width solid $border-color;
+
+  @if      $box-edge == top    { $box-edge-inverse: bottom; $offset-direction: left; }
+  @if      $box-edge == right  { $box-edge-inverse: left; $offset-direction: top; }
+  @else if $box-edge == bottom { $box-edge-inverse: top; $offset-direction: left; }
+  @else if $box-edge == left   { $box-edge-inverse: right; $offset-direction: top; }
+
+
+  &:after, &:before {
+    #{$box-edge-inverse}: 100%;
+    #{$offset-direction}: $arrow-offset;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-#{$box-edge-inverse}-color: $background-color;
+    border-width: $arrow-size;
+    margin-#{$offset-direction}: -$arrow-size;
+  }
+  &:before {
+    $border-offset: $arrow-size + round($border-width * 1.41421); //this.get('size') + Math.round(borderWidth * Math.sqrt(2)),
+    border-color: rgba(194, 225, 245, 0);
+    border-#{$box-edge-inverse}-color: $border-color;
+    border-width: $border-offset;
+    margin-#{$offset-direction}: -$border-offset; 
+  }  
+}

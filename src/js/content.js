@@ -26,29 +26,14 @@ const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 chrome.storage.sync.get('state', data => {
 	const { websites, timer } = data.state;
 	checkShouldMountOrNot(websites.items, timer.date, data.state);
-		// const shouldBlockSite = checker(data.state.websites.items);
-		// const date = data.state.timer.date;
-
-		// if (date && date > Date.now() && shouldBlockSite && !mounted) {
-		// 	mountBlocker(data.state);
-		// }
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
 		if (msg.type === 'STATE_UPDATE') {
 			const { websites, timer } = msg.data;
 			checkShouldMountOrNot(websites.items, timer.date, msg.data);
-
-			// const date = msg.data.timer.date;
-			// if (date && date > Date.now() && shouldBlockSite && !mounted) {
-			// 	mountBlocker(msg.data);
-			// }
-			// if (!date && mounted) {
-			// 	dismountBlocker();
-			// }
 		}
 	});
 });
-
 
 function mountBlocker(state) {
 	// set up mount point
