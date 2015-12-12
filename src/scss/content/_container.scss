@@ -16,17 +16,21 @@
 }
 
 #clock {
-	font-size: 2em;
+	font-size: 4em;
 }
 
 .start-focusing {
   padding: 20px 30px;
   font-size: 2em;
-  background-color: darken($blue, 10%);
+  background-color: lighten($blue, 10%);
   color: white;
   text-transform: uppercase;
-  @include transition(all 0.15s ease-in-out);
+  border-bottom: 5px solid lighten($blue, 5%);
+  letter-spacing: 0.15em;
+  @include transition(all 0.10s ease-in-out);
   &:hover {
   	background-color: darken($blue, 15%);
+  	border: 0px solid darken($blue, 20%);
+  	@include transform(translateY(5px));
   }
 }

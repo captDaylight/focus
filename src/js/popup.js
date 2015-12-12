@@ -30,10 +30,6 @@ chrome.tabs.query(
         chrome.extension.getBackgroundPage().console.log('from the popup',data);
         ReactDOM.render(
           <div>
-            <h1>Focus what...</h1>
-            {data.state.websites.items.map((site) => {
-              return <li>{site.name}</li>
-            })}
             <button onClick={() => processSiteInfo(url, favIconUrl)}>
               Add site to block list
             </button>
