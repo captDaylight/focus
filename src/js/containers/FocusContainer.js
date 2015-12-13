@@ -35,15 +35,20 @@ export default class FocusContainer extends Component {
 		const { items } = this.state.websites;
 		
 		return (
-			<section id="focus-container" className={classnames({focusing: minutes})}>
-				
+			<section 
+				id="focus-container" 
+				className={classnames({focusing: minutes})}>
 					{
 						minutes
 						? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 						: (
 								<div>
 									<div id="main-action">
-										<button className="focus-button" onClick={() => countDown(Date.now() + 30000)}>Set Timer</button>
+										<button 
+											className="focus-button" 
+											onClick={() => countDown(Date.now() + 30000)}>
+											Start Working
+										</button>
 									</div>
 									<WebsiteList websites={items} removeWebsite={removeWebsite} />
 								</div> 

@@ -14,6 +14,7 @@ const storageSync = createStorageSync(store.getState());
 
 // store.dispatch(websites.addWebsite('read.com'));
 
+
 // on init, sync state
 storageSync(store.getState());
 // subscribe to store and sync chrome state
