@@ -4,7 +4,7 @@
 	padding: 30px;
 	background-color: lighten($blue, 20%);
 	color: darken($blue, 10%);
-	@include transition(all 0.15s ease-in-out);
+	@include transition(all 0.25s ease-in-out);
 	&.focusing {
 		background-color: lighten($red, 20%);
 		color: darken($red, 10%);
@@ -25,12 +25,12 @@
   background-color: lighten($blue, 10%);
   color: white;
   text-transform: uppercase;
-  border-bottom: 5px solid lighten($blue, 5%);
+  border-bottom: 5px solid lighten($blue, 3%);
   letter-spacing: 0.15em;
   @include transition(all 0.10s ease-in-out);
   &:hover {
-  	background-color: darken($blue, 15%);
-  	border: 0px solid darken($blue, 20%);
+  	background-color: $blue;
+  	border: 0px solid darken($blue, 15%);
   	@include transform(translateY(5px));
   }
   &.smaller {
@@ -38,4 +38,15 @@
   	padding: 10px 15px;
   	letter-spacing: 0.05em;
   }
+}
+
+.focusing {
+	.focus-button {
+	  background-color: lighten($red, 10%);
+	  border-bottom: 5px solid lighten($red, 3%);
+	  &:hover {
+	  	background-color: $red;
+	  	border: 0px solid darken($red, 15%);
+	  }
+	}
 }

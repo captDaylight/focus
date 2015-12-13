@@ -49,7 +49,6 @@ export default class FocusContainer extends Component {
 								</div> 
 							)
 					}
-				
 			</section>
 		);
 	}
