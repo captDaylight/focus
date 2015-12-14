@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 export default function WebsiteList(props) {
-	const { websites, removeWebsite } = props;
-
+	const { websites, removeWebsite, disabled } = props;
 	return (
 		<ul id="website-list">
 		{
@@ -11,9 +10,14 @@ export default function WebsiteList(props) {
 					<li className="website-item" key={idx}>
 						<img src={website.favicon} />
 						<span>{website.name}</span>
-						<button onClick={() => removeWebsite(website.id)}>
-							Remove Website
-						</button>
+						{
+							disabled ? null : (						
+								<button onClick={() => removeWebsite(website.id)}>
+									Remove Website
+								</button>
+							)
+						}
+
 					</li>
 				);
 			})
