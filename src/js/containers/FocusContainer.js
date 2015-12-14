@@ -4,7 +4,7 @@ import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
-
+import SessionsList from '../components/SessionsList';
 const actions = wrapActionsWithMessanger([
 	'clearTimer',
 	'countDown',
@@ -31,9 +31,15 @@ export default class FocusContainer extends Component {
 	}
 	render() {
 		const { countDown, addWebsite, removeWebsite } = actions;
-		const { date, minutes, seconds } = this.state.timer;
+		const { 
+			date, 
+			minutes, 
+			seconds, 
+			duration,
+			sessions,
+		} = this.state.timer;
 		const { items } = this.state.websites;
-		
+		console.log(sessions);
 		return (
 			<section 
 				id="focus-container" 
@@ -45,7 +51,7 @@ export default class FocusContainer extends Component {
 						: (
 							<button 
 								className="focus-button" 
-								onClick={() => countDown(Date.now() + 30000)}>
+								onClick={() => countDown(Date.now() + duration)}>
 								Start Working
 							</button>
 						)
@@ -54,7 +60,8 @@ export default class FocusContainer extends Component {
 				<WebsiteList 
 					websites={items} 
 					removeWebsite={removeWebsite} 
-					disabled={minutes ? true : false}/>
+					disabled={minutes ? true : false} />
+				<SessionsList sessions={sessions}/>
 			</section>
 		);
 	}

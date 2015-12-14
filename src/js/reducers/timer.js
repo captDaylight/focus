@@ -12,12 +12,22 @@ const initialState = {
 	minutes: null,
 	seconds: null,
 	countdownInterval: null,
+	sessions: [],
+	duration: 40000, // 30 secs
 };
 
 export default function timer(state=initialState, action) {
 	switch(action.type) {
 		case SET_TIMER:
-			return {...state, date: action.date};
+			const session = {
+				date: action.date,
+				duration: action.duration,
+			};
+			return {
+				...state, 
+				date: action.date, 
+				sessions: [...state.sessions, session]
+			};
 
 		case SET_TIME_LEFT:
 			const { minutes, seconds } = action;

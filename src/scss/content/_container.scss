@@ -20,33 +20,33 @@
 }
 
 .focus-button {
-  padding: 20px 30px;
-  font-size: 2em;
-  background-color: lighten($blue, 10%);
-  color: white;
-  text-transform: uppercase;
-  border-bottom: 5px solid lighten($blue, 3%);
-  letter-spacing: 0.15em;
-  @include transition(all 0.10s ease-in-out);
-  &:hover {
-  	background-color: $blue;
-  	border: 0px solid darken($blue, 15%);
-  	@include transform(translateY(5px));
-  }
-  &.smaller {
-  	font-size: 1em;
-  	padding: 10px 15px;
-  	letter-spacing: 0.05em;
-  }
+	padding: 20px 30px;
+	font-size: 2em;
+	background-color: lighten($blue, 10%);
+	color: white;
+	text-transform: uppercase;
+	border-bottom: 5px solid lighten($blue, 3%);
+	letter-spacing: 0.15em;
+	@include transition(all 0.10s ease-in-out);
+	&:hover {
+		background-color: $blue;
+		border: 0px solid darken($blue, 15%);
+		@include transform(translateY(5px));
+	}
+	&.smaller {
+		font-size: 1em;
+		padding: 10px 15px;
+		letter-spacing: 0.05em;
+	}
 }
 
 .focusing {
 	.focus-button {
-	  background-color: lighten($red, 10%);
-	  border-bottom: 5px solid lighten($red, 3%);
-	  &:hover {
-	  	background-color: $red;
-	  	border: 0px solid darken($red, 15%);
-	  }
+		background-color: lighten($red, 10%);
+		border-bottom: 5px solid lighten($red, 3%);
+		&:hover {
+			background-color: $red;
+			border: 0px solid darken($red, 15%);
+		}
 	}
 }
