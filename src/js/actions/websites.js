@@ -14,3 +14,19 @@ export function removeWebsite(id) {
 		id
 	}
 }
+
+export function checkForTab(website, id, favicon) {
+	return dispatch => {
+		dispatch(addWebsite(website, favicon));	
+		if (!favicon) {
+			setTimeout(() => {
+				chrome.tabs.get(id, tab => {
+					const { favIconUrl } = tab;
+					if (favIconUrl) {
+						dispatch(addWebsite(website, favIconUrl));
+					}
+				});
+			}, 5000);
+		}
+	}
+}

@@ -7,7 +7,7 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds';
 
 const actions = wrapActionsWithMessanger([
 	'countDown',
-	'addWebsite',
+	'checkForTab',
 ]);
 
 function processSiteInfo(siteURL, faviconURL) {
@@ -17,7 +17,7 @@ function processSiteInfo(siteURL, faviconURL) {
 	// TODO: a website like google.co.uk won't work with this solution, it'll return co.uk
 	const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
 
-	actions.addWebsite(parsedHostname, faviconURL);
+	actions.checkForTab(parsedHostname, faviconURL);
 }
 
 function urlIsInList(url, list) {
@@ -46,8 +46,9 @@ export default class FocusContainer extends Component {
 			{currentWindow: true, active : true},
 			tab => {
 				if (tab.length !== 0) {
-					const { url, favIconUrl } = tab[0];
-		      processSiteInfo(url, favIconUrl)
+					const { url, id, favIconUrl } = tab[0];
+
+					processSiteInfo(url, id, favIconUrl)		      
 				}
 			}
 		)
