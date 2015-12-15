@@ -13,7 +13,7 @@ const initialState = {
 	seconds: null,
 	countdownInterval: null,
 	sessions: [],
-	duration: 40000, // 30 secs
+	duration: 20000, // 30 secs
 };
 
 export default function timer(state=initialState, action) {
@@ -21,7 +21,7 @@ export default function timer(state=initialState, action) {
 		case SET_TIMER:
 			const session = {
 				date: action.date,
-				duration: action.duration,
+				duration: state.duration,
 			};
 			return {
 				...state, 
@@ -37,7 +37,7 @@ export default function timer(state=initialState, action) {
 			return {...state, interval: action.interval};
 
 		case CLEAR_COUNTDOWN_INTERVAL:
-			return initialState;
+			return {...initialState, sessions: state.sessions, duration: state.duration};
 
 		default:
 			return state;
