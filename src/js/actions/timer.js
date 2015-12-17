@@ -37,14 +37,9 @@ export function clearCountdownInterval() {
 	}
 }
 
-
+import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-
-function doubleDigit(amount) {
-	return amount < 10 ? `0${amount}` : `${amount}`;
-}
-
 export function countDown(date) {
 	return dispatch => {
 		dispatch(setTimer(date));
