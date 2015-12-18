@@ -8,7 +8,6 @@ export default function SessionsList(props) {
 	return (
 		<ul id="sessions-list">
 			{
-
 				sessions.reverse().map((session, idx) => {
 					const date = new Date(session.date);
 					const isCurrent = (Date.now() < session.date);
