@@ -6,21 +6,24 @@ export default function SessionsList(props) {
 	const { sessions } = props;
 	console.log(sessions);
 	return (
-		<ul id="sessions-list">
-			{
-				sessions.reverse().map((session, idx) => {
-					const date = new Date(session.date);
-					const isCurrent = (Date.now() < session.date);
+		<div>
+			<h5>WORK SESSIONS</h5>
+			<ul id="sessions-list">
+				{
+					sessions.reverse().map((session, idx) => {
+						const date = new Date(session.date);
+						const isCurrent = (Date.now() < session.date);
 
-					return (
-						<li key={idx} className={classnames({current: isCurrent})}>
-							{`${formatAMPM(date, true)}`}
-							{session.duration}
-							{isCurrent ? ' CURRENT': null}
-						</li>
-					)
-				})
-			}
-		</ul>
+						return (
+							<li key={idx} className={classnames({current: isCurrent})}>
+								{`${formatAMPM(date, true)}`}
+								{session.duration}
+								{isCurrent ? ' CURRENT': null}
+							</li>
+						)
+					})
+				}
+			</ul>
+		</div>
 	);
 }
