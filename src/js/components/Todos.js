@@ -5,6 +5,7 @@ export default function SessionsList(props) {
 	return (
 		<div>
 			TODOS
+			<input placeholder="add a todo" />
 			<ul>
 				
 			</ul>

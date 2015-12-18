@@ -46,7 +46,7 @@ export default function timer(state=initialState, action) {
 			return {...state, interval: action.interval};
 
 		case CLEAR_COUNTDOWN_INTERVAL:
-			return {...state, timerInitial};
+			return {...state, ...timerInitial};
 
 		default:
 			return state;

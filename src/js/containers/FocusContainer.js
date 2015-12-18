@@ -61,12 +61,16 @@ export default class FocusContainer extends Component {
 						)
 					}
 				</div>
-				<WebsiteList 
-					websites={items} 
-					removeWebsite={removeWebsite} 
-					disabled={minutes ? true : false} />
-				<SessionsList sessions={sessions} ampm={ampm}/>
-				<Todos />
+				
+				<div id="spread">
+					<WebsiteList 
+						websites={items} 
+						removeWebsite={removeWebsite} 
+						disabled={minutes ? true : false} />
+					<SessionsList sessions={sessions} ampm={ampm}/>
+					<Todos />
+				</div>
+
 			</section>
 		);
 	}

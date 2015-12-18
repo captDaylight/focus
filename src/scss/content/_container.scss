@@ -1,7 +1,6 @@
 #focus-container {
 	height: 100%;
 	width: 100%;
-	padding: 30px;
 	background-color: lighten($blue, 20%);
 	color: darken($blue, 10%);
 	@include transition(all 0.25s ease-in-out);
@@ -17,6 +16,13 @@
 
 #clock {
 	font-size: 4em;
+}
+
+#spread {
+	@include display(flex);
+	> ul, > div {
+		@include flex-grow(1);
+	}
 }
 
 .focus-button {
