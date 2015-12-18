@@ -4,6 +4,7 @@ import rootReducer from './reducers';
 import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
 import * as websites from './actions/websites';
+import * as todos from './actions/todos';
 
 const createAndComposeStore = compose(
 	applyMiddleware(thunkMiddleware)
@@ -45,7 +46,7 @@ chrome.tabs.onActivated.addListener((info) => {
 // TODO: switch this to long-lived connection
 // https://developer.chrome.com/extensions/messaging#connect
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-	const actions = {...timer, ...websites};
+	const actions = {...timer, ...websites, ...todos};
 	if (req.type === 'ACTION') {
 		console.log('action coming in', req);
 		store.dispatch(actions[req.action](...req.data));

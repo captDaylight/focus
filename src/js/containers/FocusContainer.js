@@ -5,11 +5,14 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
 import SessionsList from '../components/SessionsList';
+import Todos from '../components/Todos';
+
 const actions = wrapActionsWithMessanger([
 	'clearTimer',
 	'countDown',
 	'addWebsite',
 	'removeWebsite',
+	'addTodo',
 ]);
 
 export default class FocusContainer extends Component {
@@ -63,6 +66,7 @@ export default class FocusContainer extends Component {
 					removeWebsite={removeWebsite} 
 					disabled={minutes ? true : false} />
 				<SessionsList sessions={sessions} ampm={ampm}/>
+				<Todos />
 			</section>
 		);
 	}

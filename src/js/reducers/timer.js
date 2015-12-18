@@ -6,16 +6,24 @@ import {
 	CLEAR_COUNTDOWN_INTERVAL,
 } from '../actions/timer';
 
-const initialState = {
+// timer data gets cleared
+const timerInitial = {
 	date: null,
 	timeRemaining: null,
 	minutes: null,
 	seconds: null,
-	countdownInterval: null,
+	countdownInterval: null,	
+}
+
+// meta data does not get cleared
+const metaInitial = {
 	sessions: [],
 	duration: 20000, // 30 secs
 	ampm: true, // am pm OR military time
-};
+}
+
+// combine timerInitial and metaInitial to form initialstate
+const initialState = {...timerInitial, ...metaInitial};
 
 export default function timer(state=initialState, action) {
 	switch(action.type) {
@@ -38,12 +46,7 @@ export default function timer(state=initialState, action) {
 			return {...state, interval: action.interval};
 
 		case CLEAR_COUNTDOWN_INTERVAL:
-			return {
-				...initialState,
-				sessions: state.sessions,
-				duration: state.duration,
-				ampm: state.ampm,
-			};
+			return {...state, timerInitial};
 
 		default:
 			return state;
