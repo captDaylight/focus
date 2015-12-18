@@ -14,6 +14,7 @@ const initialState = {
 	countdownInterval: null,
 	sessions: [],
 	duration: 20000, // 30 secs
+	ampm: true, // am pm OR military time
 };
 
 export default function timer(state=initialState, action) {
@@ -37,7 +38,12 @@ export default function timer(state=initialState, action) {
 			return {...state, interval: action.interval};
 
 		case CLEAR_COUNTDOWN_INTERVAL:
-			return {...initialState, sessions: state.sessions, duration: state.duration};
+			return {
+				...initialState,
+				sessions: state.sessions,
+				duration: state.duration,
+				ampm: state.ampm,
+			};
 
 		default:
 			return state;

@@ -37,9 +37,10 @@ export default class FocusContainer extends Component {
 			seconds, 
 			duration,
 			sessions,
+			ampm,
 		} = this.state.timer;
 		const { items } = this.state.websites;
-		console.log(sessions);
+		
 		return (
 			<section 
 				id="focus-container" 
@@ -61,7 +62,7 @@ export default class FocusContainer extends Component {
 					websites={items} 
 					removeWebsite={removeWebsite} 
 					disabled={minutes ? true : false} />
-				<SessionsList sessions={sessions}/>
+				<SessionsList sessions={sessions} ampm={ampm}/>
 			</section>
 		);
 	}
