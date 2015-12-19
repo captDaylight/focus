@@ -1,6 +1,7 @@
 import doubleDigit from './doubleDigit';
 
-export default function formatAMPM(date, ampm=true) {
+export default function formatAMPM(timecode, ampm=true) {
+	const date = new Date(timecode);
 	let hours = date.getHours();
 	const minutes = doubleDigit(date.getMinutes());
 	const amOrPm = hours >= 12 ? ' pm' : ' am';

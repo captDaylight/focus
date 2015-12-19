@@ -11,13 +11,12 @@ export default function SessionsList(props) {
 			<ul id="sessions-list">
 				{
 					sessions.reverse().map((session, idx) => {
-						const date = new Date(session.date);
 						const isCurrent = (Date.now() < session.date);
 
 						return (
 							<li key={idx} className={classnames({current: isCurrent})}>
-								{`${formatAMPM(date, true)}`}
-								{session.duration}
+								{`${formatAMPM(session.date, true)}`} - {`${formatAMPM(session.date + session.duration, true)}`} 
+								
 								{isCurrent ? ' CURRENT': null}
 							</li>
 						)

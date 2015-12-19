@@ -7,10 +7,7 @@ export default function SessionsList(props) {
 	return (
 		<div>
 			<h5>TODOS</h5>
-			<Form ref="form">
-				<FocusInput name="website" placeholder="Add a Todo" />
-				<button>Submit</button>
-			</Form>
+
 			
 			<ul>
 
@@ -18,3 +15,8 @@ export default function SessionsList(props) {
 		</div>
 	);
 }
+
+			// <Form ref="form">
+			// 	<FocusInput name="website" placeholder="Add a Todo" />
+			// 	<button>Submit</button>
+			// </Form>
