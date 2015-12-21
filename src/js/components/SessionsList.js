@@ -4,9 +4,13 @@ import formatAMPM from '../utils/formatAMPM';
 
 function isTodayOrDate(time) {
 	const date = new Date(time);
-	const day = new Date(date.getYear(), date.getMonth(), date.getDay());
-	const now = Date.now();
-	return 
+	// const day = new Date(date.getYear(), date.getMonth(), date.getDay());
+	const now = new Date();
+	if (date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDay() === now.getDay()) {
+		return 'Today';
+	} else {
+		return `${date.toLocaleString('en-us', { month: 'short' })} ${date.getDay()}, ${date.getFullYear()}`;
+	}
 }
 
 export default function SessionsList(props) {
@@ -25,7 +29,7 @@ export default function SessionsList(props) {
 								--
 								{`${formatAMPM(session.date + session.duration, true)}`} 
 								::
-								{isToday()}
+								{isTodayOrDate(session.date)}
 								
 								{isCurrent ? ' CURRENT': null}
 							</li>
