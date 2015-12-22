@@ -33,7 +33,7 @@ export default class FocusContainer extends Component {
 		});
 	}
 	render() {
-		const { countDown, addWebsite, removeWebsite } = actions;
+		const { countDown, addWebsite, removeWebsite, addTodo } = actions;
 		const { 
 			date, 
 			minutes, 
@@ -61,14 +61,14 @@ export default class FocusContainer extends Component {
 						)
 					}
 				</div>
-				
+
 				<div id="spread">
 					<WebsiteList 
 						websites={items} 
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
 					<SessionsList sessions={sessions} ampm={ampm}/>
-					<Todos />
+					<Todos addTodo={addTodo} />
 				</div>
 
 			</section>
