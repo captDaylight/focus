@@ -17,6 +17,7 @@ export default class SessionsList extends Component {
 		}
 	}
 	render() {
+		const { todos } = this.props;
 		return (
 			<div>
 				<h5>TODOS</h5>
@@ -27,7 +28,11 @@ export default class SessionsList extends Component {
 				</Form>
 
 				<ul>
-
+					{todos.map(todo => {
+						return (
+							<li>{todo}</li>
+						)
+					})}
 				</ul>
 			</div>
 		);

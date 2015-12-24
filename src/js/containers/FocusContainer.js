@@ -43,8 +43,8 @@ export default class FocusContainer extends Component {
 			ampm,
 		} = this.state.timer;
 		const { websites } = this.state.websites;
-		console.log(this.state);
-		
+		const { todos } = this.state.todos;
+
 		return (
 			<section 
 				id="focus-container" 
@@ -69,7 +69,7 @@ export default class FocusContainer extends Component {
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
 					<SessionsList sessions={sessions} ampm={ampm}/>
-					<Todos addTodo={addTodo} />
+					<Todos addTodo={addTodo} todos={todos}/>
 				</div>
 
 			</section>
