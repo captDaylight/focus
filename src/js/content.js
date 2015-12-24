@@ -25,12 +25,12 @@ const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 
 chrome.storage.sync.get('state', data => {
 	const { websites, timer } = data.state;
-	checkShouldMountOrNot(websites.items, timer.date, data.state);
+	checkShouldMountOrNot(websites.websites, timer.date, data.state);
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
 		if (msg.type === 'STATE_UPDATE') {
 			const { websites, timer } = msg.data;
-			checkShouldMountOrNot(websites.items, timer.date, msg.data);
+			checkShouldMountOrNot(websites.websites, timer.date, msg.data);
 		}
 	});
 });

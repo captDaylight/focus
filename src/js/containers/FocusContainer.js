@@ -42,7 +42,8 @@ export default class FocusContainer extends Component {
 			sessions,
 			ampm,
 		} = this.state.timer;
-		const { items } = this.state.websites;
+		const { websites } = this.state.websites;
+		console.log(this.state);
 		
 		return (
 			<section 
@@ -64,7 +65,7 @@ export default class FocusContainer extends Component {
 
 				<div id="spread">
 					<WebsiteList 
-						websites={items} 
+						websites={websites} 
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
 					<SessionsList sessions={sessions} ampm={ampm}/>

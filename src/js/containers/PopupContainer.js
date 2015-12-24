@@ -56,7 +56,7 @@ export default class FocusContainer extends Component {
 	render() {
 		const { countDown, addWebsite } = actions;
 		const { date, minutes, seconds, duration } = this.state.timer;
-		const { items } = this.state.websites;
+		const { websites } = this.state.websites;
 		
 		return (
 			<section id="popup" className={classnames({focusing: minutes})}>
@@ -77,7 +77,7 @@ export default class FocusContainer extends Component {
 
 				<div className="popup-section">
 					{
-						urlIsInList(this.props.url, items)
+						urlIsInList(this.props.url, websites)
 						?
 						<span>Site is on the blocked list</span>
 						: (
