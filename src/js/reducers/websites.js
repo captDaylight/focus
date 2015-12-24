@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import find from 'lodash/collection/find';
 import { 
 	ADD_WEBSITE,
@@ -21,7 +22,7 @@ export default function websites(state=initialState, action) {
 			const website = {
 				name: action.website,
 				favicon: action.favicon,
-				id: Date.now(),
+				id: shortid.generate(),
 			};
 			if (siteIdx >= 0) {
 				if (state.websites[siteIdx].favicon) {

@@ -28,9 +28,9 @@ export default class SessionsList extends Component {
 				</Form>
 
 				<ul>
-					{todos.map(todo => {
+					{todos.map((todo, idx)=> {
 						return (
-							<li>{todo}</li>
+							<li key={idx}>{todo.todo}</li>
 						)
 					})}
 				</ul>
