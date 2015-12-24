@@ -1,0 +1,10 @@
+#todos {
+
+}
+.todo {
+	cursor: pointer;
+	&.completed {
+		text-decoration: line-through;
+		font-weight: bold;
+	}
+}

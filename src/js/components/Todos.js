@@ -17,7 +17,7 @@ export default class SessionsList extends Component {
 		}
 	}
 	render() {
-		const { todos } = this.props;
+		const { todos, toggleTodoCompletion } = this.props;
 		return (
 			<div>
 				<h5>TODOS</h5>
@@ -27,10 +27,15 @@ export default class SessionsList extends Component {
 					<button>Submit</button>
 				</Form>
 
-				<ul>
+				<ul id="todos">
 					{todos.map((todo, idx)=> {
 						return (
-							<li key={idx}>{todo.todo}</li>
+							<li 
+								key={idx} 
+								onClick={() => toggleTodoCompletion(todo.id)}
+								className={classnames('todo', {completed: todo.completed})}>
+								{todo.todo}
+							</li>
 						)
 					})}
 				</ul>

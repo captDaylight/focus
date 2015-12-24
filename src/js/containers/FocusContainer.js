@@ -13,6 +13,7 @@ const actions = wrapActionsWithMessanger([
 	'addWebsite',
 	'removeWebsite',
 	'addTodo',
+	'toggleTodoCompletion',
 ]);
 
 export default class FocusContainer extends Component {
@@ -33,7 +34,13 @@ export default class FocusContainer extends Component {
 		});
 	}
 	render() {
-		const { countDown, addWebsite, removeWebsite, addTodo } = actions;
+		const { 
+			countDown,
+			addWebsite,
+			removeWebsite,
+			addTodo,
+			toggleTodoCompletion
+		} = actions;
 		const { 
 			date, 
 			minutes, 
@@ -69,7 +76,10 @@ export default class FocusContainer extends Component {
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
 					<SessionsList sessions={sessions} ampm={ampm}/>
-					<Todos addTodo={addTodo} todos={todos}/>
+					<Todos 
+						addTodo={addTodo} 
+						toggleTodoCompletion={toggleTodoCompletion} 
+						todos={todos} />
 				</div>
 
 			</section>

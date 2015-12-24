@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import findIndex from 'lodash/array/findIndex';
+import split from '../utils/split';
 import {
 	ADD_TODO,
 	REMOVE_TODO,
@@ -8,7 +9,7 @@ import {
 
 const initialState = {
 	todos: [],
-	completed: false;
+	completed: false,
 };
 
 export default function todos(state=initialState, action) {
@@ -26,10 +27,14 @@ export default function todos(state=initialState, action) {
 
 		case TOGGLE_TODO_COMPLETION: 
 			// const id = action.id;
-			const idx = _.findIndex(state.todos, todo => todo.id === action.id);
+			const idx = findIndex(state.todos, todo => todo.id === action.id);
+			const splitTodos = split(state.todos, idx);
 			const	todoPrevious = state.todos[idx];
-			const todoUpdate = {...todoPrevious, completed: !todoPrevious.completed}
-			return {...state, todos: state.todos.filter(item => item.id !== id)};
+			const todoUpdate = {
+				...todoPrevious, 
+				completed: !todoPrevious.completed
+			};
+			return {...state, todos: [...splitTodos[0], todoUpdate, ...splitTodos[1]]};
 
 		default:
 			return state;
