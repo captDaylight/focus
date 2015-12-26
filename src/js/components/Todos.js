@@ -14,6 +14,7 @@ export default class SessionsList extends Component {
 		const { addTodo } = this.props;
 		if (e.todo) {
 			addTodo(e.todo);
+			this.refs.form.reset();
 		}
 	}
 	render() {
@@ -22,7 +23,7 @@ export default class SessionsList extends Component {
 			<div>
 				<h5>TODOS</h5>
 				
-				<Form onSubmit={this.handleSubmit.bind(this)}>
+				<Form onSubmit={this.handleSubmit.bind(this)} ref="form">
 					<FocusInput name="todo" placeholder="Add a Todo" />
 					<button>Submit</button>
 				</Form>
