@@ -75,7 +75,10 @@ export default class FocusContainer extends Component {
 						websites={websites} 
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
-					<SessionsList sessions={sessions} ampm={ampm}/>
+					<SessionsList 
+						sessions={sessions} 
+						ampm={ampm} 
+						todos={todos} />
 					<Todos 
 						addTodo={addTodo} 
 						toggleTodoCompletion={toggleTodoCompletion} 

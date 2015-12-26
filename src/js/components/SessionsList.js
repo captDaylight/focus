@@ -14,7 +14,7 @@ function isTodayOrDate(time) {
 }
 
 export default function SessionsList(props) {
-	const { sessions } = props;
+	const { sessions, todos } = props;
 	return (
 		<div>
 			<h5>WORK SESSIONS</h5>
@@ -22,16 +22,32 @@ export default function SessionsList(props) {
 				{
 					sessions.reverse().map((session, idx) => {
 						const isCurrent = (Date.now() < session.date);
-
+						const { date, duration } = session;
 						return (
 							<li key={idx} className={classnames({current: isCurrent})}>
-								{`${formatAMPM(session.date, true)}`} 
-								--
-								{`${formatAMPM(session.date + session.duration, true)}`} 
-								::
-								{isTodayOrDate(session.date)}
-								
-								{isCurrent ? ' CURRENT': null}
+								<div>
+									{`${formatAMPM(date, true)}`} 
+									--
+									{`${formatAMPM(date + duration, true)}`} 
+									::
+									{isTodayOrDate(date)}
+									
+									{isCurrent ? ' CURRENT': null}
+								</div>
+								<ul className="completed-todos">
+									{
+										todos.map((todo, idx) => {
+											const { completed } = todo;
+			
+											console.log(completed - date);
+											if (completed > date && completed < date + duration) {
+												return (
+													<li key={`${idx}-completed`}>{todo.todo}</li>
+												)
+											}
+										})
+									}
+								</ul>
 							</li>
 						)
 					})

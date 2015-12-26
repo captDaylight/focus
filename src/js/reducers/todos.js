@@ -9,7 +9,6 @@ import {
 
 const initialState = {
 	todos: [],
-	completed: false,
 };
 
 export default function todos(state=initialState, action) {
@@ -18,6 +17,8 @@ export default function todos(state=initialState, action) {
 			const todo = {
 				todo: action.todo,
 				id: shortid.generate(),
+				created: Date.now(),
+				completed: null,
 			};
 			return {...state, todos: [...state.todos, todo]};
 
@@ -32,7 +33,7 @@ export default function todos(state=initialState, action) {
 			const	todoPrevious = state.todos[idx];
 			const todoUpdate = {
 				...todoPrevious, 
-				completed: !todoPrevious.completed
+				completed: todoPrevious.completed ? null : Date.now()
 			};
 			return {...state, todos: [...splitTodos[0], todoUpdate, ...splitTodos[1]]};
 
