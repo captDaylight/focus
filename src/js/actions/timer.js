@@ -40,12 +40,12 @@ export function clearCountdownInterval() {
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-export function countDown(date) {
+export function countDown(date, duration) {
 	return dispatch => {
 		dispatch(setTimer(date));
-
+		const dateEnd = date + duration;
 		const setTime = (interval) => {
-			const fromNow = date - Date.now();
+			const fromNow = dateEnd - Date.now();
 			if (fromNow >= 0) {
 				const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
 				const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
@@ -66,7 +66,7 @@ export function countDown(date) {
 			
 			setTime(countdownInterval); // set time first after timeout
 			dispatch(setCountdownInterval(countdownInterval));
-		}, (date - Date.now()) % SECOND ); 
+		}, (dateEnd - Date.now()) % SECOND ); 
 
 		setTime(); // initial time before timeout
 	}

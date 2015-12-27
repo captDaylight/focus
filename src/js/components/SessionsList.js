@@ -21,14 +21,16 @@ export default function SessionsList(props) {
 			<ul id="sessions-list">
 				{
 					sessions.reverse().map((session, idx) => {
-						const isCurrent = (Date.now() < session.date);
 						const { date, duration } = session;
+						const now = Date.now();
+						const dateEnd = date + duration;
+						const isCurrent = (now > date && now < dateEnd);
 						return (
 							<li key={idx} className={classnames({current: isCurrent})}>
 								<div>
 									{`${formatAMPM(date, true)}`} 
 									--
-									{`${formatAMPM(date + duration, true)}`} 
+									{`${formatAMPM(dateEnd, true)}`} 
 									::
 									{isTodayOrDate(date)}
 									
@@ -38,9 +40,7 @@ export default function SessionsList(props) {
 									{
 										todos.map((todo, idx) => {
 											const { completed } = todo;
-			
-											console.log(completed - date);
-											if (completed > date && completed < date + duration) {
+											if (completed > date && completed < dateEnd) {
 												return (
 													<li key={`${idx}-completed`}>{todo.todo}</li>
 												)

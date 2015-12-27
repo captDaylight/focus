@@ -67,7 +67,7 @@ export default class FocusContainer extends Component {
 						<div className="popup-section">
 							<button 
 								className="focus-button smaller" 
-								onClick={() => countDown(Date.now() + duration)}
+								onClick={() => countDown(Date.now())}
 							>
 								Start Working
 							</button>

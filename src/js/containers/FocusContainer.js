@@ -63,7 +63,7 @@ export default class FocusContainer extends Component {
 						: (
 							<button 
 								className="focus-button" 
-								onClick={() => countDown(Date.now() + duration)}>
+								onClick={() => countDown(Date.now(), duration)}>
 								Start Working
 							</button>
 						)
