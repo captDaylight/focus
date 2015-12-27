@@ -1,4 +1,9 @@
 #sessions-list {
+	> li {
+		border: 1px solid $blue;
+		padding:10px;
+		margin: 10px 0px;
+	}
 	.current {
 		font-weight: bold;
 	}

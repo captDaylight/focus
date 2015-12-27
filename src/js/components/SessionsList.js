@@ -25,9 +25,14 @@ export default function SessionsList(props) {
 						const now = Date.now();
 						const dateEnd = date + duration;
 						const isCurrent = (now > date && now < dateEnd);
+						const sessionTodos = todos.filter(todo => {
+							const { completed } = todo;
+							return completed > date && completed < dateEnd;
+						});
+
 						return (
 							<li key={idx} className={classnames({current: isCurrent})}>
-								<div>
+								<h5>
 									{`${formatAMPM(date, true)}`} 
 									--
 									{`${formatAMPM(dateEnd, true)}`} 
@@ -35,19 +40,24 @@ export default function SessionsList(props) {
 									{isTodayOrDate(date)}
 									
 									{isCurrent ? ' CURRENT': null}
-								</div>
-								<ul className="completed-todos">
-									{
-										todos.map((todo, idx) => {
-											const { completed } = todo;
-											if (completed > date && completed < dateEnd) {
-												return (
-													<li key={`${idx}-completed`}>{todo.todo}</li>
-												)
-											}
-										})
-									}
-								</ul>
+								</h5>
+								{
+									sessionTodos.length === 0 ? null : 
+									(
+										<div>
+											<div>Finished Todos</div>
+											<ul className="completed-todos">
+												{
+													sessionTodos.map((todo, idx) => {
+														return (
+															<li key={`${idx}-completed`}>- {todo.todo}</li>
+														);
+													})
+												}
+											</ul>
+										</div>
+									)
+								}
 							</li>
 						)
 					})
