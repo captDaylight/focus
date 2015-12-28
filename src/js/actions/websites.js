@@ -15,18 +15,34 @@ export function removeWebsite(id) {
 	}
 }
 
+function times(fn, timesLeft) {
+	if (timesLeft > 0) {
+		return fn(timesLeft);
+	} else {
+		return;
+	}
+}
+
 export function checkForTab(website, id, favicon) {
 	return dispatch => {
 		dispatch(addWebsite(website, favicon));	
 		if (!favicon) {
-			setTimeout(() => {
-				chrome.tabs.get(id, tab => {
-					const { favIconUrl } = tab;
-					if (favIconUrl) {
-						dispatch(addWebsite(website, favIconUrl));
-					}
-				});
-			}, 5000);
+
+			const timeOut = count => {
+				console.log('timeout', count);
+				setTimeout(() => {
+					chrome.tabs.get(id, tab => {
+						const { favIconUrl } = tab;
+						if (favIconUrl) {
+							dispatch(addWebsite(website, favIconUrl));
+						} else {
+							times(timeOut, count - 1);
+						}
+					});
+				}, 500);
+			};
+
+			times(timeOut, 10);
 		}
 	}
 }
