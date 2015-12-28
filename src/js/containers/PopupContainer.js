@@ -10,14 +10,14 @@ const actions = wrapActionsWithMessanger([
 	'checkForTab',
 ]);
 
-function processSiteInfo(siteURL, faviconURL) {
+function processSiteInfo(siteURL, id, faviconURL) {
 	const urlParse = url.parse(siteURL);
 	const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
 	// turn www.facebook.com into facebook.com
 	// TODO: a website like google.co.uk won't work with this solution, it'll return co.uk
 	const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
 
-	actions.checkForTab(parsedHostname, faviconURL);
+	actions.checkForTab(parsedHostname, id, faviconURL);
 }
 
 function urlIsInList(url, list) {
@@ -47,7 +47,7 @@ export default class FocusContainer extends Component {
 			tab => {
 				if (tab.length !== 0) {
 					const { url, id, favIconUrl } = tab[0];
-
+					console.log(tab, favIconUrl);
 					processSiteInfo(url, id, favIconUrl)		      
 				}
 			}
@@ -67,7 +67,7 @@ export default class FocusContainer extends Component {
 						<div className="popup-section">
 							<button 
 								className="focus-button smaller" 
-								onClick={() => countDown(Date.now())}
+								onClick={() => countDown(Date.now(), duration)}
 							>
 								Start Working
 							</button>

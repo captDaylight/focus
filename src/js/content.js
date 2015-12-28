@@ -5,12 +5,12 @@ import FocusContainer from './containers/FocusContainer';
 import checkShouldBlock from './utils/checkShouldBlock';
 
 let mounted = false;
-
+console.log('herrro');
 function mountOrNot(siteChecker) {
 	return (siteList, date, state) => {
 		const shouldBlockSite = siteChecker(siteList);
 
-		if (date && date > Date.now()) {
+		if (date && date < Date.now()) {
 			if (shouldBlockSite && !mounted) {
 				mountBlocker(state);	
 			}
@@ -25,6 +25,7 @@ const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 
 chrome.storage.sync.get('state', data => {
 	const { websites, timer } = data.state;
+	console.log(websites.websites);
 	checkShouldMountOrNot(websites.websites, timer.date, data.state);
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results

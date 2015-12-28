@@ -18,7 +18,8 @@ const timerInitial = {
 // meta data does not get cleared
 const metaInitial = {
 	sessions: [],
-	duration: 20000, // 30 secs
+	// duration: 1500000, // 30 secs
+	duration: 20000,
 	ampm: true, // am pm OR military time
 }
 
