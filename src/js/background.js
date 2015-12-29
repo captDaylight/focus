@@ -22,6 +22,7 @@ storageSync(store.getState());
 store.subscribe(() => {
 	const state = store.getState();
 	const statePayload = { type: 'STATE_UPDATE', data: state };
+	console.log(statePayload);
 	storageSync(state);
 	chrome.runtime.sendMessage(statePayload);
 	chrome.tabs.query(
@@ -39,7 +40,7 @@ chrome.tabs.onActivated.addListener((info) => {
 	const statePayload = { type: 'STATE_UPDATE', data: state };
 	const tabId = info.tabId;
 	const windowId = info.windowId;
-	
+	console.log('here 1');
 	chrome.tabs.sendMessage(tabId, statePayload);
 });
 

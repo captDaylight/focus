@@ -33,7 +33,7 @@ export default function todos(state=initialState, action) {
 			const	todoPrevious = state.todos[idx];
 			const todoUpdate = {
 				...todoPrevious, 
-				completed: todoPrevious.completed ? null : Date.now()
+				completed: todoPrevious.completed ? null : Date.now(),
 			};
 			return {...state, todos: [...splitTodos[0], todoUpdate, ...splitTodos[1]]};
 
