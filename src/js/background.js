@@ -24,10 +24,18 @@ store.subscribe(() => {
 	const statePayload = { type: 'STATE_UPDATE', data: state };
 	if (state.timer.date) {
 		const {duration, date} = state.timer;
-		const minutesLeft = Math.floor(((date + duration) - Date.now()) / 60000).toString();
-		chrome.browserAction.setBadgeText({text: minutesLeft}); // need to set the time remaining 
+		const timeLeft = (date + duration) - Date.now();
+		if (timeLeft > 60000) {
+			const minutesLeft = Math.floor((timeLeft) / 60000).toString();	
+			chrome.browserAction.setBadgeText({text: `${minutesLeft}m`}); 
+		} else {
+			const secondsLeft = Math.floor((timeLeft) / 1000).toString();	
+			chrome.browserAction.setBadgeText({text: `${secondsLeft}s`}); 
+		}
 		// chrome.browserAction.setIcon({path: icon});
 		// suchrome.browserAction.setBadgeBackgroundColor({color:[190, 190, 190, 230]});
+	} else {
+		chrome.browserAction.setBadgeText({text: ''});
 	}
 	storageSync(state);
 	chrome.runtime.sendMessage(statePayload);
