@@ -14,9 +14,7 @@ const store = createAndComposeStore(rootReducer);
 const storageSync = createStorageSync(store.getState());
 
 // store.dispatch(websites.addWebsite('read.com'));
-chrome.browserAction.setBadgeText({text: '12'}); // need to set the time remaining 
-// chrome.browserAction.setIcon({path: icon});
-// chrome.browserAction.setBadgeBackgroundColor({color:[190, 190, 190, 230]});
+
 
 // on init, sync state
 storageSync(store.getState());
@@ -24,7 +22,13 @@ storageSync(store.getState());
 store.subscribe(() => {
 	const state = store.getState();
 	const statePayload = { type: 'STATE_UPDATE', data: state };
-
+	if (state.timer.date) {
+		const {duration, date} = state.timer;
+		const minutesLeft = Math.floor(((date + duration) - Date.now()) / 60000).toString();
+		chrome.browserAction.setBadgeText({text: minutesLeft}); // need to set the time remaining 
+		// chrome.browserAction.setIcon({path: icon});
+		// suchrome.browserAction.setBadgeBackgroundColor({color:[190, 190, 190, 230]});
+	}
 	storageSync(state);
 	chrome.runtime.sendMessage(statePayload);
 	chrome.tabs.query(
