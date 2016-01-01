@@ -6,7 +6,6 @@ export default function createStorageListener(store) {
 		if ('state' in data) {
 			const { newValue, oldValue } = data.state;
 
-			debugger;
 			store.dispatch({
 				type: HYDRATE_STATE,
 				state: newValue,
