@@ -19,8 +19,8 @@ const timerInitial = {
 const metaInitial = {
 	sessions: [],
 	// duration: 1500000, // 30 secs
-	duration: 70000,
-	// duration: 20000,
+	// duration: 70000,
+	duration: 20000,
 	ampm: true, // am pm OR military time
 }
 
