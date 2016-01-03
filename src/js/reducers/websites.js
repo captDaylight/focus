@@ -37,7 +37,19 @@ const initialState = {
 
 	{favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
 	id: '4JYKcZhIg',
-	name: 'medium.com'}],
+	name: 'medium.com'},
+
+	{favicon: 'https://cdn2.vox-cdn.com/community_logos/52517/voxv.png',
+	id: 'Nkz4ouzwl',
+	name: 'vox.com'},
+
+	{favicon: 'https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico',
+	id: 'EJKNsOGvl',
+	name: 'facebook.com'},
+
+	{favicon: 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2015.ico',
+	id: 'Ek88sOMPl',
+	name: 'netflix.com'}],
 };
 
 function indexPop(arr, idx) {
