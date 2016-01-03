@@ -18,7 +18,7 @@ export default class SessionsList extends Component {
 		}
 	}
 	render() {
-		const { todos, toggleTodoCompletion } = this.props;
+		const { todos, toggleTodoCompletion, removeTodo } = this.props;
 		return (
 			<div>
 				<h5>TODOS</h5>
@@ -35,7 +35,7 @@ export default class SessionsList extends Component {
 								key={idx} 
 								onClick={() => toggleTodoCompletion(todo.id)}
 								className={classnames('todo', {completed: todo.completed})}>
-								{todo.todo}
+								{todo.todo} <button onClick={() => removeTodo(todo.id)}>Remove Todo</button>
 							</li>
 						)
 					})}

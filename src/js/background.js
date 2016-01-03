@@ -26,7 +26,7 @@ store.subscribe(() => {
 		const {duration, date} = state.timer;
 		const timeLeft = (date + duration) - Date.now();
 		if (timeLeft > 60000) {
-			const minutesLeft = Math.floor((timeLeft) / 60000).toString();	
+			const minutesLeft = Math.floor((timeLeft) / 60000).toString();
 			chrome.browserAction.setBadgeText({text: `${minutesLeft}m`}); 
 		} else {
 			const secondsLeft = Math.floor((timeLeft) / 1000).toString();	
@@ -54,7 +54,7 @@ chrome.tabs.onActivated.addListener((info) => {
 	const statePayload = { type: 'STATE_UPDATE', data: state };
 	const tabId = info.tabId;
 	const windowId = info.windowId;
-	console.log('here 1');
+
 	chrome.tabs.sendMessage(tabId, statePayload);
 });
 
@@ -63,6 +63,8 @@ chrome.tabs.onActivated.addListener((info) => {
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	const actions = {...timer, ...websites, ...todos};
 	if (req.type === 'ACTION') {
+		console.log('----------------');
+		console.log('----------------');
 		console.log('action coming in', req);
 		store.dispatch(actions[req.action](...req.data));
 	}
