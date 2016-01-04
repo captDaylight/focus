@@ -15,6 +15,13 @@ export function removeWebsite(id) {
 	}
 }
 
+export const TOGGLE_SHOW_SITES = 'TOGGLE_SHOW_SITES';
+export function toggleShowSites() {
+	return {
+		type: TOGGLE_SHOW_SITES,
+	}
+}
+
 function times(fn, timesLeft) {
 	if (timesLeft > 0) {
 		return fn(timesLeft);

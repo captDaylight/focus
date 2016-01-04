@@ -3,9 +3,11 @@ import find from 'lodash/collection/find';
 import { 
 	ADD_WEBSITE,
 	REMOVE_WEBSITE,
+	TOGGLE_SHOW_SITES,
 } from '../actions/websites';
 
 const initialState = {
+	showSites: false,
 	websites: [
 	{favicon: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
 	id: 'NJbXqZhIe',
@@ -81,6 +83,9 @@ export default function websites(state=initialState, action) {
 		case REMOVE_WEBSITE:
 			const id = action.id;
 			return {...state, websites: state.websites.filter(item => item.id !== id)};
+
+		case TOGGLE_SHOW_SITES:
+			return {...state, showSites: !state.showSites};
 
 		default:
 			return state;

@@ -11,6 +11,7 @@ const actions = wrapActionsWithMessanger([
 	'clearTimer',
 	'countDown',
 	'addWebsite',
+	'toggleShowSites',
 	'removeWebsite',
 	'addTodo',
 	'toggleTodoCompletion',
@@ -42,6 +43,7 @@ export default class FocusContainer extends Component {
 			addTodo,
 			toggleTodoCompletion,
 			removeTodo,
+			toggleShowSites,
 		} = actions;
 		const { 
 			date, 
@@ -51,9 +53,9 @@ export default class FocusContainer extends Component {
 			sessions,
 			ampm,
 		} = this.state.timer;
-		const { websites } = this.state.websites;
+		const { websites, showSites } = this.state.websites;
 		const { todos } = this.state.todos;
-
+		
 		return (
 			<section 
 				id="focus-container" 
@@ -83,7 +85,9 @@ export default class FocusContainer extends Component {
 						ampm={ampm} 
 						todos={todos} />
 					<WebsiteList 
-						websites={websites} 
+						websites={websites}
+						showSites={showSites}
+						toggleShowSites={toggleShowSites}
 						removeWebsite={removeWebsite} 
 						disabled={minutes ? true : false} />
 				</div>
