@@ -35,7 +35,7 @@ export default class SessionsList extends Component {
 								key={idx} 
 								onClick={() => toggleTodoCompletion(todo.id)}
 								className={classnames('todo', {completed: todo.completed})}>
-								{todo.todo} <button onClick={() => removeTodo(todo.id)}>Remove Todo</button>
+								{todo.todo} <button onClick={() => removeTodo(todo.id)}>X</button>
 							</li>
 						)
 					})}

@@ -50,7 +50,7 @@ export default function SessionsList(props) {
 												{
 													sessionTodos.map((todo, idx) => {
 														return (
-															<li key={`${idx}-completed`}>- {todo.todo}</li>
+															<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
 														);
 													})
 												}
