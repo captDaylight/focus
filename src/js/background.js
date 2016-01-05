@@ -70,3 +70,5 @@ chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	}
 	return true;
 });
+
+chrome.notifications.create({title:'TEST', message: 'HERRO there'});
