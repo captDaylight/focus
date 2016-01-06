@@ -70,6 +70,5 @@ chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	}
 	return true;
 });
-console.log('notifications');
-chrome.notifications.create('123',{title:'TEST', message: 'HERRO there', type:'basic', iconUrl: 'dist/img/focus.png'});
+
 

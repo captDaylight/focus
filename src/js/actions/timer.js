@@ -1,3 +1,5 @@
+import formatAMPM from '../utils/formatAMPM';
+
 export const SET_TIMER = 'SET_TIMER';
 export function setTimer(date) {
 	return {
@@ -52,6 +54,12 @@ export function countDown(date, duration) {
 				dispatch(setTimeLeft(minutes, seconds));				
 			} else {
 				clearInterval(interval);
+				chrome.notifications.create({
+					title:'SESSION DONE',
+					message: `Finished at ${formatAMPM(Date.now(), true)}`,
+					type:'basic',
+					iconUrl: 'dist/img/focus.png',
+				});
 				dispatch(clearCountdownInterval())
 			}
 		};
