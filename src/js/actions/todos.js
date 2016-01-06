@@ -21,3 +21,11 @@ export function toggleTodoCompletion(id) {
 		id,
 	}
 }
+
+export const TOGGLE_TODO_EDIT = 'TOGGLE_TODO_EDIT';
+export function toggleTodoEdit(id) {
+	return {
+		type: TOGGLE_TODO_EDIT,
+		id,
+	}
+}

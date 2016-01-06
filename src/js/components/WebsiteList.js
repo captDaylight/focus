@@ -8,7 +8,7 @@ export default function WebsiteList(props) {
 		showSites,
 		toggleShowSites,
 	} = props;
-	console.log(toggleShowSites);
+	
 	return (
 		<div>
 			<h5>BLOCKED SITES</h5>
@@ -38,7 +38,6 @@ export default function WebsiteList(props) {
 						}
 						</ul>
 					</div>
-					
 				)
 				: 
 				(

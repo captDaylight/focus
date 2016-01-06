@@ -36,7 +36,6 @@ export function checkForTab(website, id, favicon) {
 		if (!favicon) {
 
 			const timeOut = count => {
-				console.log('timeout', count);
 				setTimeout(() => {
 					chrome.tabs.get(id, tab => {
 						const { favIconUrl } = tab;

@@ -3,12 +3,6 @@ import Formsy, { Form } from 'formsy-react';
 import classnames from 'classnames';
 import FocusInput from './FocusInput';
 
-// function wrapSubmit(action) {
-// 	return function handleSubmit(e) {
-// 		console.log(e, action, 'yup');
-// 	}
-// }
-
 export default class SessionsList extends Component {
 	handleSubmit(e) {
 		const { addTodo } = this.props;
@@ -18,7 +12,7 @@ export default class SessionsList extends Component {
 		}
 	}
 	render() {
-		const { todos, toggleTodoCompletion, removeTodo } = this.props;
+		const { todos, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
 		return (
 			<div>
 				<h5>TODOS</h5>
@@ -33,9 +27,13 @@ export default class SessionsList extends Component {
 						return (
 							<li 
 								key={idx} 
-								onClick={() => toggleTodoCompletion(todo.id)}
-								className={classnames('todo', {completed: todo.completed})}>
-								{todo.todo} <button onClick={() => removeTodo(todo.id)}>X</button>
+								className={classnames('todo', {completed: todo.completed})} >
+								<div 
+									onClick={() => toggleTodoCompletion(todo.id)} 
+									onDoubleClick={() => toggleTodoEdit(todo.id)} >
+									{todo.editing ? 'editing!!!' : todo.todo}
+								</div>
+								<button onClick={() => removeTodo(todo.id)}>X</button>
 							</li>
 						)
 					})}

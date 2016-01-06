@@ -16,6 +16,7 @@ const actions = wrapActionsWithMessanger([
 	'addTodo',
 	'toggleTodoCompletion',
 	'removeTodo',
+	'toggleTodoEdit',
 ]);
 
 export default class FocusContainer extends Component {
@@ -44,6 +45,7 @@ export default class FocusContainer extends Component {
 			toggleTodoCompletion,
 			removeTodo,
 			toggleShowSites,
+			toggleTodoEdit,
 		} = actions;
 		const { 
 			date, 
@@ -79,7 +81,8 @@ export default class FocusContainer extends Component {
 						addTodo={addTodo} 
 						toggleTodoCompletion={toggleTodoCompletion} 
 						removeTodo={removeTodo}
-						todos={todos} />
+						todos={todos}
+						toggleTodoEdit={toggleTodoEdit} />
 					<SessionsList 
 						sessions={sessions} 
 						ampm={ampm} 
