@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Formsy, { Form } from 'formsy-react';
 import classnames from 'classnames';
+import Todo from './Todo';
 import FocusInput from './FocusInput';
 
 export default class SessionsList extends Component {
@@ -23,19 +24,8 @@ export default class SessionsList extends Component {
 				</Form>
 
 				<ul id="todos">
-					{todos.map((todo, idx)=> {
-						return (
-							<li 
-								key={idx} 
-								className={classnames('todo', {completed: todo.completed})} >
-								<div 
-									onClick={() => toggleTodoCompletion(todo.id)} 
-									onDoubleClick={() => toggleTodoEdit(todo.id)} >
-									{todo.editing ? 'editing!!!' : todo.todo}
-								</div>
-								<button onClick={() => removeTodo(todo.id)}>X</button>
-							</li>
-						)
+					{todos.map((todo, idx) => {
+						return <Todo key={idx} todo={todo} {...this.props} />;
 					})}
 				</ul>
 			</div>
