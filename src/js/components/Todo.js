@@ -4,13 +4,11 @@ import classnames from 'classnames';
 import FocusInput from './FocusInput';
 
 export default class SessionsList extends Component {
-	// handleSubmit(e) {
-	// 	const { addTodo } = this.props;
-	// 	if (e.todo) {
-	// 		addTodo(e.todo);
-	// 		this.refs.form.reset();
-	// 	}
-	// }
+	handleSubmit(data) {			
+		console.log(data.todoedit);
+
+		this.refs.form.reset();
+	}
 	render() {
 		const { todo, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
 		
@@ -20,10 +18,9 @@ export default class SessionsList extends Component {
 				{
 					todo.editing 
 					?
-					(<div
-						onDoubleClick={() => toggleTodoEdit(todo.id)}>
-						k for real editing
-					</div>)
+					(<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
+						<FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} />
+					</Form>)
 					:
 					(<div 
 						onClick={() => toggleTodoCompletion(todo.id)} 
