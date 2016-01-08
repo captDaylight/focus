@@ -42,7 +42,8 @@ export function clearCountdownInterval() {
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-export function countDown(date, duration) {
+export function countDown(date, duration, sound) {
+	var audio = new Audio(`dist/sound/${sound}.mp3`);
 	return dispatch => {
 		dispatch(setTimer(date));
 		const dateEnd = date + duration;
@@ -54,6 +55,7 @@ export function countDown(date, duration) {
 				dispatch(setTimeLeft(minutes, seconds));				
 			} else {
 				clearInterval(interval);
+				audio.play();
 				chrome.notifications.create({
 					title:'SESSION DONE',
 					message: `Finished at ${formatAMPM(Date.now(), true)}`,

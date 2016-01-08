@@ -6,7 +6,8 @@ import FocusInput from './FocusInput';
 export default class SessionsList extends Component {
 	handleSubmit(data) {			
 		console.log(data.todoedit);
-
+		// console.log(this);
+		// editTodo(this);
 		this.refs.form.reset();
 	}
 	render() {

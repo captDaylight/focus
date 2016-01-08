@@ -6,6 +6,7 @@ import {
 	REMOVE_TODO,
 	TOGGLE_TODO_COMPLETION,
 	TOGGLE_TODO_EDIT,
+	EDIT_TODO,
 } from '../actions/todos';
 
 const initialState = {
@@ -52,6 +53,14 @@ export default function todos(state=initialState, action) {
 					return !value;
 				})
 			};
+
+		case EDIT_TODO:
+			return {
+				...state,
+				todos: updateInArray(state.todos, action.id, 'editing', value => {
+					return action.todo;
+				})
+			}
 
 		default:
 			return state;

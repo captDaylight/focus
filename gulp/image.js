@@ -10,4 +10,6 @@ gulp.task('image', function(){
         use: [pngquant()]
     }))
     .pipe(gulp.dest('dist/img'));
+  gulp.src('src/sound/**')
+    .pipe(gulp.dest('dist/sound'));
 });

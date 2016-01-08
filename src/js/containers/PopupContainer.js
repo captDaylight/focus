@@ -56,7 +56,7 @@ export default class FocusContainer extends Component {
 	}
 	render() {
 		const { countDown, addWebsite } = actions;
-		const { date, minutes, seconds, duration } = this.state.timer;
+		const { date, minutes, seconds, duration, sound } = this.state.timer;
 		const { websites } = this.state.websites;
 		
 		return (
@@ -68,7 +68,7 @@ export default class FocusContainer extends Component {
 						<div className="popup-section">
 							<button 
 								className="focus-button smaller" 
-								onClick={() => countDown(Date.now(), duration)}
+								onClick={() => countDown(Date.now(), duration, sound)}
 							>
 								Start Working
 							</button>

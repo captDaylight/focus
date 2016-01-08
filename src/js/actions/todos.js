@@ -29,3 +29,12 @@ export function toggleTodoEdit(id) {
 		id,
 	}
 }
+
+export const EDIT_TODO = 'EDIT_TODO';
+export function editTodo(id, todo) {
+	return {
+		type: EDIT_TODO,
+		id,
+		todo,
+	}
+}

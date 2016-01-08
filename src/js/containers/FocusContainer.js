@@ -17,6 +17,7 @@ const actions = wrapActionsWithMessanger([
 	'toggleTodoCompletion',
 	'removeTodo',
 	'toggleTodoEdit',
+	'editTodo',
 ]);
 
 export default class FocusContainer extends Component {
@@ -46,6 +47,7 @@ export default class FocusContainer extends Component {
 			removeTodo,
 			toggleShowSites,
 			toggleTodoEdit,
+			editTodo,
 		} = actions;
 		const { 
 			date, 
@@ -54,6 +56,7 @@ export default class FocusContainer extends Component {
 			duration,
 			sessions,
 			ampm,
+			sound,
 		} = this.state.timer;
 		const { websites, showSites } = this.state.websites;
 		const { todos } = this.state.todos;
@@ -69,7 +72,7 @@ export default class FocusContainer extends Component {
 						: (
 							<button 
 								className="focus-button" 
-								onClick={() => countDown(Date.now(), duration)}>
+								onClick={() => countDown(Date.now(), duration, sound)}>
 								Start Working
 							</button>
 						)
@@ -82,7 +85,8 @@ export default class FocusContainer extends Component {
 						toggleTodoCompletion={toggleTodoCompletion} 
 						removeTodo={removeTodo}
 						todos={todos}
-						toggleTodoEdit={toggleTodoEdit} />
+						toggleTodoEdit={toggleTodoEdit}
+						editTodo={editTodo} />
 					<SessionsList 
 						sessions={sessions} 
 						ampm={ampm} 
