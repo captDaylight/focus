@@ -32,6 +32,7 @@ export default class SessionsList extends Component {
 					</div>)
 				}
 
+
 				<button onClick={() => removeTodo(todo.id)}>X</button>
 			</li>
 		);
