@@ -2,7 +2,6 @@
 
 }
 .todo {
-	cursor: pointer;
 	&.completed {
 		text-decoration: line-through;
 		font-weight: bold;
@@ -11,6 +10,19 @@
 		@include display(flex);
 		button {
 			margin-left: 10px;
+			display: none;
+			cursor: pointer;
+		}
+		&:hover {
+			button {
+				display: block;
+			}
+		}
+	}
+	.todo-content {
+		cursor: pointer;
+		&:hover {
+			text-decoration: line-through;
 		}
 	}
 }
