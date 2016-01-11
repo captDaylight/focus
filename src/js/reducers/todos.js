@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+	import shortid from 'shortid';
 import findIndex from 'lodash/array/findIndex';
 import split from '../utils/split';
 import {
@@ -13,12 +13,13 @@ const initialState = {
 	todos: [],
 };
 
-function updateInArray(items, id, key, fn) {
+function updateInArray(items, id, keysAndFns) {
 	const idx = findIndex(items, item => item.id === id);
 	const splitItems = split(items, idx);
 	const	itemPrevious = items[idx];
 	const itemUpdate = {...itemPrevious};
-	itemUpdate[key] = fn(itemPrevious[key]);
+	keysAndFns.map(obj => itemUpdate[obj.key] = obj.fn(itemPrevious[obj.key]));
+	
 	return [...splitItems[0], itemUpdate, ...splitItems[1]];
 }
 
@@ -41,27 +42,32 @@ export default function todos(state=initialState, action) {
 		case TOGGLE_TODO_COMPLETION: 
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, 'completed', value => {
-					return value ? null : Date.now();
-				})
+				todos: updateInArray(state.todos, action.id, [{
+					key: 'completed', 
+					fn: value => value ? null : Date.now(),
+				}])
 			};
 
 		case TOGGLE_TODO_EDIT:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, 'editing', value => {
-					return !value;
-				})
+				todos: updateInArray(state.todos, action.id, [{
+					key: 'editing', 
+					fn: value => !value,
+				}])
 			};
 
 		case EDIT_TODO:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, 'todo', value => {
-					return action.todo;
-				})
+				todos: updateInArray(state.todos, action.id, [{
+					key: 'todo',
+					fn: value => action.todo
+				}, {
+					key: 'editing', 
+					fn: value => !value,
+				}])
 			}
-
 		default:
 			return state;
 	}
