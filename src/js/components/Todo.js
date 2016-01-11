@@ -4,12 +4,10 @@ import classnames from 'classnames';
 import FocusInput from './FocusInput';
 
 export default class SessionsList extends Component {
-	handleSubmit(data) {			
-		console.log(data.todoedit);
-		const { editTodo, id } = this.props;
-		// console.log(this);
-		// editTodo(this);
-		editTodo(id, data.todoedit);
+	handleSubmit(data) {
+		const { editTodo, todo } = this.props;
+
+		editTodo(todo.id, data.todoedit);
 		this.refs.form.reset();
 	}
 	render() {
@@ -31,7 +29,6 @@ export default class SessionsList extends Component {
 						{todo.todo}
 					</div>)
 				}
-
 
 				<button onClick={() => removeTodo(todo.id)}>X</button>
 			</li>

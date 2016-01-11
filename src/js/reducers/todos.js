@@ -57,7 +57,7 @@ export default function todos(state=initialState, action) {
 		case EDIT_TODO:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, 'editing', value => {
+				todos: updateInArray(state.todos, action.id, 'todo', value => {
 					return action.todo;
 				})
 			}
