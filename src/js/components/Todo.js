@@ -23,14 +23,19 @@ export default class SessionsList extends Component {
 						<FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} />
 					</Form>)
 					:
-					(<div 
-						onClick={() => toggleTodoCompletion(todo.id)} 
-						onDoubleClick={() => toggleTodoEdit(todo.id)} >
-						{todo.todo}
-					</div>)
+					(<div className="todo-container">
+						<div 
+							className="todo-content"
+							onClick={() => toggleTodoCompletion(todo.id)} 
+							onDoubleClick={() => toggleTodoEdit(todo.id)} >
+							{todo.todo}
+						</div>
+						<button onClick={() => removeTodo(todo.id)}>X</button>
+					</div>
+					)
 				}
 
-				<button onClick={() => removeTodo(todo.id)}>X</button>
+				
 			</li>
 		);
 	}

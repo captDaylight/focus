@@ -7,4 +7,10 @@
 		text-decoration: line-through;
 		font-weight: bold;
 	}
+	.todo-container {
+		@include display(flex);
+		button {
+			margin-left: 10px;
+		}
+	}
 }
