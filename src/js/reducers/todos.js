@@ -31,6 +31,7 @@ export default function todos(state=initialState, action) {
 				id: shortid.generate(),
 				created: Date.now(),
 				completed: null,
+				workingOn: null, 
 				editing: false,
 			};
 			return {...state, todos: [...state.todos, todo]};
@@ -44,6 +45,15 @@ export default function todos(state=initialState, action) {
 				...state,
 				todos: updateInArray(state.todos, action.id, [{
 					key: 'completed', 
+					fn: value => value ? null : Date.now(),
+				}])
+			};
+
+		case TOGGLE_TODO_WORKING: 
+			return {
+				...state,
+				todos: updateInArray(state.todos, action.id, [{
+					key: 'workingOn', 
 					fn: value => value ? null : Date.now(),
 				}])
 			};
