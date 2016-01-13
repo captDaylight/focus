@@ -2,9 +2,28 @@
 
 }
 .todo {
+	.todo-content {
+		&:hover {
+			background-color: yellow;
+		}
+	}
+	&.working {
+		background-color: yellow;
+		.todo-content {
+			&:hover {
+				text-decoration: line-through;
+			}
+		}
+	}
 	&.completed {
 		text-decoration: line-through;
 		font-weight: bold;
+		background-color: none;	
+		.todo-content {
+			&:hover {
+				background-color: transparent;
+			}
+		}
 	}
 	.todo-container {
 		@include display(flex);
@@ -21,8 +40,5 @@
 	}
 	.todo-content {
 		cursor: pointer;
-		&:hover {
-			text-decoration: line-through;
-		}
 	}
 }

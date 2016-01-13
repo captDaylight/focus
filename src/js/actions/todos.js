@@ -23,7 +23,7 @@ export function toggleTodoCompletion(id) {
 }
 
 export const TOGGLE_TODO_WORKING = 'TOGGLE_TODO_WORKING';
-export function toggleTodoCompletion(id) {
+export function toggleTodoWorking(id) {
 	return {
 		type: TOGGLE_TODO_WORKING,
 		id,

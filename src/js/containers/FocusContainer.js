@@ -18,6 +18,7 @@ const actions = wrapActionsWithMessanger([
 	'removeTodo',
 	'toggleTodoEdit',
 	'editTodo',
+	'toggleTodoWorking',
 ]);
 
 export default class FocusContainer extends Component {
@@ -44,6 +45,7 @@ export default class FocusContainer extends Component {
 			removeWebsite,
 			addTodo,
 			toggleTodoCompletion,
+			toggleTodoWorking,
 			removeTodo,
 			toggleShowSites,
 			toggleTodoEdit,
@@ -82,6 +84,7 @@ export default class FocusContainer extends Component {
 				<div id="spread">
 					<Todos 
 						addTodo={addTodo} 
+						toggleTodoWorking={toggleTodoWorking}
 						toggleTodoCompletion={toggleTodoCompletion} 
 						removeTodo={removeTodo}
 						todos={todos}

@@ -11,11 +11,20 @@ export default class SessionsList extends Component {
 		this.refs.form.reset();
 	}
 	render() {
-		const { todo, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
+		const { 
+			todo,
+			toggleTodoCompletion, 
+			toggleTodoWorking, 
+			removeTodo, 
+			toggleTodoEdit 
+		} = this.props;
 		
 		return (
 			<li
-				className={classnames('todo', {completed: todo.completed})} >
+				className={classnames('todo', {
+					working: todo.workingOn && !todo.completed,
+					completed: todo.completed,
+				})} >
 				{
 					todo.editing 
 					?
@@ -26,11 +35,18 @@ export default class SessionsList extends Component {
 					(<div className="todo-container">
 						<div 
 							className="todo-content"
-							onClick={() => toggleTodoCompletion(todo.id)} 
+							onClick={() => {
+								console.log(todo.workingOn);
+								if (todo.workingOn) {
+									toggleTodoCompletion(todo.id);
+								} else {
+									toggleTodoWorking(todo.id);
+								}
+							}} 
 							onDoubleClick={() => toggleTodoEdit(todo.id)} >
 							{todo.todo}
 						</div>
-						<button onClick={() => removeTodo(todo.id)}>X</button>
+						<button onClick={() => removeTodo(todo.id)}>Remove</button>
 					</div>
 					)
 				}

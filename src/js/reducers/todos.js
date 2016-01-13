@@ -4,6 +4,7 @@ import split from '../utils/split';
 import {
 	ADD_TODO,
 	REMOVE_TODO,
+	TOGGLE_TODO_WORKING,
 	TOGGLE_TODO_COMPLETION,
 	TOGGLE_TODO_EDIT,
 	EDIT_TODO,
@@ -19,9 +20,10 @@ function updateInArray(items, id, keysAndFns) {
 	const	itemPrevious = items[idx];
 	const itemUpdate = {...itemPrevious};
 	keysAndFns.map(obj => itemUpdate[obj.key] = obj.fn(itemPrevious[obj.key]));
-	
 	return [...splitItems[0], itemUpdate, ...splitItems[1]];
 }
+
+const dateOrNull = value => value ? null : Date.now();
 
 export default function todos(state=initialState, action) {
 	switch(action.type) {
@@ -45,7 +47,7 @@ export default function todos(state=initialState, action) {
 				...state,
 				todos: updateInArray(state.todos, action.id, [{
 					key: 'completed', 
-					fn: value => value ? null : Date.now(),
+					fn: dateOrNull,
 				}])
 			};
 
@@ -54,7 +56,7 @@ export default function todos(state=initialState, action) {
 				...state,
 				todos: updateInArray(state.todos, action.id, [{
 					key: 'workingOn', 
-					fn: value => value ? null : Date.now(),
+					fn: dateOrNull,
 				}])
 			};
 
