@@ -16,7 +16,7 @@ function isTodayOrDate(time) {
 export default function SessionsList(props) {
 	const { sessions, todos } = props;
 	return (
-		<div>
+		<div id="sessions-container">
 			<h5>WORK SESSIONS</h5>
 			<ul id="sessions-list">
 				{

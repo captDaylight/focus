@@ -1,7 +1,12 @@
+#todos-container {
+	padding-right: 15px;	
+}
 #todos {
-
+	
 }
 .todo {
+	margin: 5px 0px;
+	padding: 5px;
 	.todo-content {
 		&:hover {
 			background-color: yellow;
@@ -19,6 +24,7 @@
 		text-decoration: line-through;
 		font-weight: bold;
 		background-color: none;	
+		color:black;
 		.todo-content {
 			&:hover {
 				background-color: transparent;

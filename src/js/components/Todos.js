@@ -25,7 +25,7 @@ export default class SessionsList extends Component {
 		console.log(todos);
 		const orderedTodos = orderTodos(todos);
 		return (
-			<div>
+			<div id="todos-container">
 				<h5>TODOS</h5>
 				
 				<Form onSubmit={this.handleSubmit.bind(this)} ref="form">

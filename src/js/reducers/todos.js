@@ -1,4 +1,4 @@
-	import shortid from 'shortid';
+import shortid from 'shortid';
 import findIndex from 'lodash/array/findIndex';
 import split from '../utils/split';
 import {
@@ -6,7 +6,7 @@ import {
 	REMOVE_TODO,
 	TOGGLE_TODO_WORKING,
 	TOGGLE_TODO_COMPLETION,
-	TOGGLE_TODO_EDIT,
+	TOGGLE_TsODO_EDIT,
 	EDIT_TODO,
 } from '../actions/todos';
 

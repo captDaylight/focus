@@ -3,6 +3,8 @@
 	width: 100%;
 	background-color: lighten($blue, 20%);
 	color: darken($blue, 10%);
+	box-sizing: border-box;
+	border: 30px solid transparent;
 	@include transition(all 0.25s ease-in-out);
 	&.focusing {
 		background-color: lighten($red, 20%);
@@ -19,9 +21,11 @@
 }
 
 #spread {
+	margin-top: 20px;
 	@include display(flex);
 	> ul, > div {
 		@include flex-grow(1);
+		width: 50%;
 	}
 }
 
