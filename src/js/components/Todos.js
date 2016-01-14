@@ -30,7 +30,6 @@ export default class SessionsList extends Component {
 				
 				<Form onSubmit={this.handleSubmit.bind(this)} ref="form">
 					<FocusInput name="todo" placeholder="Add a Todo" />
-					<button>Submit</button>
 				</Form>
 
 				<ul id="todos">
