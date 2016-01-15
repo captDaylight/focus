@@ -21,10 +21,10 @@ label {
 #{$all-text-inputs},
 select[multiple=multiple] {
   border: none;
-  border-bottom: 2px solid $red;
+  border-bottom: 2px solid black;
   box-sizing: border-box;
   background-color: transparent;
-  color: red;
+  color: black;
   font-size: 14px;
   // font-family: $base-font-family;
   // font-size: $base-font-size;
@@ -33,7 +33,7 @@ select[multiple=multiple] {
   // transition: border-color $base-duration $base-timing;
   width: 100%;
   @include placeholder {
-    color: lighten(red, 20%);
+    color: lighten(black, 25%);
   }
   &:hover {
     // border-color: shade($base-border-color, 20%);

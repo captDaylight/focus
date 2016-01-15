@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import formatAMPM from '../utils/formatAMPM';
+import filter from 'lodash/collection/filter';
 
 function isTodayOrDate(time) {
 	const date = new Date(time);
@@ -13,8 +14,15 @@ function isTodayOrDate(time) {
 	}
 }
 
+function betweenDates(begin, end) {
+	return date => date > begin && date < end;
+}
+
 export default function SessionsList(props) {
 	const { sessions, todos } = props;
+	const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
+	const now = Date.now();
+
 	return (
 		<div id="sessions-container">
 			<h5>WORK SESSIONS</h5>
@@ -22,16 +30,20 @@ export default function SessionsList(props) {
 				{
 					sessions.reverse().map((session, idx) => {
 						const { date, duration } = session;
-						const now = Date.now();
 						const dateEnd = date + duration;
-						const isCurrent = (now > date && now < dateEnd);
-						const sessionTodos = todos.filter(todo => {
-							const { completed } = todo;
-							return completed > date && completed < dateEnd;
+						const sessionCheck = betweenDates(date, dateEnd);
+						
+						const working = filter(startedTodos, todo => {
+							const { workingOn, completed } = todo;
+							return sessionCheck(workingOn) && !sessionCheck(completed);
 						});
-
+						const finished = filter(startedTodos, todo => {
+							const { completed } = todo;
+							return sessionCheck(completed);
+						});
+						
 						return (
-							<li key={idx} className={classnames({current: isCurrent})}>
+							<li key={idx} className={classnames({current: sessionCheck(now)})}>
 								<h5>
 									{`${formatAMPM(date, true)}`} 
 									--
@@ -39,16 +51,26 @@ export default function SessionsList(props) {
 									::
 									{isTodayOrDate(date)}
 									
-									{isCurrent ? ' CURRENT': null}
+									{sessionCheck(now) ? ' CURRENT': null}
 								</h5>
 								{
-									sessionTodos.length === 0 ? null : 
+									working.length === 0 && finished.length === 0 ? null : 
 									(
 										<div>
 											<div>Finished Todos</div>
 											<ul className="completed-todos">
 												{
-													sessionTodos.map((todo, idx) => {
+													finished.map((todo, idx) => {
+														return (
+															<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
+														);
+													})
+												}
+											</ul>
+											<div>Working Todos</div>
+											<ul className="completed-todos">
+												{
+													working.map((todo, idx) => {
 														return (
 															<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
 														);
