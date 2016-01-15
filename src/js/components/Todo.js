@@ -36,16 +36,15 @@ export default class SessionsList extends Component {
 						<div 
 							className="todo-content"
 							onClick={() => {
-								console.log(todo.workingOn);
 								if (todo.workingOn) {
 									toggleTodoCompletion(todo.id);
 								} else {
 									toggleTodoWorking(todo.id);
 								}
-							}} 
-							onDoubleClick={() => toggleTodoEdit(todo.id)} >
-							{todo.todo}
+							}} >
+							- {todo.todo}
 						</div>
+						<button onClick={() =>  toggleTodoEdit(todo.id)}>Edit</button>
 						<button onClick={() => removeTodo(todo.id)}>Remove</button>
 					</div>
 					)

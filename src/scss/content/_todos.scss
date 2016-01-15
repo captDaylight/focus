@@ -2,11 +2,10 @@
 	padding-right: 15px;	
 }
 #todos {
-	
+	margin-top: 20px;
 }
 .todo {
 	margin: 5px 0px;
-	padding: 5px;
 	.todo-content {
 		&:hover {
 			background-color: yellow;
