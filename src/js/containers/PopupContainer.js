@@ -21,7 +21,6 @@ function processSiteInfo(siteURL, id, faviconURL) {
 }
 
 function urlIsInList(url, list) {
-	console.log('checking url list', url);
 	return list.filter(site => url.indexOf(site.name) >= 0).length > 0;
 }
 
@@ -48,7 +47,7 @@ export default class FocusContainer extends Component {
 			tab => {
 				if (tab.length !== 0) {
 					const { url, id, favIconUrl } = tab[0];
-					console.log(tab, favIconUrl);
+					
 					processSiteInfo(url, id, favIconUrl)		      
 				}
 			}

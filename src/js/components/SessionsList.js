@@ -35,7 +35,7 @@ export default function SessionsList(props) {
 						
 						const working = filter(startedTodos, todo => {
 							const { workingOn, completed } = todo;
-							return sessionCheck(workingOn) && !sessionCheck(completed);
+							return workingOn < dateEnd && !sessionCheck(completed);
 						});
 						const finished = filter(startedTodos, todo => {
 							const { completed } = todo;

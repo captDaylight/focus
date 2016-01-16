@@ -22,7 +22,7 @@ export default class SessionsList extends Component {
 	}
 	render() {
 		const { todos, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
-		console.log(todos);
+		
 		const orderedTodos = orderTodos(todos);
 		return (
 			<div id="todos-container">
