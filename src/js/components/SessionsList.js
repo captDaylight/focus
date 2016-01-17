@@ -35,7 +35,10 @@ export default function SessionsList(props) {
 						
 						const working = filter(startedTodos, todo => {
 							const { workingOn, completed } = todo;
-							return workingOn < dateEnd && !sessionCheck(completed);
+							console.log(`${formatAMPM(date, true)}`, completed, !sessionCheck(completed));
+							return (
+								workingOn < dateEnd 
+								&& (completed ? completed > dateEnd: true ));
 						});
 						const finished = filter(startedTodos, todo => {
 							const { completed } = todo;
@@ -57,7 +60,6 @@ export default function SessionsList(props) {
 									working.length === 0 && finished.length === 0 ? null : 
 									(
 										<div>
-											<div>Finished Todos</div>
 											<ul className="completed-todos">
 												{
 													finished.map((todo, idx) => {
@@ -67,12 +69,11 @@ export default function SessionsList(props) {
 													})
 												}
 											</ul>
-											<div>Working Todos</div>
 											<ul className="completed-todos">
 												{
 													working.map((todo, idx) => {
 														return (
-															<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
+															<li key={`${idx}-completed`}><b>- {todo.todo} (Working on)</b></li>
 														);
 													})
 												}
