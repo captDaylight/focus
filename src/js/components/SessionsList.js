@@ -35,7 +35,6 @@ export default function SessionsList(props) {
 						
 						const working = filter(startedTodos, todo => {
 							const { workingOn, completed } = todo;
-							console.log(`${formatAMPM(date, true)}`, completed, !sessionCheck(completed));
 							return (
 								workingOn < dateEnd 
 								&& (completed ? completed > dateEnd: true ));
