@@ -35,6 +35,7 @@ const FocusInput = React.createClass({
           placeholder={placeholder}
           onChange={this.changeValue}
           value={this.getValue()}
+          autoComplete="off"
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
         />
         <span className='validation-error'>{errorMessage}</span>

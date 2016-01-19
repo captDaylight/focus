@@ -17,7 +17,7 @@ export default function WebsiteList(props) {
 				showSites ?
 				(
 					<div>
-						<b onClick={() => toggleShowSites()}>Hide Sites</b>
+						<b className="pointer" onClick={() => toggleShowSites()}>Hide Sites</b>
 						<ul id="website-list">
 						{
 							websites.map((website, idx) => {
@@ -43,7 +43,7 @@ export default function WebsiteList(props) {
 				(
 					<div>
 						You're blocking {websites.length} sites. 
-						<b onClick={() => toggleShowSites()}> See Sites</b>
+						<b className="pointer" onClick={() => toggleShowSites()}> See Sites</b>
 					</div>
 				)
 			}
