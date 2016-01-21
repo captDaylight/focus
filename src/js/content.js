@@ -12,15 +12,24 @@ const centerStyling = 'display: -webkit-box;display: -moz-box;display: box;displ
     -webkit-align-items: center;-moz-align-items: center; -ms-align-items: center;-o-align-items: center;\
     align-items: center;-ms-flex-align: center;'
 
+const timeTpl = template('<%= minutes %> : <%= seconds%>');
+const todosTpl = template(' \
+	<% todos.map(function (todo) {%> \
+		<li class="focus-content-todo"><%= todo.todo %></li> \
+	<% }); %> \
+');
+
 const mountTemplate = template(' \
-	<div id="content-container" style="height:100%;text-align:center;' + centerStyling + '"> \
+	<style> \
+		#focus-content-container {height:100%;text-align:center;' + centerStyling + '} \
+		#focus-content-time {font-size: 4em; margin-bottom:20px;} \
+		.focus-content-todo {margin:10px 0px;font-size:14px;} \
+	</style> \
+	<div id="focus-content-container"> \
 		<div style="width:100%;"> \
-			<div id="content-time" style="font-size: 4em; margin-bottom:20px;"><%= minutes %> : <%= seconds%></div> \
-			<div id="content-todo"> \
-				<ul> \
-					<% todos.map(function (todo) {%> \
-						<li style="margin:10px 0px;font-size:14px;"><%= todo.todo %></li> \
-					<% }); %> \
+			<div id="focus-content-time"></div> \
+			<div> \
+				<ul id="focus-content-todos"> \
 				</ul> \
 			</div> \
 		</div> \
@@ -71,8 +80,9 @@ function mountBlocker(state) {
 	body.appendChild(mountPoint);
 	document.getElementsByTagName('html')[0].appendChild(body);
 	
+	$('#mount-point-focus').html(mountTemplate());
+	
 	updateBlocker(state);
-
 	mounted = true;
 }
 
@@ -87,5 +97,6 @@ function dismountBlocker() {
 function updateBlocker(data) {
 	const {minutes, seconds} = data.timer;
 	const todos = filter(data.todos.todos, todo => todo.workingOn );
-	$('#mount-point-focus').html(mountTemplate({minutes, seconds, todos}));
+	$('#focus-content-time').html(timeTpl({minutes,seconds}));
+	$('#focus-content-todos').html(todosTpl({todos}));
 }
