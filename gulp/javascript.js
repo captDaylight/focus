@@ -32,7 +32,4 @@ gulp.task('javascript', function () {
 		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./dist/js/'));
 
-  // gulp.src('./src/js/*.js')
-  //   .pipe(uglify())
-  //   .pipe(gulp.dest('dist/js'));
 });

@@ -7,14 +7,22 @@ import checkShouldBlock from './utils/checkShouldBlock';
 
 let mounted = false;
 
-const todoItem = template('<li>{todo}</li>');
+const centerStyling = 'display: -webkit-box;display: -moz-box;display: box;display: -webkit-flex;display: -moz-flex;\
+    display: -ms-flexbox;display: flex;-webkit-box-align: center;-moz-box-align: center;box-align: center;\
+    -webkit-align-items: center;-moz-align-items: center; -ms-align-items: center;-o-align-items: center;\
+    align-items: center;-ms-flex-align: center;'
+
 const mountTemplate = template(' \
-	<div id="content-container"> \
-		<div id="content-time"><%= minutes %> : <%= seconds%></div> \
-		<div id="content-todo"> \
-			<ul> \
-				<% todos.map(function (todo) {%> <li><%= todo.todo %></li><% }); %> \
-			</ul> \
+	<div id="content-container" style="height:100%;text-align:center;' + centerStyling + '"> \
+		<div style="width:100%;"> \
+			<div id="content-time" style="font-size: 4em; margin-bottom:20px;"><%= minutes %> : <%= seconds%></div> \
+			<div id="content-todo"> \
+				<ul> \
+					<% todos.map(function (todo) {%> \
+						<li style="margin:10px 0px;font-size:14px;"><%= todo.todo %></li> \
+					<% }); %> \
+				</ul> \
+			</div> \
 		</div> \
 	</div> \
 ');
@@ -58,8 +66,8 @@ function mountBlocker(state) {
 	const mountPoint = document.createElement('div');
 	mountPoint.id = 'mount-point-focus';
 	mountPoint.style.cssText = ' \
-		color:black; position:fixed; width:100%; height:100%; \
-		background-color:green; top:0px; left:0px; z-index:10000;';
+		color:#ea1c0d; position:fixed; width:100%; height:100%; \
+		background-color:#f99d97; top:0px; left:0px; z-index:10000;';
 	body.appendChild(mountPoint);
 	document.getElementsByTagName('html')[0].appendChild(body);
 	
@@ -78,7 +86,6 @@ function dismountBlocker() {
 
 function updateBlocker(data) {
 	const {minutes, seconds} = data.timer;
-		const todos = filter(data.todos.todos, todo => todo.workingOn );
-		console.log(todos);
+	const todos = filter(data.todos.todos, todo => todo.workingOn );
 	$('#mount-point-focus').html(mountTemplate({minutes, seconds, todos}));
 }
