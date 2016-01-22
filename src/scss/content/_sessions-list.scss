@@ -12,3 +12,10 @@
 		border-width: 2px;
 	}
 }
+.focusing {
+	#sessions-list {
+		> li {
+			border-color: $red;
+		}
+	}
+}

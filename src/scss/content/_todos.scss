@@ -8,11 +8,12 @@
 	margin: 5px 0px;
 	.todo-content {
 		&:hover {
-			border: 1px solid yellow;
+			font-weight: bold;
 		}
 	}
 	&.working {
-		background-color: yellow;
+		font-weight: bold;
+		background-color: lighten($blue, 35%);
 		.todo-content {
 			&:hover {
 				text-decoration: line-through;
@@ -21,9 +22,8 @@
 	}
 	&.completed {
 		text-decoration: line-through;
-		font-weight: bold;
 		background-color: none;	
-		color:black;
+		color: lighten($blue, 25%);
 		.todo-content {
 			&:hover {
 				background-color: transparent;
@@ -47,4 +47,15 @@
 	.todo-content {
 		cursor: pointer;
 	}
+}
+.focusing {
+	.todo {
+		&.working {
+			background-color: lighten($red, 35%);
+		}
+		&.completed {
+			color: lighten($red, 25%);
+		}		
+	}
+
 }
