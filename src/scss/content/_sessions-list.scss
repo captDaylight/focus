@@ -2,14 +2,14 @@
 	padding-left: 15px;
 }
 #sessions-list {
-	
 	> li {
-		border: 1px solid $blue;
+		border: 2px dashed $blue;
 		padding:10px;
 		margin: 10px 0px;
 	}
 	.current {
 		border-width: 2px;
+		border-style: solid;
 	}
 }
 .focusing {
@@ -17,5 +17,13 @@
 		> li {
 			border-color: $red;
 		}
+	}
+}
+.session {
+	h5 {
+		margin-bottom: 0px;
+	}
+	.session-date {
+		margin-bottom: 15px;
 	}
 }

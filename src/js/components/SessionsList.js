@@ -45,16 +45,16 @@ export default function SessionsList(props) {
 						});
 						
 						return (
-							<li key={idx} className={classnames({current: sessionCheck(now)})}>
+							<li key={idx} className={classnames('session',{current: sessionCheck(now)})}>
 								<h5>
 									{`${formatAMPM(date, true)}`} 
-									--
+									 - 
 									{`${formatAMPM(dateEnd, true)}`} 
-									::
-									{isTodayOrDate(date)}
-									
-									{sessionCheck(now) ? ' CURRENT': null}
+
 								</h5>
+								<div className="session-date">									
+									{sessionCheck(now) ? ' CURRENT SESSION': isTodayOrDate(date)}
+								</div>
 								{
 									working.length === 0 && finished.length === 0 ? null : 
 									(

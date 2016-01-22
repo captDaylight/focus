@@ -19,10 +19,6 @@ export const websitesData = [
 	id: '4krPq-28l',
 	name: 'ycombinator.com'},
 
-	{favicon: 'http://www.trulia.com/favicon.ico',
-	id: 'VkJ_9-n8e',
-	name: 'trulia.com'},
-
 	{favicon: 'https://abs.twimg.com/favicons/favicon.ico',
 	id: '4y2uqW3Ig',
 	name: 'twitter.com'},
