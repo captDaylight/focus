@@ -96,7 +96,7 @@ function dismountBlocker() {
 
 function updateBlocker(data) {
 	const {minutes, seconds} = data.timer;
-	const todos = filter(data.todos.todos, todo => todo.workingOn );
+	const todos = filter(data.todos.todos, todo => todo.workingOn && !todo.completed);
 	$('#focus-content-time').html(timeTpl({minutes,seconds}));
 	$('#focus-content-todos').html(todosTpl({todos}));
 }

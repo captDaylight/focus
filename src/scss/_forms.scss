@@ -43,8 +43,10 @@ select[multiple=multiple] {
   padding: 5px;
   // transition: border-color $base-duration $base-timing;
   width: 100%;
+  letter-spacing: 0.07em;
   @include placeholder {
     color: lighten($blue, 25%);
+    letter-spacing: 0.07em;
   }
   &:hover {
     // border-color: shade($base-border-color, 20%);
