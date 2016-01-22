@@ -11,8 +11,6 @@ export default function WebsiteList(props) {
 	
 	return (
 		<div>
-			<h5>BLOCKED SITES</h5>
-			
 			{
 				showSites ?
 				(
