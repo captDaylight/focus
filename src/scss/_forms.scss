@@ -44,9 +44,11 @@ select[multiple=multiple] {
   // transition: border-color $base-duration $base-timing;
   width: 100%;
   letter-spacing: 0.07em;
+  font-family: 'Poppins', sans-serif;
   @include placeholder {
     color: lighten($blue, 25%);
     letter-spacing: 0.07em;
+    font-family: 'Poppins', sans-serif;
   }
   &:hover {
     // border-color: shade($base-border-color, 20%);
