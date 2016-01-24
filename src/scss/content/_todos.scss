@@ -22,14 +22,17 @@
 		}
 	}
 	&.completed {
-		text-decoration: line-through;
 		background-color: none;	
 		color: lighten($blue, 25%);
 		.todo-content {
+			text-decoration: line-through;
 			&:hover {
 				background-color: transparent;
 				border: none;
 			}
+		}
+		button {
+			text-decoration: none;
 		}
 	}
 	.todo-container {
