@@ -45,7 +45,7 @@ export default class SessionsList extends Component {
 							- {todo.todo}
 						</div>
 						{
-							todo.workingOn ? 
+							todo.workingOn && !todo.completed ? 
 							<button onClick={() => toggleTodoWorking(todo.id)}>Cancel</button>
 							: null
 						}

@@ -23,7 +23,8 @@ const mountTemplate = template(' \
 	<style> \
 		#focus-content-container {height:100%;text-align:center;' + centerStyling + '} \
 		#focus-content-time {font-size: 4em; margin-bottom:20px;} \
-		.focus-content-todo {margin:10px 0px;font-size:14px;} \
+		#focus-content-todos {margin: 0px; padding:0px;} \
+		.focus-content-todo {margin:10px 0px;font-size:14px; list-style: none} \
 	</style> \
 	<div id="focus-content-container"> \
 		<div style="width:100%;"> \
