@@ -74,8 +74,10 @@ function mountBlocker(state) {
 	// set up mount point
 	const body = document.body ? document.body : document.createElement('body');
 	const mountPoint = document.createElement('div');
+	$(body).append('<link href="https://fonts.googleapis.com/css?family=Poppins:500" rel="stylesheet" type="text/css">');
 	mountPoint.id = 'mount-point-focus';
 	mountPoint.style.cssText = ' \
+		font-family: \'Poppins\', sans-serif; letter-spacing: 0.07em; \
 		color:#ea1c0d; position:fixed; width:100%; height:100%; \
 		background-color:#f99d97; top:0px; left:0px; z-index:10000;';
 	body.appendChild(mountPoint);
