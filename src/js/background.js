@@ -6,6 +6,9 @@ import * as timer from './actions/timer';
 import * as websites from './actions/websites';
 import * as todos from './actions/todos';
 
+// TODO REMOVE THIS 
+import $ from 'jquery';
+
 const createAndComposeStore = compose(
 	applyMiddleware(thunkMiddleware)
 )(createStore);
@@ -17,6 +20,7 @@ const storageSync = createStorageSync(store.getState());
 
 
 // on init, sync state
+$.post('http://localhost:8080/api/events', {type:'INIT SYNC', data:{message: 'none'}}, () => {});
 storageSync(store.getState());
 // subscribe to store and sync chrome state
 store.subscribe(() => {
@@ -66,6 +70,9 @@ chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 		console.log('----------------');
 		console.log('----------------');
 		console.log('action coming in', req);
+		
+		$.post('http://localhost:8080/api/events', {type:'action', data: req}, () => {});
+
 		store.dispatch(actions[req.action](...req.data));
 	}
 	return true;
