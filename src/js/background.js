@@ -66,11 +66,7 @@ chrome.tabs.onActivated.addListener((info) => {
 // https://developer.chrome.com/extensions/messaging#connect
 chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	const actions = {...timer, ...websites, ...todos};
-	if (req.type === 'ACTION') {
-		console.log('----------------');
-		console.log('----------------');
-		console.log('action coming in', req);
-		
+	if (req.type === 'ACTION') {		
 		$.post('http://localhost:8080/api/events', {type:'action', data: req}, () => {});
 
 		store.dispatch(actions[req.action](...req.data));
@@ -78,4 +74,41 @@ chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 	return true;
 });
 
+function preHandleCountdown() {
+	let dateEnd = 0;
+	return () => {
+		const now = Date.now();
+		if (dateEnd < now) {
+			// call getState, get a new end date
+			dateEnd = store.getState().timer.dateEnd || 0;
+		}
 
+		const fromNow = dateEnd - now;
+		if (fromNow >= 0) {
+			store.dispatch(timer.calcTime(dateEnd));
+		} else {
+			console.log('sound', timer.clearCountdown(store.getState().timer.sound));
+			store.dispatch( timer.clearCountdown(store.getState().timer.sound) );
+			chrome.alarms.clear('COUNTDOWN_TIMER');
+		}		
+	};
+}
+
+chrome.alarms.onAlarm.addListener(alarm => {
+	const SECS_IN_MINUTE = 1 / 60;
+	const handleCountdown = preHandleCountdown();
+	switch (alarm.name) {
+		case 'TIME_TIL_TIMER_START':
+			chrome.alarms.clear('TIME_TIL_TIMER_START');
+			chrome.alarms.create('COUNTDOWN_TIMER', {
+				delayInMinutes: 0,
+				periodInMinutes: SECS_IN_MINUTE,
+			});
+
+		case 'COUNTDOWN_TIMER':
+			handleCountdown();
+
+		default:
+			return false;
+	}
+});

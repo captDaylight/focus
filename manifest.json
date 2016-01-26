@@ -15,7 +15,8 @@
   "permissions": [
     "activeTab",
     "storage",
-    "notifications"
+    "notifications",
+    "alarms"
   ],
   "background": {
     "scripts": ["dist/js/background.js"],

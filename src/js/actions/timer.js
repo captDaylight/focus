@@ -1,4 +1,8 @@
 import formatAMPM from '../utils/formatAMPM';
+const { alarms } = chrome;
+
+const MINUTE = 60000;
+const SECOND = 1000;
 
 export const SET_TIMER = 'SET_TIMER';
 export function setTimer(date) {
@@ -32,52 +36,70 @@ export function setCountdownInterval(interval) {
 	}
 }
 
-export const CLEAR_COUNTDOWN_INTERVAL = 'CLEAR_COUNTDOWN_INTERVAL';
-export function clearCountdownInterval() {
-	return {
-		type: CLEAR_COUNTDOWN_INTERVAL,
+export const CLEAR_COUNTDOWN = 'CLEAR_COUNTDOWN';
+export function clearCountdown() {
+	return { type: CLEAR_COUNTDOWN };
+}
+
+export const STOP_COUNTDOWN = 'STOP_COUNTDOWN';
+export function stopCountdown(sound) {
+	var audio = new Audio(`dist/sound/${sound}.mp3`);
+	dispatch => {
+		dispatch(clearCountdown());
+		audio.play();
+		chrome.notifications.create({
+			title:'SESSION DONE',
+			message: `Finished at ${formatAMPM(Date.now(), true)}`,
+			type:'basic',
+			iconUrl: 'dist/img/focus.png',
+		});
 	}
 }
 
 import doubleDigit from '../utils/doubleDigit';
-const MINUTE = 60000;
-const SECOND = 1000;
-export function countDown(date, duration, sound) {
-	var audio = new Audio(`dist/sound/${sound}.mp3`);
+export function calcTime(dateEnd) {
+	return dispatch => {
+		const fromNow = dateEnd - Date.now();
+		const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
+		const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
+		dispatch(setTimeLeft(minutes, seconds));
+	}
+}
+
+export function countDown(date, duration) {
+	
 	return dispatch => {
 		dispatch(setTimer(date));
 		const dateEnd = date + duration;
-		const setTime = (interval) => {
-			const fromNow = dateEnd - Date.now();
-			if (fromNow >= 0) {
-				const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
-				const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
-				dispatch(setTimeLeft(minutes, seconds));				
-			} else {
-				clearInterval(interval);
-				audio.play();
-				chrome.notifications.create({
-					title:'SESSION DONE',
-					message: `Finished at ${formatAMPM(Date.now(), true)}`,
-					type:'basic',
-					iconUrl: 'dist/img/focus.png',
-				});
-				dispatch(clearCountdownInterval())
-			}
-		};
+		// const setTime = (interval) => {
+		// 	const fromNow = dateEnd - Date.now();
+		// 	if (fromNow >= 0) {
+		// 		const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
+		// 		const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
+		// 		dispatch(setTimeLeft(minutes, seconds));				
+		// 	} else {
+		// 		clearInterval(interval);
+
+		// 		dispatch(clearCountdownInterval())
+		// 	}
+		// };
 
 		// start interval when you are on top of a second, otherwise you might
 		// open the browser mid second and have timers that are out of sync
-		setTimeout(() => {
-			// set time everysecond
-			const countdownInterval = setInterval(() => {
-				setTime(countdownInterval); // set times each interval
-			}, 1000);			
-			
-			setTime(countdownInterval); // set time first after timeout
-			dispatch(setCountdownInterval(countdownInterval));
-		}, (dateEnd - Date.now()) % SECOND ); 
+		const timeTilNext = ((dateEnd - Date.now()) % SECOND) / MINUTE;
+		alarms.create('TIME_TIL_TIMER_START', { delayInMinutes: timeTilNext });
 
-		setTime(); // initial time before timeout
+		// setTimeout(() => {
+		// 	// set time everysecond
+		// 	const countdownInterval = setInterval(() => {
+		// 		setTime(countdownInterval); // set times each interval
+		// 	}, 1000);			
+			
+		// 	setTime(countdownInterval); // set time first after timeout
+		// 	dispatch(setCountdownInterval(countdownInterval));
+		// }, (dateEnd - Date.now()) % SECOND);
+
+		calcTime(); // initial time before timeout
 	}
 }
+

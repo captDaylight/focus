@@ -19,7 +19,9 @@ export default function storageSync(initState) {
 			}
 		} else {
 			console.log('Should Storage 2', state);
-			$.post('http://localhost:8080/api/events', {type:'syncing 2', data: objSync}, () => {});
+			$.post('http://localhost:8080/api/events', {
+				type:'syncing 2',
+				data: {new: objSync, old: prevState}}, () => {});
 			chrome.storage.sync.set(objSync);
 		}
 
