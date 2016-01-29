@@ -9,7 +9,7 @@
   padding: 5px 0px;
 	.todo-content {
 		&:hover {
-			font-weight: bold;
+			background-color: lighten($blue, 40%);
 		}
 	}
 	&.working {
@@ -17,6 +17,7 @@
 		background-color: lighten($blue, 35%);
 		.todo-content {
 			&:hover {
+				background-color: lighten($blue, 35%);
 				text-decoration: line-through;
 			}
 		}
@@ -31,19 +32,23 @@
 				border: none;
 			}
 		}
-		button {
+		.todo-button {
 			text-decoration: none;
 		}
 	}
 	.todo-container {
 		@include display(flex);
-		button {
+		.todo-button {
 			margin-left: 10px;
 			display: none;
 			cursor: pointer;
+			font-weight: 700;
+			border: 2px solid $blue;
+			padding: 2px 5px 0px 5px;
+			font-size: 10px;
 		}
 		&:hover {
-			button {
+			.todo-button {
 				display: block;
 				
 			}
