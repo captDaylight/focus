@@ -2,13 +2,13 @@
 	min-height: 100%;
 	width: 100%;
 	// background-color: lighten($blue, 20%);
-	color: darken($blue, 10%);
+	color: $blue;
 	box-sizing: border-box;
 	border: 30px solid transparent;
 	@include transition(all 0.25s ease-in-out);
 	&.focusing {
 		// background-color: lighten($red, 20%);
-		color: darken($red, 10%);
+		color: $red;
 	}
 }
 
