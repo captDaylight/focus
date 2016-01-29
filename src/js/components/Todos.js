@@ -7,7 +7,8 @@ import FocusInput from './FocusInput';
 
 function orderTodos(todos) {
 	const workingOn = filter(todos, todo => todo.workingOn && !todo.completed);
-	const notStarted = filter(todos, todo => !todo.workingOn && !todo.completed);
+	const notStarted = filter(todos, todo => !todo.workingOn && !todo.completed)
+		.reverse();
 	const completed = filter(todos, todo => todo.completed);
 	return [...workingOn, ...notStarted, ...completed];
 }

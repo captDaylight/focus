@@ -2,16 +2,17 @@ import {
 	SET_TIMER,
 	CLEAR_TIMER,
 	SET_TIME_LEFT,
-	CLEAR_COUNTDOWN,
+	SET_COUNTDOWN_INTERVAL,
+	CLEAR_COUNTDOWN_INTERVAL,
 } from '../actions/timer';
 
 // timer data gets cleared
 const timerInitial = {
 	date: null,
-	dateEnd: null,
 	timeRemaining: null,
 	minutes: null,
 	seconds: null,
+	countdownInterval: null,	
 }
 
 // meta data does not get cleared
@@ -33,12 +34,10 @@ export default function timer(state=initialState, action) {
 			const session = {
 				date: action.date,
 				duration: state.duration,
-				dateEnd: action.date + state.duration,
 			};
 			return {
 				...state, 
 				date: action.date, 
-				dateEnd: action.date + state.duration,
 				sessions: [...state.sessions, session]
 			};
 
@@ -46,7 +45,10 @@ export default function timer(state=initialState, action) {
 			const { minutes, seconds } = action;
 			return {...state, minutes, seconds };
 
-		case CLEAR_COUNTDOWN:
+		case SET_COUNTDOWN_INTERVAL:
+			return {...state, interval: action.interval};
+
+		case CLEAR_COUNTDOWN_INTERVAL:
 			return {...state, ...timerInitial};
 
 		default:
