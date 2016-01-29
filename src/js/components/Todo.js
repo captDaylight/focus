@@ -29,7 +29,7 @@ export default class SessionsList extends Component {
 					todo.editing 
 					?
 					(<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
-						<FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} />
+						<FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} autoFocus={true} />
 					</Form>)
 					:
 					(<div className="todo-container">

@@ -37,6 +37,7 @@ const FocusInput = React.createClass({
           value={this.getValue()}
           autoComplete="off"
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
+          autoFocus={this.props.autoFocus}
         />
         <span className='validation-error'>{errorMessage}</span>
       </div>
