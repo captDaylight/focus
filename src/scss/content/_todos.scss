@@ -38,20 +38,23 @@
 	}
 	.todo-container {
 		@include display(flex);
-		.todo-button {
-			margin-left: 10px;
-			display: none;
-			cursor: pointer;
-			font-weight: 700;
-			border: 2px solid $blue;
-			padding: 2px 5px 0px 5px;
-			font-size: 10px;
-		}
 		&:hover {
 			.todo-button {
 				display: block;
-				
 			}
+		}
+	}
+	.todo-button {
+		margin-left: 10px;
+		display: none;
+		cursor: pointer;
+		font-weight: 700;
+		border: 2px solid $blue;
+		padding: 2px 5px 0px 5px;
+		font-size: 10px;
+		&:hover {
+			color: white;
+			background-color: $blue;
 		}
 	}
 	.todo-content {
@@ -60,12 +63,27 @@
 }
 .focusing {
 	.todo {
+		.todo-content {
+			&:hover {
+				background-color: lighten($red, 40%);
+			}
+		}
 		&.working {
 			background-color: lighten($red, 35%);
+			.todo-content {
+				&:hover {
+					background-color: lighten($red, 35%);
+				}
+			}
 		}
 		&.completed {
 			color: lighten($red, 25%);
 		}		
+		.todo-button {
+			border: 2px solid $red;
+			&:hover {
+				background-color: $red;
+			}
+		}
 	}
-
 }
