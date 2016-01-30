@@ -2,13 +2,14 @@
 	@include transition(all 0.2s ease-in-out);
 	display: none;
 	position: fixed;
-	background-color: rgba(white, 0.98);
+	background-color: rgba(white, 0.8);
 	height: 100%;
 	width: 100%;
 	top: 0px;
 	left: 0px;
 	@extend .center;
 	opacity: 0;
+	z-index: 1;
 	&.display {
 		display: flex;
 		opacity: 1;

@@ -38,7 +38,7 @@ export default function WebsiteList(props) {
 				</ul>
 			</div>
 
-			<div>
+			<div className={classnames({blurring: showSites})}>
 				You're blocking {websites.length} sites. 
 				<b className="pointer" onClick={() => toggleShowSites()}> See Sites</b>
 			</div>
