@@ -57,3 +57,10 @@
     margin-#{$offset-direction}: -$border-offset; 
   }  
 }
+
+.center {
+  @include flex-grow(1);
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(center);
+}

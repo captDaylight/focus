@@ -1,7 +1,28 @@
+#website-list-wrapper {
+	@include transition(all 0.2s ease-in-out);
+	display: none;
+	position: fixed;
+	background-color: rgba(white, 0.98);
+	height: 100%;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	@extend .center;
+	opacity: 0;
+	&.display {
+		display: flex;
+		opacity: 1;
+	}
+}
+#hide-sites {
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	font-size: 31px;
+}
 #website-list {
 
 }
-
 .website-item {
 	margin-bottom: 10px;
 	@include display(flex);

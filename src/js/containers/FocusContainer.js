@@ -67,7 +67,7 @@ export default class FocusContainer extends Component {
 			<section 
 				id="focus-container" 
 				className={classnames({focusing: minutes})}>
-				<div id="main-action">
+				<div id="main-action" className={classnames({blurring: showSites})}>
 					{
 						minutes
 						? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
@@ -86,7 +86,7 @@ export default class FocusContainer extends Component {
 					toggleShowSites={toggleShowSites}
 					removeWebsite={removeWebsite} 
 					disabled={minutes ? true : false} />
-				<div id="spread">
+				<div id="spread" className={classnames({blurring: showSites})}>
 					<Todos 
 						addTodo={addTodo} 
 						toggleTodoWorking={toggleTodoWorking}
