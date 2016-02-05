@@ -16,12 +16,14 @@ export default function SessionsList(props) {
 	const date = new Date();
 	const midnight = date.setHours(0,0,0,0);
 
+	const todaysSessions = filter(sessions, session => session.date > midnight);
+
 	return (
 		<div id="sessions-container">
 			<h5>WORK LOG</h5>
 			<ul id="sessions-list">
 				{
-					sessions.reverse().map((session, idx) => {
+					todaysSessions.reverse().map((session, idx) => {
 						const { date, duration } = session;
 						const dateEnd = date + duration;
 						const sessionCheck = betweenDates(date, dateEnd);
