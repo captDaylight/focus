@@ -21,10 +21,10 @@ const todosTpl = template(' \
 
 const mountTemplate = template(' \
 	<style> \
-		#focus-content-container {height:100%;text-align:center;' + centerStyling + '} \
-		#focus-content-time {font-size: 4em; margin-bottom:20px;} \
+		#focus-content-container {background-color:white;border: 40px #F44336 solid;box-sizing: border-box;height:100%;text-align:center;' + centerStyling + '} \
+		#focus-content-time {font-size: 40px; margin-bottom:20px;} \
 		#focus-content-todos {margin: 0px; padding:0px;} \
-		.focus-content-todo {margin:10px 0px;font-size:14px; list-style: none} \
+		.focus-content-todo {margin:10px 0px;font-size:20px; list-style: none} \
 	</style> \
 	<div id="focus-content-container"> \
 		<div style="width:100%;"> \
@@ -79,7 +79,7 @@ function mountBlocker(state) {
 	mountPoint.style.cssText = ' \
 		font-family: \'Poppins\', sans-serif; letter-spacing: 0.07em; \
 		color:#ea1c0d; position:fixed; width:100%; height:100%; \
-		background-color:#f99d97; top:0px; left:0px; z-index:10000;';
+		background-color:#white; top:0px; left:0px; z-index:10000;';
 	body.appendChild(mountPoint);
 	document.getElementsByTagName('html')[0].appendChild(body);
 	

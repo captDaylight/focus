@@ -37,7 +37,7 @@
 		}
 	}
 	.todo-container {
-		@include display(flex);
+		@extend .left-right;
 		&:hover {
 			.todo-button {
 				display: block;
@@ -64,6 +64,7 @@
 .focusing {
 	.todo {
 		.todo-content {
+			width: 50%;
 			&:hover {
 				background-color: lighten($red, 40%);
 			}
@@ -86,4 +87,9 @@
 			}
 		}
 	}
+}
+.todo-actions {
+	@include display(flex);
+	@include justify-content(flex-end);
+	width: 50%;
 }

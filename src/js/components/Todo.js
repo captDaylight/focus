@@ -42,15 +42,18 @@ export default class SessionsList extends Component {
 									toggleTodoWorking(todo.id);
 								}
 							}} >
-							- {todo.todo}
+							{todo.todo}
 						</div>
-						{
-							todo.workingOn && !todo.completed ? 
-							<div className="todo-button" onClick={() => toggleTodoWorking(todo.id)}>Cancel</div>
-							: null
-						}
-						<div className="todo-button" onClick={() => toggleTodoEdit(todo.id)}>Edit</div>
-						<div className="todo-button" onClick={() => removeTodo(todo.id)}>Remove</div>
+						<div className="todo-actions">
+							{
+								todo.workingOn && !todo.completed ? 
+								<div className="todo-button" onClick={() => toggleTodoWorking(todo.id)}>Cancel</div>
+								: null
+							}
+							<div className="todo-button" onClick={() => toggleTodoEdit(todo.id)}>Edit</div>
+							<div className="todo-button" onClick={() => removeTodo(todo.id)}>Remove</div>
+						</div>
+
 					</div>
 					)
 				}
