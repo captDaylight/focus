@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import formatAMPM from '../utils/formatAMPM';
 import filter from 'lodash/collection/filter';
+import SessionItem from './SessionItem';
 
-function isTodayOrDate(time) {
-	const date = new Date(time);
-	// const day = new Date(date.getYear(), date.getMonth(), date.getDay());
-	const now = new Date();
-	if (date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDay() === now.getDay()) {
-		return 'Today';
-	} else {
-		return `${date.toLocaleString('en-us', { month: 'short' })} ${date.getDate()}, ${date.getFullYear()}`;
-	}
-}
 
 function betweenDates(begin, end) {
 	return date => date > begin && date < end;
@@ -23,6 +13,9 @@ export default function SessionsList(props) {
 	const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
 	const now = Date.now();
 
+	const date = new Date();
+	const midnight = date.setHours(0,0,0,0);
+
 	return (
 		<div id="sessions-container">
 			<h5>WORK LOG</h5>
@@ -32,7 +25,8 @@ export default function SessionsList(props) {
 						const { date, duration } = session;
 						const dateEnd = date + duration;
 						const sessionCheck = betweenDates(date, dateEnd);
-						
+						const current = sessionCheck(now);
+
 						const working = filter(startedTodos, todo => {
 							const { workingOn, completed } = todo;
 							return (
@@ -45,42 +39,13 @@ export default function SessionsList(props) {
 						});
 						
 						return (
-							<li key={idx} className={classnames('session',{current: sessionCheck(now)})}>
-								<div className="session-header">
-									<div>
-										<h5>
-											{`${formatAMPM(date, true)}`} 
-											 - 
-											{`${formatAMPM(dateEnd, true)}`} 
-
-										</h5>
-									</div>
-									<div className="session-date">									
-										{sessionCheck(now) ? ' CURRENT SESSION': isTodayOrDate(date)}
-									</div>
-								</div>
-								{
-									working.length === 0 && finished.length === 0 ? null : 
-									(
-										<ul className="session-todos">
-											{
-												finished.map((todo, idx) => {
-													return (
-														<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
-													);
-												})
-											}
-											{
-												working.map((todo, idx) => {
-													return (
-														<li key={`${idx}-completed`}><b>- {todo.todo} (Working on)</b></li>
-													);
-												})
-											}
-										</ul>
-									)
-								}
-							</li>
+							<SessionItem 
+								current={current}
+								date={date}
+								dateEnd={dateEnd}
+								working={working}
+								finished={finished}
+							/>
 						)
 					})
 				}

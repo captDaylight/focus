@@ -9,11 +9,13 @@ function orderTodos(todos) {
 	// set date's time to 0:00 of today
 	const date = new Date();
 	const midnight = date.setHours(0,0,0,0);
-	
-	const workingOn = filter(todos, todo => todo.workingOn && !todo.completed);
+	const workingOn = filter(todos, todo => todo.workingOn && !todo.completed);	
 	const notStarted = filter(todos, todo => !todo.workingOn && !todo.completed)
 		.reverse();
-	const completed = filter(todos, todo => todo.completed && todo.completed > midnight);
+	const completed = filter(todos, todo => {
+		return todo.completed && todo.completed > midnight
+	});
+
 	return [...workingOn, ...notStarted, ...completed];
 }
 

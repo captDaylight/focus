@@ -34,6 +34,10 @@
 		}
 		.todo-button {
 			text-decoration: none;
+			opacity: 0.25;
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 	.todo-container {
@@ -79,12 +83,6 @@
 		}
 		&.completed {
 			color: lighten($red, 25%);
-			.todo-button {
-				opacity: 0.25;
-				&:hover {
-					opacity: 1;
-				}
-			}
 		}		
 		.todo-button {
 			border: 2px solid $red;
