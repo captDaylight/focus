@@ -25,7 +25,7 @@ export default function SessionsList(props) {
 
 	return (
 		<div id="sessions-container">
-			<h5>WORK SESSIONS</h5>
+			<h5>WORK LOG</h5>
 			<ul id="sessions-list">
 				{
 					sessions.reverse().map((session, idx) => {
