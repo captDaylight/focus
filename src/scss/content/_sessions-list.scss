@@ -6,10 +6,19 @@
 		border: 2px dashed $blue;
 		padding:10px;
 		margin: 10px 0px;
+    border-right: transparent;
+    border-left: transparent;
+    border-bottom: transparent;
 	}
 	.current {
 		border-width: 2px;
 		border-style: solid;
+		background-color: $red;
+		color: white;
+		border-top: $red;
+    border-right: $red;
+    border-left: $red;
+    border-bottom: $red;
 	}
 }
 .focusing {
@@ -20,10 +29,18 @@
 	}
 }
 .session {
+
 	h5 {
 		margin-bottom: 0px;
 	}
-	.session-date {
-		margin-bottom: 15px;
-	}
+}
+
+.session-header {
+	@extend .left-right;
+	@include align-items(center);
+	@include justify-content(center);
+}
+
+.session-todos {
+	margin-top: 15px;
 }

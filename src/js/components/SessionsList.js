@@ -46,38 +46,38 @@ export default function SessionsList(props) {
 						
 						return (
 							<li key={idx} className={classnames('session',{current: sessionCheck(now)})}>
-								<h5>
-									{`${formatAMPM(date, true)}`} 
-									 - 
-									{`${formatAMPM(dateEnd, true)}`} 
+								<div className="session-header">
+									<div>
+										<h5>
+											{`${formatAMPM(date, true)}`} 
+											 - 
+											{`${formatAMPM(dateEnd, true)}`} 
 
-								</h5>
-								<div className="session-date">									
-									{sessionCheck(now) ? ' CURRENT SESSION': isTodayOrDate(date)}
+										</h5>
+									</div>
+									<div className="session-date">									
+										{sessionCheck(now) ? ' CURRENT SESSION': isTodayOrDate(date)}
+									</div>
 								</div>
 								{
 									working.length === 0 && finished.length === 0 ? null : 
 									(
-										<div>
-											<ul className="completed-todos">
-												{
-													finished.map((todo, idx) => {
-														return (
-															<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
-														);
-													})
-												}
-											</ul>
-											<ul className="completed-todos">
-												{
-													working.map((todo, idx) => {
-														return (
-															<li key={`${idx}-completed`}><b>- {todo.todo} (Working on)</b></li>
-														);
-													})
-												}
-											</ul>
-										</div>
+										<ul className="session-todos">
+											{
+												finished.map((todo, idx) => {
+													return (
+														<li key={`${idx}-completed`}><b>- {todo.todo}</b></li>
+													);
+												})
+											}
+											{
+												working.map((todo, idx) => {
+													return (
+														<li key={`${idx}-completed`}><b>- {todo.todo} (Working on)</b></li>
+													);
+												})
+											}
+										</ul>
 									)
 								}
 							</li>
