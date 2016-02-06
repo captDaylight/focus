@@ -54,8 +54,8 @@ function mountOrNot(siteChecker) {
 const urlData = url.parse(window.location.href);
 const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 
-chrome.storage.sync.get('state', data => {
-	const { websites, timer } = data.state;
+chrome.storage.sync.get(null, data => {
+	const { websites, timer } = data;
 	
 	checkShouldMountOrNot(websites.websites, timer.date, data.state);
 

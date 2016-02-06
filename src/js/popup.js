@@ -6,9 +6,9 @@ chrome.tabs.query(
 	{currentWindow: true, active : true},
 	tab => {
 		if (tab.length !== 0) {
-			chrome.storage.sync.get('state', data => {
+			chrome.storage.sync.get(null, data => {
 				ReactDOM.render(
-					<PopupContainer state={data.state} url={tab[0].url}/>,
+					<PopupContainer state={data} url={tab[0].url}/>,
 					document.getElementById('mount-point')
 				);
 			});      
