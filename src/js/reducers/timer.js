@@ -12,7 +12,7 @@ const timerInitial = {
 	timeRemaining: null,
 	minutes: null,
 	seconds: null,
-	countdownInterval: null,	
+	countdownInterval: null,
 }
 
 // meta data does not get cleared

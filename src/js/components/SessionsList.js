@@ -9,66 +9,76 @@ const DAY = 86400000;
 function betweenDates(begin, end) {
 	return date => date > begin && date < end;
 }
+export default class SessionsList extends Component {
+	constructor(props) {
+		super(props);
+	}
+	shouldComponentUpdate(nextProps) {
+		// console.log('TESTSTSETE', this.props.sessions, nextProps.sessions);
+		// console.log(this.props.todos === nextProps.todos);
+		return false;
+	}
+	render() {
+		const { sessions, todos } = this.props;
+		const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
+		const now = Date.now();
 
-export default function SessionsList(props) {
-	const { sessions, todos } = props;
-	const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
-	const now = Date.now();
+		const date = new Date();
+		const midnight = date.setHours(0,0,0,0);
 
-	const date = new Date();
-	const midnight = date.setHours(0,0,0,0);
+		const sessionDays = groupBy(sessions, session => {
+			const dateDayRoundDown = new Date(session.date);
+			return dateDayRoundDown.setHours(0,0,0,0);
+		});
+		
+		return (
+			<div id="sessions-container">
+				<h5>WORK LOG</h5>
+				<ul id="sessions-list">
+					{
 
-	const sessionDays = groupBy(sessions.reverse(), session => {
-		return Math.floor(session.date / DAY)
-	});
-	
-	console.log(Object.keys(sessionDays).map(time => time * DAY));
+						Object.keys(sessionDays).map((day, idx) => {
+							console.log('----day', (new Date(parseInt(day))).toDateString());
+							const sessions = sessionDays[day].map((session, idx) => {
+								console.log('session');
+								const { date, duration } = session;
+								const dateEnd = date + duration;
+								const sessionCheck = betweenDates(date, dateEnd);
+								const current = sessionCheck(now);
 
-
-
-	return (
-		<div id="sessions-container">
-			<h5>WORK LOG</h5>
-			<ul id="sessions-list">
-				{
-
-					Object.keys(sessionDays).reverse().map((day, idx) => {
-						const sessions = sessionDays[day].map((session, idx) => {
-							const { date, duration } = session;
-							const dateEnd = date + duration;
-							const sessionCheck = betweenDates(date, dateEnd);
-							const current = sessionCheck(now);
-
-							const working = filter(startedTodos, todo => {
-								const { workingOn, completed } = todo;
+								const working = filter(startedTodos, todo => {
+									const { workingOn, completed } = todo;
+									return (
+										workingOn < dateEnd 
+										&& (completed ? completed > dateEnd: true ));
+								});
+								const finished = filter(startedTodos, todo => {
+									const { completed } = todo;
+									return sessionCheck(completed);
+								});
+								
 								return (
-									workingOn < dateEnd 
-									&& (completed ? completed > dateEnd: true ));
+									<SessionItem 
+										key={idx}
+										current={current}
+										date={date}
+										dateEnd={dateEnd}
+										working={working}
+										finished={finished}
+									/>
+								)
 							});
-							const finished = filter(startedTodos, todo => {
-								const { completed } = todo;
-								return sessionCheck(completed);
-							});
-							
-							return (
-								<SessionItem 
-									key={idx}
-									current={current}
-									date={date}
-									dateEnd={dateEnd}
-									working={working}
-									finished={finished}
-								/>
-							)
-						})
-						
-						return [(
-							<li>----------- {day}</li>
-						), ...sessions];
-					})
 
-				}
-			</ul>
-		</div>
-	);
+							const headerListItem = (parseInt(day) === midnight) 
+								? <li>TODAY</li>
+								: <li>--- {(new Date(parseInt(day))).toDateString()}</li>;
+
+							return [headerListItem, ...sessions];
+						})
+
+					}
+				</ul>
+			</div>
+		);
+	}
 }
