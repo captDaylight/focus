@@ -13,11 +13,11 @@ export default class SessionsList extends Component {
 	constructor(props) {
 		super(props);
 	}
-	shouldComponentUpdate(nextProps) {
-		// console.log('TESTSTSETE', this.props.sessions, nextProps.sessions);
-		// console.log(this.props.todos === nextProps.todos);
-		return false;
-	}
+	// shouldComponentUpdate(nextProps) {
+	// 	// console.log('TESTSTSETE', this.props.sessions, nextProps.sessions);
+	// 	// console.log(this.props.todos === nextProps.todos);
+	// 	return true;
+	// }
 	render() {
 		const { sessions, todos } = this.props;
 		const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);

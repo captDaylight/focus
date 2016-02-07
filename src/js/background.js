@@ -70,7 +70,7 @@ const init = initState => {
 		return true;
 	});
 };
-// console.log(chrome.storage.sync.clear());
+console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
 	console.log(data);
 	init(Object.keys(data).length !== 0 ? data : false);
