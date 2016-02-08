@@ -5,8 +5,8 @@ export default class WebsiteList extends Component {
 	shouldComponentUpdate(nextProps) {
 		const { websites, showSites, disabled } = this.props;
 		return ( websites !== nextProps.websites 
-			&& showSites !== nextProps.showSites 
-			&& disabled !== nextProps.disabled );
+			|| showSites !== nextProps.showSites 
+			|| disabled !== nextProps.disabled );
 	}
 	render() {
 		const { 

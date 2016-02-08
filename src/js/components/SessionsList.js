@@ -15,7 +15,7 @@ export default class SessionsList extends Component {
 	}
 	shouldComponentUpdate(nextProps) {
 		const { todos, sessions } = this.props;
-		return todos !== nextProps.todos && sessions !== nextProps.sessions;
+		return todos !== nextProps.todos || sessions !== nextProps.sessions;
 	}
 	render() {
 		const { sessions, todos } = this.props;
