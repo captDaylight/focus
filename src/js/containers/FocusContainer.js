@@ -21,17 +21,30 @@ const actions = wrapActionsWithMessanger([
 	'toggleTodoWorking',
 ]);
 
+let oldState = {};
+
 export default class FocusContainer extends Component {
 	constructor(props) {
 		super(props);
+		oldState = props.state;
 		this.state = props.state;
 	}
 	updateState(newState) {
-		this.setState(newState);
+		const { seconds } = newState.timer;
+		console.log(seconds, seconds !== oldState.timer.seconds);
+		if (seconds && seconds !== oldState.timer.seconds) {
+			console.log('--timer');
+			this.setState(newState);
+		} else {
+			console.log('--');
+			this.setState(newState);
+		}
+		oldState = newState;
 	}
 	componentWillMount() {
 		const { updateState } = this;
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
+			console.log(req);
 			if (req.type === 'STATE_UPDATE') {
 				updateState.call(this, req.data);
 			}

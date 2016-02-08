@@ -38,9 +38,9 @@ export default class SessionsList extends Component {
 					{
 
 						Object.keys(sessionDays).map((day, idx) => {
-							console.log('----day', (new Date(parseInt(day))).toDateString());
+							// console.log('----day', (new Date(parseInt(day))).toDateString());
 							const sessions = sessionDays[day].map((session, idx) => {
-								console.log('session');
+								// console.log('session');
 								const { date, duration } = session;
 								const dateEnd = date + duration;
 								const sessionCheck = betweenDates(date, dateEnd);

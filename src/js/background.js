@@ -39,11 +39,13 @@ const init = initState => {
 			chrome.browserAction.setBadgeText({text: ''});
 		}
 		storageSync(state);
-		chrome.runtime.sendMessage(statePayload);
+		console.log('sending message');
+		chrome.runtime.sendMessage('newTab',statePayload);
 		chrome.tabs.query(
 			{currentWindow: true, active : true},
 			tab => {
 				if (tab.length !== 0) {
+					console.log('sending message');
 					chrome.tabs.sendMessage(tab[0].id, statePayload)
 				}
 			}
@@ -64,12 +66,13 @@ const init = initState => {
 	chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 		const actions = {...timer, ...websites, ...todos};
 		if (req.type === 'ACTION') {
+			console.log('req action');
 			store.dispatch(actions[req.action](...req.data));
 		}
 		return true;
 	});
 };
-// console.log(chrome.storage.sync.clear());
+console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
 	init(Object.keys(data).length !== 0 ? data : false);
 });
