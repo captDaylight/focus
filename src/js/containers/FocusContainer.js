@@ -35,10 +35,12 @@ export default class FocusContainer extends Component {
 			let stateNewTime = oldState;
 			stateNewTime.timer.seconds = seconds;
 			stateNewTime.timer.minutes = minutes;
-
+			console.log('--- timer ---');
 			this.setState(stateNewTime);
 			oldState = stateNewTime;
+
 		} else {
+			console.log('*** update ***');
 			this.setState(newState);
 			oldState = newState;
 		}

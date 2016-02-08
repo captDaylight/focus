@@ -13,11 +13,10 @@ export default class SessionsList extends Component {
 	constructor(props) {
 		super(props);
 	}
-	// shouldComponentUpdate(nextProps) {
-	// 	// console.log('TESTSTSETE', this.props.sessions, nextProps.sessions);
-	// 	// console.log(this.props.todos === nextProps.todos);
-	// 	return true;
-	// }
+	shouldComponentUpdate(nextProps) {
+		const { todos, sessions } = this.props;
+		return todos !== nextProps.todos && sessions !== nextProps.sessions;
+	}
 	render() {
 		const { sessions, todos } = this.props;
 		const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
@@ -30,7 +29,7 @@ export default class SessionsList extends Component {
 			const dateDayRoundDown = new Date(session.date);
 			return dateDayRoundDown.setHours(0,0,0,0);
 		});
-		
+		console.log('rendering sessions');
 		return (
 			<div id="sessions-container">
 				<h5>WORK LOG</h5>
