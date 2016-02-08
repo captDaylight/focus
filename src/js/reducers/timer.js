@@ -9,7 +9,6 @@ import {
 // timer data gets cleared
 const timerInitial = {
 	date: null,
-	timeRemaining: null,
 	minutes: null,
 	seconds: null,
 	countdownInterval: null,

@@ -30,21 +30,23 @@ export default class FocusContainer extends Component {
 		this.state = props.state;
 	}
 	updateState(newState) {
-		const { seconds } = newState.timer;
-		console.log(seconds, seconds !== oldState.timer.seconds);
+		const { seconds, minutes } = newState.timer;
 		if (seconds && seconds !== oldState.timer.seconds) {
-			console.log('--timer');
-			this.setState(newState);
+			let stateNewTime = oldState;
+			stateNewTime.timer.seconds = seconds;
+			stateNewTime.timer.minutes = minutes;
+
+			this.setState(stateNewTime);
+			oldState = stateNewTime;
 		} else {
-			console.log('--');
 			this.setState(newState);
+			oldState = newState;
 		}
-		oldState = newState;
+
 	}
 	componentWillMount() {
 		const { updateState } = this;
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-			console.log(req);
 			if (req.type === 'STATE_UPDATE') {
 				updateState.call(this, req.data);
 			}

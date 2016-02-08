@@ -27,7 +27,11 @@ export default class SessionsList extends Component {
 			this.refs.form.reset();
 		}
 	}
+	shouldComponentUpdate(nextProps) {
+		return this.props.todos !== nextProps.todos;
+	}
 	render() {
+		console.log('rendering todos');
 		const { todos, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
 
 		const orderedTodos = orderTodos(todos);
