@@ -51,7 +51,7 @@ export default class SessionsList extends Component {
 								: null
 							}
 							<div className="todo-button" onClick={() => toggleTodoEdit(todo.id)}>Edit</div>
-							<div className="todo-button" onClick={() => removeTodo(todo.id)}>Remove</div>
+							<div className="todo-button" onClick={() => removeTodo(todo.id)}>Delete</div>
 						</div>
 
 					</div>

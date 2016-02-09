@@ -36,7 +36,7 @@ export default class SessionsList extends Component {
 				<ul id="sessions-list">
 					{
 
-						Object.keys(sessionDays).map((day, idx) => {
+						Object.keys(sessionDays).reverse().map((day, idx) => {
 							// console.log('----day', (new Date(parseInt(day))).toDateString());
 							const sessions = sessionDays[day].reverse().map((session, idx) => {
 								// console.log('session');
