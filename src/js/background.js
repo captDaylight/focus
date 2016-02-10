@@ -40,7 +40,7 @@ const init = initState => {
 		}
 		storageSync(state);
 		console.log('sending message');
-		chrome.runtime.sendMessage('newTab',statePayload);
+		chrome.runtime.sendMessage(statePayload);
 		chrome.tabs.query(
 			{currentWindow: true, active : true},
 			tab => {

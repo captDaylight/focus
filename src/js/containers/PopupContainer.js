@@ -30,13 +30,15 @@ export default class FocusContainer extends Component {
 		this.state = props.state;
 	}
 	updateState(newState) {
+		console.log('in update state');
 		this.setState(newState);
 	}
 	componentWillMount() {
 		const { updateState } = this;
+		console.log('component will mount');
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-			console.log('popup message', req.data, req);
 			if (req.type === 'STATE_UPDATE') {
+				console.log('getting STATE_UPDATE');
 				updateState.call(this, req.data);
 			}
 			return true;
