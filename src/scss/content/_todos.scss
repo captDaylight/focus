@@ -54,12 +54,17 @@
 		cursor: pointer;
 		font-weight: 700;
 		border: 2px solid $blue;
-		padding: 2px 5px 0px 5px;
+		padding: 2px 7px 0px 7px;
 		font-size: 10px;
 		&:hover {
 			color: white;
 			background-color: $blue;
 		}
+	}
+	.todo-icon {
+		margin-left: 15px;
+		padding-top: 3px;
+		cursor: pointer;
 	}
 	.todo-content {
 		cursor: pointer;
@@ -83,7 +88,7 @@
 		}
 		&.completed {
 			color: lighten($red, 25%);
-		}		
+		}	
 		.todo-button {
 			border: 2px solid $red;
 			&:hover {

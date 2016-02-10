@@ -12,4 +12,6 @@ gulp.task('image', function(){
     .pipe(gulp.dest('dist/img'));
   gulp.src('src/sound/**')
     .pipe(gulp.dest('dist/sound'));
+  gulp.src('src/fonts/**')
+    .pipe(gulp.dest('dist/fonts'));
 });
