@@ -84,11 +84,10 @@ export default class SessionsList extends Component {
 							} else {
 								return [(
 									<li className="session-day-header">
-
-										
-										<div>{(new Date(parseInt(day))).toDateString()}</div>
-										<div className="icon-enlarge2"></div>
-
+										<button>
+											<div>{(new Date(parseInt(day))).toDateString()}</div>
+											<div className="icon-enlarge2"></div>
+										</button>
 									</li>
 								)];
 							}

@@ -1,35 +1,33 @@
 #{$all-buttons} {
-  appearance: none;
-  // background-color: $action-color;
-  border: 0;
-  // border-radius: $base-border-radius;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  // font-family: $base-font-family;
-  // font-size: $base-font-size;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 600;
-  line-height: 1;
-  // padding: $small-spacing $base-spacing;
-  text-decoration: none;
-  // transition: background-color $base-duration $base-timing;
-  user-select: none;
-  vertical-align: middle;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $blue;
+  background-color: transparent;
   white-space: nowrap;
-
-  &:hover,
-  &:focus {
-    // background-color: shade($action-color, 20%);
-    color: #fff;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  color: $blue;
+  letter-spacing: 0.07em;
+  font-size: 1.4rem;
+  &.button-small {
+    font-size: 10px;
+    padding: 4px 8px;
   }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-
+  &:hover {
+    color: white;
+    background-color: $blue;
+  }
+}
+.focusing {
+  #{$all-buttons} {
+    border-color: $red;
+    color: $red;
     &:hover {
-      // background-color: $action-color;
+      color: white;
+      background-color: $red;
     }
   }
 }

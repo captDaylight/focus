@@ -12,6 +12,12 @@
 	}
 }
 
+#header {
+	@include display(flex);
+	@include justify-content(space-between);
+	@include align-items(center);
+}
+
 #main-action {
 	height: 100px;
 }
@@ -32,22 +38,8 @@
 .focus-button {
 	padding: 20px 30px;
 	font-size: 2em;
-	background-color: lighten($blue, 10%);
-	color: white;
-	text-transform: uppercase;
-	border-bottom: 5px solid lighten($blue, 3%);
 	letter-spacing: 0.15em;
-	@include transition(all 0.10s ease-in-out);
-	&:hover {
-		background-color: $blue;
-		border: 0px solid darken($blue, 15%);
-		@include transform(translateY(5px));
-	}
-	&.smaller {
-		font-size: 1em;
-		padding: 10px 15px;
-		letter-spacing: 0.05em;
-	}
+	border-width: 5px;
 }
 
 .focusing {

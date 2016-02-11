@@ -84,25 +84,29 @@ export default class FocusContainer extends Component {
 			<section 
 				id="focus-container" 
 				className={classnames({focusing: minutes})}>
-				<div id="main-action" className={classnames({blurring: showSites})}>
-					{
-						minutes
-						? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-						: (
-							<button 
-								className="focus-button" 
-								onClick={() => countDown(Date.now(), duration, sound)}>
-								Start Working
-							</button>
-						)
-					}
+
+				<div id="header">
+					<div id="main-action" className={classnames({blurring: showSites})}>
+						{
+							minutes
+							? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+							: (
+								<button 
+									className="focus-button" 
+									onClick={() => countDown(Date.now(), duration, sound)}>
+									Start Working
+								</button>
+							)
+						}
+					</div>
+					<WebsiteList 
+						websites={websites}
+						showSites={showSites}
+						toggleShowSites={toggleShowSites}
+						removeWebsite={removeWebsite} 
+						disabled={minutes ? true : false} />
 				</div>
-				<WebsiteList 
-					websites={websites}
-					showSites={showSites}
-					toggleShowSites={toggleShowSites}
-					removeWebsite={removeWebsite} 
-					disabled={minutes ? true : false} />
+
 				<div id="spread" className={classnames({blurring: showSites})}>
 					<Todos 
 						addTodo={addTodo} 
