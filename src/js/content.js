@@ -55,17 +55,15 @@ const urlData = url.parse(window.location.href);
 const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 
 chrome.storage.sync.get(null, data => {
-	console.log(data);
 	const { websites, timer } = data;
 	
 	checkShouldMountOrNot(websites.websites, timer.date, data);
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
-		if (msg.type === 'STATE_UPDATE') {
+		if (msg.type === 'STATE_UPDATE' && msg.dest === 'BLOCKER') {
 			const { websites, timer } = msg.data;
 			checkShouldMountOrNot(websites.websites, timer.date, msg.data);
 			if (mounted) {
-				console.log('here 2', msg);
 				updateBlocker(msg.data);	
 			}
 		}
@@ -86,7 +84,6 @@ function mountBlocker(state) {
 	document.getElementsByTagName('html')[0].appendChild(body);
 	
 	$('#mount-point-focus').html(mountTemplate());
-	console.log('here 1', state);
 	updateBlocker(state);
 	mounted = true;
 }
@@ -100,7 +97,6 @@ function dismountBlocker() {
 }
 
 function updateBlocker(data) {
-	console.log('update blocker', data);
 	const {minutes, seconds} = data.timer;
 	const todos = filter(data.todos.todos, todo => todo.workingOn && !todo.completed);
 	$('#focus-content-time').html(timeTpl({minutes,seconds}));

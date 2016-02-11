@@ -39,14 +39,17 @@ const init = initState => {
 			chrome.browserAction.setBadgeText({text: ''});
 		}
 		storageSync(state);
-		console.log('sending message');
+		
+		// for the popup
 		chrome.runtime.sendMessage(statePayload);
+
+		// for the blocker
 		chrome.tabs.query(
 			{currentWindow: true, active : true},
 			tab => {
 				if (tab.length !== 0) {
 					console.log('sending message');
-					chrome.tabs.sendMessage(tab[0].id, statePayload)
+					chrome.tabs.sendMessage(tab[0].id, {...statePayload, dest: 'BLOCKER'})
 				}
 			}
 		)

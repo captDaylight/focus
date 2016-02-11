@@ -52,7 +52,7 @@ export default class SessionsList extends Component {
 										className="todo-button" 
 										onClick={() => toggleTodoCompletion(todo.id)}
 									>
-										Complete
+										Finish
 									</div>
 								) : null
 							}
@@ -63,7 +63,7 @@ export default class SessionsList extends Component {
 										className="todo-button" 
 										onClick={() => toggleTodoWorking(todo.id)}
 									>
-										Work On
+										Start
 									</div>
 								) : null
 							}

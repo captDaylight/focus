@@ -29,7 +29,7 @@ export default class SessionsList extends Component {
 			const dateDayRoundDown = new Date(session.date);
 			return dateDayRoundDown.setHours(0,0,0,0);
 		});
-		console.log('rendering sessions');
+		// console.log('rendering sessions');
 		return (
 			<div id="sessions-container">
 				<h5>WORK LOG</h5>
@@ -69,10 +69,26 @@ export default class SessionsList extends Component {
 							});
 
 							const headerListItem = (parseInt(day) === midnight) 
-								? <li>TODAY</li>
-								: <li>--- {(new Date(parseInt(day))).toDateString()}</li>;
+								? []
+								: [(
+									<li className="session-day-header">
+										{(new Date(parseInt(day))).toDateString()}
+									</li>
+								)];
 
-							return [headerListItem, ...sessions];
+							return [...headerListItem, ...sessions];
+
+							if (parseInt(day) === midnight) {
+								// today's sessions
+								return [...sessions];
+							} else {
+								return [(
+									<li className="session-day-header">
+										{(new Date(parseInt(day))).toDateString()}
+									</li>
+								)];
+							}
+
 						})
 
 					}

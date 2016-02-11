@@ -16,7 +16,7 @@ export default class WebsiteList extends Component {
 			showSites,
 			toggleShowSites,
 		} = this.props;
-		console.log('rendering websites');
+		// console.log('rendering websites');
 		return (
 			<div>
 
