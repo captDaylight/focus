@@ -76,7 +76,7 @@ export default class SessionsList extends Component {
 									</li>
 								)];
 
-							return [...headerListItem, ...sessions];
+							// return [...headerListItem, ...sessions];
 
 							if (parseInt(day) === midnight) {
 								// today's sessions
@@ -84,7 +84,11 @@ export default class SessionsList extends Component {
 							} else {
 								return [(
 									<li className="session-day-header">
-										{(new Date(parseInt(day))).toDateString()}
+
+										
+										<div>{(new Date(parseInt(day))).toDateString()}</div>
+										<div className="icon-enlarge2"></div>
+
 									</li>
 								)];
 							}
