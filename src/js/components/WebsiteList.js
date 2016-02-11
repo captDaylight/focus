@@ -22,22 +22,26 @@ export default class WebsiteList extends Component {
 
 				<div id="website-list-wrapper" className={classnames({display: showSites})}>
 					<div id="hide-sites">
-						<b className="pointer" onClick={() => toggleShowSites()}>X</b>
+						<b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
 					</div>
 					<ul id="website-list">
 					{
 						websites.map((website, idx) => {
 							return (
 								<li className="website-item" key={idx}>
-									<img src={website.favicon} />
-									<span>{website.name}</span>
-									{
-										disabled ? null : (						
-											<button onClick={() => removeWebsite(website.id)}>
-												Remove Website
-											</button>
-										)
-									}
+									<div className="left">
+										<img src={website.favicon} />
+										<span>{website.name}</span>
+									</div>
+
+									<div 
+										className={classnames('icon-bin', {disabled})} 
+										onClick={() => {
+											if (!disabled) {
+												removeWebsite(website.id)	
+											}
+										}}>
+									</div>
 								</li>
 							);
 						})

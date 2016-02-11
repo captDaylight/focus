@@ -31,7 +31,7 @@ export default class SessionsList extends Component {
 		return this.props.todos !== nextProps.todos;
 	}
 	render() {
-		// console.log('rendering todos');
+		console.log('rendering todos');
 		const { todos, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
 
 		const orderedTodos = orderTodos(todos);
