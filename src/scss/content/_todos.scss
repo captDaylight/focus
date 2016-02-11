@@ -39,6 +39,11 @@
 				opacity: 1;
 			}
 		}
+		.todo-icon {
+			&:hover {
+				color: $blue;
+			}
+		}
 	}
 	.todo-container {
 		@extend .left-right;
@@ -88,6 +93,11 @@
 		}
 		&.completed {
 			color: lighten($red, 25%);
+			.todo-icon {
+				&:hover {
+					color: $red;
+				}
+			}
 		}	
 		.todo-button {
 			border: 2px solid $red;
