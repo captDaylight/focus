@@ -39,16 +39,9 @@
 	padding: 20px 30px;
 	font-size: 2em;
 	letter-spacing: 0.15em;
-	border-width: 5px;
+	border-width: 4px;
 }
 
 .focusing {
-	.focus-button {
-		background-color: lighten($red, 10%);
-		border-bottom: 5px solid lighten($red, 3%);
-		&:hover {
-			background-color: $red;
-			border: 0px solid darken($red, 15%);
-		}
-	}
+
 }

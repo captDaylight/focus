@@ -69,7 +69,7 @@ export default class FocusContainer extends Component {
 					: (
 						<div className="popup-section">
 							<button 
-								className="focus-button smaller" 
+								className="popup" 
 								onClick={() => countDown(Date.now(), duration, sound)}
 							>
 								Start Working
@@ -89,7 +89,7 @@ export default class FocusContainer extends Component {
 							<span>Site is on the blocked list</span>
 							: (
 									<button 
-										className="focus-button smaller" 
+										className="popup" 
 										onClick={this.handleAddWebsite}
 									>
 										block this site

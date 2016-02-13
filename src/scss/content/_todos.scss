@@ -4,6 +4,7 @@
 #todos {
 	margin-top: 20px;
 }
+
 .todo {
   margin: 2px 0;
   padding: 5px 0px;
@@ -78,6 +79,9 @@
 			}
 		}
 	}
+}
+.todo.completed {
+
 }
 .todo-actions {
 	@include display(flex);

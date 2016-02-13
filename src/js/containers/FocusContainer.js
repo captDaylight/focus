@@ -31,6 +31,7 @@ export default class FocusContainer extends Component {
 	}
 	updateState(newState) {
 		const { seconds, minutes } = newState.timer;
+		console.log('seconds', seconds, oldState.timer.seconds);
 		if (seconds && seconds !== oldState.timer.seconds) {
 			let stateNewTime = oldState;
 			stateNewTime.timer.seconds = seconds;
@@ -94,7 +95,7 @@ export default class FocusContainer extends Component {
 								<button 
 									className="focus-button" 
 									onClick={() => countDown(Date.now(), duration, sound)}>
-									Start Working
+									start focusing
 								</button>
 							)
 						}

@@ -3,11 +3,9 @@
 	width: 100%;
 	box-sizing: border-box;
 	border: 15px solid transparent;
-	background-color: lighten($blue, 20%);
 	color: darken($blue, 10%);
 	@include transition(all 0.15s ease-in-out);
 	&.focusing {
-		background-color: lighten($red, 20%);
 		color: darken($red, 10%);
 	}
 	.popup-section {
@@ -15,9 +13,5 @@
 		&:last-child {
 			margin-bottom: 15px;
 		}
-	}
-	button {
-		width: 100%;
-		margin: 10px 0px;
 	}
 }

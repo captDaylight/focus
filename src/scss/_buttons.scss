@@ -16,6 +16,11 @@
     font-size: 10px;
     padding: 4px 8px;
   }
+  &.popup {
+    padding: 15px 0px;
+    width: 100%;
+    border-width: 4px;
+  }
   &:hover {
     color: white;
     background-color: $blue;
