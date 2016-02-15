@@ -1,3 +1,5 @@
+import qwest from 'qwest';
+
 export const ADD_WEBSITE = 'ADD_WEBSITE';
 export function addWebsite(website, favicon) {
 	return {
@@ -6,6 +8,24 @@ export function addWebsite(website, favicon) {
 		favicon,
 	}
 }
+
+export function postWebsite() {
+	return dispatch => {
+		qwest.post('http://localhost:3000/api/todos', {
+			todo: 'test',
+			editing: false
+		 })
+		 .then(function(xhr, response) {
+			// Make some useful actions 
+			console.log('success',response);
+		 })
+		 .catch(function(e, xhr, response) {
+			// Process the error 
+			console.log('error',response);
+		 })
+	}
+}
+
 
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
 export function removeWebsite(id) {

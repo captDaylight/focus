@@ -6,6 +6,12 @@ import * as timer from './actions/timer';
 import * as websites from './actions/websites';
 import * as todos from './actions/todos';
 
+function sessionCheck(sessions, duration){
+	console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
+	const { date } =  sessions[sessions.length - 1];
+	return (date + duration) > Date.now();
+}
+
 const init = initState => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
@@ -17,8 +23,22 @@ const init = initState => {
 
 	const storageSync = createStorageSync(store.getState());
 
-	// on init, sync state
-	storageSync(store.getState());
+	const { sessions, duration, sound } = store.getState().timer;
+	if (sessionCheck(sessions, duration)) {
+		// if timer is still going on init, restart countdown
+		const state = store.getState();
+		const { date } = sessions[sessions.length - 1]; 
+		console.log('in here', date, (date + duration) - Date.now());
+		store.dispatch(timer.countDown(date, (date + duration) - Date.now(), sound));
+		storageSync(store.getState());
+	} else {
+		// clear timer info
+		store.dispatch(timer.clearCountdownInterval());
+		chrome.storage.sync.set(store.getState());
+	}
+	
+
+
 	// subscribe to store and sync chrome state
 	store.subscribe(() => {
 		const state = store.getState();

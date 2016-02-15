@@ -44,6 +44,7 @@ const MINUTE = 60000;
 const SECOND = 1000;
 export function countDown(date, duration, sound) {
 	var audio = new Audio(`dist/sound/${sound}.mp3`);
+	console.log('countDown', date, duration, sound);
 	return dispatch => {
 		dispatch(setTimer(date));
 		const dateEnd = date + duration;
