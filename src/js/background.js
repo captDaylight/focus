@@ -24,21 +24,22 @@ const init = initState => {
 	const storageSync = createStorageSync(store.getState());
 
 	const { sessions, duration, sound } = store.getState().timer;
-	if (sessionCheck(sessions, duration)) {
-		// if timer is still going on init, restart countdown
-		const state = store.getState();
-		const { date } = sessions[sessions.length - 1]; 
-		console.log('in here', date, (date + duration) - Date.now());
-		store.dispatch(timer.countDown(date, (date + duration) - Date.now(), sound));
-		storageSync(store.getState());
+	if (sessions.length > 0) {
+		if (sessionCheck(sessions, duration)) {
+			// if timer is still going on init, restart countdown
+			const state = store.getState();
+			const { date } = sessions[sessions.length - 1]; 
+			store.dispatch(timer.startCountDown(date, (date + duration) - Date.now(), sound));
+		} else {
+			// clear timer info
+			store.dispatch(timer.clearCountdownInterval());
+			chrome.storage.sync.set(store.getState());
+		}
 	} else {
-		// clear timer info
-		store.dispatch(timer.clearCountdownInterval());
-		chrome.storage.sync.set(store.getState());
+		storageSync(store.getState());
 	}
+
 	
-
-
 	// subscribe to store and sync chrome state
 	store.subscribe(() => {
 		const state = store.getState();
@@ -80,7 +81,6 @@ const init = initState => {
 		const statePayload = { type: 'STATE_UPDATE', data: state };
 		const tabId = info.tabId;
 		const windowId = info.windowId;
-
 		chrome.tabs.sendMessage(tabId, statePayload);
 	});
 

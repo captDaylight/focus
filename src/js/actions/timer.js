@@ -43,12 +43,17 @@ import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
 export function countDown(date, duration, sound) {
-	var audio = new Audio(`dist/sound/${sound}.mp3`);
-	console.log('countDown', date, duration, sound);
 	return dispatch => {
 		dispatch(setTimer(date));
+		dispatch(startCountDown(date, duration, sound));
+	}
+}
+
+export function startCountDown(date, duration, sound) {
+	var audio = new Audio(`dist/sound/${sound}.mp3`);
+	return dispatch => {
 		const dateEnd = date + duration;
-		const setTime = (interval) => {
+		const setTime = interval => {
 			const fromNow = dateEnd - Date.now();
 			if (fromNow >= 0) {
 				const minutes = doubleDigit(Math.floor(fromNow / MINUTE));

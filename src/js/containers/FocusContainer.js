@@ -69,6 +69,7 @@ export default class FocusContainer extends Component {
 			toggleTodoEdit,
 			editTodo,
 		} = actions;
+		console.log(this.state.timer);
 		const { 
 			date, 
 			minutes, 
@@ -84,7 +85,7 @@ export default class FocusContainer extends Component {
 		return (
 			<section 
 				id="focus-container" 
-				className={classnames({focusing: minutes})}>
+				className={classnames({focusing: !!minutes})}>
 
 				<div id="header">
 					<div id="main-action" className={classnames({blurring: showSites})}>

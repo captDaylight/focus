@@ -7,7 +7,10 @@ import groupBy from 'lodash/collection/groupBy';
 const DAY = 86400000;
 
 function betweenDates(begin, end) {
-	return date => date > begin && date < end;
+	return date => {
+		// console.log(date, begin, end, date - begin, date - end);
+		return date > begin && date < end
+	};
 }
 export default class SessionsList extends Component {
 	constructor(props) {
@@ -29,7 +32,7 @@ export default class SessionsList extends Component {
 			const dateDayRoundDown = new Date(session.date);
 			return dateDayRoundDown.setHours(0,0,0,0);
 		});
-		// console.log('rendering sessions');
+
 		return (
 			<div id="sessions-container">
 				<h5>WORK LOG</h5>
@@ -42,6 +45,7 @@ export default class SessionsList extends Component {
 								// console.log('session');
 								const { date, duration } = session;
 								const dateEnd = date + duration;
+								console.log('duration', duration);
 								const sessionCheck = betweenDates(date, dateEnd);
 								const current = sessionCheck(now);
 
@@ -80,6 +84,7 @@ export default class SessionsList extends Component {
 
 							if (parseInt(day) === midnight) {
 								// today's sessions
+								console.log('sessions', sessionDays[day]);
 								return [...sessions];
 							} else {
 								return [(
@@ -91,9 +96,7 @@ export default class SessionsList extends Component {
 									</li>
 								)];
 							}
-
 						})
-
 					}
 				</ul>
 			</div>

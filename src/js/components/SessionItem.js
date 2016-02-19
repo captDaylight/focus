@@ -30,7 +30,6 @@ export default class SessionsList extends Component {
 							{`${formatAMPM(date, true)}`} 
 							 -  
 							{`${formatAMPM(dateEnd, true)}`} 
-
 						</h5>
 					</div>
 					<div className="session-date">									

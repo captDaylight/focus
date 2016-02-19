@@ -1,16 +1,17 @@
 import qwest from 'qwest';
 
-export const ADD_WEBSITE = 'ADD_WEBSITE';
-export function addWebsite(website, favicon) {
-	return {
-		type: ADD_WEBSITE,
-		website,
-		favicon,
-	}
-}
+// export const ADD_WEBSITE = 'ADD_WEBSITE';
+// export function addWebsite(website, favicon) {
+// 	return {
+// 		type: ADD_WEBSITE,
+// 		website,
+// 		favicon,
+// 	}
+// }
 
-export function postWebsite() {
+export function addWebsite() {
 	return dispatch => {
+		console.log('TRYING TO POST');
 		qwest.post('http://localhost:3000/api/todos', {
 			todo: 'test',
 			editing: false
@@ -22,7 +23,7 @@ export function postWebsite() {
 		 .catch(function(e, xhr, response) {
 			// Process the error 
 			console.log('error',response);
-		 })
+		 });
 	}
 }
 
