@@ -1,34 +1,32 @@
-var gulp       = require('gulp');
-var reactify   = require('reactify');
-var source     = require('vinyl-source-stream');
-var babel      = require('babelify');
-var uglify     = require('gulp-uglify');
-var buffer     = require('vinyl-buffer');
-var transform  = require('vinyl-transform');
-var browserify = require('browserify');
-var envify     = require('envify/custom');
-var livereload = require('gulp-livereload');
-var sourcemaps = require('gulp-sourcemaps');
-var gutil = require('gulp-util');
-var argv = require('yargs').argv; // take values from command line
+// const gulp = require('gulp');
+// const webpack = require('webpack-stream');
+// const named = require('vinyl-named');
+// var path = require('path');
 
-gulp.task('javascript', function () {
-	// set up the browserify instance on a task basis
-	var b = browserify({
-		entries: `./src/js/${argv.jsfile}.js`,
-		debug: true,
-		// defining transforms here will avoid crashing your stream
-		transform: [[babel, { "stage": "2" }],reactify]
-	});
-
-	return b.bundle()
-		.pipe(source(`${argv.jsfile}.js`))
-		.pipe(buffer())
-		.pipe(sourcemaps.init({loadMaps: true}))
-			// Add transformation tasks to the pipeline here.
-			// .pipe(uglify())
-			.on('error', gutil.log)
-		.pipe(sourcemaps.write('./'))
-		.pipe(gulp.dest('./dist/js/'));
-
-});
+// gulp.task('javascript', function() {
+//   return gulp.src([
+//   		'babel-polyfill',
+//   		'src/js/background.js', 
+//   		'src/js/popup.js',
+//   		'src/js/content.js',
+//   		'src/js/newtab.js'
+//   	])
+//     .pipe(named())
+//     .pipe(webpack({
+//       watch: true,
+//       module: {
+//         loaders: [{
+//           loader: 'babel-loader',
+//           test: /\.js$/,
+//           include: [
+//             path.resolve(__dirname, 'src'),
+//           ],
+//           query: {
+//             plugins: ['transform-runtime'],
+//             presets: ['es2015', 'stage-0', 'react'],
+//           }
+//         }]
+//       }      
+//     }))
+//     .pipe(gulp.dest('dist/js/'));
+// });
