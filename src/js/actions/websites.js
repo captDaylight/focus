@@ -12,9 +12,13 @@ import qwest from 'qwest';
 export function addWebsite() {
 	return dispatch => {
 		console.log('TRYING TO POST');
-		qwest.post('http://localhost:3000/api/todos', {
-			todo: 'test',
-			editing: false
+		qwest.post('http://localhost:3000/api/websites', {
+			name: 'facebook.com',
+			favicon: 'facebook.com',
+		 }, {
+		 	headers: {
+		 		'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2Y2U1MzYxMDEzZTlmMWExMDY5MzZiYSIsImVtYWlsIjoicGF1bEBwYXVsLnBhdWwiLCJpYXQiOjE0NTYzNjIzMzgsImV4cCI6MTQ1NjQ0ODczOH0.7gHQb5bFHP0LV_ie_IsInyszYFEZ7KR3qlWqPj9MC9Y'
+		 	}
 		 })
 		 .then(function(xhr, response) {
 			// Make some useful actions 
