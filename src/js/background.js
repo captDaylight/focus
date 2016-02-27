@@ -5,6 +5,7 @@ import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
 import * as websites from './actions/websites';
 import * as todos from './actions/todos';
+import * as user from './actions/user';
 
 function sessionCheck(sessions, duration){
 	console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
@@ -44,6 +45,7 @@ const init = initState => {
 	store.subscribe(() => {
 		const state = store.getState();
 		const statePayload = { type: 'STATE_UPDATE', data: state };
+		console.log('STATE CHANGE');
 		if (state.timer.date) {
 			const {duration, date} = state.timer;
 			const timeLeft = (date + duration) - Date.now();
@@ -87,7 +89,8 @@ const init = initState => {
 	// TODO: switch this to long-lived connection
 	// https://developer.chrome.com/extensions/messaging#connect
 	chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-		const actions = {...timer, ...websites, ...todos};
+		const actions = {...timer, ...websites, ...todos, ...user};
+
 		if (req.type === 'ACTION') {
 			console.log('req action');
 			store.dispatch(actions[req.action](...req.data));

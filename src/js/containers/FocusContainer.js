@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
+import Register from '../components/Register';
 import Login from '../components/Login';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
@@ -20,7 +21,9 @@ const actions = wrapActionsWithMessanger([
 	'toggleTodoEdit',
 	'editTodo',
 	'toggleTodoWorking',
+	'register',
 	'login',
+	'logout',
 ]);
 
 let oldState = {};
@@ -31,6 +34,7 @@ export default class FocusContainer extends Component {
 		oldState = props.state;
 		this.state = props.state;
 	}
+
 	updateState(newState) {
 		const { seconds, minutes } = newState.timer;
 		console.log('seconds', seconds, oldState.timer.seconds);
@@ -47,8 +51,8 @@ export default class FocusContainer extends Component {
 			this.setState(newState);
 			oldState = newState;
 		}
-
 	}
+
 	componentWillMount() {
 		const { updateState } = this;
 		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
@@ -58,16 +62,22 @@ export default class FocusContainer extends Component {
 			return true;
 		});
 	}
+
 	render() {
 		const { user } = this.state;
 		if (user.token === '') {
-			const { login } = actions;
-			return <Login login={login} />
+			const { register, login } = actions;
+			return (
+				<div>
+					<Register register={register} />
+					<Login login={login} />
+				</div>
+			)
 		} else {
 			const { 
 				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
 				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-				editTodo
+				editTodo, logout
 			} = actions;
 			console.log(this.state.timer);
 			const { 
@@ -101,6 +111,7 @@ export default class FocusContainer extends Component {
 							toggleShowSites={toggleShowSites}
 							removeWebsite={removeWebsite} 
 							disabled={minutes ? true : false} />
+						<div onClick={() => {console.log('????');logout()}}>LOGOUT</div>
 					</div>
 
 					<div id="spread" className={classnames({blurring: showSites})}>
