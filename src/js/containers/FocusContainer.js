@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
+import Login from '../components/Login';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
@@ -19,6 +20,7 @@ const actions = wrapActionsWithMessanger([
 	'toggleTodoEdit',
 	'editTodo',
 	'toggleTodoWorking',
+	'login',
 ]);
 
 let oldState = {};
@@ -57,74 +59,67 @@ export default class FocusContainer extends Component {
 		});
 	}
 	render() {
-		const { 
-			countDown,
-			addWebsite,
-			removeWebsite,
-			addTodo,
-			toggleTodoCompletion,
-			toggleTodoWorking,
-			removeTodo,
-			toggleShowSites,
-			toggleTodoEdit,
-			editTodo,
-		} = actions;
-		console.log(this.state.timer);
-		const { 
-			date, 
-			minutes, 
-			seconds, 
-			duration,
-			sessions,
-			ampm,
-			sound,
-		} = this.state.timer;
-		const { websites, showSites } = this.state.websites;
-		const { todos } = this.state.todos;
-		
-		return (
-			<section 
-				id="focus-container" 
-				className={classnames({focusing: !!minutes})}>
+		const { user } = this.state;
+		if (user.token === '') {
+			const { login } = actions;
+			return <Login login={login} />
+		} else {
+			const { 
+				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
+				editTodo
+			} = actions;
+			console.log(this.state.timer);
+			const { 
+				date, minutes, seconds, duration, sessions, ampm, sound,
+			} = this.state.timer;
+			const { websites, showSites } = this.state.websites;
+			const { todos } = this.state.todos;
+			
+			return (
+				<section 
+					id="focus-container" 
+					className={classnames({focusing: !!minutes})}>
 
-				<div id="header">
-					<div id="main-action" className={classnames({blurring: showSites})}>
-						{
-							minutes
-							? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-							: (
-								<button 
-									className="focus-button" 
-									onClick={() => countDown(Date.now(), duration, sound)}>
-									start focusing
-								</button>
-							)
-						}
+					<div id="header">
+						<div id="main-action" className={classnames({blurring: showSites})}>
+							{
+								minutes
+								? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+								: (
+									<button 
+										className="focus-button" 
+										onClick={() => countDown(Date.now(), duration, sound)}>
+										start focusing
+									</button>
+								)
+							}
+						</div>
+						<WebsiteList 
+							websites={websites}
+							showSites={showSites}
+							toggleShowSites={toggleShowSites}
+							removeWebsite={removeWebsite} 
+							disabled={minutes ? true : false} />
 					</div>
-					<WebsiteList 
-						websites={websites}
-						showSites={showSites}
-						toggleShowSites={toggleShowSites}
-						removeWebsite={removeWebsite} 
-						disabled={minutes ? true : false} />
-				</div>
 
-				<div id="spread" className={classnames({blurring: showSites})}>
-					<Todos 
-						addTodo={addTodo} 
-						toggleTodoWorking={toggleTodoWorking}
-						toggleTodoCompletion={toggleTodoCompletion} 
-						removeTodo={removeTodo}
-						todos={todos}
-						toggleTodoEdit={toggleTodoEdit}
-						editTodo={editTodo} />
-					<SessionsList 
-						sessions={sessions} 
-						ampm={ampm} 
-						todos={todos} />
-				</div>
+					<div id="spread" className={classnames({blurring: showSites})}>
+						<Todos 
+							addTodo={addTodo} 
+							toggleTodoWorking={toggleTodoWorking}
+							toggleTodoCompletion={toggleTodoCompletion} 
+							removeTodo={removeTodo}
+							todos={todos}
+							toggleTodoEdit={toggleTodoEdit}
+							editTodo={editTodo} />
+						<SessionsList 
+							sessions={sessions} 
+							ampm={ampm} 
+							todos={todos} />
+					</div>
 
-			</section>
-		);
+				</section>
+			);			
+		}
 	}
 }

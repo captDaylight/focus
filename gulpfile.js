@@ -5,6 +5,7 @@ var requireDir = require('require-dir')('./gulp');
 const webpack = require('webpack-stream');
 const named = require('vinyl-named');
 var path = require('path');
+const plumber = require('gulp-plumber');
 
 gulp.task('javascript', function() {
   return gulp.src([
@@ -14,6 +15,7 @@ gulp.task('javascript', function() {
   		'src/js/content.js',
   		'src/js/newtab.js'
   	])
+    .pipe(plumber())
     .pipe(named())
     .pipe(webpack({
       watch: true,

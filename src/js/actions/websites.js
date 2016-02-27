@@ -65,7 +65,7 @@ export function checkForTab(website, id, favicon) {
 					chrome.tabs.get(id, tab => {
 						const { favIconUrl } = tab;
 						if (favIconUrl) {
-							dispatch(addWebsite(website, favIconUrl));
+							dispatch(postWebsite(website, favIconUrl));
 						} else {
 							times(timeOut, count - 1);
 						}

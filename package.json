@@ -27,6 +27,7 @@
     "gulp-csso": "^1.0.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-livereload": "^3.8.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.0.4",
     "gulp-util": "^3.0.6",
     "imagemin-pngquant": "^4.2.0",
