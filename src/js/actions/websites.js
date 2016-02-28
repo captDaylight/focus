@@ -1,36 +1,37 @@
 import qwest from 'qwest';
 
-// export const ADD_WEBSITE = 'ADD_WEBSITE';
-// export function addWebsite(website, favicon) {
-// 	return {
-// 		type: ADD_WEBSITE,
-// 		website,
-// 		favicon,
-// 	}
-// }
+export const ADD_WEBSITE = 'ADD_WEBSITE';
+export function addWebsite(website, favicon) {
+	return {
+		type: ADD_WEBSITE,
+		website,
+		favicon,
+	}
+}
 
-export function addWebsite(name, favicon) {
+export function postWebsite(name, favicon, token) {
 	return dispatch => {
-		console.log('TRYING TO POST');
+		console.log('TRYING TO POST', name, favicon, token);
 		qwest.post('http://localhost:3000/api/websites', {
 			name,
 			favicon,
 		 }, {
 		 	headers: {
-		 		'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2Y2U1MzYxMDEzZTlmMWExMDY5MzZiYSIsImVtYWlsIjoicGF1bEBwYXVsLnBhdWwiLCJpYXQiOjE0NTYzNjIzMzgsImV4cCI6MTQ1NjQ0ODczOH0.7gHQb5bFHP0LV_ie_IsInyszYFEZ7KR3qlWqPj9MC9Y'
+		 		'x-access-token': token
 		 	}
 		 })
-		 .then(function(xhr, response) {
+		 .then(function(xhr, res) {
 			// Make some useful actions 
-			console.log('success',response);
+			console.log('success',res);
+			const {name, favicon} = res.website;
+			dispatch(addWebsite(name, favicon));
 		 })
-		 .catch(function(e, xhr, response) {
+		 .catch(function(e, xhr, res) {
 			// Process the error 
 			console.log('error',response);
 		 });
 	}
 }
-
 
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
 export function removeWebsite(id) {
@@ -55,17 +56,16 @@ function times(fn, timesLeft) {
 	}
 }
 
-export function checkForTab(website, id, favicon) {
+export function checkForTab(website, id, favicon, token) {
 	return dispatch => {
-		dispatch(addWebsite(website, favicon));	
+		dispatch(postWebsite(website, favicon, token));	
 		if (!favicon) {
-
 			const timeOut = count => {
 				setTimeout(() => {
 					chrome.tabs.get(id, tab => {
 						const { favIconUrl } = tab;
 						if (favIconUrl) {
-							dispatch(postWebsite(website, favIconUrl));
+							dispatch(postWebsite(website, favIconUrl, token));
 						} else {
 							times(timeOut, count - 1);
 						}

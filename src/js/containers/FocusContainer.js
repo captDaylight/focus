@@ -37,17 +37,13 @@ export default class FocusContainer extends Component {
 
 	updateState(newState) {
 		const { seconds, minutes } = newState.timer;
-		console.log('seconds', seconds, oldState.timer.seconds);
 		if (seconds && seconds !== oldState.timer.seconds) {
 			let stateNewTime = oldState;
 			stateNewTime.timer.seconds = seconds;
 			stateNewTime.timer.minutes = minutes;
-			console.log('--- timer ---');
 			this.setState(stateNewTime);
 			oldState = stateNewTime;
-
 		} else {
-			console.log('*** update ***');
 			this.setState(newState);
 			oldState = newState;
 		}
@@ -79,7 +75,6 @@ export default class FocusContainer extends Component {
 				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
 				editTodo, logout
 			} = actions;
-			console.log(this.state.timer);
 			const { 
 				date, minutes, seconds, duration, sessions, ampm, sound,
 			} = this.state.timer;
@@ -111,7 +106,7 @@ export default class FocusContainer extends Component {
 							toggleShowSites={toggleShowSites}
 							removeWebsite={removeWebsite} 
 							disabled={minutes ? true : false} />
-						<div onClick={() => {console.log('????');logout()}}>LOGOUT</div>
+						<div onClick={() => {logout()}}>LOGOUT</div>
 					</div>
 
 					<div id="spread" className={classnames({blurring: showSites})}>
