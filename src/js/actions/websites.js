@@ -9,11 +9,11 @@ export function addWebsite(website, favicon) {
 	}
 }
 
-export function postWebsite(name, favicon, token) {
+export function postWebsite(url, favicon, token) {
 	return dispatch => {
 		console.log('TRYING TO POST', name, favicon, token);
 		qwest.post('http://localhost:3000/api/websites', {
-			name,
+			url,
 			favicon,
 		 }, {
 		 	headers: {
@@ -22,9 +22,8 @@ export function postWebsite(name, favicon, token) {
 		 })
 		 .then(function(xhr, res) {
 			// Make some useful actions 
-			console.log('success',res);
-			const {name, favicon} = res.website;
-			dispatch(addWebsite(name, favicon));
+			const {url, favicon} = res.website;
+			dispatch(addWebsite(url, favicon));
 		 })
 		 .catch(function(e, xhr, res) {
 			// Process the error 

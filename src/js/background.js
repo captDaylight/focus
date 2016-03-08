@@ -18,6 +18,19 @@ const init = initState => {
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
 
+	// create alarm
+	chrome.alarms.create('DAILY_CLEANUP', {
+		when: Date.now() + 1000,
+		periodInMinutes: 1,
+	}); 
+
+	chrome.alarms.onAlarm.addListener(alarm => {
+		if (alarm.name === 'DAILY_CLEANUP') {
+			console.log('ALARM', alarm);	
+		}
+		
+	});
+
 	const store = initState 
 		? createAndComposeStore(rootReducer, initState)
 		: createAndComposeStore(rootReducer);
