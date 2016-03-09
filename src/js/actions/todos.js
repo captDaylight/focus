@@ -46,3 +46,11 @@ export function editTodo(id, todo) {
 		todo,
 	}
 }
+
+export const UPDATE_TODOS = 'UPDATE_TODOS';
+export function updateTodos(todos) {
+	return {
+		type: UPDATE_TODOS,
+		todos,
+	}
+}

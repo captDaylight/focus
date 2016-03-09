@@ -39,6 +39,14 @@ export function clearCountdownInterval() {
 	}
 }
 
+export const UPDATE_SESSIONS = 'UPDATE_SESSIONS';
+export function updateSessions(sessions) {
+	return {
+		type: UPDATE_SESSIONS,
+		sessions
+	}
+}
+
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;

@@ -8,6 +8,7 @@ import {
 	TOGGLE_TODO_COMPLETION,
 	TOGGLE_TODO_EDIT,
 	EDIT_TODO,
+	UPDATE_TODOS,
 } from '../actions/todos';
 
 const initialState = {
@@ -79,7 +80,11 @@ export default function todos(state=initialState, action) {
 					key: 'editing', 
 					fn: value => !value,
 				}])
-			}
+			};
+
+		case UPDATE_TODOS:
+			return {...state, todos: action.todos};
+
 		default:
 			return state;
 	}

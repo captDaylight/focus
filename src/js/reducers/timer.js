@@ -4,6 +4,7 @@ import {
 	SET_TIME_LEFT,
 	SET_COUNTDOWN_INTERVAL,
 	CLEAR_COUNTDOWN_INTERVAL,
+	UPDATE_SESSIONS,
 } from '../actions/timer';
 
 // timer data gets cleared
@@ -49,6 +50,9 @@ export default function timer(state=initialState, action) {
 
 		case CLEAR_COUNTDOWN_INTERVAL:
 			return {...state, ...timerInitial};
+
+		case UPDATE_SESSIONS:
+			return {...state, sessions: action.sessions};
 
 		default:
 			return state;

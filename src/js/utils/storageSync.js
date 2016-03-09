@@ -5,11 +5,11 @@ export default function storageSync(initState) {
 		// have to make sure not to overpost, ie, each second with the timer
 		if (state.timer !== prevState.timer) {
 			if (state.timer.date !== prevState.timer.date) {
-				console.log('Should Storage 1', state);
+				// console.log('Should Storage 1', state);
 				chrome.storage.sync.set(state);
 			}
 		} else {
-			console.log('Should Storage 2', state);
+			// console.log('Should Storage 2', state);
 			chrome.storage.sync.set(state);
 		}
 

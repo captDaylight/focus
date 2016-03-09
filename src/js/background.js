@@ -6,6 +6,7 @@ import * as timer from './actions/timer';
 import * as websites from './actions/websites';
 import * as todos from './actions/todos';
 import * as user from './actions/user';
+import cleanUp from './utils/cleanUp';
 
 function sessionCheck(sessions, duration){
 	console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
@@ -17,19 +18,6 @@ const init = initState => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
-
-	// create alarm
-	chrome.alarms.create('DAILY_CLEANUP', {
-		when: Date.now() + 1000,
-		periodInMinutes: 1,
-	}); 
-
-	chrome.alarms.onAlarm.addListener(alarm => {
-		if (alarm.name === 'DAILY_CLEANUP') {
-			console.log('ALARM', alarm);	
-		}
-		
-	});
 
 	const store = initState 
 		? createAndComposeStore(rootReducer, initState)
@@ -112,6 +100,26 @@ const init = initState => {
 		}
 		return true;
 	});
+
+	// CLEAN UP
+	// create alarm
+	const midnight = new Date();
+	midnight.setHours(24, 0, 0, 0);
+	chrome.alarms.create('DAILY_CLEANUP', {
+		when: midnight.getTime(),
+		periodInMinutes: 1440,
+	});
+
+	// clean store on init
+	cleanUp(store);
+
+	chrome.alarms.onAlarm.addListener(alarm => {
+		if (alarm.name === 'DAILY_CLEANUP') {
+			// clean store everyday at midnight
+			cleanUp(store);
+		}
+	});
+
 };
 // console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
