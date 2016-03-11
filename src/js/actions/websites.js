@@ -76,3 +76,30 @@ export function checkForTab(website, id, favicon, token) {
 		}
 	}
 }
+
+// ADD most common websites for users on to look through and block, mostly on init
+export const ADD_COMMON_WEBSITES = 'ADD_COMMON_WEBSITES';
+export function addCommonWebsites(websites) {
+	return {
+		type: 'ADD_COMMON_WEBSITES',
+		websites
+	}
+}
+
+export function FetchCommonWebsites() {
+	return dispatch => {
+		qwest.get('http://localhost:3000/api/websites', null, {
+		 	headers: {
+		 		'x-access-token': token
+		 	}
+		 })
+		 .then(function(xhr, res) {
+			// Make some useful actions 
+			console.log('fetch common websites');
+		 })
+		 .catch(function(e, xhr, res) {
+			// Process the error 
+			console.log('error',response);
+		 });
+	}
+}

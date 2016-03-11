@@ -7,6 +7,7 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
 import SessionsList from '../components/SessionsList';
+import AddWebsites from '../components/AddWebsites';
 import Todos from '../components/Todos';
 
 const actions = wrapActionsWithMessanger([
@@ -60,7 +61,8 @@ export default class FocusContainer extends Component {
 	}
 
 	render() {
-		const { user } = this.state;
+		const { user, websites } = this.state;
+		console.log('state',this.state);
 		if (user.token === '') {
 			const { register, login } = actions;
 			return (
@@ -69,63 +71,73 @@ export default class FocusContainer extends Component {
 					<Login login={login} />
 				</div>
 			)
-		} else {
-			const { 
-				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
-				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-				editTodo, logout
-			} = actions;
-			const { 
-				date, minutes, seconds, duration, sessions, ampm, sound,
-			} = this.state.timer;
-			const { websites, showSites } = this.state.websites;
-			const { todos } = this.state.todos;
-			
-			return (
-				<section 
-					id="focus-container" 
-					className={classnames({focusing: !!minutes})}>
+		} 
 
-					<div id="header">
-						<div id="main-action" className={classnames({blurring: showSites})}>
-							{
-								minutes
-								? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-								: (
-									<button 
-										className="focus-button" 
-										onClick={() => countDown(Date.now(), duration, sound)}>
-										start focusing
-									</button>
-								)
-							}
-						</div>
-						<WebsiteList 
-							websites={websites}
-							showSites={showSites}
-							toggleShowSites={toggleShowSites}
-							removeWebsite={removeWebsite} 
-							disabled={minutes ? true : false} />
-						<div onClick={() => {logout()}}>LOGOUT</div>
-					</div>
-
-					<div id="spread" className={classnames({blurring: showSites})}>
-						<Todos 
-							addTodo={addTodo} 
-							toggleTodoWorking={toggleTodoWorking}
-							toggleTodoCompletion={toggleTodoCompletion} 
-							removeTodo={removeTodo}
-							todos={todos}
-							toggleTodoEdit={toggleTodoEdit}
-							editTodo={editTodo} />
-						<SessionsList 
-							sessions={sessions} 
-							ampm={ampm} 
-							todos={todos} />
-					</div>
-
-				</section>
-			);			
+		else {
+			return <AddWebsites />
 		}
+
+
+
+		//  else if(websites.websites.length === 0) {
+
+		// } else {
+		// 	const { 
+		// 		countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+		// 		toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
+		// 		editTodo, logout
+		// 	} = actions;
+		// 	const { 
+		// 		date, minutes, seconds, duration, sessions, ampm, sound,
+		// 	} = this.state.timer;
+		// 	const { websites, showSites } = this.state.websites;
+		// 	const { todos } = this.state.todos;
+			
+		// 	return (
+		// 		<section 
+		// 			id="focus-container" 
+		// 			className={classnames({focusing: !!minutes})}>
+
+		// 			<div id="header">
+		// 				<div id="main-action" className={classnames({blurring: showSites})}>
+		// 					{
+		// 						minutes
+		// 						? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+		// 						: (
+		// 							<button 
+		// 								className="focus-button" 
+		// 								onClick={() => countDown(Date.now(), duration, sound)}>
+		// 								start focusing
+		// 							</button>
+		// 						)
+		// 					}
+		// 				</div>
+		// 				<WebsiteList 
+		// 					websites={websites}
+		// 					showSites={showSites}
+		// 					toggleShowSites={toggleShowSites}
+		// 					removeWebsite={removeWebsite} 
+		// 					disabled={minutes ? true : false} />
+		// 				<div onClick={() => {logout()}}>LOGOUT</div>
+		// 			</div>
+
+		// 			<div id="spread" className={classnames({blurring: showSites})}>
+		// 				<Todos 
+		// 					addTodo={addTodo} 
+		// 					toggleTodoWorking={toggleTodoWorking}
+		// 					toggleTodoCompletion={toggleTodoCompletion} 
+		// 					removeTodo={removeTodo}
+		// 					todos={todos}
+		// 					toggleTodoEdit={toggleTodoEdit}
+		// 					editTodo={editTodo} />
+		// 				<SessionsList 
+		// 					sessions={sessions} 
+		// 					ampm={ampm} 
+		// 					todos={todos} />
+		// 			</div>
+
+		// 		</section>
+		// 	);			
+		// }
 	}
 }

@@ -10,6 +10,7 @@ import { websitesData } from '../websitesData';
 const initialState = {
 	showSites: false,
 	websites: websitesData,
+	commonWebsites: []
 };
 
 function indexPop(arr, idx) {
