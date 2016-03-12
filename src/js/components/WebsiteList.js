@@ -31,7 +31,7 @@ export default class WebsiteList extends Component {
 								<li className="website-item" key={idx}>
 									<div className="left">
 										<img src={website.favicon} />
-										<span>{website.name}</span>
+										<span>{website.url}</span>
 									</div>
 
 									<div 

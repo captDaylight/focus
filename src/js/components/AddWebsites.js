@@ -7,7 +7,11 @@ export default class Login extends Component {
 		props.fetchWebsites();
 	}
 	render() {
-		const {websites:{commonWebsites, websites}, postWebsite} = this.props;
+		const {
+			websites: {commonWebsites, websites}, 
+			postWebsite,
+			doneAddingCommonSites,
+		} = this.props;
 
 		return (
 			<div>
@@ -38,6 +42,7 @@ export default class Login extends Component {
 						})
 					}
 				</ul>
+				<button onClick={() => {doneAddingCommonSites()}}>next</button>
 			</div>
 		);
 	}

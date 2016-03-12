@@ -7,6 +7,7 @@ import {
 	TOGGLE_FETCH,
 	ADD_WEBSITES,
 	ADD_COMMON_WEBSITES,
+	DONE_ADDING_COMMON_SITES,
 } from '../actions/websites';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
 	websites: [],
 	commonWebsites: [],
 	fetching: false,
+	doneCommonSites: false,
 };
 
 function indexPop(arr, idx) {
@@ -27,7 +29,7 @@ export default function websites(state=initialState, action) {
 		case ADD_WEBSITE:
 			const siteIdx = state.websites.findIndex(item => item.url === action.website.url);
 			const {website} = action;
-			
+
 			if (siteIdx >= 0) {
 				if (state.websites[siteIdx].favicon) {
 					return state;	
@@ -53,8 +55,11 @@ export default function websites(state=initialState, action) {
 			return {...state, websites: action.websites};
 
 		case ADD_COMMON_WEBSITES:
-			console.log('ADDING COMMON WEBSITES');
 			return {...state, commonWebsites: action.websites};
+
+		case DONE_ADDING_COMMON_SITES:
+			console.log('adding to state', action.bool);
+			return {...state, doneCommonSites: action.bool};
 
 		default:
 			return state;
