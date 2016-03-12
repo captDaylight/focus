@@ -91,9 +91,8 @@ const init = initState => {
 	// https://developer.chrome.com/extensions/messaging#connect
 	chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 		const actions = {...timer, ...websites, ...todos, ...user};
-		console.log('STATE',store.getState());
 		const {token} = store.getState().user;
-		console.log(token);
+
 		if (req.type === 'ACTION') {
 			console.log('req action');
 			store.dispatch(actions[req.action](...req.data, token));

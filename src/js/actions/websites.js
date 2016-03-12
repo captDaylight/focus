@@ -1,42 +1,53 @@
 import qwest from 'qwest';
 
+export const TOGGLE_FETCH = 'TOGGLE_FETCH';
+export function toggleFetch(bool=false) {
+	return { type: 'TOGGLE_FETCH', bool	}
+}
+
 export const ADD_WEBSITE = 'ADD_WEBSITE';
-export function addWebsite(website, favicon) {
+export function addWebsite(website) {
+	console.log('adding website!!', website);
 	return {
 		type: ADD_WEBSITE,
-		website,
-		favicon,
+		website
 	}
 }
 
 export function postWebsite(url, favicon, token) {
 	return dispatch => {
-		console.log('TRYING TO POST', name, favicon, token);
 		qwest.post('http://localhost:3000/api/websites', {
-			url,
-			favicon,
-		 }, {
-		 	headers: {
-		 		'x-access-token': token
-		 	}
-		 })
-		 .then(function(xhr, res) {
-			// Make some useful actions 
-			const {url, favicon} = res.website;
-			dispatch(addWebsite(url, favicon));
-		 })
-		 .catch(function(e, xhr, res) {
-			// Process the error 
-			console.log('error',response);
-		 });
+					url,
+					favicon,
+				}, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('success post website', res);
+				dispatch(addWebsite(res.data.website));
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
 
+// remove the website from the client side
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
 export function removeWebsite(id) {
 	return {
 		type: REMOVE_WEBSITE,
 		id
+	}
+}
+// delete from user on the server
+export function deleteWebsite() {
+	return dispatch => {
+
 	}
 }
 
@@ -71,9 +82,37 @@ export function checkForTab(website, id, favicon, token) {
 					});
 				}, 500);
 			};
-
 			times(timeOut, 10);
 		}
+	}
+}
+
+export const ADD_WEBSITES = 'ADD_WEBSITES';
+export function addWebsites(websites) {
+	return {
+		type: 'ADD_WEBSITES',
+		websites
+	}
+}
+
+export function fetchWebsites(token) {
+	return dispatch => {
+		qwest.get('http://localhost:3000/api/websites', null, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('fetch common websites', res);
+				if (res.status) {
+					dispatch(addWebsites(res.data.websites));
+				}
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
 
@@ -86,20 +125,23 @@ export function addCommonWebsites(websites) {
 	}
 }
 
-export function FetchCommonWebsites() {
+export function fetchCommonWebsites(token) {
 	return dispatch => {
-		qwest.get('http://localhost:3000/api/websites', null, {
-		 	headers: {
-		 		'x-access-token': token
-		 	}
-		 })
-		 .then(function(xhr, res) {
-			// Make some useful actions 
-			console.log('fetch common websites');
-		 })
-		 .catch(function(e, xhr, res) {
-			// Process the error 
-			console.log('error',response);
-		 });
+		qwest.get('http://localhost:3000/api/websites/common', null, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				if (res.status) {
+					dispatch(addCommonWebsites(res.data.websites));
+				}
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
+

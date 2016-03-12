@@ -11,20 +11,16 @@ import AddWebsites from '../components/AddWebsites';
 import Todos from '../components/Todos';
 
 const actions = wrapActionsWithMessanger([
-	'clearTimer',
-	'countDown',
-	'addWebsite',
-	'toggleShowSites',
-	'removeWebsite',
-	'addTodo',
-	'toggleTodoCompletion',
-	'removeTodo',
-	'toggleTodoEdit',
-	'editTodo',
+	//timer
+	'clearTimer','countDown',
+	// websites
+	'addWebsite','toggleShowSites', 'removeWebsite', 'fetchWebsites',
+	'fetchCommonWebsites', 'postWebsite',
+	// todo
+	'addTodo', 'toggleTodoCompletion', 'removeTodo', 'toggleTodoEdit', 'editTodo',
 	'toggleTodoWorking',
-	'register',
-	'login',
-	'logout',
+	// user
+	'register', 'login', 'logout',
 ]);
 
 let oldState = {};
@@ -74,14 +70,20 @@ export default class FocusContainer extends Component {
 		} 
 
 		else {
-			return <AddWebsites />
+			return (
+				<AddWebsites 
+					fetchCommonWebsites={actions.fetchCommonWebsites}
+					fetchWebsites={actions.fetchWebsites} 
+					postWebsite={actions.postWebsite}
+					websites={websites} />
+			)
 		}
 
 
 
 		//  else if(websites.websites.length === 0) {
 
-		// } else {
+		//  else {
 		// 	const { 
 		// 		countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
 		// 		toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,

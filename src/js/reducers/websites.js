@@ -4,13 +4,16 @@ import {
 	ADD_WEBSITE,
 	REMOVE_WEBSITE,
 	TOGGLE_SHOW_SITES,
+	TOGGLE_FETCH,
+	ADD_WEBSITES,
+	ADD_COMMON_WEBSITES,
 } from '../actions/websites';
-import { websitesData } from '../websitesData';
 
 const initialState = {
 	showSites: false,
-	websites: websitesData,
-	commonWebsites: []
+	websites: [],
+	commonWebsites: [],
+	fetching: false,
 };
 
 function indexPop(arr, idx) {
@@ -22,12 +25,9 @@ function indexPop(arr, idx) {
 export default function websites(state=initialState, action) {
 	switch(action.type) {
 		case ADD_WEBSITE:
-			const siteIdx = state.websites.findIndex(item => item.name === action.website);
-			const website = {
-				name: action.website,
-				favicon: action.favicon,
-				id: shortid.generate(),
-			};
+			const siteIdx = state.websites.findIndex(item => item.url === action.website.url);
+			const {website} = action;
+			
 			if (siteIdx >= 0) {
 				if (state.websites[siteIdx].favicon) {
 					return state;	
@@ -39,12 +39,22 @@ export default function websites(state=initialState, action) {
 				return {...state, websites: [...state.websites, website]};
 			}
 
+		case TOGGLE_FETCH:
+			return {...state, fetching: action.bool}
+
 		case REMOVE_WEBSITE:
 			const id = action.id;
 			return {...state, websites: state.websites.filter(item => item.id !== id)};
 
 		case TOGGLE_SHOW_SITES:
 			return {...state, showSites: !state.showSites};
+
+		case ADD_WEBSITES:
+			return {...state, websites: action.websites};
+
+		case ADD_COMMON_WEBSITES:
+			console.log('ADDING COMMON WEBSITES');
+			return {...state, commonWebsites: action.websites};
 
 		default:
 			return state;
