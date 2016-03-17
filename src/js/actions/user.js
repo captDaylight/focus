@@ -25,7 +25,9 @@ export function register(email, password) {
 		})
 		.then((xhr, res) => {
 			console.log('succesful register', xhr, res);
-			dispatch(addUser(res.token, res.user));
+			if (res.status) {
+				dispatch(addUser(res.token, res.user));	
+			}
 		})
 		.catch((err, xhr, res) => {
 			console.log('whoops no register', e, res);
@@ -41,7 +43,9 @@ export function login(email, password) {
 		})
 		.then((xhr, res) => {
 			console.log('succesful auth', xhr, res);
-			dispatch(addUser(res.token, res.user));
+			if (res.status) {
+				dispatch(addUser(res.token, res.user));	
+			}
 		})
 		.catch((err, xhr, res) => {
 			console.log('whoops no auth', e, res);

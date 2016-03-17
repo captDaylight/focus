@@ -21,7 +21,7 @@ function processSiteInfo(siteURL, id, faviconURL) {
 }
 
 function urlIsInList(url, list) {
-	return list.filter(site => url.indexOf(site.name) >= 0).length > 0;
+	return list.filter(site => url.indexOf(site.url) >= 0).length > 0;
 }
 
 export default class FocusContainer extends Component {

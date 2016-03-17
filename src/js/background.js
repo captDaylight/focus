@@ -92,7 +92,7 @@ const init = initState => {
 	chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 		const actions = {...timer, ...websites, ...todos, ...user};
 		const {token} = store.getState().user;
-
+		console.log('!!!!', store.getState());
 		if (req.type === 'ACTION') {
 			console.log('req action');
 			store.dispatch(actions[req.action](...req.data, token));
