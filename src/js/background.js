@@ -30,8 +30,8 @@ const init = initState => {
 		if (sessionCheck(sessions, duration)) {
 			// if timer is still going on init, restart countdown
 			const state = store.getState();
-			const { date } = sessions[sessions.length - 1]; 
-			store.dispatch(timer.startCountDown(date, (date + duration) - Date.now(), sound));
+			const { start, end } = sessions[sessions.length - 1]; 
+			store.dispatch(timer.startCountDown(start, end - Date.now(), sound));
 		} else {
 			// clear timer info
 			store.dispatch(timer.clearCountdownInterval());
@@ -92,9 +92,9 @@ const init = initState => {
 	chrome.extension.onMessage.addListener((req, sender, sendRes) => {
 		const actions = {...timer, ...websites, ...todos, ...user};
 		const {token} = store.getState().user;
-		console.log('!!!!', store.getState());
+		// console.log('!!!!', store.getState());
 		if (req.type === 'ACTION') {
-			console.log('req action');
+			// console.log('req action');
 			store.dispatch(actions[req.action](...req.data, token));
 		}
 		return true;

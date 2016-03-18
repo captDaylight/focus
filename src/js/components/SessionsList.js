@@ -29,7 +29,7 @@ export default class SessionsList extends Component {
 		const midnight = date.setHours(0,0,0,0);
 
 		const sessionDays = groupBy(sessions, session => {
-			const dateDayRoundDown = new Date(session.date);
+			const dateDayRoundDown = new Date(session.start);
 			return dateDayRoundDown.setHours(0,0,0,0);
 		});
 
@@ -43,17 +43,16 @@ export default class SessionsList extends Component {
 							// console.log('----day', (new Date(parseInt(day))).toDateString());
 							const sessions = sessionDays[day].reverse().map((session, idx) => {
 								// console.log('session');
-								const { date, duration } = session;
-								const dateEnd = date + duration;
-								console.log('duration', duration);
-								const sessionCheck = betweenDates(date, dateEnd);
+								const { start, end } = session;
+								
+								const sessionCheck = betweenDates(start, end);
 								const current = sessionCheck(now);
 
 								const working = filter(startedTodos, todo => {
 									const { workingOn, completed } = todo;
 									return (
-										workingOn < dateEnd 
-										&& (completed ? completed > dateEnd: true ));
+										workingOn < end 
+										&& (completed ? completed > end: true ));
 								});
 								const finished = filter(startedTodos, todo => {
 									const { completed } = todo;
@@ -64,8 +63,8 @@ export default class SessionsList extends Component {
 									<SessionItem 
 										key={idx}
 										current={current}
-										date={date}
-										dateEnd={dateEnd}
+										date={start}
+										dateEnd={end}
 										working={working}
 										finished={finished}
 									/>

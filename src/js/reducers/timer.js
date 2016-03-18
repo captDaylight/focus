@@ -31,14 +31,10 @@ const initialState = {...timerInitial, ...metaInitial};
 export default function timer(state=initialState, action) {
 	switch(action.type) {
 		case SET_TIMER:
-			const session = {
-				date: action.date,
-				duration: state.duration,
-			};
 			return {
 				...state, 
-				date: action.date, 
-				sessions: [...state.sessions, session]
+				date: action.session.start, 
+				sessions: [...state.sessions, action.session]
 			};
 
 		case SET_TIME_LEFT:

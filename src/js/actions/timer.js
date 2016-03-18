@@ -1,10 +1,11 @@
 import formatAMPM from '../utils/formatAMPM';
+// import pick from 'lodash/collection/pick';
 
 export const SET_TIMER = 'SET_TIMER';
-export function setTimer(date) {
+export function setTimer(session) {
 	return {
 		type: SET_TIMER,
-		date
+		session
 	}
 }
 
@@ -52,8 +53,15 @@ const MINUTE = 60000;
 const SECOND = 1000;
 export function countDown(date, duration, sound) {
 	return dispatch => {
-		dispatch(setTimer(date));
+		const session = {
+			start: date,
+			duration: duration,
+			end: date + duration,
+			persisted: false,
+		};
+		dispatch(setTimer(session));
 		dispatch(startCountDown(date, duration, sound));
+		// dispatch(persistSession())
 	}
 }
 
