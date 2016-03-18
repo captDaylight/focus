@@ -38,19 +38,34 @@ export function postWebsite(url, favicon, token) {
 }
 
 // remove the website from the client side
-export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
-export function removeWebsite(id) {
+export const CLEAR_WEBSITE = 'CLEAR_WEBSITE';
+export function clearWebsite(id) {
 	return {
-		type: REMOVE_WEBSITE,
+		type: CLEAR_WEBSITE,
 		id
 	}
 }
-// delete from user on the server
-export function deleteWebsite() {
-	return dispatch => {
 
+export function removeWebsite(id, token) {
+	return dispatch => {
+		qwest.delete(`http://localhost:3000/api/websites/${id}`, null, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				if (res.status) {
+					console.log('success remove website', res);
+					dispatch(clearWebsite(id));	
+				}
+				
+			})
+			.catch(function(e, xhr, res) {
+				console.log('error',response);
+			});
 	}
 }
+
 
 export const TOGGLE_SHOW_SITES = 'TOGGLE_SHOW_SITES';
 export function toggleShowSites() {

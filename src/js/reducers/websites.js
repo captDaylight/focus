@@ -2,7 +2,7 @@ import shortid from 'shortid';
 import find from 'lodash/collection/find';
 import { 
 	ADD_WEBSITE,
-	REMOVE_WEBSITE,
+	CLEAR_WEBSITE,
 	TOGGLE_SHOW_SITES,
 	TOGGLE_FETCH,
 	ADD_WEBSITES,
@@ -44,9 +44,9 @@ export default function websites(state=initialState, action) {
 		case TOGGLE_FETCH:
 			return {...state, fetching: action.bool}
 
-		case REMOVE_WEBSITE:
+		case CLEAR_WEBSITE:
 			const id = action.id;
-			return {...state, websites: state.websites.filter(item => item.id !== id)};
+			return {...state, websites: state.websites.filter(item => item._id !== id)};
 
 		case TOGGLE_SHOW_SITES:
 			return {...state, showSites: !state.showSites};
