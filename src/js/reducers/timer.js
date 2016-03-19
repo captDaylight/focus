@@ -1,3 +1,5 @@
+import update from 'react/lib/update';
+import findIndex from 'lodash/array/findIndex';
 import { 
 	SET_TIMER,
 	CLEAR_TIMER,
@@ -5,6 +7,7 @@ import {
 	SET_COUNTDOWN_INTERVAL,
 	CLEAR_COUNTDOWN_INTERVAL,
 	UPDATE_SESSIONS,
+	UPDATE_SESSION,
 } from '../actions/timer';
 
 // timer data gets cleared
@@ -25,7 +28,28 @@ const metaInitial = {
 	sound: 'chime'
 }
 
-// combine timerInitial and metaInitial to form initialstate
+function updateSession(state, action) {
+	const sIdx = findIndex(state.sessions, s => {
+		console.log(s, action.session);
+		return s.start.toString() === action.session.start
+	});
+	console.log('INDEX',sIdx);
+	console.log(update(state, {
+		sessions: {
+			[sIdx]: {
+				$merge: action.session
+			}
+		}
+	}));
+	return update(state, {
+		sessions: {
+			[sIdx]: {
+				$merge: action.session
+			}
+		}
+	});
+}
+
 const initialState = {...timerInitial, ...metaInitial};
 
 export default function timer(state=initialState, action) {
@@ -49,6 +73,9 @@ export default function timer(state=initialState, action) {
 
 		case UPDATE_SESSIONS:
 			return {...state, sessions: action.sessions};
+
+		case UPDATE_SESSION:
+			return updateSession(state, action);
 
 		default:
 			return state;

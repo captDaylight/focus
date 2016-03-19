@@ -27,7 +27,6 @@ export default class WebsiteList extends Component {
 					<ul id="website-list">
 					{
 						websites.map((website, idx) => {
-							console.log('WEBSITE',website);
 							return (
 								<li className="website-item" key={idx}>
 									<div className="left">

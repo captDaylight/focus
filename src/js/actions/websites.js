@@ -16,7 +16,6 @@ export function addWebsite(website) {
 
 export function postWebsite(url, favicon, token) {
 	return dispatch => {
-		console.log('token:', token, url, favicon);
 		qwest.post('http://localhost:3000/api/websites/', {
 					url,
 					favicon,

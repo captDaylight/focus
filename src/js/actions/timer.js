@@ -1,5 +1,6 @@
+import qwest from 'qwest';
+import pick from 'lodash/object/pick';
 import formatAMPM from '../utils/formatAMPM';
-// import pick from 'lodash/collection/pick';
 
 export const SET_TIMER = 'SET_TIMER';
 export function setTimer(session) {
@@ -51,17 +52,16 @@ export function updateSessions(sessions) {
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-export function countDown(date, duration, sound) {
+export function countDown(date, duration, sound, token) {
 	return dispatch => {
 		const session = {
 			start: date,
 			duration: duration,
 			end: date + duration,
-			persisted: false,
 		};
 		dispatch(setTimer(session));
 		dispatch(startCountDown(date, duration, sound));
-		// dispatch(persistSession())
+		dispatch(persistSession(pick(session, ['start', 'end']), token))
 	}
 }
 
@@ -101,5 +101,36 @@ export function startCountDown(date, duration, sound) {
 		}, (dateEnd - Date.now()) % SECOND ); 
 
 		setTime(); // initial time before timeout
+	}
+}
+
+export function persistSession(session, token) {
+	return dispatch => {
+		console.log('persist session', session, token);
+		qwest.post('http://localhost:3000/api/sessions/', session, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				if (res.status) {
+					console.log('success', res.data);
+					dispatch(updateSession(res.data));	
+				}
+				
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
+	}
+}
+
+export const UPDATE_SESSION = 'UPDATE_SESSION';
+export function updateSession(session) {
+	return {
+		type: UPDATE_SESSION,
+		session
 	}
 }

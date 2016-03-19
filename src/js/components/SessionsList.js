@@ -43,7 +43,7 @@ export default class SessionsList extends Component {
 							// console.log('----day', (new Date(parseInt(day))).toDateString());
 							const sessions = sessionDays[day].reverse().map((session, idx) => {
 								// console.log('session');
-								const { start, end } = session;
+								const { start, end, _id } = session;
 								
 								const sessionCheck = betweenDates(start, end);
 								const current = sessionCheck(now);
@@ -67,6 +67,7 @@ export default class SessionsList extends Component {
 										dateEnd={end}
 										working={working}
 										finished={finished}
+										id={_id}
 									/>
 								)
 							});

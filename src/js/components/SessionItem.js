@@ -20,6 +20,7 @@ export default class SessionsList extends Component {
 			dateEnd,
 			working,
 			finished,
+			id,
 		} = this.props;
 
 		return (
@@ -29,7 +30,7 @@ export default class SessionsList extends Component {
 						<h5>
 							{`${formatAMPM(date, true)}`} 
 							 -  
-							{`${formatAMPM(dateEnd, true)}`} 
+							{`${formatAMPM(dateEnd, true)}`} : {id || 'nope'}
 						</h5>
 					</div>
 					<div className="session-date">									
