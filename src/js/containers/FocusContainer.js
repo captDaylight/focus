@@ -18,7 +18,6 @@ const actions = wrapActionsWithMessanger([
 	'fetchCommonWebsites', 'postWebsite', 'doneAddingCommonSites',
 	// todo
 	'addTodo', 'toggleTodoCompletion', 'removeTodo', 'toggleTodoEdit', 'editTodo',
-	'toggleTodoWorking',
 	// user
 	'register', 'login', 'logout',
 ]);
@@ -78,8 +77,7 @@ export default class FocusContainer extends Component {
 		} else {
 			const { 
 				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
-				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-				editTodo, logout
+				removeTodo, toggleShowSites, toggleTodoEdit, editTodo, logout
 			} = actions;
 			const { 
 				date, minutes, seconds, duration, sessions, ampm, sound,
@@ -118,7 +116,6 @@ export default class FocusContainer extends Component {
 					<div id="spread" className={classnames({blurring: showSites})}>
 						<Todos 
 							addTodo={addTodo} 
-							toggleTodoWorking={toggleTodoWorking}
 							toggleTodoCompletion={toggleTodoCompletion} 
 							removeTodo={removeTodo}
 							todos={todos}

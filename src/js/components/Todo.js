@@ -14,7 +14,6 @@ export default class SessionsList extends Component {
 		const { 
 			todo,
 			toggleTodoCompletion, 
-			toggleTodoWorking, 
 			removeTodo, 
 			toggleTodoEdit 
 		} = this.props;
@@ -22,7 +21,6 @@ export default class SessionsList extends Component {
 		return (
 			<li
 				className={classnames('todo', {
-					working: todo.workingOn && !todo.completed,
 					completed: todo.completed,
 				})} >
 				{
@@ -36,10 +34,8 @@ export default class SessionsList extends Component {
 						<div 
 							className="todo-content"
 							onClick={() => {
-								if (todo.workingOn) {
-									toggleTodoCompletion(todo.id);
-								} else {
-									toggleTodoWorking(todo.id);
+								if (!todo.completed) {
+									toggleTodoCompletion(todo.id);	
 								}
 							}} >
 							{todo.todo}
@@ -56,28 +52,6 @@ export default class SessionsList extends Component {
 									</button>
 								) : null
 							}
-							{
-								!todo.workingOn && !todo.completed 
-								? (
-									<button 
-										className="button-small" 
-										onClick={() => toggleTodoWorking(todo.id)}
-									>
-										Start
-									</button>
-								) : null
-							}
-							{
-								todo.workingOn && !todo.completed 
-								? (
-									<button 
-										className="button-small" 
-										onClick={() => toggleTodoWorking(todo.id)}
-									>
-										Cancel
-									</button>
-								)	: null
-							}
 							<div 
 								className="todo-icon icon-pencil" 
 								onClick={() => toggleTodoEdit(todo.id)}
@@ -91,8 +65,6 @@ export default class SessionsList extends Component {
 					</div>
 					)
 				}
-
-				
 			</li>
 		);
 	}

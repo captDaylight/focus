@@ -18,8 +18,6 @@ export default class SessionsList extends Component {
 			current,
 			date,
 			dateEnd,
-			working,
-			finished,
 		} = this.props;
 
 		return (
@@ -36,27 +34,6 @@ export default class SessionsList extends Component {
 						{current ? ' CURRENT SESSION': isTodayOrDate(date)}
 					</div>
 				</div>
-				{
-					working.length === 0 && finished.length === 0 ? null : 
-					(
-						<ul className="session-todos">
-							{
-								finished.map((todo, idx) => {
-									return (
-										<li key={`${idx}-completed`}>- {todo.todo}</li>
-									);
-								})
-							}
-							{
-								working.map((todo, idx) => {
-									return (
-										<li key={`${idx}-completed`}>- {todo.todo} (Working on)</li>
-									);
-								})
-							}
-						</ul>
-					)
-				}
 			</li>
 		);
 	}

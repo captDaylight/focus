@@ -22,7 +22,6 @@ export default class SessionsList extends Component {
 	}
 	render() {
 		const { sessions, todos } = this.props;
-		const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
 		const now = Date.now();
 
 		const date = new Date();
@@ -48,25 +47,12 @@ export default class SessionsList extends Component {
 								const sessionCheck = betweenDates(start, end);
 								const current = sessionCheck(now);
 
-								const working = filter(startedTodos, todo => {
-									const { workingOn, completed } = todo;
-									return (
-										workingOn < end 
-										&& (completed ? completed > end: true ));
-								});
-								const finished = filter(startedTodos, todo => {
-									const { completed } = todo;
-									return sessionCheck(completed);
-								});
-								
 								return (
 									<SessionItem 
 										key={idx}
 										current={current}
 										date={start}
 										dateEnd={end}
-										working={working}
-										finished={finished}
 									/>
 								)
 							});
@@ -78,8 +64,6 @@ export default class SessionsList extends Component {
 										{(new Date(parseInt(day))).toDateString()}
 									</li>
 								)];
-
-							// return [...headerListItem, ...sessions];
 
 							if (parseInt(day) === midnight) {
 								// today's sessions
