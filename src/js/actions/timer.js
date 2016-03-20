@@ -61,7 +61,7 @@ export function countDown(date, duration, sound, token) {
 		};
 		dispatch(setTimer(session));
 		dispatch(startCountDown(date, duration, sound));
-		dispatch(persistSession(pick(session, ['start', 'end']), token))
+		dispatch(persistSession(session, token))
 	}
 }
 
@@ -106,7 +106,6 @@ export function startCountDown(date, duration, sound) {
 
 export function persistSession(session, token) {
 	return dispatch => {
-		console.log('persist session', session, token);
 		qwest.post('http://localhost:3000/api/sessions/', session, {
 				headers: {
 					'x-access-token': token
@@ -115,10 +114,8 @@ export function persistSession(session, token) {
 			.then(function(xhr, res) {
 				// Make some useful actions 
 				if (res.status) {
-					console.log('success', res.data);
-					dispatch(updateSession(res.data));	
-				}
-				
+					dispatch(updateSession(res.data.session));	
+				}				
 			})
 			.catch(function(e, xhr, res) {
 				// Process the error 

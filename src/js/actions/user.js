@@ -1,4 +1,5 @@
 import qwest from 'qwest';
+import {addWebsites} from './websites';
 
 export const ADD_USER = 'ADD_USER';
 export function addUser(token, userData) {
@@ -26,7 +27,7 @@ export function register(email, password) {
 		.then((xhr, res) => {
 			console.log('succesful register', xhr, res);
 			if (res.status) {
-				dispatch(addUser(res.token, res.user));	
+				dispatch(addUser(res.data.token, res.data.user));	
 			}
 		})
 		.catch((err, xhr, res) => {
@@ -44,7 +45,8 @@ export function login(email, password) {
 		.then((xhr, res) => {
 			console.log('succesful auth', xhr, res);
 			if (res.status) {
-				dispatch(addUser(res.token, res.user));	
+				dispatch(addUser(res.data.token, res.data.user));	
+				dispatch(addWebsites(res.data.websites));
 			}
 		})
 		.catch((err, xhr, res) => {

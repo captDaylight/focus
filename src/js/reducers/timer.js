@@ -30,10 +30,9 @@ const metaInitial = {
 
 function updateSession(state, action) {
 	const sIdx = findIndex(state.sessions, s => {
-		console.log(s, action.session);
-		return s.start.toString() === action.session.start
+		return s.start === action.session.start
 	});
-	console.log('INDEX',sIdx);
+	console.log('INDEX UPDATING',sIdx);
 	console.log(update(state, {
 		sessions: {
 			[sIdx]: {

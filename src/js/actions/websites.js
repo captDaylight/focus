@@ -105,6 +105,7 @@ export function checkForTab(website, id, favicon, token) {
 
 export const ADD_WEBSITES = 'ADD_WEBSITES';
 export function addWebsites(websites) {
+	console.log('WEBSITES BEING ADDED');
 	return {
 		type: 'ADD_WEBSITES',
 		websites
