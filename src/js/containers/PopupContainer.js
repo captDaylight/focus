@@ -7,7 +7,7 @@ import MinutesAndSeconds from '../components/MinutesAndSeconds';
 
 const actions = wrapActionsWithMessanger([
 	'countDown',
-	'checkForTab',
+	'postWebsite',
 ]);
 
 function processSiteInfo(siteURL, id, faviconURL) {
@@ -17,7 +17,7 @@ function processSiteInfo(siteURL, id, faviconURL) {
 	// TODO: a website like google.co.uk won't work with this solution, it'll return co.uk
 	const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
 
-	actions.checkForTab(parsedHostname, id, faviconURL);
+	actions.postWebsite(parsedHostname, siteURL);
 }
 
 function urlIsInList(url, list) {
