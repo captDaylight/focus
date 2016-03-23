@@ -14,28 +14,6 @@ export function addWebsite(website) {
 	}
 }
 
-export function postWebsite(url, favicon, token) {
-	return dispatch => {
-		qwest.post('http://localhost:3000/api/websites/', {
-					url,
-					favicon,
-				}, {
-				headers: {
-					'x-access-token': token
-				}
-			})
-			.then(function(xhr, res) {
-				// Make some useful actions 
-				console.log('success post website', res);
-				dispatch(addWebsite(res.data.website));
-			})
-			.catch(function(e, xhr, res) {
-				// Process the error 
-				console.log('error',response);
-			});
-	}
-}
-
 // remove the website from the client side
 export const CLEAR_WEBSITE = 'CLEAR_WEBSITE';
 export function clearWebsite(id) {
@@ -81,25 +59,25 @@ function times(fn, timesLeft) {
 	}
 }
 
-export function checkForTab(website, id, favicon, token) {
+export function postWebsite(parsedURL, rawURL, token) {
 	return dispatch => {
-		console.log('check tab', website, favicon, token);
-		dispatch(postWebsite(website, favicon, token));	
-		if (!favicon) {
-			const timeOut = count => {
-				setTimeout(() => {
-					chrome.tabs.get(id, tab => {
-						const { favIconUrl } = tab;
-						if (favIconUrl) {
-							dispatch(postWebsite(website, favIconUrl, token));
-						} else {
-							times(timeOut, count - 1);
-						}
-					});
-				}, 500);
-			};
-			times(timeOut, 10);
-		}
+		qwest.post('http://localhost:3000/api/websites/', {
+					parsedURL,
+					rawURL
+				}, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('success post website', res);
+				dispatch(addWebsite(res.data.website));
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
 

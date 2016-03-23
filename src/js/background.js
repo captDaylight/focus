@@ -122,5 +122,6 @@ const init = initState => {
 };
 // console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
+	console.log('before init', data);
 	init(Object.keys(data).length !== 0 ? data : false);
 });
