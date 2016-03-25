@@ -32,6 +32,7 @@ export default class FocusContainer extends Component {
 	}
 
 	updateState(newState) {
+		console.log('update-state', newState);
 		const { seconds, minutes } = newState.timer;
 		if (seconds && seconds !== oldState.timer.seconds) {
 			let stateNewTime = oldState;

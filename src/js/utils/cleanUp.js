@@ -15,7 +15,7 @@ export default function cleanUp(store) {
 	});
 
 	const threeDaysOfSessions = state.timer.sessions.filter(session => {
-		return session.date > (morningUTC - (DAY * 2))
+		return session.start > (morningUTC - (DAY * 2))
 	})
 
 	store.dispatch(updateTodos(todaysTodos));

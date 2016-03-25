@@ -52,6 +52,7 @@ function updateSession(state, action) {
 const initialState = {...timerInitial, ...metaInitial};
 
 export default function timer(state=initialState, action) {
+	console.log('INITIAL STATE', state);
 	switch(action.type) {
 		case SET_TIMER:
 			return {

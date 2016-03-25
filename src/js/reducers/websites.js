@@ -25,6 +25,7 @@ function indexPop(arr, idx) {
 }
 
 export default function websites(state=initialState, action) {
+	console.log('WEBSITE INITIAL',state, action);
 	switch(action.type) {
 		case ADD_WEBSITE:
 			const siteIdx = state.websites.findIndex(item => item.url === action.website.url);

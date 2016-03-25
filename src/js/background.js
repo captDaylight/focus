@@ -18,8 +18,8 @@ const init = initState => {
 	const createAndComposeStore = compose(
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
-
-	const store = initState 
+	console.log('initstate', !!initState);
+	const store = !!initState 
 		? createAndComposeStore(rootReducer, initState)
 		: createAndComposeStore(rootReducer);
 
@@ -40,7 +40,6 @@ const init = initState => {
 	} else {
 		storageSync(store.getState());
 	}
-
 	
 	// subscribe to store and sync chrome state
 	store.subscribe(() => {
@@ -118,7 +117,6 @@ const init = initState => {
 			cleanUp(store);
 		}
 	});
-
 };
 // console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
