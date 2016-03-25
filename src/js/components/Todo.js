@@ -7,7 +7,7 @@ export default class SessionsList extends Component {
 	handleSubmit(data) {
 		const { editTodo, todo } = this.props;
 
-		editTodo(todo.id, data.todoedit);
+		editTodo(todo.created, data.todoedit);
 		this.refs.form.reset();
 	}
 	render() {
@@ -35,10 +35,10 @@ export default class SessionsList extends Component {
 							className="todo-content"
 							onClick={() => {
 								if (!todo.completed) {
-									toggleTodoCompletion(todo.id);	
+									toggleTodoCompletion(todo.created);	
 								}
 							}} >
-							{todo.todo}
+							{todo.text}
 						</div>
 						<div className="todo-actions">
 							{
@@ -46,7 +46,7 @@ export default class SessionsList extends Component {
 								? (
 									<button 
 										className="button-small" 
-										onClick={() => toggleTodoCompletion(todo.id)}
+										onClick={() => toggleTodoCompletion(todo.created)}
 									>
 										Finish
 									</button>
@@ -54,11 +54,11 @@ export default class SessionsList extends Component {
 							}
 							<div 
 								className="todo-icon icon-pencil" 
-								onClick={() => toggleTodoEdit(todo.id)}
+								onClick={() => toggleTodoEdit(todo.created)}
 							></div>
 							<div 
 								className="todo-icon icon-bin" 
-								onClick={() => removeTodo(todo.id)}
+								onClick={() => removeTodo(todo.created)}
 							></div>
 						</div>
 

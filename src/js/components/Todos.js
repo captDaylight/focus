@@ -21,9 +21,9 @@ function orderTodos(todos) {
 
 export default class SessionsList extends Component {
 	handleSubmit(e) {
-		const { addTodo } = this.props;
-		if (e.todo) {
-			addTodo(e.todo);
+		const { postTodo } = this.props;
+		if (e.text) {
+			postTodo(e.text);
 			this.refs.form.reset();
 		}
 	}
@@ -32,15 +32,15 @@ export default class SessionsList extends Component {
 	}
 	render() {
 		console.log('rendering todos');
-		const { todos, toggleTodoCompletion, removeTodo, toggleTodoEdit } = this.props;
-
+		const { todos, toggleTodoCompletion, toggleTodoEdit } = this.props;
+		console.log('TODOS',todos);
 		const orderedTodos = orderTodos(todos);
 		return (
 			<div id="todos-container">
 				<h5>TODOS</h5>
 				
 				<Form onSubmit={this.handleSubmit.bind(this)} ref="form">
-					<FocusInput name="todo" placeholder="Add a Todo" />
+					<FocusInput name="text" placeholder="Add a Todo" />
 				</Form>
 
 				<ul id="todos">

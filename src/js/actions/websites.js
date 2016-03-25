@@ -7,7 +7,6 @@ export function toggleFetch(bool=false) {
 
 export const ADD_WEBSITE = 'ADD_WEBSITE';
 export function addWebsite(website) {
-	console.log('adding website!!', website);
 	return {
 		type: ADD_WEBSITE,
 		website

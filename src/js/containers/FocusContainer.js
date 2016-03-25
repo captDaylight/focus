@@ -17,7 +17,7 @@ const actions = wrapActionsWithMessanger([
 	'addWebsite','toggleShowSites', 'removeWebsite', 'fetchWebsites',
 	'fetchCommonWebsites', 'postWebsite', 'doneAddingCommonSites',
 	// todo
-	'addTodo', 'toggleTodoCompletion', 'removeTodo', 'toggleTodoEdit', 'editTodo',
+	'postTodo', 'toggleTodoCompletion', 'removeTodo', 'toggleTodoEdit', 'editTodo',
 	// user
 	'register', 'login', 'logout',
 ]);
@@ -32,7 +32,6 @@ export default class FocusContainer extends Component {
 	}
 
 	updateState(newState) {
-		console.log('update-state', newState);
 		const { seconds, minutes } = newState.timer;
 		if (seconds && seconds !== oldState.timer.seconds) {
 			let stateNewTime = oldState;
@@ -77,7 +76,7 @@ export default class FocusContainer extends Component {
 			)
 		} else {
 			const { 
-				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+				countDown, addWebsite, removeWebsite, postTodo, toggleTodoCompletion,
 				removeTodo, toggleShowSites, toggleTodoEdit, editTodo, logout
 			} = actions;
 			const { 
@@ -116,7 +115,7 @@ export default class FocusContainer extends Component {
 
 					<div id="spread" className={classnames({blurring: showSites})}>
 						<Todos 
-							addTodo={addTodo} 
+							postTodo={postTodo} 
 							toggleTodoCompletion={toggleTodoCompletion} 
 							removeTodo={removeTodo}
 							todos={todos}
@@ -127,7 +126,6 @@ export default class FocusContainer extends Component {
 							ampm={ampm} 
 							todos={todos} />
 					</div>
-
 				</section>
 			);
 		}

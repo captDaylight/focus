@@ -15,8 +15,8 @@ const initialState = {
 	todos: [],
 };
 
-function updateInArray(items, id, keysAndFns) {
-	const idx = findIndex(items, item => item.id === id);
+function updateInArray(items, created, keysAndFns) {
+	const idx = findIndex(items, item => item.created === created);
 	const splitItems = split(items, idx);
 	const	itemPrevious = items[idx];
 	const itemUpdate = {...itemPrevious};
@@ -30,22 +30,21 @@ export default function todos(state=initialState, action) {
 	switch(action.type) {
 		case ADD_TODO:
 			const todo = {
-				todo: action.todo,
-				id: shortid.generate(),
-				created: Date.now(),
+				text: action.text,
+				created: action.created,
 				completed: null,
 				editing: false,
 			};
 			return {...state, todos: [...state.todos, todo]};
 
 		case REMOVE_TODO:
-			const id = action.id;
-			return {...state, todos: state.todos.filter(item => item.id !== id)};
+			const created = action.created;
+			return {...state, todos: state.todos.filter(item => item.created !== created)};
 
 		case TOGGLE_TODO_COMPLETION: 
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, [{
+				todos: updateInArray(state.todos, action.created, [{
 					key: 'completed', 
 					fn: dateOrNull,
 				}])
@@ -54,7 +53,7 @@ export default function todos(state=initialState, action) {
 		case TOGGLE_TODO_EDIT:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, [{
+				todos: updateInArray(state.todos, action.created, [{
 					key: 'editing', 
 					fn: value => !value,
 				}])
@@ -63,7 +62,7 @@ export default function todos(state=initialState, action) {
 		case EDIT_TODO:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.id, [{
+				todos: updateInArray(state.todos, action.created, [{
 					key: 'todo',
 					fn: value => action.todo
 				}, {
