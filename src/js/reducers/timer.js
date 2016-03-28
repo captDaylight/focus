@@ -32,14 +32,7 @@ function updateSession(state, action) {
 	const sIdx = findIndex(state.sessions, s => {
 		return s.start === action.session.start
 	});
-	console.log('INDEX UPDATING',sIdx);
-	console.log(update(state, {
-		sessions: {
-			[sIdx]: {
-				$merge: action.session
-			}
-		}
-	}));
+
 	return update(state, {
 		sessions: {
 			[sIdx]: {

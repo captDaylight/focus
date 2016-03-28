@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import findIndex from 'lodash/array/findIndex';
+import update from 'react/lib/update';
 import split from '../utils/split';
 import {
 	ADD_TODO,
@@ -24,6 +25,15 @@ function updateInArray(items, created, keysAndFns) {
 	return [...splitItems[0], itemUpdate, ...splitItems[1]];
 }
 
+function updateTodo(todos, created, updateObj) {
+	const i = findIndex(todos, t => t.created === created );
+
+	return update(todos, {
+		[i]: { $merge: updateObj }
+	});
+};
+
+
 const dateOrNull = value => value ? null : Date.now();
 
 export default function todos(state=initialState, action) {
@@ -44,10 +54,9 @@ export default function todos(state=initialState, action) {
 		case TOGGLE_TODO_COMPLETION: 
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.created, [{
-					key: 'completed', 
-					fn: dateOrNull,
-				}])
+				todos: updateTodo(state.todos, action.created, {
+					completed: action.completed
+				})
 			};
 
 		case TOGGLE_TODO_EDIT:

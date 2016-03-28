@@ -32,7 +32,7 @@ export default class SessionsList extends Component {
 	}
 	render() {
 		console.log('rendering todos');
-		const { todos, toggleTodoCompletion, toggleTodoEdit } = this.props;
+		const { todos, persistTodoCompletion, toggleTodoEdit } = this.props;
 		console.log('TODOS',todos);
 		const orderedTodos = orderTodos(todos);
 		return (

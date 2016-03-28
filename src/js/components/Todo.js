@@ -13,7 +13,7 @@ export default class SessionsList extends Component {
 	render() {
 		const { 
 			todo,
-			toggleTodoCompletion, 
+			persistTodoCompletion, 
 			removeTodo, 
 			toggleTodoEdit 
 		} = this.props;
@@ -35,7 +35,7 @@ export default class SessionsList extends Component {
 							className="todo-content"
 							onClick={() => {
 								if (!todo.completed) {
-									toggleTodoCompletion(todo.created);	
+									persistTodoCompletion(todo.created);	
 								}
 							}} >
 							{todo.text}
@@ -46,7 +46,7 @@ export default class SessionsList extends Component {
 								? (
 									<button 
 										className="button-small" 
-										onClick={() => toggleTodoCompletion(todo.created)}
+										onClick={() => persistTodoCompletion(todo.created)}
 									>
 										Finish
 									</button>

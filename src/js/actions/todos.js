@@ -40,11 +40,34 @@ export function removeTodo(created) {
 	}
 }
 
+export function persistTodoCompletion(created, token) {
+	return dispatch => {
+		const completed = Date.now();
+		dispatch(toggleTodoCompletion(created, completed))
+		qwest.put('http://localhost:3000/api/todos/'+ created, {
+			completed
+		}, {
+			headers: {
+				'x-access-token': token
+			}
+		})
+		.then(function(xhr, res) {
+			// Make some useful actions 
+			console.log('success update complete todo', res);
+		})
+		.catch(function(e, xhr, res) {
+			// Process the error 
+			console.log('error',response);
+		});
+	}
+}
+
 export const TOGGLE_TODO_COMPLETION = 'TOGGLE_TODO_COMPLETION';
-export function toggleTodoCompletion(created) {
+export function toggleTodoCompletion(created, completed) {
 	return {
 		type: TOGGLE_TODO_COMPLETION,
 		created,
+		completed,
 	}
 }
 
