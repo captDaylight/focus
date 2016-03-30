@@ -40,25 +40,44 @@ export function removeTodo(created) {
 	}
 }
 
+export function deleteTodo(created, token) {
+	return dispatch => {
+		dispatch(removeTodo(created));
+		qwest.delete(`http://localhost:3000/api/todos/${created}`, null, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('success delete Todo', res);
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
+	}
+}
+
 export function persistTodoCompletion(created, token) {
 	return dispatch => {
 		const completed = Date.now();
 		dispatch(toggleTodoCompletion(created, completed))
-		qwest.put('http://localhost:3000/api/todos/'+ created, {
-			completed
-		}, {
-			headers: {
-				'x-access-token': token
-			}
-		})
-		.then(function(xhr, res) {
-			// Make some useful actions 
-			console.log('success update complete todo', res);
-		})
-		.catch(function(e, xhr, res) {
-			// Process the error 
-			console.log('error',response);
-		});
+		qwest.put(`http://localhost:3000/api/todos/${created}`, {
+				completed
+			}, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('success update complete todo', res);
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
 

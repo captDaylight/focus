@@ -14,7 +14,7 @@ export default class SessionsList extends Component {
 		const { 
 			todo,
 			persistTodoCompletion, 
-			removeTodo, 
+			deleteTodo, 
 			toggleTodoEdit 
 		} = this.props;
 		
@@ -58,7 +58,7 @@ export default class SessionsList extends Component {
 							></div>
 							<div 
 								className="todo-icon icon-bin" 
-								onClick={() => removeTodo(todo.created)}
+								onClick={() => deleteTodo(todo.created)}
 							></div>
 						</div>
 

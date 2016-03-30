@@ -17,7 +17,7 @@ const actions = wrapActionsWithMessanger([
 	'addWebsite','toggleShowSites', 'removeWebsite', 'fetchWebsites',
 	'fetchCommonWebsites', 'postWebsite', 'doneAddingCommonSites',
 	// todo
-	'postTodo', 'persistTodoCompletion', 'removeTodo', 'toggleTodoEdit', 'editTodo',
+	'postTodo', 'persistTodoCompletion', 'deleteTodo', 'toggleTodoEdit', 'editTodo',
 	// user
 	'register', 'login', 'logout',
 ]);
@@ -77,7 +77,7 @@ export default class FocusContainer extends Component {
 		} else {
 			const { 
 				countDown, addWebsite, removeWebsite, postTodo, persistTodoCompletion,
-				removeTodo, toggleShowSites, toggleTodoEdit, editTodo, logout
+				deleteTodo, toggleShowSites, toggleTodoEdit, editTodo, logout
 			} = actions;
 			const { 
 				date, minutes, seconds, duration, sessions, ampm, sound,
@@ -117,7 +117,7 @@ export default class FocusContainer extends Component {
 						<Todos 
 							postTodo={postTodo} 
 							persistTodoCompletion={persistTodoCompletion} 
-							removeTodo={removeTodo}
+							deleteTodo={deleteTodo}
 							todos={todos}
 							toggleTodoEdit={toggleTodoEdit}
 							editTodo={editTodo} />
