@@ -71,13 +71,10 @@ export default function todos(state=initialState, action) {
 		case EDIT_TODO:
 			return {
 				...state,
-				todos: updateInArray(state.todos, action.created, [{
-					key: 'todo',
-					fn: value => action.todo
-				}, {
-					key: 'editing', 
-					fn: value => !value,
-				}])
+				todos: updateTodo(state.todos, action.created, {
+					text: action.text,
+					editing: false
+				})
 			};
 
 		case UPDATE_TODOS:

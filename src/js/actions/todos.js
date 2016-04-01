@@ -99,11 +99,32 @@ export function toggleTodoEdit(created) {
 }
 
 export const EDIT_TODO = 'EDIT_TODO';
-export function editTodo(created, todo) {
+export function editTodo(created, text) {
 	return {
 		type: EDIT_TODO,
 		created,
-		todo,
+		text,
+	}
+}
+
+export function updateTodo(created, text, token) {
+	return dispatch => {
+		dispatch(editTodo(created, text));
+		qwest.put(`http://localhost:3000/api/todos/${created}`, {
+				text
+			}, {
+				headers: {
+					'x-access-token': token
+				}
+			})
+			.then(function(xhr, res) {
+				// Make some useful actions 
+				console.log('success update text todo', res);
+			})
+			.catch(function(e, xhr, res) {
+				// Process the error 
+				console.log('error',response);
+			});
 	}
 }
 

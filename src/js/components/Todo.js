@@ -5,9 +5,9 @@ import FocusInput from './FocusInput';
 
 export default class SessionsList extends Component {
 	handleSubmit(data) {
-		const { editTodo, todo } = this.props;
+		const { updateTodo, todo } = this.props;
 
-		editTodo(todo.created, data.todoedit);
+		updateTodo(todo.created, data.todoedit);
 		this.refs.form.reset();
 	}
 	render() {
@@ -27,7 +27,7 @@ export default class SessionsList extends Component {
 					todo.editing 
 					?
 					(<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
-						<FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} autoFocus={true} />
+						<FocusInput name="todoedit" placeholder="todoedit" value={todo.text} autoFocus={true} />
 					</Form>)
 					:
 					(<div className="todo-container">
