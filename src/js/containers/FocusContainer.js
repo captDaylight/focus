@@ -60,7 +60,7 @@ export default class FocusContainer extends Component {
 		if (user.token === '') {
 			const { register, login } = actions;
 			return (
-				<div>
+				<div id="auth">
 					<Register register={register} />
 					<Login login={login} />
 				</div>
@@ -110,7 +110,7 @@ export default class FocusContainer extends Component {
 							toggleShowSites={toggleShowSites}
 							removeWebsite={removeWebsite} 
 							disabled={minutes ? true : false} />
-						<div onClick={() => {logout()}}>LOGOUT</div>
+						<div onClick={() => {logout()}} className="pointer">LOGOUT</div>
 					</div>
 
 					<div id="spread" className={classnames({blurring: showSites})}>
