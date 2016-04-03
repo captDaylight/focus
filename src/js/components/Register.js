@@ -14,7 +14,7 @@ export default class Register extends Component {
 	render() {
 		return (
 			<Form onSubmit={this.handleSubmit.bind(this)} ref="form">
-				<div>REGISTER</div>
+				<div className="label">REGISTER</div>
 				<FocusInput 
 					name="email" 
 					placeholder="Email..." 
@@ -25,7 +25,7 @@ export default class Register extends Component {
 					placeholder="Password..." 
 					autoFocus={true}
 					type="password" />
-				<button>SUBMIT</button>
+				<button className="button-regular">SUBMIT</button>
 			</Form>
 		);
 	}

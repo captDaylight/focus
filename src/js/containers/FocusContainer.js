@@ -61,8 +61,10 @@ export default class FocusContainer extends Component {
 			const { register, login } = actions;
 			return (
 				<div id="auth">
-					<Register register={register} />
-					<Login login={login} />
+					<div>
+						<Register register={register} />
+						<Login login={login} />
+					</div>
 				</div>
 			)
 		} else if (!this.state.websites.doneCommonSites) {
