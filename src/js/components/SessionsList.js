@@ -69,16 +69,17 @@ export default class SessionsList extends Component {
 								// today's sessions
 								console.log('sessions', sessionDays[day]);
 								return [...sessions];
-							} else {
-								return [(
-									<li className="session-day-header">
-										<button>
-											<div>{(new Date(parseInt(day))).toDateString()}</div>
-											<div className="icon-enlarge2"></div>
-										</button>
-									</li>
-								)];
-							}
+							} 
+							// else {
+							// 	return [(
+							// 		<li className="session-day-header">
+							// 			<button>
+							// 				<div>{(new Date(parseInt(day))).toDateString()}</div>
+							// 				<div className="icon-enlarge2"></div>
+							// 			</button>
+							// 		</li>
+							// 	)];
+							// }
 						})
 					}
 				</ul>
