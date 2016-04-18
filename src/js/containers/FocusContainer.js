@@ -63,7 +63,9 @@ export default class FocusContainer extends Component {
 				<div id="auth">
 					<div>
 						<Register register={register} />
+						{user.registerError !== '' ? user.registerError : null}
 						<Login login={login} />
+						{user.loginError !== '' ? user.loginError : null}
 					</div>
 				</div>
 			)

@@ -32,12 +32,14 @@ export function register(email, password) {
 		})
 		.catch((err, xhr, res) => {
 			console.log('whoops no register', e, res);
+			dispatch(loginError('Something went wrong with your registration.'));
 		});
 	}
 }
 
 export function login(email, password) {
 	return dispatch => {
+		console.log('here?');
 		qwest.post('http://localhost:3000/api/authenticate',{
 			email,
 			password,
@@ -51,7 +53,24 @@ export function login(email, password) {
 		})
 		.catch((err, xhr, res) => {
 			console.log('whoops no auth', e, res);
+			dispatch(loginError('Something went wrong with your login.'));
 		});
+	}
+}
+
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export function loginError(message) {
+	return {
+		type: LOGIN_ERROR,
+		message
+	}
+}
+
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+export function registerError(message) {
+	return {
+		type: REGISTER_ERROR,
+		message
 	}
 }
 

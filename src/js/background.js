@@ -9,7 +9,6 @@ import * as user from './actions/user';
 import cleanUp from './utils/cleanUp';
 
 function sessionCheck(sessions, duration){
-	console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
 	const { date } =  sessions[sessions.length - 1];
 	return (date + duration) > Date.now();
 }
@@ -118,6 +117,7 @@ const init = initState => {
 		}
 	});
 };
+
 // console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
 	init(Object.keys(data).length !== 0 ? data : false);
