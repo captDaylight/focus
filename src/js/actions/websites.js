@@ -1,34 +1,9 @@
-import qwest from 'qwest';
-
 export const ADD_WEBSITE = 'ADD_WEBSITE';
 export function addWebsite(website, favicon) {
 	return {
 		type: ADD_WEBSITE,
 		website,
 		favicon,
-	}
-}
-
-export function postWebsite(url, favicon, token) {
-	return dispatch => {
-		console.log('TRYING TO POST', name, favicon, token);
-		qwest.post('http://localhost:3000/api/websites', {
-			url,
-			favicon,
-		 }, {
-		 	headers: {
-		 		'x-access-token': token
-		 	}
-		 })
-		 .then(function(xhr, res) {
-			// Make some useful actions 
-			const {url, favicon} = res.website;
-			dispatch(addWebsite(url, favicon));
-		 })
-		 .catch(function(e, xhr, res) {
-			// Process the error 
-			console.log('error',response);
-		 });
 	}
 }
 
@@ -55,16 +30,17 @@ function times(fn, timesLeft) {
 	}
 }
 
-export function checkForTab(website, id, favicon, token) {
+export function checkForTab(website, id, favicon) {
 	return dispatch => {
-		dispatch(postWebsite(website, favicon, token));	
+		dispatch(addWebsite(website, favicon));	
 		if (!favicon) {
+
 			const timeOut = count => {
 				setTimeout(() => {
 					chrome.tabs.get(id, tab => {
 						const { favIconUrl } = tab;
 						if (favIconUrl) {
-							dispatch(postWebsite(website, favIconUrl, token));
+							dispatch(addWebsite(website, favIconUrl));
 						} else {
 							times(timeOut, count - 1);
 						}

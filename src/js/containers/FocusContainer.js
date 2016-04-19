@@ -60,72 +60,63 @@ export default class FocusContainer extends Component {
 	}
 
 	render() {
-		const { user } = this.state;
-		if (user.token === '') {
-			const { register, login } = actions;
-			return (
-				<div>
-					<Register register={register} />
-					<Login login={login} />
+		// const { user } = this.state;
+
+		const { 
+			countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+			toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
+			editTodo, logout
+		} = actions;
+		const { 
+			date, minutes, seconds, duration, sessions, ampm, sound,
+		} = this.state.timer;
+		const { websites, showSites } = this.state.websites;
+		const { todos } = this.state.todos;
+		
+		return (
+			<section 
+				id="focus-container" 
+				className={classnames({focusing: !!minutes})}>
+
+				<div id="header">
+					<div id="main-action" className={classnames({blurring: showSites})}>
+						{
+							minutes
+							? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+							: (
+								<button 
+									className="focus-button" 
+									onClick={() => countDown(Date.now(), duration, sound)}>
+									start focusing
+								</button>
+							)
+						}
+					</div>
+					<WebsiteList 
+						websites={websites}
+						showSites={showSites}
+						toggleShowSites={toggleShowSites}
+						removeWebsite={removeWebsite} 
+						disabled={minutes ? true : false} />
+					<div onClick={() => {logout()}}>LOGOUT</div>
 				</div>
-			)
-		} else {
-			const { 
-				countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
-				toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-				editTodo, logout
-			} = actions;
-			const { 
-				date, minutes, seconds, duration, sessions, ampm, sound,
-			} = this.state.timer;
-			const { websites, showSites } = this.state.websites;
-			const { todos } = this.state.todos;
-			
-			return (
-				<section 
-					id="focus-container" 
-					className={classnames({focusing: !!minutes})}>
 
-					<div id="header">
-						<div id="main-action" className={classnames({blurring: showSites})}>
-							{
-								minutes
-								? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-								: (
-									<button 
-										className="focus-button" 
-										onClick={() => countDown(Date.now(), duration, sound)}>
-										start focusing
-									</button>
-								)
-							}
-						</div>
-						<WebsiteList 
-							websites={websites}
-							showSites={showSites}
-							toggleShowSites={toggleShowSites}
-							removeWebsite={removeWebsite} 
-							disabled={minutes ? true : false} />
-						<div onClick={() => {logout()}}>LOGOUT</div>
-					</div>
+				<div id="spread" className={classnames({blurring: showSites})}>
+					<Todos 
+						addTodo={addTodo} 
+						toggleTodoWorking={toggleTodoWorking}
+						toggleTodoCompletion={toggleTodoCompletion} 
+						removeTodo={removeTodo}
+						todos={todos}
+						toggleTodoEdit={toggleTodoEdit}
+						editTodo={editTodo} />
+					<SessionsList 
+						sessions={sessions} 
+						ampm={ampm} 
+						todos={todos} />
+				</div>
 
-					<div id="spread" className={classnames({blurring: showSites})}>
-						<Todos 
-							addTodo={addTodo} 
-							toggleTodoWorking={toggleTodoWorking}
-							toggleTodoCompletion={toggleTodoCompletion} 
-							removeTodo={removeTodo}
-							todos={todos}
-							toggleTodoEdit={toggleTodoEdit}
-							editTodo={editTodo} />
-						<SessionsList 
-							sessions={sessions} 
-							ampm={ampm} 
-							todos={todos} />
-					</div>
-
-				</section>
-			);			
-		}
+			</section>
+		);			
 	}
 }
