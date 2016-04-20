@@ -54,7 +54,8 @@ export default class SessionsList extends Component {
 										console.log(todo, workingOn < dateEnd, workingOn, dateEnd);
 									}
 									return (
-										workingOn < dateEnd 
+										!!workingOn 
+										&& workingOn < dateEnd 
 										&& (completed ? completed > dateEnd: true ));
 								});
 								const finished = filter(startedTodos, todo => {
