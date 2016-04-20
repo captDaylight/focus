@@ -45,12 +45,14 @@ export default class SessionsList extends Component {
 								// console.log('session');
 								const { date, duration } = session;
 								const dateEnd = date + duration;
-								console.log('duration', duration);
 								const sessionCheck = betweenDates(date, dateEnd);
 								const current = sessionCheck(now);
 
 								const working = filter(startedTodos, todo => {
 									const { workingOn, completed } = todo;
+									if (workingOn) {
+										console.log(todo, workingOn < dateEnd, workingOn, dateEnd);
+									}
 									return (
 										workingOn < dateEnd 
 										&& (completed ? completed > dateEnd: true ));
@@ -80,22 +82,19 @@ export default class SessionsList extends Component {
 									</li>
 								)];
 
-							// return [...headerListItem, ...sessions];
-
 							if (parseInt(day) === midnight) {
-								// today's sessions
-								console.log('sessions', sessionDays[day]);
 								return [...sessions];
-							} else {
-								return [(
-									<li className="session-day-header">
-										<button>
-											<div>{(new Date(parseInt(day))).toDateString()}</div>
-											<div className="icon-enlarge2"></div>
-										</button>
-									</li>
-								)];
-							}
+							} 
+							// else {
+							// 	return [(
+							// 		<li className="session-day-header">
+							// 			<button>
+							// 				<div>{(new Date(parseInt(day))).toDateString()}</div>
+							// 				<div className="icon-enlarge2"></div>
+							// 			</button>
+							// 		</li>
+							// 	)];
+							// }
 						})
 					}
 				</ul>
