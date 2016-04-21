@@ -33,7 +33,7 @@ export default class SessionsList extends Component {
 						</h5>
 					</div>
 					<div className="session-date">									
-						{current ? ' CURRENT SESSION': isTodayOrDate(date)}
+						
 					</div>
 				</div>
 				{

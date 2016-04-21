@@ -51,6 +51,7 @@ const init = initState => {
 			const {duration, date} = state.timer;
 			const timeLeft = (date + duration) - Date.now();
 			if (timeLeft > 60000) {
+				chrome.browserAction.setIcon({path: 'dist/img/logo-sm-red.png'});
 				const minutesLeft = Math.floor((timeLeft) / 60000).toString();
 				chrome.browserAction.setBadgeText({text: `${minutesLeft}m`}); 
 			} else {
@@ -60,6 +61,7 @@ const init = initState => {
 			// chrome.browserAction.setIcon({path: icon});
 			// suchrome.browserAction.setBadgeBackgroundColor({color:[190, 190, 190, 230]});
 		} else {
+			chrome.browserAction.setIcon({path: 'dist/img/logo-sm-blue.png'});
 			chrome.browserAction.setBadgeText({text: ''});
 		}
 		storageSync(state);

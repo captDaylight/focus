@@ -4,11 +4,18 @@
   "name": "Focus",
   "description": "productivity",
   "version": "1.0",
-
+  "icons": {
+      "19": "dist/img/logo-sm-blue.png",
+      "38": "dist/img/logo-lg-blue.png",
+      "48": "dist/img/logo-lg-blue.png",
+      "128": "dist/img/logo-lg-blue.png"
+  },
   "browser_action": {
     "default_icon": {
-      "19": "dist/img/focus.png",
-      "38": "dist/img/focus38.png"
+      "19": "dist/img/logo-sm-blue.png",
+      "38": "dist/img/logo-lg-blue.png",
+      "48": "dist/img/logo-lg-blue.png",
+      "128": "dist/img/logo-lg-blue.png"
     },
     "default_popup": "popup.html"
   },
