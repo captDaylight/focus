@@ -74,7 +74,7 @@ export function startCountDown(date, duration, sound) {
 					title:'SESSION DONE',
 					message: `Finished at ${formatAMPM(Date.now(), true)}`,
 					type:'basic',
-					iconUrl: 'dist/img/focus.png',
+					iconUrl: 'dist/img/logo-lg-blue.png',
 				});
 				dispatch(clearCountdownInterval())
 			}
