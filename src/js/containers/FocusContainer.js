@@ -77,52 +77,43 @@ export default class FocusContainer extends Component {
 			<section 
 				id="focus-container" 
 				className={classnames({focusing: !!minutes})}>
-				{websites.length === 0 
-					? (
-						<div>
-							NO WEBSITES YET
-						</div>
-					) : (
-						<div id="header">
-							<div id="main-action" className={classnames({blurring: showSites})}>
-								{
-									minutes
-									? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-									: (
-										<button 
-											className="focus-button" 
-											onClick={() => countDown(Date.now(), duration, sound)}>
-											start focusing
-										</button>
-									)
-								}
-							</div>
-							<WebsiteList 
-								websites={websites}
-								showSites={showSites}
-								toggleShowSites={toggleShowSites}
-								removeWebsite={removeWebsite} 
-								disabled={minutes ? true : false} />
 
-						</div>
+				<div id="header">
+					<div id="main-action" className={classnames({blurring: showSites})}>
+						{
+							minutes
+							? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+							: (
+								<button 
+									className="focus-button" 
+									onClick={() => countDown(Date.now(), duration, sound)}>
+									start focusing
+								</button>
+							)
+						}
+					</div>
+					<WebsiteList 
+						websites={websites}
+						showSites={showSites}
+						toggleShowSites={toggleShowSites}
+						removeWebsite={removeWebsite} 
+						disabled={minutes ? true : false} />
+				</div>
 
-						<div id="spread" className={classnames({blurring: showSites})}>
-							<Todos 
-								addTodo={addTodo} 
-								toggleTodoWorking={toggleTodoWorking}
-								toggleTodoCompletion={toggleTodoCompletion} 
-								removeTodo={removeTodo}
-								todos={todos}
-								toggleTodoEdit={toggleTodoEdit}
-								editTodo={editTodo} />
-							<SessionsList 
-								sessions={sessions} 
-								ampm={ampm} 
-								todos={todos} />
-						</div>
-					)
-				}
-
+				<div id="spread" className={classnames({blurring: showSites})}>
+					<Todos 
+						addTodo={addTodo} 
+						toggleTodoWorking={toggleTodoWorking}
+						toggleTodoCompletion={toggleTodoCompletion} 
+						removeTodo={removeTodo}
+						todos={todos}
+						toggleTodoEdit={toggleTodoEdit}
+						editTodo={editTodo} />
+					<SessionsList 
+						sessions={sessions} 
+						ampm={ampm} 
+						todos={todos} />
+				</div>
 
 			</section>
 		);			
