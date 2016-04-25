@@ -1,9 +1,16 @@
-import {} from '../actions/ui';
+import {
+	SET_NEXT_INTRO_STEP
+} from '../actions/ui';
 
-const initialState = {};
+const initialState = {
+	introStep: 0
+};
 
 export default function user(state=initialState, action) {
 	switch(action.type) {
+		case SET_NEXT_INTRO_STEP:
+			return {...state, introStep: ++state.introStep};
+
 		default: 
 			return state;
 	}

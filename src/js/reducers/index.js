@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   timer, 
   todos,
   user,
+  ui,
 });
 
 export default rootReducer;
