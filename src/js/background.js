@@ -19,7 +19,7 @@ const init = initState => {
 		applyMiddleware(thunkMiddleware)
 	)(createStore);
 
-	const store = initState 
+	const store = initState
 		? createAndComposeStore(rootReducer, initState)
 		: createAndComposeStore(rootReducer);
 
@@ -30,7 +30,7 @@ const init = initState => {
 		if (sessionCheck(sessions, duration)) {
 			// if timer is still going on init, restart countdown
 			const state = store.getState();
-			const { date } = sessions[sessions.length - 1]; 
+			const { date } = sessions[sessions.length - 1];
 			store.dispatch(timer.startCountDown(date, (date + duration) - Date.now(), sound));
 		} else {
 			// clear timer info
@@ -41,7 +41,7 @@ const init = initState => {
 		storageSync(store.getState());
 	}
 
-	
+
 	// subscribe to store and sync chrome state
 	store.subscribe(() => {
 		const state = store.getState();
@@ -53,10 +53,10 @@ const init = initState => {
 			if (timeLeft > 60000) {
 				chrome.browserAction.setIcon({path: 'dist/img/logo-sm-red.png'});
 				const minutesLeft = Math.floor((timeLeft) / 60000).toString();
-				chrome.browserAction.setBadgeText({text: `${minutesLeft}m`}); 
+				chrome.browserAction.setBadgeText({text: `${minutesLeft}m`});
 			} else {
-				const secondsLeft = Math.floor((timeLeft) / 1000).toString();	
-				chrome.browserAction.setBadgeText({text: `${secondsLeft}s`}); 
+				const secondsLeft = Math.floor((timeLeft) / 1000).toString();
+				chrome.browserAction.setBadgeText({text: `${secondsLeft}s`});
 			}
 			// chrome.browserAction.setIcon({path: icon});
 			// suchrome.browserAction.setBadgeBackgroundColor({color:[190, 190, 190, 230]});
@@ -65,7 +65,7 @@ const init = initState => {
 			chrome.browserAction.setBadgeText({text: ''});
 		}
 		storageSync(state);
-		
+
 		// for the popup
 		chrome.runtime.sendMessage(statePayload);
 

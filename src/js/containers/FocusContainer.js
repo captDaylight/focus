@@ -3,11 +3,13 @@ import classnames from 'classnames';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import Register from '../components/Register';
 import Login from '../components/Login';
+import AddWebsites from '../components/AddWebsites';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import WebsiteForm from '../components/WebsiteForm';
 import WebsiteList from '../components/WebsiteList';
 import SessionsList from '../components/SessionsList';
 import Todos from '../components/Todos';
+import { websitesData } from '../websitesData';
 
 const actions = wrapActionsWithMessanger([
 	'clearTimer',
@@ -61,27 +63,30 @@ export default class FocusContainer extends Component {
 	}
 
 	render() {
-		const { 
+		const {
 			countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
 			toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
 			editTodo, logout, setNextIntroStep
 		} = actions;
-		const { 
+		const {
 			date, minutes, seconds, duration, sessions, ampm, sound,
 		} = this.state.timer;
 		const { websites, showSites } = this.state.websites;
 		const { todos } = this.state.todos;
 		const { ui } = this.state;
-		console.log('ui',ui);
+
 		return (
-			<section 
-				id="focus-container" 
+			<section
+				id="focus-container"
 				className={classnames({focusing: !!minutes})}>
 				{
-					ui.introStep !== 1 
+					ui.introStep !== 1
 					? (
 						<div>
-							select websites
+              <AddWebsites
+                websitesData={websitesData}
+                addWebsite={actions.addWebsite}
+                websites={websites} />
 						</div>
 					) : (
 						<div>
@@ -91,40 +96,40 @@ export default class FocusContainer extends Component {
 										minutes
 										? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 										: (
-											<button 
-												className="focus-button" 
+											<button
+												className="focus-button"
 												onClick={() => countDown(Date.now(), duration, sound)}>
 												start focusing
 											</button>
 										)
 									}
 								</div>
-								<WebsiteList 
+								<WebsiteList
 									websites={websites}
 									showSites={showSites}
 									toggleShowSites={toggleShowSites}
-									removeWebsite={removeWebsite} 
+									removeWebsite={removeWebsite}
 									disabled={minutes ? true : false} />
 							</div>
 
 							<div id="spread" className={classnames({blurring: showSites})}>
-								<Todos 
-									addTodo={addTodo} 
+								<Todos
+									addTodo={addTodo}
 									toggleTodoWorking={toggleTodoWorking}
-									toggleTodoCompletion={toggleTodoCompletion} 
+									toggleTodoCompletion={toggleTodoCompletion}
 									removeTodo={removeTodo}
 									todos={todos}
 									toggleTodoEdit={toggleTodoEdit}
 									editTodo={editTodo} />
-								<SessionsList 
-									sessions={sessions} 
-									ampm={ampm} 
+								<SessionsList
+									sessions={sessions}
+									ampm={ampm}
 									todos={todos} />
 							</div>
 						</div>
 					)
 				}
 			</section>
-		);			
+		);
 	}
 }

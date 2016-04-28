@@ -3,7 +3,7 @@ import {
 } from '../actions/ui';
 
 const initialState = {
-	introStep: 1
+	introStep: 0
 };
 
 export default function user(state=initialState, action) {
@@ -11,7 +11,7 @@ export default function user(state=initialState, action) {
 		case SET_NEXT_INTRO_STEP:
 			return {...state, introStep: ++state.introStep};
 
-		default: 
+		default:
 			return state;
 	}
 }

@@ -23,9 +23,9 @@ export const websitesData = [
 	id: '4y2uqW3Ig',
 	name: 'twitter.com'},
 
-	{favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
-	id: '4JYKcZhIg',
-	name: 'medium.com'},
+	// {favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
+	// id: '4JYKcZhIg',
+	// name: 'medium.com'},
 
 	{favicon: 'https://cdn2.vox-cdn.com/community_logos/52517/voxv.png',
 	id: 'Nkz4ouzwl',
