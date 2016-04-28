@@ -3,7 +3,7 @@ import {
 } from '../actions/ui';
 
 const initialState = {
-	introStep: 0
+	introStep: 1
 };
 
 export default function user(state=initialState, action) {
