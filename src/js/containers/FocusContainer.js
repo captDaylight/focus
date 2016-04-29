@@ -86,6 +86,7 @@ export default class FocusContainer extends Component {
               <AddWebsites
                 websitesData={websitesData}
                 addWebsite={actions.addWebsite}
+                removeWebsite={actions.removeWebsite}
                 websites={websites} />
 						</div>
 					) : (

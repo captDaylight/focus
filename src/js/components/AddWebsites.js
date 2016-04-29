@@ -10,28 +10,33 @@ export default class Login extends Component {
       websites,
       addWebsite,
       websitesData,
+      removeWebsite
     } = this.props;
 
     return (
       <div>
         to block
+
         <ul>
           {
             websitesData.map((website, idx) => {
-              const {url, favicon} = website;
+              const {name, favicon} = website;
 
               return (
                 <li key={idx}>
                   <img src={favicon} />
-                  {website.url}
                   {
-                    findIndex(websites, (w) => w.url === website.url ) >= 0
+                    findIndex(websites, (w) => {
+                      console.log(website);
+                      return w.name === website.name;
+
+                    } ) >= 0
                     ? (
-                      <button onClick={() => {addWebsite(url, favicon)}}>
+                      <button onClick={() => {removeWebsite(name, favicon)}}>
                         un-block
                       </button>
                     ) : (
-                      <button onClick={() => {addWebsite(url, favicon)}}>
+                      <button onClick={() => {addWebsite(name, favicon)}}>
                         block
                       </button>
                     )

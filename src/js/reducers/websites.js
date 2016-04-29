@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import find from 'lodash/collection/find';
-import { 
+import {
 	ADD_WEBSITE,
 	REMOVE_WEBSITE,
 	TOGGLE_SHOW_SITES,
@@ -9,11 +9,11 @@ import { websitesData } from '../websitesData';
 
 const initialState = {
 	showSites: false,
-	websites: websitesData,
+	websites: [],
 };
 
 function indexPop(arr, idx) {
-	const beginning = arr.slice(0, idx); 
+	const beginning = arr.slice(0, idx);
 	const end = arr.slice(idx + 1);
 	return [...beginning, ...end];
 }
@@ -29,7 +29,7 @@ export default function websites(state=initialState, action) {
 			};
 			if (siteIdx >= 0) {
 				if (state.websites[siteIdx].favicon) {
-					return state;	
+					return state;
 				} else {
 					const websites = indexPop(state.websites, siteIdx);
 					return {...state, websites: [...websites, website]};
