@@ -1,51 +1,61 @@
 #website-list-wrapper {
-	@include transition(all 0.2s ease-in-out);
-	pointer-events: none;
-	position: fixed;
-	background-color: rgba(white, 0.8);
-	height: 100%;
-	width: 100%;
-	top: 0px;
-	left: 0px;
-	@extend .center;
-	opacity: 0;
-	z-index: 1;
-	&.display {
-		display: flex;
-		opacity: 1;
-		pointer-events: auto;
-	}
+  @include transition(all 0.2s ease-in-out);
+  pointer-events: none;
+  position: fixed;
+  background-color: rgba(white, 0.8);
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  @extend .center;
+  opacity: 0;
+  z-index: 1;
+  &.display {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 #hide-sites {
-	position: absolute;
-	top: 25px;
-	right: 25px;
-	font-size: 25px;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 25px;
 }
-#website-list {
 
-}
 .website-item {
-	margin-bottom: 10px;
-	@include display(flex);
-	@include justify-content(space-between);
-	.left {
-		@include display(flex);
-	}
-	img {
-		width: 25px;
-		height: 25px;
-		border-radius: 3px;
-	}
-	img, span {
-		margin-right: 15px;
-	}
-	.icon-bin {
-		cursor: pointer;
-		margin-top: 3px;
-		&.disabled {
-			cursor: not-allowed;
-			color: lighten($red, 25%);
-		}
-	}
+  margin-bottom: 10px;
+  @include display(flex);
+  @include justify-content(space-between);
+  .left {
+    @include display(flex);
+  }
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+  }
+  img, span {
+    margin-right: 15px;
+  }
+  .icon-bin {
+    cursor: pointer;
+    margin-top: 3px;
+    &.disabled {
+      cursor: not-allowed;
+      color: lighten($red, 25%);
+    }
+  }
+}
+
+.website-intro-list {
+  @include columns(3);
+  @include column-gap(50px);
+  @include column-rule(solid $blue 1px);
+  > li {
+    padding: 5px 0px;
+    &.blocked {
+      background-color: lighten($blue, 40%);
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import findIndex from 'lodash/array/findIndex';
+import classnames from 'classnames';
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,28 +16,30 @@ export default class Login extends Component {
 
     return (
       <div>
-        to block
 
-        <ul>
+        <ul className="website-intro-list">
           {
             websitesData.map((website, idx) => {
-              const {name, favicon} = website;
+              const {url, favicon} = website;
+              const blocked = findIndex(websites, (w) => {
+                  return w.url === website.url;
+                }) >= 0;
 
               return (
-                <li key={idx}>
-                  <img src={favicon} />
-                  {
-                    findIndex(websites, (w) => {
-                      console.log(website);
-                      return w.name === website.name;
+                <li key={idx} className={classnames('website-item', {blocked: blocked})}>
+                  <div className="left">
+                    <img src={favicon} />
+                    <span>{url}</span>
+                  </div>
 
-                    } ) >= 0
+                  {
+                    blocked
                     ? (
-                      <button onClick={() => {removeWebsite(name, favicon)}}>
+                      <button onClick={() => {removeWebsite(url)}}>
                         un-block
                       </button>
                     ) : (
-                      <button onClick={() => {addWebsite(name, favicon)}}>
+                      <button onClick={() => {addWebsite(url, favicon)}}>
                         block
                       </button>
                     )

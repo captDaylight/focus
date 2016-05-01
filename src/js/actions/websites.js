@@ -1,17 +1,17 @@
 export const ADD_WEBSITE = 'ADD_WEBSITE';
-export function addWebsite(website, favicon) {
+export function addWebsite(url, favicon) {
 	return {
 		type: ADD_WEBSITE,
-		website,
+		url,
 		favicon,
 	}
 }
 
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
-export function removeWebsite(id) {
+export function removeWebsite(url) {
 	return {
 		type: REMOVE_WEBSITE,
-		id
+		url
 	}
 }
 
@@ -30,9 +30,9 @@ function times(fn, timesLeft) {
 	}
 }
 
-export function checkForTab(website, id, favicon) {
+export function checkForTab(url, id, favicon) {
 	return dispatch => {
-		dispatch(addWebsite(website, favicon));	
+		dispatch(addWebsite(url, favicon));
 		if (!favicon) {
 
 			const timeOut = count => {
@@ -40,7 +40,7 @@ export function checkForTab(website, id, favicon) {
 					chrome.tabs.get(id, tab => {
 						const { favIconUrl } = tab;
 						if (favIconUrl) {
-							dispatch(addWebsite(website, favIconUrl));
+							dispatch(addWebsite(url, favIconUrl));
 						} else {
 							times(timeOut, count - 1);
 						}

@@ -21,9 +21,9 @@ function indexPop(arr, idx) {
 export default function websites(state=initialState, action) {
 	switch(action.type) {
 		case ADD_WEBSITE:
-			const siteIdx = state.websites.findIndex(item => item.name === action.website);
+			const siteIdx = state.websites.findIndex(item => item.url === action.url);
 			const website = {
-				name: action.website,
+				url: action.url,
 				favicon: action.favicon,
 				id: shortid.generate(),
 			};
@@ -39,8 +39,8 @@ export default function websites(state=initialState, action) {
 			}
 
 		case REMOVE_WEBSITE:
-			const id = action.id;
-			return {...state, websites: state.websites.filter(item => item.id !== id)};
+			const url = action.url;
+			return {...state, websites: state.websites.filter(item => item.url !== url)};
 
 		case TOGGLE_SHOW_SITES:
 			return {...state, showSites: !state.showSites};

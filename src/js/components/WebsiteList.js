@@ -4,12 +4,12 @@ import classnames from 'classnames';
 export default class WebsiteList extends Component {
 	shouldComponentUpdate(nextProps) {
 		const { websites, showSites, disabled } = this.props;
-		return ( websites !== nextProps.websites 
-			|| showSites !== nextProps.showSites 
+		return ( websites !== nextProps.websites
+			|| showSites !== nextProps.showSites
 			|| disabled !== nextProps.disabled );
 	}
 	render() {
-		const { 
+		const {
 			websites,
 			removeWebsite,
 			disabled,
@@ -24,21 +24,21 @@ export default class WebsiteList extends Component {
 					<div id="hide-sites">
 						<b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
 					</div>
-					<ul id="website-list">
+					<ul class="website-list">
 					{
 						websites.map((website, idx) => {
 							return (
 								<li className="website-item" key={idx}>
 									<div className="left">
 										<img src={website.favicon} />
-										<span>{website.name}</span>
+										<span>{website.url}</span>
 									</div>
 
-									<div 
-										className={classnames('icon-bin', {disabled})} 
+									<div
+										className={classnames('icon-bin', {disabled})}
 										onClick={() => {
 											if (!disabled) {
-												removeWebsite(website.id)	
+												removeWebsite(website.url)
 											}
 										}}>
 									</div>
@@ -50,7 +50,7 @@ export default class WebsiteList extends Component {
 				</div>
 
 				<div className={classnames({blurring: showSites})}>
-					You're blocking {websites.length} sites. 
+					You're blocking {websites.length} sites.
 					<b className="pointer" onClick={() => toggleShowSites()}> See Sites</b>
 				</div>
 
