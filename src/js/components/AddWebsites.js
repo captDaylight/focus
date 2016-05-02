@@ -11,12 +11,16 @@ export default class Login extends Component {
       websites,
       addWebsite,
       websitesData,
-      removeWebsite
+      removeWebsite,
+      setNextIntroStep
     } = this.props;
 
     return (
       <div>
-
+        <div className="intro-text">
+          <h5>Add sites to your block list!</h5>
+          <h6>You'll see how to add others later.</h6>
+        </div>
         <ul className="website-intro-list">
           {
             websitesData.map((website, idx) => {
@@ -39,7 +43,7 @@ export default class Login extends Component {
                         un-block
                       </button>
                     ) : (
-                      <button onClick={() => {addWebsite(url, favicon)}}>
+                      <button  onClick={() => {addWebsite(url, favicon)}}>
                         block
                       </button>
                     )
@@ -49,7 +53,9 @@ export default class Login extends Component {
             })
           }
         </ul>
-        <button onClick={() => {console.log('NEXT')}}>next</button>
+        <div className="intro-next">
+          <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+        </div>
       </div>
     );
   }
