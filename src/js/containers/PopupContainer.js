@@ -21,7 +21,7 @@ function processSiteInfo(siteURL, id, faviconURL) {
 }
 
 function urlIsInList(url, list) {
-	return list.filter(site => url.indexOf(site.name) >= 0).length > 0;
+	return list.filter(site => url.indexOf(site.url) >= 0).length > 0;
 }
 
 export default class FocusContainer extends Component {
@@ -48,8 +48,8 @@ export default class FocusContainer extends Component {
 			tab => {
 				if (tab.length !== 0) {
 					const { url, id, favIconUrl } = tab[0];
-					
-					processSiteInfo(url, id, favIconUrl)		      
+
+					processSiteInfo(url, id, favIconUrl)
 				}
 			}
 		)
@@ -58,7 +58,7 @@ export default class FocusContainer extends Component {
 		const { countDown, addWebsite } = actions;
 		const { date, minutes, seconds, duration, sound } = this.state.timer;
 		const { websites } = this.state.websites;
-		
+
 		return (
 			<section id="popup" className={classnames({focusing: minutes})}>
 				{
@@ -66,8 +66,8 @@ export default class FocusContainer extends Component {
 					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
 					: (
 						<div className="popup-section">
-							<button 
-								className="popup" 
+							<button
+								className="popup"
 								onClick={() => countDown(Date.now(), duration, sound)}
 							>
 								Start Working
@@ -81,13 +81,13 @@ export default class FocusContainer extends Component {
 						this.props.url.indexOf('chrome://newtab') >= 0
 						?
 						<span>You don't want to block the new tab</span>
-						: 
+						:
 							(urlIsInList(this.props.url, websites)
 							?
 							<span>Site is on the blocked list</span>
 							: (
-									<button 
-										className="popup" 
+									<button
+										className="popup"
 										onClick={this.handleAddWebsite}
 									>
 										block this site
