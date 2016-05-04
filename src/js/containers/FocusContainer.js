@@ -81,8 +81,7 @@ export default class FocusContainer extends Component {
         className={classnames({focusing: !!minutes})}>
         {(() => {
           switch (ui.introStep) {
-            case 0:
-              return (
+            case 0: return (
                 <div>
                   <AddWebsites
                     websitesData={websitesData}
@@ -92,15 +91,51 @@ export default class FocusContainer extends Component {
                     setNextIntroStep={setNextIntroStep} />
                 </div>
               );
-            case 1:
-              return (
+            case 1: return (
                 <div>
-                  next page
-                  <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+                  <div className="intro-text">
+                    <h5>Step 2 <br/> Drop down</h5>
+                    <h6>When you're on a site you want to block in the future, click on the drop down and click "Block This Site". <br/><br/>You can also start a focus session from here.</h6>
+                  </div>
+                  <div className="intro-next">
+                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+                  </div>
                 </div>
               );
-            default:
-              return (
+            case 2: return (
+                <div>
+                  <div className="intro-text">
+                    <h5>Step 3 <br/> Start Focusing</h5>
+                    <h6>A focus session lasts for 25 minutes. The site will go red and countdown until you can take a break.</h6>
+                  </div>
+                  <div className="intro-next">
+                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+                  </div>
+                </div>
+              );
+            case 3: return (
+                <div>
+                  <div className="intro-text">
+                    <h5>Step 3 <br/> Add Todos</h5>
+                    <h6>Break your task into the smallest units possible and write them out. Cross them off your list as you go.</h6>
+                  </div>
+                  <div className="intro-next">
+                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+                  </div>
+                </div>
+              );
+            case 4: return (
+                <div>
+                  <div className="intro-text">
+                    <h5>Step 4 <br/> Enjoy!</h5>
+                    <h6>That's it, now give it spin!</h6>
+                  </div>
+                  <div className="intro-next">
+                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
+                  </div>
+                </div>
+              );
+            default: return (
                 <div>
                   <div id="header">
                     <div id="main-action" className={classnames({blurring: showSites})}>

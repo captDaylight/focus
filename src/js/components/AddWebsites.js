@@ -18,8 +18,8 @@ export default class Login extends Component {
     return (
       <div>
         <div className="intro-text">
-          <h5>Add websites to your block list!</h5>
-          <h6>You'll see how to add others later.</h6>
+          <h5>Step 1 <br/>Add websites to block</h5>
+          <h6>When you start a focus session, any site on your list will be blocked. You'll see how to add others later.</h6>
         </div>
         <ul className="website-intro-list">
           {
