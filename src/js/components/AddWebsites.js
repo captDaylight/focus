@@ -18,7 +18,7 @@ export default class Login extends Component {
     return (
       <div>
         <div className="intro-text">
-          <h5>Add sites to your block list!</h5>
+          <h5>Add websites to your block list!</h5>
           <h6>You'll see how to add others later.</h6>
         </div>
         <ul className="website-intro-list">
