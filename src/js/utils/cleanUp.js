@@ -11,6 +11,7 @@ export default function cleanUp(store) {
 	const morningUTC = morning.getTime();
 
 	const todaysTodos = state.todos.todos.filter(todo => {
+    console.log(todo, !todo.completed);
 		return !todo.completed || todo.completed > morningUTC;
 	});
 

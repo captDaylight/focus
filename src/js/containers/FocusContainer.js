@@ -95,8 +95,9 @@ export default class FocusContainer extends Component {
                 <div>
                   <div className="intro-text">
                     <h5>Step 2 <br/> Drop down</h5>
-                    <h6>When you're on a site you want to block in the future, click on the drop down and click "Block This Site". <br/><br/>You can also start a focus session from here.</h6>
+                    <h6>When you are on a site you want to block, click the drop down and select "Block This Site". <br/><br/> You can also start a focus session from here.</h6>
                   </div>
+                  <img src="dist/img/block.png" />
                   <div className="intro-next">
                     <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
                   </div>
@@ -108,6 +109,7 @@ export default class FocusContainer extends Component {
                     <h5>Step 3 <br/> Start Focusing</h5>
                     <h6>A focus session lasts for 25 minutes. The site will go red and countdown until you can take a break.</h6>
                   </div>
+                  <img className="intro-image" src="dist/img/25m.png" />
                   <div className="intro-next">
                     <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
                   </div>
@@ -117,8 +119,9 @@ export default class FocusContainer extends Component {
                 <div>
                   <div className="intro-text">
                     <h5>Step 3 <br/> Add Todos</h5>
-                    <h6>Break your task into the smallest units possible and write them out. Cross them off your list as you go.</h6>
+                    <h6>Break your task into the smallest units possible and write them out. Cross them off as you go.</h6>
                   </div>
+                  <img className="intro-image" src="dist/img/todo.png" />
                   <div className="intro-next">
                     <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
                   </div>
