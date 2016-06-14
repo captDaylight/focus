@@ -30,24 +30,26 @@ export default class Login extends Component {
                 }) >= 0;
 
               return (
-                <li key={idx} className={classnames('website-item', {blocked: blocked})}>
-                  <div className="left">
-                    <img src={favicon} />
-                    <span>{url}</span>
-                  </div>
+                <li key={idx} className={classnames('website-item-wrapper', {blocked: blocked})}>
+                  <div className="website-item">
+                    <div className="left">
+                      <img src={favicon} />
+                      <span>{url}</span>
+                    </div>
 
-                  {
-                    blocked
-                    ? (
-                      <button onClick={() => {removeWebsite(url)}}>
-                        un-block
-                      </button>
-                    ) : (
-                      <button  onClick={() => {addWebsite(url, favicon)}}>
-                        block
-                      </button>
-                    )
-                  }
+                    {
+                      blocked
+                      ? (
+                        <button onClick={() => {removeWebsite(url)}}>
+                          un-block
+                        </button>
+                      ) : (
+                        <button  onClick={() => {addWebsite(url, favicon)}}>
+                          block
+                        </button>
+                      )
+                    }
+                  </div>
                 </li>
               )
             })
