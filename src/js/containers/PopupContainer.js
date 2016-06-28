@@ -30,7 +30,6 @@ export default class FocusContainer extends Component {
 		this.state = props.state;
 	}
 	updateState(newState) {
-		console.log('in update state');
 		this.setState(newState);
 	}
 	componentWillMount() {

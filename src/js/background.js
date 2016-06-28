@@ -123,7 +123,7 @@ const init = initState => {
   });
 
 };
-console.log(chrome.storage.sync.clear());
+// console.log(chrome.storage.sync.clear());
 chrome.storage.sync.get(null, data => {
   init(Object.keys(data).length !== 0 ? data : false);
 });
