@@ -58,44 +58,58 @@ export default class FocusContainer extends Component {
 		const { countDown, addWebsite } = actions;
 		const { date, minutes, seconds, duration, sound } = this.state.timer;
 		const { websites } = this.state.websites;
+    const { ui } = this.state;
 
 		return (
 			<section id="popup" className={classnames({focusing: minutes})}>
-				{
-					minutes
-					? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
-					: (
-						<div className="popup-section">
-							<button
-								className="popup"
-								onClick={() => countDown(Date.now(), duration, sound)}
-							>
-								Start Working
-							</button>
-						</div>
-					)
-				}
+        {
+          ui.introStep < 5 ?
+          (
+            <div className="popup-section">
+              Open a new tab to get started!
+            </div>
+          ) : (
+            <div>
+              {
+                minutes
+                ? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+                : (
+                  <div className="popup-section">
+                    <button
+                      className="popup"
+                      onClick={() => countDown(Date.now(), duration, sound)}
+                    >
+                      Start Working
+                    </button>
+                  </div>
+                )
+              }
 
-				<div className="popup-section">
-					{
-						this.props.url.indexOf('chrome://newtab') >= 0
-						?
-						<span>You don't want to block the new tab</span>
-						:
-							(urlIsInList(this.props.url, websites)
-							?
-							<span>Site is on the blocked list</span>
-							: (
-									<button
-										className="popup"
-										onClick={this.handleAddWebsite}
-									>
-										block this site
-									</button>
-								)
-							)
-					}
-				</div>
+              <div className="popup-section">
+                {
+                  this.props.url.indexOf('chrome://newtab') >= 0
+                  ?
+                  <span>You don't want to block the new tab</span>
+                  :
+                    (urlIsInList(this.props.url, websites)
+                    ?
+                    <span>Site is on the blocked list</span>
+                    : (
+                        <button
+                          className="popup"
+                          onClick={this.handleAddWebsite}
+                        >
+                          block this site
+                        </button>
+                      )
+                    )
+                }
+              </div>
+            </div>
+          )
+        }
+
+
 			</section>
 		);
 	}
