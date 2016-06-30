@@ -24,24 +24,26 @@ export default class WebsiteList extends Component {
 					<div id="hide-sites">
 						<b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
 					</div>
-					<ul class="website-list">
+					<ul className="website-list">
 					{
 						websites.map((website, idx) => {
 							return (
 								<li className="website-item" key={idx}>
-									<div className="left">
-										<img src={website.favicon} />
-										<span>{website.url}</span>
-									</div>
+                  <div className="website-item-wrapper">
+                    <div className="left">
+                      <img src={website.favicon} />
+                      <span>{website.url}</span>
+                    </div>
 
-									<div
-										className={classnames('icon-bin', {disabled})}
-										onClick={() => {
-											if (!disabled) {
-												removeWebsite(website.url)
-											}
-										}}>
-									</div>
+                    <div
+                      className={classnames('icon-bin', {disabled})}
+                      onClick={() => {
+                        if (!disabled) {
+                          removeWebsite(website.url)
+                        }
+                      }}>
+                    </div>
+                  </div>
 								</li>
 							);
 						})
