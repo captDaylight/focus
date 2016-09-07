@@ -96,7 +96,7 @@ export const websitesData = [
 
   {
     favicon: 'https://www.wikipedia.org/static/favicon/wikipedia.ico',
-    url: 'wikipedia.org/'
+    url: 'wikipedia.org'
   },
 
 	{
@@ -131,11 +131,16 @@ export const websitesData = [
 
   {
     favicon: 'https://www.expedia.com/favicon.ico',
-    url: 'https://www.expedia.com/'
+    url: 'expedia.com'
   },
 
   {
     favicon: 'http://my.ebay.com/favicon.ico',
     url: 'ebay.com'
+  },
+
+  {
+    favicon: 'https://mic.com/component_assets/images/mic-logo-black.png',
+    url: 'mic.com'
   }
 ];

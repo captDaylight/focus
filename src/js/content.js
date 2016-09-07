@@ -43,7 +43,7 @@ function mountOrNot(siteChecker) {
 
 		if (date && date < Date.now()) {
 			if (shouldBlockSite && !mounted) {
-				mountBlocker(state);	
+				mountBlocker(state);
 			}
 		} else if (mounted) {
 			dismountBlocker();
@@ -56,7 +56,7 @@ const checkShouldMountOrNot = mountOrNot(checkShouldBlock(urlData));
 
 chrome.storage.sync.get(null, data => {
 	const { websites, timer } = data;
-	
+
 	checkShouldMountOrNot(websites.websites, timer.date, data);
 
 	chrome.extension.onMessage.addListener(function(msg) {	// Listen for results
@@ -64,7 +64,7 @@ chrome.storage.sync.get(null, data => {
 			const { websites, timer } = msg.data;
 			checkShouldMountOrNot(websites.websites, timer.date, msg.data);
 			if (mounted) {
-				updateBlocker(msg.data);	
+				updateBlocker(msg.data);
 			}
 		}
 	});
@@ -79,10 +79,10 @@ function mountBlocker(state) {
 	mountPoint.style.cssText = ' \
 		font-family: \'Poppins\', sans-serif; letter-spacing: 0.07em; \
 		color:#ea1c0d; position:fixed; width:100%; height:100%; \
-		background-color:#white; top:0px; left:0px; z-index:10000;';
+		background-color:#white; top:0px; left:0px; z-index:10000000000;';
 	body.appendChild(mountPoint);
 	document.getElementsByTagName('html')[0].appendChild(body);
-	
+
 	$('#mount-point-focus').html(mountTemplate());
 	updateBlocker(state);
 	mounted = true;
@@ -99,7 +99,7 @@ function dismountBlocker() {
 function updateBlocker(data) {
 	const {minutes, seconds} = data.timer;
 	const workingOnTodos = filter(data.todos.todos, todo => todo.workingOn && !todo.completed)
-	const todos = workingOnTodos.length !== 0 ? workingOnTodos : filter(data.todos.todos, todo => !todo.completed); 
+	const todos = workingOnTodos.length !== 0 ? workingOnTodos : filter(data.todos.todos, todo => !todo.completed);
 	$('#focus-content-time').html(timeTpl({minutes,seconds}));
 	$('#focus-content-todos').html(todosTpl({todos}));
 }

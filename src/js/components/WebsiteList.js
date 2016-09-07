@@ -29,7 +29,7 @@ export default class WebsiteList extends Component {
 						websites.map((website, idx) => {
 							return (
 								<li className="website-item" key={idx}>
-                  <div className="website-item-wrapper">
+                  <div className="website-item-container">
                     <div className="left">
                       <img src={website.favicon} />
                       <span>{website.url}</span>
