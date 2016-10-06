@@ -33,16 +33,21 @@ export default class SessionsList extends Component {
       return dateDayRoundDown.setHours(0,0,0,0);
     });
 
+    const sessionDayKeys = Object.keys(sessionDays);
+
     return (
       <div id="sessions-container">
-        <h5>WORK LOG</h5>
+        <h5>
+          WORK LOG {
+            sessionDayKeys.length === 1
+            && sessionDays[sessionDayKeys[0]].length > 0
+            && `(${sessionDays[sessionDayKeys[0]].length})`
+          }
+        </h5>
         <ul id="sessions-list">
           {
-
-            Object.keys(sessionDays).reverse().map((day, idx) => {
-              // console.log('----day', (new Date(parseInt(day))).toDateString());
+            sessionDayKeys.reverse().map((day, idx) => {
               const sessions = sessionDays[day].reverse().map((session, idx) => {
-                // console.log('session');
                 const { date, duration } = session;
                 const dateEnd = date + duration;
                 const sessionCheck = betweenDates(date, dateEnd);
@@ -84,16 +89,6 @@ export default class SessionsList extends Component {
               if (parseInt(day) === midnight) {
                 return [...sessions];
               }
-              // else {
-              //  return [(
-              //    <li className="session-day-header">
-              //      <button>
-              //        <div>{(new Date(parseInt(day))).toDateString()}</div>
-              //        <div className="icon-enlarge2"></div>
-              //      </button>
-              //    </li>
-              //  )];
-              // }
             })
           }
         </ul>

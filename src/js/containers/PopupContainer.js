@@ -13,11 +13,8 @@ const actions = wrapActionsWithMessanger([
 function processSiteInfo(siteURL, id, faviconURL) {
 	const urlParse = url.parse(siteURL);
 	const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
-	// turn www.facebook.com into facebook.com
-	// TODO: a website like google.co.uk won't work with this solution, it'll return co.uk
-	const parsedHostname = takeRight(hostname.split('.'), 2).join('.');
 
-	actions.checkForTab(parsedHostname, id, faviconURL);
+	actions.checkForTab(hostname, id, faviconURL);
 }
 
 function urlIsInList(url, list) {
@@ -113,6 +110,3 @@ export default class FocusContainer extends Component {
 		);
 	}
 }
-
-
-

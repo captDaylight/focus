@@ -5,7 +5,8 @@ import {
 	SET_COUNTDOWN_INTERVAL,
 	CLEAR_COUNTDOWN_INTERVAL,
 	UPDATE_SESSIONS,
-	TOGGLE_ASK_CANCEL_TIME
+	TOGGLE_ASK_CANCEL_TIME,
+	CREATE_FINISH_ALERT
 } from '../actions/timer';
 
 // timer data gets cleared
@@ -71,7 +72,17 @@ export default function timer(state=initialState, action) {
 				...timerInitial,
 				sessions: removeLast(state.sessions),
 				askCancelTimer: false
-			}
+			};
+
+		case CREATE_FINISH_ALERT:
+			chrome.notifications.create({
+				title:'SESSION DONE',
+				message: `Finished at ${formatAMPM(Date.now(), true)}`,
+				type:'basic',
+				iconUrl: 'dist/img/logo-lg-blue.png',
+			});
+			return state;
+
 		default:
 			return state;
 	}

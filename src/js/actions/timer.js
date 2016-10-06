@@ -60,6 +60,13 @@ export function countDown(date, duration, sound) {
 	}
 }
 
+export const CREATE_FINISH_ALERT = 'CREATE_FINISH_ALERT'
+export function createFinishAlert() {
+	return {
+		type: CREATE_FINISH_ALERT
+	}
+}
+
 export function startCountDown(date, duration, sound) {
 	var audio = new Audio(`dist/sound/${sound}.mp3`);
 	return dispatch => {
@@ -73,12 +80,7 @@ export function startCountDown(date, duration, sound) {
 			} else {
 				clearInterval(interval);
 				audio.play();
-				chrome.notifications.create({
-					title:'SESSION DONE',
-					message: `Finished at ${formatAMPM(Date.now(), true)}`,
-					type:'basic',
-					iconUrl: 'dist/img/logo-lg-blue.png',
-				});
+				dispatch(createFinishAlert());
 				dispatch(clearCountdownInterval())
 			}
 		};
@@ -98,6 +100,7 @@ export function startCountDown(date, duration, sound) {
 		setTime(); // initial time before timeout
 	}
 }
+
 
 export const TOGGLE_ASK_CANCEL_TIME = 'TOGGLE_ASK_CANCEL_TIME';
 export function toggleAskCancelTimer() {
