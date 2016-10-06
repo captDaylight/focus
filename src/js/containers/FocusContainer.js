@@ -27,6 +27,7 @@ const actions = wrapActionsWithMessanger([
   'login',
   'logout',
   'setNextIntroStep',
+  'toggleAskCancelTimer',
 ]);
 
 let oldState = {};
@@ -64,12 +65,12 @@ export default class FocusContainer extends Component {
 
   render() {
     const {
-      countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+      clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-      editTodo, logout, setNextIntroStep
+      editTodo, logout, setNextIntroStep, toggleAskCancelTimer
     } = actions;
     const {
-      date, minutes, seconds, duration, sessions, ampm, sound,
+      date, minutes, seconds, duration, sessions, ampm, sound, askCancelTimer
     } = this.state.timer;
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
@@ -131,7 +132,7 @@ export default class FocusContainer extends Component {
                 <div>
                   <div className="intro-text">
                     <h5>Step 4 <br/> Enjoy!</h5>
-                    <h6>That's it, now give it spin!</h6>
+                    <h6>{`That's it, now give it spin!`}</h6>
                   </div>
                   <div className="intro-next">
                     <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
@@ -144,7 +145,13 @@ export default class FocusContainer extends Component {
                     <div id="main-action" className={classnames({blurring: showSites})}>
                       {
                         minutes
-                        ? <MinutesAndSeconds minutes={minutes} seconds={seconds} />
+                        ? <MinutesAndSeconds
+                            minutes={minutes}
+                            seconds={seconds}
+                            toggleAskCancelTimer={toggleAskCancelTimer}
+                            clearTimer={clearTimer}
+                            askCancelTimer={askCancelTimer}
+                          />
                         : (
                           <button
                             className="focus-button"

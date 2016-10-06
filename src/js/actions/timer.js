@@ -1,5 +1,7 @@
 import formatAMPM from '../utils/formatAMPM';
 
+let countdownInterval;
+
 export const SET_TIMER = 'SET_TIMER';
 export function setTimer(date) {
 	return {
@@ -10,6 +12,7 @@ export function setTimer(date) {
 
 export const CLEAR_TIMER = 'CLEAR_TIMER';
 export function clearTimer() {
+	clearInterval(countdownInterval);
 	return {
 		type: CLEAR_TIMER,
 	}
@@ -66,7 +69,7 @@ export function startCountDown(date, duration, sound) {
 			if (fromNow >= 0) {
 				const minutes = doubleDigit(Math.floor(fromNow / MINUTE));
 				const seconds = doubleDigit(Math.floor(fromNow / SECOND) % 60);
-				dispatch(setTimeLeft(minutes, seconds));				
+				dispatch(setTimeLeft(minutes, seconds));
 			} else {
 				clearInterval(interval);
 				audio.play();
@@ -84,14 +87,21 @@ export function startCountDown(date, duration, sound) {
 		// open the browser mid second and have timers that are out of sync
 		setTimeout(() => {
 			// set time everysecond
-			const countdownInterval = setInterval(() => {
+			countdownInterval = setInterval(() => {
 				setTime(countdownInterval); // set times each interval
-			}, 1000);			
-			
+			}, 1000);
+
 			setTime(countdownInterval); // set time first after timeout
 			dispatch(setCountdownInterval(countdownInterval));
-		}, (dateEnd - Date.now()) % SECOND ); 
+		}, (dateEnd - Date.now()) % SECOND );
 
 		setTime(); // initial time before timeout
+	}
+}
+
+export const TOGGLE_ASK_CANCEL_TIME = 'TOGGLE_ASK_CANCEL_TIME';
+export function toggleAskCancelTimer() {
+	return {
+		type: TOGGLE_ASK_CANCEL_TIME
 	}
 }

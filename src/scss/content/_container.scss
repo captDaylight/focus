@@ -15,15 +15,13 @@
 #header {
 	@include display(flex);
 	@include justify-content(space-between);
-	@include align-items(center);
-}
-
-#main-action {
-	height: 100px;
+	// @include align-items(center);
+	margin-bottom: 5rem;
 }
 
 #clock {
-	font-size: 4em;
+	font-size: 5rem;
+	line-height: 5rem;
 }
 
 #spread {

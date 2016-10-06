@@ -89,3 +89,19 @@ button:focus {
     }
   }
 }
+
+.pointer {
+	cursor: pointer;
+}
+
+.pink-hover-red {
+	color: lighten($red, 30%);
+	@include transition(color 0.2s ease-in-out);
+	&:hover {
+		color: $red;
+	}
+}
+
+.margin-left-sm {
+	margin-left: 10px;
+}

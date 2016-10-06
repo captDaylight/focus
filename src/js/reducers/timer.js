@@ -1,10 +1,11 @@
-import { 
+import {
 	SET_TIMER,
 	CLEAR_TIMER,
 	SET_TIME_LEFT,
 	SET_COUNTDOWN_INTERVAL,
 	CLEAR_COUNTDOWN_INTERVAL,
 	UPDATE_SESSIONS,
+	TOGGLE_ASK_CANCEL_TIME
 } from '../actions/timer';
 
 // timer data gets cleared
@@ -18,15 +19,22 @@ const timerInitial = {
 // meta data does not get cleared
 const metaInitial = {
 	sessions: [],
-	duration: 1500000, 
+	duration: 1500000,
 	// duration: 70000,
 	// duration: 20000,
 	ampm: true, // am pm OR military time
-	sound: 'chime'
+	sound: 'chime',
+	askCancelTimer: false
 }
 
 // combine timerInitial and metaInitial to form initialstate
 const initialState = {...timerInitial, ...metaInitial};
+
+const removeLast = array => {
+  const newArray = [...array];
+  newArray.pop();
+	return newArray;
+};
 
 export default function timer(state=initialState, action) {
 	switch(action.type) {
@@ -36,8 +44,8 @@ export default function timer(state=initialState, action) {
 				duration: state.duration,
 			};
 			return {
-				...state, 
-				date: action.date, 
+				...state,
+				date: action.date,
 				sessions: [...state.sessions, session]
 			};
 
@@ -54,6 +62,16 @@ export default function timer(state=initialState, action) {
 		case UPDATE_SESSIONS:
 			return {...state, sessions: action.sessions};
 
+		case TOGGLE_ASK_CANCEL_TIME:
+			return {...state, askCancelTimer: !state.askCancelTimer};
+
+		case CLEAR_TIMER:
+			return {
+				...state,
+				...timerInitial,
+				sessions: removeLast(state.sessions),
+				askCancelTimer: false
+			}
 		default:
 			return state;
 	}

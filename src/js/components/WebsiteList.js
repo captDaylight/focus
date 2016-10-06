@@ -52,8 +52,7 @@ export default class WebsiteList extends Component {
 				</div>
 
 				<div className={classnames({blurring: showSites})}>
-					You're blocking {websites.length} sites.
-					<b className="pointer" onClick={() => toggleShowSites()}> See Sites</b>
+					<b className="pointer" onClick={() => toggleShowSites()}>View Profile</b>
 				</div>
 
 			</div>

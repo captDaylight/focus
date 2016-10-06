@@ -41,12 +41,11 @@ const init = initState => {
     storageSync(store.getState());
   }
 
-
   // subscribe to store and sync chrome state
   store.subscribe(() => {
     const state = store.getState();
     const statePayload = { type: 'STATE_UPDATE', data: state };
-    // console.log('STATE CHANGE');
+    // console.log('----STATE CHANGE');
     if (state.timer.date) {
       const {duration, date} = state.timer;
       const timeLeft = (date + duration) - Date.now();
@@ -64,6 +63,7 @@ const init = initState => {
       chrome.browserAction.setIcon({path: 'dist/img/logo-sm-blue.png'});
       chrome.browserAction.setBadgeText({text: ''});
     }
+
     storageSync(state);
 
     // for the popup
@@ -93,7 +93,7 @@ const init = initState => {
   // https://developer.chrome.com/extensions/messaging#connect
   chrome.extension.onMessage.addListener((req, sender, sendRes) => {
     const actions = {...timer, ...websites, ...todos, ...ui};
-    // console.log('STATE',store.getState());
+    // console.log('STATE', req.action, req.data);
     // const {token} = store.getState().user;
     // console.log(token);
     if (req.type === 'ACTION') {
