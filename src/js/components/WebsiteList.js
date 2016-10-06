@@ -13,41 +13,37 @@ export default class WebsiteList extends Component {
 			websites,
 			removeWebsite,
 			disabled,
-			showSites,
 			toggleShowSites,
 		} = this.props;
 
 		return (
 			<div>
-
-				<div id="website-list-wrapper" className={classnames({display: showSites})}>
-					<ul className="website-list">
-					{
-						websites.map((website, idx) => {
-							return (
-								<li className="website-item" key={idx}>
-                  <div className="website-item-container">
-                    <div className="left">
-                      <img src={website.favicon} />
-                      <span>{website.url}</span>
-                    </div>
-
-                    <div
-                      className={classnames('icon-bin', {disabled})}
-                      onClick={() => {
-                        if (!disabled) {
-                          removeWebsite(website.url)
-                        }
-                      }}>
-                    </div>
+				<h5>{`${websites.length} BLOCKED SITES`}</h5>
+				<ul className="website-list">
+				{
+					websites.map((website, idx) => {
+						return (
+							<li className="website-item" key={idx}>
+                <div className="website-item-container">
+                  <div className="left">
+                    <img src={website.favicon} />
+                    <span>{website.url}</span>
                   </div>
-								</li>
-							);
-						})
-					}
-					</ul>
-				</div>
 
+                  <div
+                    className={classnames('icon-bin', {disabled})}
+                    onClick={() => {
+                      if (!disabled) {
+                        removeWebsite(website.url)
+                      }
+                    }}>
+                  </div>
+                </div>
+							</li>
+						);
+					})
+				}
+				</ul>
 			</div>
 		);
 	}

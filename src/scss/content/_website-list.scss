@@ -1,14 +1,6 @@
-.profile {
+.profile-wrapper {
   opacity: 0;
   z-index: 1;
-  &.display {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-#website-list-wrapper {
   @include transition(all 0.2s ease-in-out);
   pointer-events: none;
   position: fixed;
@@ -17,7 +9,14 @@
   width: 100%;
   top: 0px;
   left: 0px;
-  @extend .center;
+  &.display {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.profile {
+  padding: 30px;
 }
 
 #hide-sites {
@@ -28,9 +27,8 @@
 }
 
 .website-list {
-  @include columns(3);
-  @include column-gap(150px);
-  padding: 30px;
+  @include columns(4);
+  @include column-gap(50px);
 }
 
 .website-item {

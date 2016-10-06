@@ -6,7 +6,6 @@ import Login from '../components/Login';
 import AddWebsites from '../components/AddWebsites';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import Profile from '../components/Profile';
-import WebsiteList from '../components/WebsiteList';
 import SessionsList from '../components/SessionsList';
 import Todos from '../components/Todos';
 import { websitesData } from '../websitesData';
