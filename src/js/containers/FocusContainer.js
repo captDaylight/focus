@@ -5,7 +5,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import AddWebsites from '../components/AddWebsites';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
-import WebsiteForm from '../components/WebsiteForm';
+import Profile from '../components/Profile';
 import WebsiteList from '../components/WebsiteList';
 import SessionsList from '../components/SessionsList';
 import Todos from '../components/Todos';
@@ -161,12 +161,14 @@ export default class FocusContainer extends Component {
                         )
                       }
                     </div>
-                    <WebsiteList
+                    <Profile
+                      showSites={showSites}
                       websites={websites}
                       showSites={showSites}
                       toggleShowSites={toggleShowSites}
                       removeWebsite={removeWebsite}
-                      disabled={minutes ? true : false} />
+                      disabled={minutes ? true : false}
+                    />
                   </div>
 
                   <div id="spread" className={classnames({blurring: showSites})}>
@@ -191,3 +193,9 @@ export default class FocusContainer extends Component {
     );
   }
 }
+// <WebsiteList
+//   websites={websites}
+//   showSites={showSites}
+//   toggleShowSites={toggleShowSites}
+//   removeWebsite={removeWebsite}
+//   disabled={minutes ? true : false} />

@@ -16,14 +16,11 @@ export default class WebsiteList extends Component {
 			showSites,
 			toggleShowSites,
 		} = this.props;
-		// console.log('rendering websites');
+
 		return (
 			<div>
 
 				<div id="website-list-wrapper" className={classnames({display: showSites})}>
-					<div id="hide-sites">
-						<b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
-					</div>
 					<ul className="website-list">
 					{
 						websites.map((website, idx) => {

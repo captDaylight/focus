@@ -1,3 +1,13 @@
+.profile {
+  opacity: 0;
+  z-index: 1;
+  &.display {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 #website-list-wrapper {
   @include transition(all 0.2s ease-in-out);
   pointer-events: none;
@@ -8,14 +18,8 @@
   top: 0px;
   left: 0px;
   @extend .center;
-  opacity: 0;
-  z-index: 1;
-  &.display {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-  }
 }
+
 #hide-sites {
   position: absolute;
   top: 25px;
