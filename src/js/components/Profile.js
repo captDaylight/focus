@@ -12,11 +12,16 @@ export default class Profile extends Component {
     } = this.props;
 
     return (
-      <div className={classnames('profile', {display: showSites})}>
-        profile
-        <div id="hide-sites">
-          <b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
-        </div>
+      <div>
+				<div className={classnames({blurring: showSites})}>
+					<b className="pointer" onClick={() => toggleShowSites()}>View Profile</b>
+				</div>
+				<div className={classnames('profile', {display: showSites})}>
+					profile
+	        <div id="hide-sites">
+	          <b className="pointer icon-cross" onClick={() => toggleShowSites()}></b>
+	        </div>
+				</div>
       </div>
     );
   }

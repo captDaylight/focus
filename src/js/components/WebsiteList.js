@@ -48,10 +48,6 @@ export default class WebsiteList extends Component {
 					</ul>
 				</div>
 
-				<div className={classnames({blurring: showSites})}>
-					<b className="pointer" onClick={() => toggleShowSites()}>View Profile</b>
-				</div>
-
 			</div>
 		);
 	}
