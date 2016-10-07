@@ -13,7 +13,6 @@ const FocusInput = React.createClass({
   },
 
   render() {
-
     // Set a specific className based on the validation
     // state of this component. showRequired() is true
     // when the value is empty and the required prop is

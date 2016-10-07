@@ -18,7 +18,7 @@ export default class WebsiteList extends Component {
 
 		return (
 			<div>
-				<h5>{`${websites.length} BLOCKED SITES`}</h5>
+				<h5>{`BLOCKED SITES (${websites.length})`}</h5>
 				<ul className="website-list">
 				{
 					websites.map((website, idx) => {
