@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import WebsiteList from './WebsiteList';
 
+const MINUTE = 60000;
+
 export default class Profile extends Component {
 	render() {
     const {
@@ -10,6 +12,8 @@ export default class Profile extends Component {
       removeWebsite,
       disabled,
       toggleShowSites,
+			setTimerLength,
+			duration
     } = this.props;
 
     return (
@@ -22,7 +26,19 @@ export default class Profile extends Component {
 						<div className="margin-bottom">
 							<h5>FOCUS LENGTH</h5>
 							<h1 className="flex flex-center">
-								<button className="margin-right-sm">-</button> 25 Min <button className="margin-left-sm">+</button>
+								<button
+									className="margin-right-sm"
+									onClick={() => setTimerLength('DECREMENT')}
+								>
+									-
+								</button>
+									<span>{duration / MINUTE} Min</span>
+								<button
+									className="margin-left-sm"
+									onClick={() => setTimerLength('INCREMENT')}
+								>
+									+
+								</button>
 							</h1>
 						</div>
 

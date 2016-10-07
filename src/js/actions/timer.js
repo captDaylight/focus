@@ -108,3 +108,12 @@ export function toggleAskCancelTimer() {
 		type: TOGGLE_ASK_CANCEL_TIME
 	}
 }
+
+export const SET_TIMER_LENGTH = 'SET_TIMER_LENGTH';
+export function setTimerLength(incOrDec = 'INCREMENT') {
+	console.log('action, set timer length');
+	return {
+		type: SET_TIMER_LENGTH,
+		incOrDec
+	}
+}

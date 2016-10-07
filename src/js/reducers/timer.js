@@ -6,8 +6,12 @@ import {
 	CLEAR_COUNTDOWN_INTERVAL,
 	UPDATE_SESSIONS,
 	TOGGLE_ASK_CANCEL_TIME,
-	CREATE_FINISH_ALERT
+	CREATE_FINISH_ALERT,
+	SET_TIMER_LENGTH
 } from '../actions/timer';
+
+const MINUTE = 60000;
+
 
 // timer data gets cleared
 const timerInitial = {
@@ -21,8 +25,6 @@ const timerInitial = {
 const metaInitial = {
 	sessions: [],
 	duration: 1500000,
-	// duration: 70000,
-	// duration: 20000,
 	ampm: true, // am pm OR military time
 	sound: 'chime',
 	askCancelTimer: false
@@ -82,6 +84,21 @@ export default function timer(state=initialState, action) {
 				iconUrl: 'dist/img/logo-lg-blue.png',
 			});
 			return state;
+
+		case SET_TIMER_LENGTH:
+			const { incOrDec } = action;
+			let newDuration;
+
+			if (incOrDec === 'INCREMENT') {
+				// can't be greater than 60 minutes
+				newDuration = state.duration < 3600000
+					? state.duration + MINUTE : state.duration;
+			} else {
+				newDuration = state.duration > 300000
+					? state.duration - MINUTE : state.duration;
+			}
+			console.log('setting timer length', newDuration);
+			return {...state, duration: newDuration};
 
 		default:
 			return state;

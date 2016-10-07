@@ -34,14 +34,15 @@ export default class SessionsList extends Component {
     });
 
     const sessionDayKeys = Object.keys(sessionDays);
-
+    console.log(parseInt(sessionDayKeys[sessionDayKeys.length - 1]) === midnight);
     return (
       <div id="sessions-container">
         <h5>
           WORK LOG {
-            sessionDayKeys.length === 1
-            && sessionDays[sessionDayKeys[0]].length > 0
-            && `(${sessionDays[sessionDayKeys[0]].length})`
+            sessionDayKeys.length > 0
+            && parseInt(sessionDayKeys[sessionDayKeys.length - 1]) === midnight
+            && sessionDays[sessionDayKeys[sessionDayKeys.length - 1]].length > 0
+            && `(${sessionDays[sessionDayKeys[sessionDayKeys.length - 1]].length})`
           }
         </h5>
         <ul id="sessions-list">

@@ -27,6 +27,7 @@ const actions = wrapActionsWithMessanger([
   'logout',
   'setNextIntroStep',
   'toggleAskCancelTimer',
+  'setTimerLength'
 ]);
 
 let oldState = {};
@@ -66,7 +67,7 @@ export default class FocusContainer extends Component {
     const {
       clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
-      editTodo, logout, setNextIntroStep, toggleAskCancelTimer
+      editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, sound, askCancelTimer
@@ -167,6 +168,8 @@ export default class FocusContainer extends Component {
                       toggleShowSites={toggleShowSites}
                       removeWebsite={removeWebsite}
                       disabled={minutes ? true : false}
+                      setTimerLength={setTimerLength}
+                      duration={duration}
                     />
                   </div>
 
@@ -192,9 +195,3 @@ export default class FocusContainer extends Component {
     );
   }
 }
-// <WebsiteList
-//   websites={websites}
-//   showSites={showSites}
-//   toggleShowSites={toggleShowSites}
-//   removeWebsite={removeWebsite}
-//   disabled={minutes ? true : false} />
