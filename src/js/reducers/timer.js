@@ -27,6 +27,7 @@ const metaInitial = {
 	duration: 1500000,
 	ampm: true, // am pm OR military time
 	sound: 'chime',
+	ticking: false,
 	askCancelTimer: false
 }
 
