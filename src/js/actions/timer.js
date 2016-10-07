@@ -1,6 +1,8 @@
 import formatAMPM from '../utils/formatAMPM';
 
 let countdownInterval;
+const tickingSound = new Audio(`dist/sound/tick.mp3`);
+tickingSound.loop = true;
 
 export const SET_TIMER = 'SET_TIMER';
 export function setTimer(date) {
@@ -13,6 +15,7 @@ export function setTimer(date) {
 export const CLEAR_TIMER = 'CLEAR_TIMER';
 export function clearTimer() {
 	clearInterval(countdownInterval);
+	tickingSound.pause();
 	return {
 		type: CLEAR_TIMER,
 	}
@@ -53,10 +56,10 @@ export function updateSessions(sessions) {
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-export function countDown(date, duration, sound) {
+export function countDown(date, duration, sound, ticking = false) {
 	return dispatch => {
 		dispatch(setTimer(date));
-		dispatch(startCountDown(date, duration, sound));
+		dispatch(startCountDown(date, duration, sound, ticking));
 	}
 }
 
@@ -67,8 +70,12 @@ export function createFinishAlert() {
 	}
 }
 
-export function startCountDown(date, duration, sound) {
+export function startCountDown(date, duration, sound, ticking) {
 	var audio = new Audio(`dist/sound/${sound}.mp3`);
+	if (ticking) {
+		// play ticking sound on loop
+		tickingSound.play();
+	}
 	return dispatch => {
 		const dateEnd = date + duration;
 		const setTime = interval => {
@@ -79,6 +86,7 @@ export function startCountDown(date, duration, sound) {
 				dispatch(setTimeLeft(minutes, seconds));
 			} else {
 				clearInterval(interval);
+				tickingSound.pause();
 				audio.play();
 				dispatch(createFinishAlert());
 				dispatch(clearCountdownInterval())
@@ -111,9 +119,15 @@ export function toggleAskCancelTimer() {
 
 export const SET_TIMER_LENGTH = 'SET_TIMER_LENGTH';
 export function setTimerLength(incOrDec = 'INCREMENT') {
-	console.log('action, set timer length');
 	return {
 		type: SET_TIMER_LENGTH,
 		incOrDec
+	}
+}
+
+export const TOGGLE_TICKING = 'TOGGLE_TICKING';
+export function toggleTicking() {
+	return {
+		type: TOGGLE_TICKING,
 	}
 }

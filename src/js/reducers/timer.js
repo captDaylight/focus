@@ -7,7 +7,8 @@ import {
 	UPDATE_SESSIONS,
 	TOGGLE_ASK_CANCEL_TIME,
 	CREATE_FINISH_ALERT,
-	SET_TIMER_LENGTH
+	SET_TIMER_LENGTH,
+	TOGGLE_TICKING
 } from '../actions/timer';
 
 const MINUTE = 60000;
@@ -100,6 +101,9 @@ export default function timer(state=initialState, action) {
 			}
 			console.log('setting timer length', newDuration);
 			return {...state, duration: newDuration};
+
+		case TOGGLE_TICKING:
+			return {...state, ticking: !state.ticking};
 
 		default:
 			return state;

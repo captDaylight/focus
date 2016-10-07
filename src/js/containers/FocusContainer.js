@@ -27,7 +27,8 @@ const actions = wrapActionsWithMessanger([
   'logout',
   'setNextIntroStep',
   'toggleAskCancelTimer',
-  'setTimerLength'
+  'setTimerLength',
+  'toggleTicking'
 ]);
 
 let oldState = {};
@@ -66,11 +67,11 @@ export default class FocusContainer extends Component {
   render() {
     const {
       clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
-      toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit,
+      toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
       editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength
     } = actions;
     const {
-      date, minutes, seconds, duration, sessions, ampm, sound, askCancelTimer
+      date, minutes, seconds, duration, sessions, ampm, sound, askCancelTimer, ticking
     } = this.state.timer;
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
@@ -155,7 +156,7 @@ export default class FocusContainer extends Component {
                         : (
                           <button
                             className="focus-button"
-                            onClick={() => countDown(Date.now(), duration, sound)}>
+                            onClick={() => countDown(Date.now(), duration, sound, ticking)}>
                             start focusing
                           </button>
                         )
@@ -170,6 +171,8 @@ export default class FocusContainer extends Component {
                       disabled={minutes ? true : false}
                       setTimerLength={setTimerLength}
                       duration={duration}
+                      toggleTicking={toggleTicking}
+                      ticking={ticking}
                     />
                   </div>
 
