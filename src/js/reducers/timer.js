@@ -6,13 +6,11 @@ import {
 	CLEAR_COUNTDOWN_INTERVAL,
 	UPDATE_SESSIONS,
 	TOGGLE_ASK_CANCEL_TIME,
-	CREATE_FINISH_ALERT,
 	SET_TIMER_LENGTH,
 	TOGGLE_TICKING
 } from '../actions/timer';
 
 const MINUTE = 60000;
-
 
 // timer data gets cleared
 const timerInitial = {
@@ -78,15 +76,6 @@ export default function timer(state=initialState, action) {
 				askCancelTimer: false
 			};
 
-		case CREATE_FINISH_ALERT:
-			chrome.notifications.create({
-				title:'SESSION DONE',
-				message: `Finished at ${formatAMPM(Date.now(), true)}`,
-				type:'basic',
-				iconUrl: 'dist/img/logo-lg-blue.png',
-			});
-			return state;
-
 		case SET_TIMER_LENGTH:
 			const { incOrDec } = action;
 			let newDuration;
@@ -96,10 +85,9 @@ export default function timer(state=initialState, action) {
 				newDuration = state.duration < 3600000
 					? state.duration + MINUTE : state.duration;
 			} else {
-				newDuration = state.duration > 300000
+				newDuration = state.duration > MINUTE
 					? state.duration - MINUTE : state.duration;
 			}
-			console.log('setting timer length', newDuration);
 			return {...state, duration: newDuration};
 
 		case TOGGLE_TICKING:

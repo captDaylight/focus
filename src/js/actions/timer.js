@@ -63,13 +63,6 @@ export function countDown(date, duration, sound, ticking = false) {
 	}
 }
 
-export const CREATE_FINISH_ALERT = 'CREATE_FINISH_ALERT'
-export function createFinishAlert() {
-	return {
-		type: CREATE_FINISH_ALERT
-	}
-}
-
 export function startCountDown(date, duration, sound, ticking) {
 	var audio = new Audio(`dist/sound/${sound}.mp3`);
 	if (ticking) {
@@ -86,10 +79,15 @@ export function startCountDown(date, duration, sound, ticking) {
 				dispatch(setTimeLeft(minutes, seconds));
 			} else {
 				clearInterval(interval);
+				dispatch(clearCountdownInterval());
+				chrome.notifications.create({
+					title:'SESSION DONE',
+					message: `Finished at ${formatAMPM(Date.now(), true)}`,
+					type:'basic',
+					iconUrl: 'dist/img/logo-lg-blue.png',
+				});
 				tickingSound.pause();
 				audio.play();
-				dispatch(createFinishAlert());
-				dispatch(clearCountdownInterval())
 			}
 		};
 
@@ -105,6 +103,7 @@ export function startCountDown(date, duration, sound, ticking) {
 			dispatch(setCountdownInterval(countdownInterval));
 		}, (dateEnd - Date.now()) % SECOND );
 
+		chrome.browserAction.setIcon({path: 'dist/img/logo-sm-red.png'});
 		setTime(); // initial time before timeout
 	}
 }

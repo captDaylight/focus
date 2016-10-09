@@ -29,14 +29,14 @@ export default class Profile extends Component {
 							<h5>FOCUS LENGTH</h5>
 							<div className="flex flex-center">
 								<h1
-									className="margin-right-sm pointer"
+									className="margin-right-sm pointer no-select"
 									onClick={() => setTimerLength('DECREMENT')}
 								>
 									-
 								</h1>
 									<h1>{duration / MINUTE} Min</h1>
 								<h1
-									className="margin-left-sm pointer"
+									className="margin-left-sm pointer no-select"
 									onClick={() => setTimerLength('INCREMENT')}
 								>
 									+
