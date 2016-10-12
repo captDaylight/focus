@@ -5,6 +5,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import AddWebsites from '../components/AddWebsites';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
+import AskCancel from '../components/AskCancel';
 import Profile from '../components/Profile';
 import SessionsList from '../components/SessionsList';
 import Todos from '../components/Todos';
@@ -146,13 +147,17 @@ export default class FocusContainer extends Component {
                     <div id="main-action" className={classnames({blurring: showSites})}>
                       {
                         minutes
-                        ? <MinutesAndSeconds
-                            minutes={minutes}
-                            seconds={seconds}
-                            toggleAskCancelTimer={toggleAskCancelTimer}
-                            clearTimer={clearTimer}
-                            askCancelTimer={askCancelTimer}
-                          />
+                        ? (<div>
+                            <MinutesAndSeconds
+                              minutes={minutes}
+                              seconds={seconds}
+                            />
+                            <AskCancel
+                              toggleAskCancelTimer={toggleAskCancelTimer}
+                              askCancelTimer={askCancelTimer}
+                              clearTimer={clearTimer}
+                            />
+                          </div>)
                         : (
                           <button
                             className="focus-button"

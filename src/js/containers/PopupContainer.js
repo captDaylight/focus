@@ -85,7 +85,7 @@ export default class FocusContainer extends Component {
                 {
                   this.props.url.indexOf('chrome://newtab') >= 0
                   ?
-                  <span>You don't want to block the new tab</span>
+                  <span>{`You don't want to block the new tab`}</span>
                   :
                     (urlIsInList(this.props.url, websites)
                     ?
