@@ -1,17 +1,17 @@
 export const websitesData = [
 	{
     favicon: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
-    url: 'youtube.com'
+    url: 'www.youtube.com'
   },
 
   {
     favicon: 'https://i.vimeocdn.com/favicon/main-touch_180',
-    url: 'vimeo.com'
+    url: 'www.vimeo.com'
   },
 
   {
     favicon: 'https://www.redditstatic.com/favicon.ico',
-    url: 'reddit.com'
+    url: 'www.reddit.com'
   },
 
   {
@@ -26,52 +26,47 @@ export const websitesData = [
 
   {
     favicon: 'https://secure.assets.tumblr.com/images/favicons/favicon.ico?_v=16316ca8b353271a2067f973950eaa42',
-    url: 'tumblr.com'
+    url: 'www.tumblr.com'
   },
 
   {
     favicon: 'https://static.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico',
-    url: 'linkedin.com'
+    url: 'www.linkedin.com'
   },
 
   {
     favicon: 'https://s-passets-cache-ak0.pinimg.com/webapp/style/app/common/images/favicon-57a225b2.png',
-    url: 'pinterest.com'
+    url: 'www.pinterest.com'
   },
 
 	{
     favicon: 'https://assets.guim.co.uk/images/favicons/79d7ab5a729562cebca9c6a13c324f0e/32x32.ico',
-    url: 'theguardian.com'
+    url: 'www.theguardian.com'
   },
 
 	{
     favicon: 'http://static01.nyt.com/favicon.ico',
-    url: 'nytimes.com'
+    url: 'www.nytimes.com'
   },
 
   {
     favicon: 'http://www.cnn.com/favicon.ie9.ico',
-    url: 'cnn.com'
+    url: 'www.cnn.com'
   },
 
   {
     favicon: 'http://www.huffingtonpost.com/favicon.ico',
-    url: 'huffingtonpost.com'
-  },
-
-	{
-    favicon: 'http://gothamist.com/favicon.ico',
-    url: 'gothamist.com'
+    url: 'www.huffingtonpost.com'
   },
 
   {
     favicon: 'http://a.espncdn.com/favicon.ico',
-    url: 'espn.go.com'
+    url: 'www.espn.com'
   },
 
 	{
     favicon: 'https://news.ycombinator.com/favicon.ico',
-    url: 'ycombinator.com'
+    url: 'news.ycombinator.com'
   },
 
 	{
@@ -101,42 +96,42 @@ export const websitesData = [
 
 	{
     favicon: 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2015.ico',
-    url: 'netflix.com'
+    url: 'www.netflix.com'
   },
 
   {
     favicon: 'https://www.amazon.com/favicon.ico',
-    url: 'amazon.com'
+    url: 'www.amazon.com'
   },
 
   {
     favicon: 'http://www.hulu.com/fat-favicon.ico',
-    url: 'hulu.com'
+    url: 'www.hulu.com'
   },
 
   {
     favicon: 'http://www.pandora.com/img/pandora_favicon_144.png',
-    url: 'pandora.com'
+    url: 'www.pandora.com'
   },
 
   {
     favicon: 'http://q-ec.bstatic.com/static/img/b25logo/favicon/ebc77706da3aae4aee7b05dadf182390f0d26d11.ico',
-    url: 'booking.com'
+    url: 'www.booking.com'
   },
 
   {
     favicon: 'https://static.tacdn.com/favicon.ico',
-    url: 'tripadvisor.com'
+    url: 'www.tripadvisor.com'
   },
 
   {
     favicon: 'https://www.expedia.com/favicon.ico',
-    url: 'expedia.com'
+    url: 'www.expedia.com'
   },
 
   {
     favicon: 'http://my.ebay.com/favicon.ico',
-    url: 'ebay.com'
+    url: 'www.ebay.com'
   },
 
   {
