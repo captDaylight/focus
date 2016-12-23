@@ -19,6 +19,11 @@ export const websitesData = [
     url: 'imgur.com'
   },
 
+	{
+		favicon: 'https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
+		url: 'mail.google.com'
+	},
+
   {
     favicon: 'https://assets-9gag-fun.9cache.com/s/fab0aa49/b1352edad08f91b71a3755195331c50ce2eba9e0/static/dist/core/img/favicon_v2.png',
     url: '9gag.com'

@@ -2,6 +2,7 @@ import formatAMPM from '../utils/formatAMPM';
 
 let countdownInterval;
 const tickingSound = new Audio(`dist/sound/tick.mp3`);
+const audio = new Audio(`dist/sound/chime.mp3`);
 tickingSound.loop = true;
 
 export const SET_TIMER = 'SET_TIMER';
@@ -56,15 +57,14 @@ export function updateSessions(sessions) {
 import doubleDigit from '../utils/doubleDigit';
 const MINUTE = 60000;
 const SECOND = 1000;
-export function countDown(date, duration, sound, ticking = false) {
+export function countDown(date, duration, notification, ticking = false) {
 	return dispatch => {
 		dispatch(setTimer(date));
-		dispatch(startCountDown(date, duration, sound, ticking));
+		dispatch(startCountDown(date, duration, notification, ticking));
 	}
 }
 
-export function startCountDown(date, duration, sound, ticking) {
-	var audio = new Audio(`dist/sound/${sound}.mp3`);
+export function startCountDown(date, duration, notification, ticking) {
 	if (ticking) {
 		// play ticking sound on loop
 		tickingSound.play();
@@ -87,7 +87,9 @@ export function startCountDown(date, duration, sound, ticking) {
 					iconUrl: 'dist/img/logo-lg-blue.png',
 				});
 				tickingSound.pause();
-				audio.play();
+				if (notification) {
+					audio.play();
+				}
 			}
 		};
 
@@ -121,6 +123,12 @@ export function setTimerLength(incOrDec = 'INCREMENT') {
 	return {
 		type: SET_TIMER_LENGTH,
 		incOrDec
+	}
+}
+export const TOGGLE_NOTIFICATION_SOUND = 'TOGGLE_NOTIFICATION_SOUND';
+export function toggleNotificationSound() {
+	return {
+		type: TOGGLE_NOTIFICATION_SOUND,
 	}
 }
 

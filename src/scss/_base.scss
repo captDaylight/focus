@@ -113,6 +113,10 @@ button:focus {
 .margin-bottom {
 	margin-bottom: 30px;
 }
+.margin-bottom-sm {
+	margin-bottom: 10px;
+}
+
 
 .flex {
 	@include display(flex);

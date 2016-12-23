@@ -7,6 +7,7 @@ import {
 	UPDATE_SESSIONS,
 	TOGGLE_ASK_CANCEL_TIME,
 	SET_TIMER_LENGTH,
+	TOGGLE_NOTIFICATION_SOUND,
 	TOGGLE_TICKING
 } from '../actions/timer';
 
@@ -26,8 +27,8 @@ const metaInitial = {
 	duration: 1500000,
 	ampm: true, // am pm OR military time
 	sound: 'chime',
+	notification: true,
 	ticking: false,
-	notificationSound: true,
 	askCancelTimer: false
 }
 
@@ -90,6 +91,10 @@ export default function timer(state=initialState, action) {
 					? state.duration - MINUTE : state.duration;
 			}
 			return {...state, duration: newDuration};
+
+		case TOGGLE_NOTIFICATION_SOUND:
+			console.log('toggling notification sound');
+			return {...state, notification: !state.notification };
 
 		case TOGGLE_TICKING:
 			return {...state, ticking: !state.ticking};

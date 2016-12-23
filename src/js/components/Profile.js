@@ -15,7 +15,9 @@ export default class Profile extends Component {
 			setTimerLength,
 			duration,
 			toggleTicking,
-			ticking
+			toggleNotificationSound,
+			ticking,
+			notification
     } = this.props;
 
     return (
@@ -45,7 +47,23 @@ export default class Profile extends Component {
 						</div>
 
 						<div className="margin-bottom">
-							<h5>TICKING</h5>
+							<h5>SOUNDS</h5>
+							{
+								notification
+								? (
+									<div className="margin-bottom-sm">
+										<span className="margin-right-sm">Notification sound is ON.</span>
+										<button className="button-small" onClick={() => toggleNotificationSound()}>Turn notification sound <b>OFF</b></button>
+									</div>
+								)
+								: (
+									<div className="margin-bottom-sm">
+										<span className="margin-right-sm">Notification sound is OFF.</span>
+										<button className="button-small" onClick={() => toggleNotificationSound()}>Turn notification sound <b>ON</b></button>
+									</div>
+								)
+							}
+
 							{
 								ticking
 								? (
