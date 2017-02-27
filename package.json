@@ -53,6 +53,7 @@
     "qwest": "^4.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-dragula": "^1.1.17",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
