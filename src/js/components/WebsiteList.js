@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 export default class WebsiteList extends Component {
-	shouldComponentUpdate(nextProps) {
-		const { websites, showSites, disabled } = this.props;
-		return ( websites !== nextProps.websites
-			|| showSites !== nextProps.showSites
-			|| disabled !== nextProps.disabled );
-	}
-	render() {
-		const {
-			websites,
-			removeWebsite,
-			disabled,
-			toggleShowSites,
-		} = this.props;
+  shouldComponentUpdate(nextProps) {
+    const { websites, showSites, disabled } = this.props;
+    return ( websites !== nextProps.websites
+      || showSites !== nextProps.showSites
+      || disabled !== nextProps.disabled );
+  }
+  render() {
+    const {
+      websites,
+      removeWebsite,
+      disabled,
+      toggleShowSites,
+    } = this.props;
 
-		return (
-			<div>
-				<h5>{`BLOCKED SITES (${websites.length})`}</h5>
-				<ul className="website-list">
-				{
-					websites.map((website, idx) => {
-						return (
-							<li className="website-item" key={idx}>
+    return (
+      <div>
+        <h5>{`BLOCKED SITES (${websites.length})`}</h5>
+        <ul className="website-list">
+        {
+          websites.map((website, idx) => {
+            return (
+              <li className="website-item" key={idx}>
                 <div className="website-item-container">
                   <div className="left">
                     <img src={website.favicon} />
@@ -39,12 +39,12 @@ export default class WebsiteList extends Component {
                     }}>
                   </div>
                 </div>
-							</li>
-						);
-					})
-				}
-				</ul>
-			</div>
-		);
-	}
+              </li>
+            );
+          })
+        }
+        </ul>
+      </div>
+    );
+  }
 }

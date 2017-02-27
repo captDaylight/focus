@@ -1,90 +1,90 @@
 #todos-container {
-	padding-right: 30px;	
+  padding-right: 30px;  
 }
 #todos {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .todo {
   margin: 2px 0;
   padding: 5px 0px;
-	.todo-content {
-		&:hover {
-			background-color: lighten($blue, 40%);
-		}
-	}
-	&.working {
-		font-weight: bold;
-		background-color: lighten($blue, 35%);
-		.todo-content {
-			&:hover {
-				background-color: lighten($blue, 35%);
-				text-decoration: line-through;
-			}
-		}
-	}
-	&.completed {
-		background-color: none;	
-		color: lighten($blue, 25%);
-		.todo-content {
-			text-decoration: line-through;
-			&:hover {
-				background-color: transparent;
-				border: none;
-			}
-		}
-		.todo-icon {
-			&:hover {
-				color: $blue;
-			}
-		}
-	}
-	.todo-container {
-		@extend .left-right;
-	}
-	button {
-		margin-left: 10px;
-	}
-	.todo-icon {
-		margin-left: 10px;
-		padding-top: 3px;
-		cursor: pointer;
-	}
-	.todo-content {
-		cursor: pointer;
-	}
+  .todo-content {
+    &:hover {
+      background-color: lighten($blue, 40%);
+    }
+  }
+  &.working {
+    font-weight: bold;
+    background-color: lighten($blue, 35%);
+    .todo-content {
+      &:hover {
+        background-color: lighten($blue, 35%);
+        text-decoration: line-through;
+      }
+    }
+  }
+  &.completed {
+    background-color: none;  
+    color: lighten($blue, 25%);
+    .todo-content {
+      text-decoration: line-through;
+      &:hover {
+        background-color: transparent;
+        border: none;
+      }
+    }
+    .todo-icon {
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+  .todo-container {
+    @extend .left-right;
+  }
+  button {
+    margin-left: 10px;
+  }
+  .todo-icon {
+    margin-left: 10px;
+    padding-top: 3px;
+    cursor: pointer;
+  }
+  .todo-content {
+    cursor: pointer;
+  }
 }
 .focusing {
-	.todo {
-		.todo-content {
-			width: 50%;
-			&:hover {
-				background-color: lighten($red, 40%);
-			}
-		}
-		&.working {
-			background-color: lighten($red, 35%);
-			.todo-content {
-				&:hover {
-					background-color: lighten($red, 35%);
-				}
-			}
-		}
-		&.completed {
-			color: lighten($red, 25%);
-			.todo-icon {
-				&:hover {
-					color: $red;
-				}
-			}
-		}
-	}
+  .todo {
+    .todo-content {
+      width: 50%;
+      &:hover {
+        background-color: lighten($red, 40%);
+      }
+    }
+    &.working {
+      background-color: lighten($red, 35%);
+      .todo-content {
+        &:hover {
+          background-color: lighten($red, 35%);
+        }
+      }
+    }
+    &.completed {
+      color: lighten($red, 25%);
+      .todo-icon {
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+  }
 }
 .todo.completed {
 
 }
 .todo-actions {
-	@include display(flex);
-	@include justify-content(flex-end);
-	width: 50%;
+  @include display(flex);
+  @include justify-content(flex-end);
+  width: 50%;
 }

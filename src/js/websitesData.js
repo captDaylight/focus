@@ -1,5 +1,5 @@
 export const websitesData = [
-	{
+  {
     favicon: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
     url: 'www.youtube.com'
   },
@@ -19,10 +19,10 @@ export const websitesData = [
     url: 'imgur.com'
   },
 
-	{
-		favicon: 'https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
-		url: 'mail.google.com'
-	},
+  {
+    favicon: 'https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
+    url: 'mail.google.com'
+  },
 
   {
     favicon: 'https://assets-9gag-fun.9cache.com/s/fab0aa49/b1352edad08f91b71a3755195331c50ce2eba9e0/static/dist/core/img/favicon_v2.png',
@@ -44,12 +44,12 @@ export const websitesData = [
     url: 'www.pinterest.com'
   },
 
-	{
+  {
     favicon: 'https://assets.guim.co.uk/images/favicons/79d7ab5a729562cebca9c6a13c324f0e/32x32.ico',
     url: 'www.theguardian.com'
   },
 
-	{
+  {
     favicon: 'http://static01.nyt.com/favicon.ico',
     url: 'www.nytimes.com'
   },
@@ -69,27 +69,27 @@ export const websitesData = [
     url: 'www.espn.com'
   },
 
-	{
+  {
     favicon: 'https://news.ycombinator.com/favicon.ico',
     url: 'news.ycombinator.com'
   },
 
-	{
+  {
     favicon: 'https://abs.twimg.com/favicons/favicon.ico',
     url: 'twitter.com'
   },
 
-	{
+  {
     favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
     url: 'medium.com'
   },
 
-	{
+  {
     favicon: 'https://cdn2.vox-cdn.com/community_logos/52517/voxv.png',
     url: 'vox.com'
   },
 
-	{
+  {
     favicon: 'https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico',
     url: 'facebook.com'
   },
@@ -99,7 +99,7 @@ export const websitesData = [
     url: 'wikipedia.org'
   },
 
-	{
+  {
     favicon: 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2015.ico',
     url: 'www.netflix.com'
   },

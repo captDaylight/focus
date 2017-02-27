@@ -99,16 +99,16 @@ select {
   width: auto;
 }
 
-.form-group {	
-	&.error {
-		#{$all-text-inputs} {
-			border: 2px solid $red;
-		}
-	}
-	.validation-error {
-		margin-top: 5px;
-		color: $red;
-	}
+.form-group {  
+  &.error {
+    #{$all-text-inputs} {
+      border: 2px solid $red;
+    }
+  }
+  .validation-error {
+    margin-top: 5px;
+    color: $red;
+  }
 }
 
 

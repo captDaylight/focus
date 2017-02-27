@@ -1,13 +1,13 @@
 html, body {
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
-	min-height: 100%;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  min-height: 100%;
 
 }
 
 body {
-	@include display(flex);
+  @include display(flex);
   font-family: 'Poppins', sans-serif;
   line-height: 1.5;
   letter-spacing: 0.07em;
@@ -52,7 +52,7 @@ ol {
 }
 
 img {
-	display: block;
+  display: block;
 }
 
 input:focus,
@@ -91,39 +91,39 @@ button:focus {
 }
 
 .pointer {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .pink-hover-red {
-	color: lighten($red, 30%);
-	@include transition(color 0.2s ease-in-out);
-	&:hover {
-		color: $red;
-	}
+  color: lighten($red, 30%);
+  @include transition(color 0.2s ease-in-out);
+  &:hover {
+    color: $red;
+  }
 }
 
 .margin-left-sm {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 .margin-right-sm {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 .margin-bottom {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 .margin-bottom-sm {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 
 .flex {
-	@include display(flex);
+  @include display(flex);
 }
 
 .flex-center {
-	@include align-items(center);
+  @include align-items(center);
 }
 
 .no-select {
