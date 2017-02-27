@@ -12,7 +12,7 @@ export default function AskCancel(props) {
             Are you sure you want to cancel the timer?
             <button
               className="button-small margin-left-sm"
-              onClick={() => toggleAskCancelTimer()
+              onClick={() => toggleAskCancelTimer()}
             >
               no
             </button>
