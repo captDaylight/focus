@@ -5,12 +5,12 @@
 
 // gulp.task('javascript', function() {
 //   return gulp.src([
-//   		'babel-polyfill',
-//   		'src/js/background.js', 
-//   		'src/js/popup.js',
-//   		'src/js/content.js',
-//   		'src/js/newtab.js'
-//   	])
+//       'babel-polyfill',
+//       'src/js/background.js', 
+//       'src/js/popup.js',
+//       'src/js/content.js',
+//       'src/js/newtab.js'
+//     ])
 //     .pipe(named())
 //     .pipe(webpack({
 //       watch: true,

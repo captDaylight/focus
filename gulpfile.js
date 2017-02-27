@@ -10,12 +10,12 @@ const plumber = require('gulp-plumber');
 
 gulp.task('javascript', function() {
   return gulp.src([
-  		'babel-polyfill',
-  		'src/js/background.js',
-  		'src/js/popup.js',
-  		'src/js/content.js',
-  		'src/js/newtab.js'
-  	])
+      'babel-polyfill',
+      'src/js/background.js',
+      'src/js/popup.js',
+      'src/js/content.js',
+      'src/js/newtab.js'
+    ])
     .pipe(plumber())
     .pipe(named())
     .pipe(webpackStream({
@@ -80,12 +80,12 @@ gulp.task('javascriptProd', function() {
 });
 
 gulp.task('default',
-	[
-		'image', 			// copy images and fonts to the public folder
-		'style',
-		'javascript',
-		'watch',
-	]);
+  [
+    'image',       // copy images and fonts to the public folder
+    'style',
+    'javascript',
+    'watch',
+  ]);
 
 gulp.task('build',
   [

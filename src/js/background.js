@@ -19,13 +19,13 @@ const init = initState => {
     applyMiddleware(thunkMiddleware)
   )(createStore);
 
-	// adding new values to timer, should figure out a better way to do this
-	if (initState && !('notification' in initState.timer)) {
-		initState.timer.notification = true;
-	}
-	if (initState && !('ticking' in initState.timer)) {
-		initState.timer.ticking = false;
-	}
+  // adding new values to timer, should figure out a better way to do this
+  if (initState && !('notification' in initState.timer)) {
+    initState.timer.notification = true;
+  }
+  if (initState && !('ticking' in initState.timer)) {
+    initState.timer.ticking = false;
+  }
   const store = initState
     ? createAndComposeStore(rootReducer, initState)
     : createAndComposeStore(rootReducer);

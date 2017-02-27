@@ -1,61 +1,61 @@
 #sessions-container {
-	padding-left: 30px;
+  padding-left: 30px;
 }
 #sessions-list {
-	> li {
-		border: 2px dashed $blue;
-		padding:15px 10px;
+  > li {
+    border: 2px dashed $blue;
+    padding:15px 10px;
     border-right: transparent;
     border-left: transparent;
     border-top: transparent;
-	}
-	.current {
-		border-width: 2px;
-		border-style: solid;
-		background-color: $red;
-		color: white;
-		border-top: $red;
+  }
+  .current {
+    border-width: 2px;
+    border-style: solid;
+    background-color: $red;
+    color: white;
+    border-top: $red;
     border-right: $red;
     border-left: $red;
     border-bottom: $red;
-	}
-	.session-day-header {
+  }
+  .session-day-header {
 
-	}
+  }
 }
 .session-day-header {
-	button {
-		width: 100%;
-		@include display(flex);
-		@include justify-content(center);
-		padding-top: 25px;
-		padding-bottom: 25px;
-		margin: 25px 0px;
-	}
-	.icon-enlarge2, .icon-shrink2 {
-		margin-left: 10px;
-	}
+  button {
+    width: 100%;
+    @include display(flex);
+    @include justify-content(center);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin: 25px 0px;
+  }
+  .icon-enlarge2, .icon-shrink2 {
+    margin-left: 10px;
+  }
 }
 .focusing {
-	#sessions-list {
-		> li {
-			border-color: $red;
-		}
-	}
+  #sessions-list {
+    > li {
+      border-color: $red;
+    }
+  }
 }
 .session {
 
-	h5 {
-		margin-bottom: 0px;
-	}
+  h5 {
+    margin-bottom: 0px;
+  }
 }
 
 .session-header {
-	@extend .left-right;
-	@include align-items(center);
-	@include justify-content(center);
+  @extend .left-right;
+  @include align-items(center);
+  @include justify-content(center);
 }
 
 .session-todos {
-	margin-top: 10px;
+  margin-top: 10px;
 }

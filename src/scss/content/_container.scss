@@ -1,43 +1,43 @@
 #focus-container {
-	min-height: 100%;
-	width: 100%;
-	// background-color: lighten($blue, 20%);
-	color: $blue;
-	box-sizing: border-box;
-	border: 30px solid transparent;
-	@include transition(all 0.25s ease-in-out);
-	&.focusing {
-		// background-color: lighten($red, 20%);
-		color: $red;
-	}
+  min-height: 100%;
+  width: 100%;
+  // background-color: lighten($blue, 20%);
+  color: $blue;
+  box-sizing: border-box;
+  border: 30px solid transparent;
+  @include transition(all 0.25s ease-in-out);
+  &.focusing {
+    // background-color: lighten($red, 20%);
+    color: $red;
+  }
 }
 
 #header {
-	@include display(flex);
-	@include justify-content(space-between);
-	// @include align-items(center);
-	margin-bottom: 5rem;
+  @include display(flex);
+  @include justify-content(space-between);
+  // @include align-items(center);
+  margin-bottom: 5rem;
 }
 
 #clock {
-	font-size: 5rem;
-	line-height: 5rem;
+  font-size: 5rem;
+  line-height: 5rem;
 }
 
 #spread {
-	margin-top: 20px;
-	@include display(flex);
-	> ul, > div {
-		@include flex-grow(1);
-		width: 50%;
-	}
+  margin-top: 20px;
+  @include display(flex);
+  > ul, > div {
+    @include flex-grow(1);
+    width: 50%;
+  }
 }
 
 .focus-button {
-	padding: 20px 30px;
-	font-size: 2em;
-	letter-spacing: 0.15em;
-	border-width: 4px;
+  padding: 20px 30px;
+  font-size: 2em;
+  letter-spacing: 0.15em;
+  border-width: 4px;
 }
 
 .focusing {

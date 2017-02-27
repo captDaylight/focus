@@ -30,7 +30,7 @@ const actions = wrapActionsWithMessanger([
   'toggleAskCancelTimer',
   'setTimerLength',
   'toggleTicking',
-	'toggleNotificationSound'
+  'toggleNotificationSound'
 ]);
 
 let oldState = {};
@@ -71,11 +71,11 @@ export default class FocusContainer extends Component {
       clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
       editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
-			toggleNotificationSound
+      toggleNotificationSound
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, notification,
-			askCancelTimer, ticking
+      askCancelTimer, ticking
     } = this.state.timer;
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
@@ -180,8 +180,8 @@ export default class FocusContainer extends Component {
                       setTimerLength={setTimerLength}
                       duration={duration}
                       toggleTicking={toggleTicking}
-											toggleNotificationSound={toggleNotificationSound}
-											notification={notification}
+                      toggleNotificationSound={toggleNotificationSound}
+                      notification={notification}
                       ticking={ticking}
                     />
                   </div>

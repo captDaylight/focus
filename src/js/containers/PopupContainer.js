@@ -6,58 +6,58 @@ import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 
 const actions = wrapActionsWithMessanger([
-	'countDown',
-	'checkForTab',
+  'countDown',
+  'checkForTab',
 ]);
 
 function processSiteInfo(siteURL, id, faviconURL) {
-	const urlParse = url.parse(siteURL);
-	const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
+  const urlParse = url.parse(siteURL);
+  const hostname = urlParse.hostname ? urlParse.hostname : urlParse.pathname;
 
-	actions.checkForTab(hostname, id, faviconURL);
+  actions.checkForTab(hostname, id, faviconURL);
 }
 
 function urlIsInList(url, list) {
-	return list.filter(site => url.indexOf(site.url) >= 0).length > 0;
+  return list.filter(site => url.indexOf(site.url) >= 0).length > 0;
 }
 
 export default class FocusContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = props.state;
-	}
-	updateState(newState) {
-		this.setState(newState);
-	}
-	componentWillMount() {
-		const { updateState } = this;
-		chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-			if (req.type === 'STATE_UPDATE') {
-				updateState.call(this, req.data);
-			}
-			return true;
-		});
-	}
-	handleAddWebsite() {
-		chrome.tabs.query(
-			{currentWindow: true, active : true},
-			tab => {
-				if (tab.length !== 0) {
-					const { url, id, favIconUrl } = tab[0];
+  constructor(props) {
+    super(props);
+    this.state = props.state;
+  }
+  updateState(newState) {
+    this.setState(newState);
+  }
+  componentWillMount() {
+    const { updateState } = this;
+    chrome.extension.onMessage.addListener((req, sender, sendRes) => {
+      if (req.type === 'STATE_UPDATE') {
+        updateState.call(this, req.data);
+      }
+      return true;
+    });
+  }
+  handleAddWebsite() {
+    chrome.tabs.query(
+      {currentWindow: true, active : true},
+      tab => {
+        if (tab.length !== 0) {
+          const { url, id, favIconUrl } = tab[0];
 
-					processSiteInfo(url, id, favIconUrl)
-				}
-			}
-		)
-	}
-	render() {
-		const { countDown, addWebsite } = actions;
-		const { date, minutes, seconds, duration, notification, ticking } = this.state.timer;
-		const { websites } = this.state.websites;
+          processSiteInfo(url, id, favIconUrl)
+        }
+      }
+    )
+  }
+  render() {
+    const { countDown, addWebsite } = actions;
+    const { date, minutes, seconds, duration, notification, ticking } = this.state.timer;
+    const { websites } = this.state.websites;
     const { ui } = this.state;
 
-		return (
-			<section id="popup" className={classnames({focusing: minutes})}>
+    return (
+      <section id="popup" className={classnames({focusing: minutes})}>
         {
           ui.introStep < 5 ?
           (
@@ -106,7 +106,7 @@ export default class FocusContainer extends Component {
         }
 
 
-			</section>
-		);
-	}
+      </section>
+    );
+  }
 }
