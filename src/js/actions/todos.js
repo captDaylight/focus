@@ -54,3 +54,11 @@ export function updateTodos(todos) {
     todos,
   };
 }
+
+export const UPDATE_TODO_ORDER = 'UPDATE_TODO_ORDER';
+export function updateTodoOrder(todoIds) {
+  return {
+    type: 'UPDATE_TODO_ORDER',
+    todoIds,
+  };
+}
