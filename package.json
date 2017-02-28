@@ -47,7 +47,6 @@
     "babel-polyfill": "^6.5.0",
     "babel-runtime": "^6.5.0",
     "classnames": "^2.2.1",
-    "formsy-react": "^0.19.2",
     "jquery": "^2.2.0",
     "lodash": "^3.10.1",
     "qwest": "^4.0.0",

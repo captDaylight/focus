@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Form } from 'formsy-react';
 import Dragula from 'react-dragula';
 import { filter, groupBy } from 'lodash';
 import Todo from './Todo';

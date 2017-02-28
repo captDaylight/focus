@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Formsy, { Form } from 'formsy-react';
 import classnames from 'classnames';
 import FocusInput from './FocusInput';
 

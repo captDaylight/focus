@@ -19,7 +19,6 @@ export default class SessionsList extends Component {
   }
 
   handleChange(e) {
-    console.log('this.state', e.target.value);
     this.setState({ newTodoValue: e.target.value });
   }
 
