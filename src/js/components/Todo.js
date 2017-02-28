@@ -4,36 +4,60 @@ import classnames from 'classnames';
 import FocusInput from './FocusInput';
 
 export default class SessionsList extends Component {
-  handleSubmit(data) {
-    const { editTodo, todo } = this.props;
-
-    editTodo(todo.id, data.todoedit);
-    this.refs.form.reset();
+  constructor(props) {
+    super(props);
+    this.state = { editTodoValue: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentWillMount() {
+    this.setState({ editTodoValue: this.props.todo.todo });
+  }
+
+  handleChange(e) {
+    this.setState({ editTodoValue: e.target.value })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { editTodo, todo } = this.props;
+    const { editTodoValue } = this.state;
+
+    editTodo(todo.id, editTodoValue);
+  }
+
   render() {
     const {
       todo,
       toggleTodoCompletion,
       toggleTodoWorking,
       removeTodo,
-      toggleTodoEdit
+      toggleTodoEdit,
     } = this.props;
+    const {editTodoValue} = this.state;
 
     return (
       <li
         className={classnames('todo', {
           working: todo.workingOn && !todo.completed,
           completed: todo.completed,
-        })} >
+        })}
+      >
         {
           todo.editing
           ?
-          (<Form ref="form" onSubmit={this.handleSubmit.bind(this)}>
-            <FocusInput name="todoedit" placeholder="todoedit" value={todo.todo} autoFocus={true} />
-          </Form>)
+          (<form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              onChange={this.handleChange}
+              placeholder="Edit Todo"
+              value={editTodoValue}
+            />
+          </form>)
           :
           (<div className="todo-container">
-            <div className={`todo-grip ${!!todo.completed ? 'no-grip' : ''}`}>&#9776;</div>
+            <div className={`todo-grip ${!todo.completed ? '' : 'no-grip'}`}>&#9776;</div>
             <div className="todo-controls left-right">
               <div
                 className="todo-content"
@@ -43,7 +67,8 @@ export default class SessionsList extends Component {
                   } else {
                     toggleTodoWorking(todo.id);
                   }
-                }} >
+                }}
+              >
                 {todo.todo}
               </div>
               <div className="todo-actions">
@@ -78,7 +103,7 @@ export default class SessionsList extends Component {
                     >
                       Cancel
                     </button>
-                  )  : null
+                  ) : null
                 }
                 <div
                   className="todo-icon icon-pencil"
@@ -93,8 +118,6 @@ export default class SessionsList extends Component {
           </div>
           )
         }
-
-
       </li>
     );
   }

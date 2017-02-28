@@ -1,47 +1,41 @@
-import React from 'react';
-import Formsy from 'formsy-react';
+import React, { Component } from 'react';
 
-const FocusInput = React.createClass({
+export default class SessionsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { newTodoValue: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  // Add the Formsy Mixin
-  mixins: [Formsy.Mixin],
+  handleSubmit(e) {
+    e.preventDefault();
+    const { addTodo } = this.props;
+    const { newTodoValue } = this.state;
+    if (newTodoValue.length > 0) {
+      addTodo(newTodoValue);
+      this.setState({ newTodoValue: '' });
+    }
+  }
 
-  // setValue() will set the value of the component, which in
-  // turn will validate it and the rest of the form
-  changeValue(event) {
-    this.setValue(event.currentTarget[this.props.type === 'checkbox' ? 'checked' : 'value']);
-  },
+  handleChange(e) {
+    console.log('this.state', e.target.value);
+    this.setState({ newTodoValue: e.target.value });
+  }
 
   render() {
-    // Set a specific className based on the validation
-    // state of this component. showRequired() is true
-    // when the value is empty and the required prop is
-    // passed to the input. showError() is true when the
-    // value typed is invalid
-    const className = this.props.className + ' ' + (this.showRequired() ? 'required' : this.showError() ? 'error' : null);
+    const { newTodoValue } = this.state;
+    const { placeholder } = this.props;
 
-    // An error message is returned ONLY if the component is invalid
-    // or the server has returned an error message
-    const errorMessage = this.getErrorMessage();
-
-    const { type, name, placeholder } = this.props;
     return (
-      <div className='form-group'>
-        <label htmlFor={this.props.name}>{this.props.title}</label>
+      <form onSubmit={this.handleSubmit}>
         <input
-          type={type || 'text'}
-          name={name}
+          onChange={this.handleChange}
           placeholder={placeholder}
-          onChange={this.changeValue}
-          value={this.getValue()}
-          autoComplete="off"
-          checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
-          autoFocus={this.props.autoFocus}
+          type="text"
+          value={newTodoValue}
         />
-        <span className='validation-error'>{errorMessage}</span>
-      </div>
+      </form>
     );
   }
-});
-
-export default FocusInput;
+}
