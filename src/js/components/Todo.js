@@ -42,6 +42,7 @@ export default class SessionsList extends Component {
           working: todo.workingOn && !todo.completed,
           completed: todo.completed,
         })}
+        id={todo.id}
       >
         {
           todo.editing

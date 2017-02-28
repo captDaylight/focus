@@ -4,16 +4,28 @@ import { filter, groupBy } from 'lodash';
 import Todo from './Todo';
 import FocusInput from './FocusInput';
 
-function dragulaDecorator(node) {
-  if (node) {
-    const options = { };
-    Dragula([node], options);
-  }
-}
-
 export default class SessionsList extends Component {
+  constructor(props) {
+    super(props)
+    this.dragulaDecorator = this.dragulaDecorator.bind(this);
+  }
+
   shouldComponentUpdate(nextProps) {
     return this.props.todos !== nextProps.todos;
+  }
+
+  dragulaDecorator(node) {
+    if (node) {
+      const options = { };
+      Dragula([node], options).on('drop', (el, target) => {
+        const listItems = target.getElementsByTagName('li');
+        let listIds = [];
+        for (let i = 0; i < listItems.length; i++) {
+          listIds.push(listItems[i].id);
+        }
+        console.log(listIds);
+      });
+    }
   }
 
   render() {
@@ -27,13 +39,13 @@ export default class SessionsList extends Component {
 
         <FocusInput addTodo={addTodo} placeholder="Add a Todo" />
 
-        {groupedByStarted.true && <ul className="todos" ref={dragulaDecorator}>
+        {groupedByStarted.true && <ul className="todos" ref={this.dragulaDecorator}>
           {groupedByStarted.true.map(todo =>
             <Todo key={todo.id} todo={todo} {...this.props} />)
           }
         </ul>}
 
-        {groupedByStarted.false && <ul className="todos" ref={dragulaDecorator}>
+        {groupedByStarted.false && <ul className="todos" ref={this.dragulaDecorator}>
           {groupedByStarted.false.map(todo =>
             <Todo key={todo.id} todo={todo} {...this.props} />)
           }
