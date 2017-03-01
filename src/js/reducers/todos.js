@@ -91,6 +91,7 @@ export default function todos(state = initialState, action) {
       return { ...state, todos: action.todos };
 
     case UPDATE_TODO_ORDER:
+      console.log('REDUCER, update todo order', action.todoIds);
       return state;
 
     default:

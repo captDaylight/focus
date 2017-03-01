@@ -15,6 +15,7 @@ export default class SessionsList extends Component {
   }
 
   dragulaDecorator(node) {
+    const { updateTodoOrder } = this.props
     if (node) {
       const options = { };
       Dragula([node], options).on('drop', (el, target) => {
@@ -23,7 +24,7 @@ export default class SessionsList extends Component {
         for (let i = 0; i < listItems.length; i++) {
           listIds.push(listItems[i].id);
         }
-        console.log(listIds);
+        updateTodoOrder(listIds);
       });
     }
   }
