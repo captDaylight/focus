@@ -32,7 +32,7 @@ const dateOrNull = value => (value ? null : Date.now());
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO: {
-      const notStartedTodos = state.todos.filter(todo => !todo.workingOn && !todo.completed);
+      const notStartedTodos = filter(state.todos, todo => !todo.workingOn && !todo.completed);
       const todo = {
         todo: action.todo,
         id: shortid.generate(),
@@ -59,14 +59,22 @@ export default function todos(state = initialState, action) {
         }]),
       };
 
-    case TOGGLE_TODO_WORKING:
+    case TOGGLE_TODO_WORKING: {
+      const todoToggling = filter(state.todos, todo => todo.id === action.id);
+      const todoGroup = !!todoToggling[0].workingOn
+        ? filter(state.todos, todo => !todo.workingOn && !todo.completed)
+        : filter(state.todos, todo => !!todo.workingOn && !todo.completed);
       return {
         ...state,
         todos: updateInArray(state.todos, action.id, [{
           key: 'workingOn',
           fn: dateOrNull,
+        }, {
+          key: 'order',
+          fn: () => todoGroup.length,
         }]),
       };
+    }
 
     case TOGGLE_TODO_EDIT:
       return {
