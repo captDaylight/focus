@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import { findIndex } from 'lodash';
+import { findIndex, filter } from 'lodash';
 import split from '../utils/split';
 import {
   ADD_TODO,
@@ -32,6 +32,7 @@ const dateOrNull = value => (value ? null : Date.now());
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO: {
+      const notStartedTodos = state.todos.filter(todo => !todo.workingOn && !todo.completed);
       const todo = {
         todo: action.todo,
         id: shortid.generate(),
@@ -39,6 +40,7 @@ export default function todos(state = initialState, action) {
         completed: null,
         workingOn: null,
         editing: false,
+        order: notStartedTodos.length,
       };
       return { ...state, todos: [...state.todos, todo] };
     }
