@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
-import Register from '../components/Register';
-import Login from '../components/Login';
 import AddWebsites from '../components/AddWebsites';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 import AskCancel from '../components/AskCancel';
@@ -30,7 +28,8 @@ const actions = wrapActionsWithMessanger([
   'toggleAskCancelTimer',
   'setTimerLength',
   'toggleTicking',
-  'toggleNotificationSound'
+  'toggleNotificationSound',
+  'updateTodoOrder',
 ]);
 
 let oldState = {};
@@ -71,7 +70,7 @@ export default class FocusContainer extends Component {
       clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
       editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
-      toggleNotificationSound
+      toggleNotificationSound, updateTodoOrder
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, notification,
@@ -84,7 +83,7 @@ export default class FocusContainer extends Component {
     return (
       <section
         id="focus-container"
-        className={classnames({focusing: !!minutes})}>
+        className={classnames({ focusing: !!minutes })}>
         {(() => {
           switch (ui.introStep) {
             case 0: return (
@@ -145,63 +144,66 @@ export default class FocusContainer extends Component {
                 </div>
               );
             default: return (
-                <div>
-                  <div id="header">
-                    <div id="main-action" className={classnames({blurring: showSites})}>
-                      {
-                        minutes
-                        ? (<div>
-                            <MinutesAndSeconds
-                              minutes={minutes}
-                              seconds={seconds}
-                            />
-                            <AskCancel
-                              toggleAskCancelTimer={toggleAskCancelTimer}
-                              askCancelTimer={askCancelTimer}
-                              clearTimer={clearTimer}
-                            />
-                          </div>)
-                        : (
-                          <button
-                            className="focus-button"
-                            onClick={() => countDown(Date.now(), duration, notification, ticking)}>
-                            start focusing
-                          </button>
-                        )
-                      }
-                    </div>
-                    <Profile
-                      showSites={showSites}
-                      websites={websites}
-                      showSites={showSites}
-                      toggleShowSites={toggleShowSites}
-                      removeWebsite={removeWebsite}
-                      disabled={minutes ? true : false}
-                      setTimerLength={setTimerLength}
-                      duration={duration}
-                      toggleTicking={toggleTicking}
-                      toggleNotificationSound={toggleNotificationSound}
-                      notification={notification}
-                      ticking={ticking}
-                    />
+              <div>
+                <div id="header">
+                  <div id="main-action" className={classnames({ blurring: showSites })}>
+                    {
+                      minutes
+                      ? (<div>
+                          <MinutesAndSeconds
+                            minutes={minutes}
+                            seconds={seconds}
+                          />
+                          <AskCancel
+                            toggleAskCancelTimer={toggleAskCancelTimer}
+                            askCancelTimer={askCancelTimer}
+                            clearTimer={clearTimer}
+                          />
+                        </div>)
+                      : (
+                        <button
+                          className="focus-button"
+                          onClick={() => countDown(Date.now(), duration, notification, ticking)}
+                        >
+                          start focusing
+                        </button>
+                      )
+                    }
                   </div>
-
-                  <div id="spread" className={classnames({blurring: showSites})}>
-                    <Todos
-                      addTodo={addTodo}
-                      toggleTodoWorking={toggleTodoWorking}
-                      toggleTodoCompletion={toggleTodoCompletion}
-                      removeTodo={removeTodo}
-                      todos={todos}
-                      toggleTodoEdit={toggleTodoEdit}
-                      editTodo={editTodo} />
-                    <SessionsList
-                      sessions={sessions}
-                      ampm={ampm}
-                      todos={todos} />
-                  </div>
+                  <Profile
+                    showSites={showSites}
+                    websites={websites}
+                    toggleShowSites={toggleShowSites}
+                    removeWebsite={removeWebsite}
+                    disabled={!!minutes}
+                    setTimerLength={setTimerLength}
+                    duration={duration}
+                    toggleTicking={toggleTicking}
+                    toggleNotificationSound={toggleNotificationSound}
+                    notification={notification}
+                    ticking={ticking}
+                  />
                 </div>
-              )
+
+                <div id="spread" className={classnames({ blurring: showSites })}>
+                  <Todos
+                    addTodo={addTodo}
+                    toggleTodoWorking={toggleTodoWorking}
+                    toggleTodoCompletion={toggleTodoCompletion}
+                    removeTodo={removeTodo}
+                    todos={todos}
+                    toggleTodoEdit={toggleTodoEdit}
+                    editTodo={editTodo}
+                    updateTodoOrder={updateTodoOrder}
+                  />
+                  <SessionsList
+                    sessions={sessions}
+                    ampm={ampm}
+                    todos={todos}
+                  />
+                </div>
+              </div>
+            );
           }
         })()}
       </section>

@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { groupBy } from 'lodash';
 import rootReducer from './reducers';
 import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
@@ -14,7 +15,7 @@ function sessionCheck(sessions, duration){
   return (date + duration) > Date.now();
 }
 
-const init = initState => {
+const init = (initState) => {
   const createAndComposeStore = compose(
     applyMiddleware(thunkMiddleware)
   )(createStore);
@@ -26,6 +27,19 @@ const init = initState => {
   if (initState && !('ticking' in initState.timer)) {
     initState.timer.ticking = false;
   }
+  if (initState && initState.todos && initState.todos.todos.length > 0) {
+    if (!initState.todos.todos[0].hasOwnProperty('order')) {
+      // people with todos that haven't been ordered yet
+      const groupedByCompleted = groupBy(initState.todos.todos, todo => !!todo.completed);
+      const groupedByStarted = groupBy(groupedByCompleted.false, todo => !!todo.workingOn);
+      const completed = groupedByCompleted.true.map((todo, idx) => ({ ...todo, order: idx }));
+      const started = groupedByStarted.true.map((todo, idx) => ({ ...todo, order: idx }));
+      const notStarted = groupedByStarted.false.map((todo, idx) => ({ ...todo, order: idx }));
+      console.log('here');
+      initState.todos.todos = [...completed, ...started, ...notStarted];
+    }
+  }
+
   const store = initState
     ? createAndComposeStore(rootReducer, initState)
     : createAndComposeStore(rootReducer);
@@ -36,7 +50,6 @@ const init = initState => {
   if (sessions.length > 0) {
     if (sessionCheck(sessions, duration)) {
       // if timer is still going on init, restart countdown
-      const state = store.getState();
       const { date } = sessions[sessions.length - 1];
       store.dispatch(timer.startCountDown(date, (date + duration) - Date.now(), sound));
     } else {
@@ -96,7 +109,7 @@ const init = initState => {
   // TODO: switch this to long-lived connection
   // https://developer.chrome.com/extensions/messaging#connect
   chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-    const actions = {...timer, ...websites, ...todos, ...ui};
+    const actions = { ...timer, ...websites, ...todos, ...ui };
     // console.log('STATE', req.action, req.data);
     // const {token} = store.getState().user;
     // console.log(token);
@@ -119,15 +132,15 @@ const init = initState => {
   // clean store on init
   cleanUp(store);
 
-  chrome.alarms.onAlarm.addListener(alarm => {
+  chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === 'DAILY_CLEANUP') {
       // clean store everyday at midnight
       cleanUp(store);
     }
   });
-
 };
+
 // console.log(chrome.storage.sync.clear());
-chrome.storage.sync.get(null, data => {
+chrome.storage.sync.get(null, (data) => {
   init(Object.keys(data).length !== 0 ? data : false);
 });

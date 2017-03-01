@@ -3,9 +3,11 @@ html, body {
   padding: 0px;
   height: 100%;
   min-height: 100%;
-
 }
 
+li {
+  list-style: none;
+}
 body {
   @include display(flex);
   font-family: 'Poppins', sans-serif;

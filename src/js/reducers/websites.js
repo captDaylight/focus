@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import find from 'lodash/collection/find';
+import { find } from 'lodash';
 import {
   ADD_WEBSITE,
   REMOVE_WEBSITE,

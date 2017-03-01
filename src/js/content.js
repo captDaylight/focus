@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import url from 'url';
-import template from 'lodash/string/template';
-import filter from 'lodash/collection/filter';
+import { template, filter } from 'lodash';
 import FocusContainer from './containers/FocusContainer';
 import checkShouldBlock from './utils/checkShouldBlock';
 

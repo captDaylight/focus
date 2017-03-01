@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default function AskCancel(props) {
   const { toggleAskCancelTimer, askCancelTimer, clearTimer } = props;
@@ -12,11 +12,16 @@ export default function AskCancel(props) {
             Are you sure you want to cancel the timer?
             <button
               className="button-small margin-left-sm"
-              onClick={() => toggleAskCancelTimer()
+              onClick={() => toggleAskCancelTimer()}
             >
               no
             </button>
-            <button className="button-small margin-left-sm" onClick={() => clearTimer()}>yes</button>
+            <button
+              className="button-small margin-left-sm"
+              onClick={() => clearTimer()}
+            >
+              yes
+            </button>
           </div>
         )
         : (

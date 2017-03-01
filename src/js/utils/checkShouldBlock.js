@@ -1,4 +1,4 @@
-import findIndex from 'lodash/array/findIndex';
+import { findIndex } from 'lodash';
 
 export default function checkShouldBlock(urlData) {
   return (sites) => {
