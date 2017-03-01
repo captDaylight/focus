@@ -14,7 +14,7 @@ function isTodayOrDate(time) {
 
 export default class SessionsList extends Component {
   render() {
-    const { 
+    const {
       current,
       date,
       dateEnd,
@@ -27,17 +27,17 @@ export default class SessionsList extends Component {
         <div className="session-header">
           <div>
             <h5>
-              {`${formatAMPM(date, true)}`} 
-               -  
-              {`${formatAMPM(dateEnd, true)}`} 
+              {`${formatAMPM(date, true)}`}
+               -
+              {`${formatAMPM(dateEnd, true)}`}
             </h5>
           </div>
-          <div className="session-date">                  
-            
+          <div className="session-date">
+            blocked &#10005; 3
           </div>
         </div>
         {
-          working.length === 0 && finished.length === 0 ? null : 
+          working.length === 0 && finished.length === 0 ? null :
           (
             <ul className="session-todos">
               {
@@ -61,4 +61,3 @@ export default class SessionsList extends Component {
     );
   }
 }
-

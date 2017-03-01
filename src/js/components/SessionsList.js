@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import { filter, groupBy } from 'lodash';
 import SessionItem from './SessionItem';
 
-const DAY = 86400000;
-
 function betweenDates(begin, end) {
-  return date => {
-    // console.log(date, begin, end, date - begin, date - end);
-    return date > begin && date < end
-  };
+  return date => date > begin && date < end;
 }
+
 export default class SessionsList extends Component {
-  constructor(props) {
-    super(props);
-  }
   shouldComponentUpdate(nextProps) {
     const { todos, sessions } = this.props;
     return todos !== nextProps.todos || sessions !== nextProps.sessions;
@@ -24,16 +16,16 @@ export default class SessionsList extends Component {
     const startedTodos = filter(todos, todo => todo.workingOn || todo.completed);
     const now = Date.now();
 
-    const date = new Date();
-    const midnight = date.setHours(0,0,0,0);
+    const dateNow = new Date();
+    const midnight = dateNow.setHours(0, 0, 0, 0);
 
-    const sessionDays = groupBy(sessions, session => {
+    const sessionDays = groupBy(sessions, (session) => {
       const dateDayRoundDown = new Date(session.date);
-      return dateDayRoundDown.setHours(0,0,0,0);
+      return dateDayRoundDown.setHours(0, 0, 0, 0);
     });
 
     const sessionDayKeys = Object.keys(sessionDays);
-    console.log(parseInt(sessionDayKeys[sessionDayKeys.length - 1]) === midnight);
+
     return (
       <div id="sessions-container">
         <h5>
@@ -46,48 +38,41 @@ export default class SessionsList extends Component {
         </h5>
         <ul id="sessions-list">
           {
-            sessionDayKeys.reverse().map((day, idx) => {
-              const sessions = sessionDays[day].reverse().map((session, idx) => {
+            sessionDayKeys.reverse().map((day) => {
+              const sessionsItems = sessionDays[day].reverse().map((session) => {
                 const { date, duration } = session;
                 const dateEnd = date + duration;
                 const sessionCheck = betweenDates(date, dateEnd);
                 const current = sessionCheck(now);
 
-                const working = filter(startedTodos, todo => {
+                const working = filter(startedTodos, (todo) => {
                   const { workingOn, completed } = todo;
 
                   return (
                     !!workingOn
                     && workingOn < dateEnd
-                    && (completed ? completed > dateEnd: true ));
+                    && (completed ? completed > dateEnd : true));
                 });
-                const finished = filter(startedTodos, todo => {
+
+                const finished = filter(startedTodos, (todo) => {
                   const { completed } = todo;
                   return sessionCheck(completed);
                 });
 
                 return (
                   <SessionItem
-                    key={idx}
+                    key={date}
                     current={current}
                     date={date}
                     dateEnd={dateEnd}
                     working={working}
                     finished={finished}
                   />
-                )
+                );
               });
 
-              const headerListItem = (parseInt(day) === midnight)
-                ? []
-                : [(
-                  <li className="session-day-header">
-                    {(new Date(parseInt(day))).toDateString()}
-                  </li>
-                )];
-
               if (parseInt(day) === midnight) {
-                return [...sessions];
+                return [...sessionsItems];
               }
             })
           }
