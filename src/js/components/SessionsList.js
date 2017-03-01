@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import filter from 'lodash/collection/filter';
+import { filter, groupBy } from 'lodash';
 import SessionItem from './SessionItem';
-import groupBy from 'lodash/collection/groupBy';
 
 const DAY = 86400000;
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import findIndex from 'lodash/array/findIndex';
+import { findIndex } from 'lodash';
 import classnames from 'classnames';
 
 export default class Login extends Component {

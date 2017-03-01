@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import findIndex from 'lodash/array/findIndex';
+import { findIndex } from 'lodash';
 import split from '../utils/split';
 import {
   ADD_TODO,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dragula from 'react-dragula';
-import { filter, groupBy } from 'lodash';
+import { groupBy, orderBy } from 'lodash';
 import Todo from './Todo';
 import FocusInput from './FocusInput';
 
@@ -40,13 +40,13 @@ export default class SessionsList extends Component {
         <FocusInput addTodo={addTodo} placeholder="Add a Todo" />
 
         {groupedByStarted.true && <ul className="todos" ref={this.dragulaDecorator}>
-          {groupedByStarted.true.map(todo =>
+          {orderBy(groupedByStarted.true, ['order'], ['asc']).map(todo =>
             <Todo key={todo.id} todo={todo} {...this.props} />)
           }
         </ul>}
 
         {groupedByStarted.false && <ul className="todos" ref={this.dragulaDecorator}>
-          {groupedByStarted.false.map(todo =>
+          {orderBy(groupedByStarted.false, ['order'], ['asc']).map(todo =>
             <Todo key={todo.id} todo={todo} {...this.props} />)
           }
         </ul>}

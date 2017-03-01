@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { groupBy } from 'lodash';
 import rootReducer from './reducers';
 import createStorageSync from './utils/storageSync';
 import * as timer from './actions/timer';
@@ -26,6 +27,19 @@ const init = (initState) => {
   if (initState && !('ticking' in initState.timer)) {
     initState.timer.ticking = false;
   }
+  if (initState && initState.todos && initState.todos.todos.length > 0) {
+    if (!initState.todos.todos[0].hasOwnProperty('order')) {
+      // people with todos that haven't been ordered yet
+      const groupedByCompleted = groupBy(initState.todos.todos, todo => !!todo.completed);
+      const groupedByStarted = groupBy(groupedByCompleted.false, todo => !!todo.workingOn);
+      const completed = groupedByCompleted.true.map((todo, idx) => ({ ...todo, order: idx }));
+      const started = groupedByStarted.true.map((todo, idx) => ({ ...todo, order: idx }));
+      const notStarted = groupedByStarted.false.map((todo, idx) => ({ ...todo, order: idx }));
+      console.log('here');
+      initState.todos.todos = [...completed, ...started, ...notStarted];
+    }
+  }
+
   const store = initState
     ? createAndComposeStore(rootReducer, initState)
     : createAndComposeStore(rootReducer);

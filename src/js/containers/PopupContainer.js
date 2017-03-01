@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import url from 'url';
-import takeRight from 'lodash/array/takeright';
+import { takeRight } from 'lodash';
 import wrapActionsWithMessanger from '../utils/wrapActionsWithMessanger';
 import MinutesAndSeconds from '../components/MinutesAndSeconds';
 
