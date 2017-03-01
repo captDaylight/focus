@@ -91,8 +91,15 @@ export default function todos(state = initialState, action) {
       return { ...state, todos: action.todos };
 
     case UPDATE_TODO_ORDER:
-      console.log('REDUCER, update todo order', action.todoIds);
-      return state;
+      return {
+        ...state,
+        todos: action.todoIds.reduce((todoState, todoId, idx) => (
+          updateInArray(todoState, todoId, [{
+            key: 'order',
+            fn: () => idx,
+          }])
+        ), state.todos),
+      };
 
     default:
       return state;
