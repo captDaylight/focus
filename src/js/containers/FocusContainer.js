@@ -99,7 +99,7 @@ export default class FocusContainer extends Component {
             case 1: return (
                 <div>
                   <div className="intro-text">
-                    <h5>Step 2 <br/> Drop down</h5>
+                    <h5>Step 2 <br/> Add Custom Sites to Block</h5>
                     <h6>When you are on a site you want to block, click the drop down and select "Block This Site". <br/><br/> You can also start a focus session from here.</h6>
                   </div>
                   <img src="dist/img/block.png" />

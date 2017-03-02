@@ -33,7 +33,7 @@ export default class SessionsList extends Component {
             </h5>
           </div>
           <div className="session-date">
-            blocked &#10005; 3
+            {/*blocked &#10005; 3 */}
           </div>
         </div>
         {
