@@ -32,10 +32,15 @@ const init = (initState) => {
       // people with todos that haven't been ordered yet
       const groupedByCompleted = groupBy(initState.todos.todos, todo => !!todo.completed);
       const groupedByStarted = groupBy(groupedByCompleted.false, todo => !!todo.workingOn);
-      const completed = groupedByCompleted.true.map((todo, idx) => ({ ...todo, order: idx }));
-      const started = groupedByStarted.true.map((todo, idx) => ({ ...todo, order: idx }));
-      const notStarted = groupedByStarted.false.map((todo, idx) => ({ ...todo, order: idx }));
-      console.log('here');
+      const completed = Boolean(groupedByCompleted.true)
+        ? groupedByCompleted.true.map((todo, idx) => ({ ...todo, order: idx }))
+        : [];
+      const started = Boolean(groupedByStarted.true)
+        ? groupedByStarted.true.map((todo, idx) => ({ ...todo, order: idx }))
+        : [];
+      const notStarted = Boolean(groupedByStarted.false)
+        ? groupedByStarted.false.map((todo, idx) => ({ ...todo, order: idx }))
+        : [];
       initState.todos.todos = [...completed, ...started, ...notStarted];
     }
   }
