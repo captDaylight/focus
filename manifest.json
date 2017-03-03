@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Focus",
   "description": "productivity",
-  "version": "1.4",
+  "version": "1.80",
   "icons": {
       "19": "dist/img/logo-sm-blue.png",
       "38": "dist/img/logo-lg-blue.png",
