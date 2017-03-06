@@ -7,6 +7,7 @@ import * as timer from './actions/timer';
 import * as websites from './actions/websites';
 import * as todos from './actions/todos';
 import * as ui from './actions/ui';
+import * as userActions from './actions/user';
 import cleanUp from './utils/cleanUp';
 
 function sessionCheck(sessions, duration){
@@ -54,7 +55,19 @@ const init = (initState) => {
 
   const storageSync = createStorageSync(store.getState());
 
-  const { sessions, duration, sound } = store.getState().timer;
+  const { timer: { sessions, duration, sound }, user } = store.getState();
+  if (user && (!('id' in user) || user.id === '')) {
+    fetch('https://1691mjv22h.execute-api.us-east-1.amazonaws.com/dev/user', {
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    })
+    .then(res => res.json())
+    .then(data => store.dispatch(userActions.addUser(data.id)));
+  }
+
   if (sessions.length > 0) {
     if (sessionCheck(sessions, duration)) {
       // if timer is still going on init, restart countdown

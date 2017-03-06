@@ -1,22 +1,20 @@
 import {
   ADD_USER,
-  LOGOUT,
 } from '../actions/user';
 
 const initialState = {
-  token: '',
+  id: '',
   email: '',
-}
+  token: '',
+};
 
-export default function user(state=initialState, action) {
-  switch(action.type) {
+export default function user(state = initialState, action) {
+  switch (action.type) {
     case ADD_USER:
-      return {...state, token: action.token, ...action.userData};
+      console.log('adding user', action.userId);
+      return { ...state, id: action.userId };
 
-    case LOGOUT: 
-      return {...initialState}
-
-    default: 
+    default:
       return state;
   }
 }
