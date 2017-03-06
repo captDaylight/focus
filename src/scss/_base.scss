@@ -97,7 +97,7 @@ button:focus {
 }
 
 .pink-hover-red {
-  color: lighten($red, 30%);
+  color: rgba($red, 0.5);
   @include transition(color 0.2s ease-in-out);
   &:hover {
     color: $red;

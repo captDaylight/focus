@@ -42,22 +42,22 @@
   padding: 5px 0px;
   .todo-content {
     &:hover {
-      background-color: lighten($blue, 40%);
+      background-color: rgba($blue, 0.6);
     }
   }
   &.working {
     font-weight: bold;
-    background-color: lighten($blue, 35%);
+    background-color: rgba($blue, 0.3);
     .todo-content {
       &:hover {
-        background-color: lighten($blue, 35%);
+        background-color: rgba($blue, 0.3);
         text-decoration: line-through;
       }
     }
   }
   &.completed {
     background-color: none;
-    color: lighten($blue, 25%);
+    color: rgba($blue, 0.5);
     .todo-content {
       text-decoration: line-through;
       &:hover {
@@ -88,19 +88,19 @@
     .todo-content {
       width: 50%;
       &:hover {
-        background-color: lighten($red, 40%);
+        background-color: rgba($red, 0.6);
       }
     }
     &.working {
-      background-color: lighten($red, 35%);
+      background-color: rgba($red, 0.3);
       .todo-content {
         &:hover {
-          background-color: lighten($red, 35%);
+          background-color: rgba($red, 0.3);
         }
       }
     }
     &.completed {
-      color: lighten($red, 25%);
+      color: rgba($red, 0.3);
       .todo-icon {
         &:hover {
           color: $red;

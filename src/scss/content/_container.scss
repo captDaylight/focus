@@ -1,14 +1,18 @@
 #focus-container {
   min-height: 100%;
   width: 100%;
-  // background-color: lighten($blue, 20%);
   color: $blue;
   box-sizing: border-box;
   border: 30px solid transparent;
   @include transition(all 0.25s ease-in-out);
   &.focusing {
-    // background-color: lighten($red, 20%);
     color: $red;
+  }
+  &.night-blue {
+    background-color: #012F76;
+  }
+  &.night-red {
+    background-color: #6C0E0E;
   }
 }
 

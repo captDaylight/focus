@@ -81,7 +81,11 @@ export default class FocusContainer extends Component {
     return (
       <section
         id="focus-container"
-        className={classnames({ focusing: !!minutes })}
+        className={classnames({
+          focusing: !!minutes,
+          'night-blue': ui.nightMode && !minutes,
+          'night-red': ui.nightMode && !!minutes,
+        })}
       >
         {(() => {
           switch (ui.introStep) {
