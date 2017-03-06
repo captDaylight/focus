@@ -180,8 +180,6 @@ export default class FocusContainer extends Component {
                       )
                     }
                   </div>
-                  <div onClick={() => toggleNightMode()}>Toggle Night Mode.</div>
-                  <div>{ui.nightMode ? 'night mode is ON' : 'night mode is off'}</div>
                   <Profile
                     showSites={showSites}
                     websites={websites}
@@ -194,6 +192,8 @@ export default class FocusContainer extends Component {
                     toggleNotificationSound={toggleNotificationSound}
                     notification={notification}
                     ticking={ticking}
+                    toggleNightMode={toggleNightMode}
+                    ui={ui}
                   />
                 </div>
 
