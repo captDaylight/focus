@@ -27,6 +27,9 @@ const init = (initState) => {
   if (initState && !('ticking' in initState.timer)) {
     initState.timer.ticking = false;
   }
+  if (initState && !('nightMode' in initState.ui)) {
+    initState.ui.nightMode = false;
+  }
   if (initState && initState.todos && initState.todos.todos.length > 0) {
     if (!initState.todos.todos[0].hasOwnProperty('order')) {
       // people with todos that haven't been ordered yet
