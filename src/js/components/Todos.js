@@ -42,19 +42,19 @@ export default class SessionsList extends Component {
 
         {groupedByStarted.true && <ul className="todos" ref={this.dragulaDecorator}>
           {orderBy(groupedByStarted.true, ['order'], ['asc']).map(todo =>
-            <Todo key={todo.id} todo={todo} {...this.props} />)
+            <Todo key={todo.id} todo={todo} {...this.props} draggable={groupedByStarted.true.length > 1} />)
           }
         </ul>}
 
         {groupedByStarted.false && <ul className="todos" ref={this.dragulaDecorator}>
           {orderBy(groupedByStarted.false, ['order'], ['asc']).map(todo =>
-            <Todo key={todo.id} todo={todo} {...this.props} />)
+            <Todo key={todo.id} todo={todo} {...this.props} draggable={groupedByStarted.false.length > 1} />)
           }
         </ul>}
 
         {groupedByCompleted.true && <ul className="todos">
           {groupedByCompleted.true.map(todo =>
-            <Todo key={todo.id} todo={todo} {...this.props} />)
+            <Todo key={todo.id} todo={todo} {...this.props} draggable={false} />)
           }
         </ul>}
       </div>

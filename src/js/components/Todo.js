@@ -28,6 +28,7 @@ export default class SessionsList extends Component {
 
   render() {
     const {
+      draggable,
       todo,
       toggleTodoCompletion,
       toggleTodoWorking,
@@ -35,7 +36,7 @@ export default class SessionsList extends Component {
       toggleTodoEdit,
     } = this.props;
     const {editTodoValue} = this.state;
-
+    console.log(!todo.completed, draggable);
     return (
       <li
         className={classnames('todo', {
@@ -57,7 +58,7 @@ export default class SessionsList extends Component {
           </form>)
           :
           (<div className="todo-container">
-            <div className={`todo-grip ${!todo.completed ? '' : 'no-grip'}`}>&#9776;</div>
+            <div className={`todo-grip ${todo.completed || !draggable ? 'no-grip' : ''}`}>&#9776;</div>
             <div className="todo-controls left-right">
               <div
                 className="todo-content"
