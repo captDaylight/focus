@@ -36,7 +36,7 @@ export default class SessionsList extends Component {
       toggleTodoEdit,
     } = this.props;
     const {editTodoValue} = this.state;
-    console.log(!todo.completed, draggable);
+
     return (
       <li
         className={classnames('todo', {

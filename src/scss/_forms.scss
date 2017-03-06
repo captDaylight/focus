@@ -24,7 +24,7 @@ label {
     border-color: $red;
     color: $red;
     @include placeholder {
-      color: lighten($red, 25%);
+      color: rgba($red, 0.75);
     }
   }
 }
@@ -46,7 +46,7 @@ select[multiple=multiple] {
   letter-spacing: 0.07em;
   font-family: 'Poppins', sans-serif;
   @include placeholder {
-    color: lighten($blue, 25%);
+    color: rgba($blue, 0.75);
     letter-spacing: 0.07em;
     font-family: 'Poppins', sans-serif;
   }
@@ -99,7 +99,7 @@ select {
   width: auto;
 }
 
-.form-group {  
+.form-group {
   &.error {
     #{$all-text-inputs} {
       border: 2px solid $red;
@@ -110,5 +110,3 @@ select {
     color: $red;
   }
 }
-
-

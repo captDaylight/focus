@@ -10,9 +10,9 @@ import Todos from '../components/Todos';
 import { websitesData } from '../websitesData';
 
 const actions = wrapActionsWithMessanger([
+  'addWebsite',
   'clearTimer',
   'countDown',
-  'addWebsite',
   'toggleShowSites',
   'removeWebsite',
   'addTodo',
@@ -22,14 +22,13 @@ const actions = wrapActionsWithMessanger([
   'editTodo',
   'toggleTodoWorking',
   'register',
-  'login',
-  'logout',
   'setNextIntroStep',
   'toggleAskCancelTimer',
   'setTimerLength',
   'toggleTicking',
   'toggleNotificationSound',
   'updateTodoOrder',
+  'toggleNightMode',
 ]);
 
 let oldState = {};
@@ -67,10 +66,10 @@ export default class FocusContainer extends Component {
 
   render() {
     const {
-      clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+      clearTimer, countDown, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
-      editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
-      toggleNotificationSound, updateTodoOrder
+      editTodo, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
+      toggleNotificationSound, updateTodoOrder, toggleNightMode,
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, notification,
@@ -83,66 +82,78 @@ export default class FocusContainer extends Component {
     return (
       <section
         id="focus-container"
-        className={classnames({ focusing: !!minutes })}>
+        className={classnames({
+          focusing: !!minutes,
+          'night-blue': ui.nightMode && !minutes,
+          'night-red': ui.nightMode && !!minutes,
+        })}
+      >
         {(() => {
           switch (ui.introStep) {
             case 0: return (
-                <div>
-                  <AddWebsites
-                    websitesData={websitesData}
-                    addWebsite={actions.addWebsite}
-                    removeWebsite={actions.removeWebsite}
-                    websites={websites}
-                    setNextIntroStep={setNextIntroStep} />
-                </div>
-              );
+              <div>
+                <AddWebsites
+                  websitesData={websitesData}
+                  addWebsite={actions.addWebsite}
+                  removeWebsite={actions.removeWebsite}
+                  websites={websites}
+                  setNextIntroStep={setNextIntroStep}
+                />
+              </div>);
             case 1: return (
-                <div>
-                  <div className="intro-text">
-                    <h5>Step 2 <br/> Add Custom Sites to Block</h5>
-                    <h6>When you are on a site you want to block, click the drop down and select "Block This Site". <br/><br/> You can also start a focus session from here.</h6>
-                  </div>
-                  <img src="dist/img/block.png" />
-                  <div className="intro-next">
-                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
-                  </div>
+              <div>
+                <div className="intro-text">
+                  <h5>Step 2 <br /> Add Custom Sites to Block</h5>
+                  <h6>
+                    When you are on a site you want to block, click the drop down
+                    and select &quot;Block This Site&quot;.
+                    <br /><br />
+                    You can also start a focus session from here.
+                  </h6>
                 </div>
-              );
+                <img alt="" src="dist/img/block.png" />
+                <div className="intro-next">
+                  <button className="popup" onClick={() => setNextIntroStep()}>next</button>
+                </div>
+              </div>);
             case 2: return (
-                <div>
-                  <div className="intro-text">
-                    <h5>Step 3 <br/> Start Focusing</h5>
-                    <h6>A focus session lasts for 25 minutes. The site will go red and countdown until you can take a break.</h6>
-                  </div>
-                  <img className="intro-image" src="dist/img/25m.png" />
-                  <div className="intro-next">
-                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
-                  </div>
+              <div>
+                <div className="intro-text">
+                  <h5>Step 3 <br /> Start Focusing</h5>
+                  <h6>
+                    A focus session lasts for 25 minutes. The site will go red
+                    and countdown until you can take a break.
+                  </h6>
                 </div>
-              );
+                <img alt="" className="intro-image" src="dist/img/25m.png" />
+                <div className="intro-next">
+                  <button className="popup" onClick={() => setNextIntroStep()}>next</button>
+                </div>
+              </div>);
             case 3: return (
-                <div>
-                  <div className="intro-text">
-                    <h5>Step 3 <br/> Add Todos</h5>
-                    <h6>Break your task into the smallest units possible and write them out. Cross them off as you go.</h6>
-                  </div>
-                  <img className="intro-image" src="dist/img/todo.png" />
-                  <div className="intro-next">
-                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
-                  </div>
+              <div>
+                <div className="intro-text">
+                  <h5>Step 3 <br /> Add Todos</h5>
+                  <h6>
+                    Break your task into the smallest units possible and write
+                    them out. Cross them off as you go.
+                  </h6>
                 </div>
-              );
+                <img alt="" className="intro-image" src="dist/img/todo.png" />
+                <div className="intro-next">
+                  <button className="popup" onClick={() => setNextIntroStep()}>next</button>
+                </div>
+              </div>);
             case 4: return (
-                <div>
-                  <div className="intro-text">
-                    <h5>Step 4 <br/> Enjoy!</h5>
-                    <h6>{`That's it, now give it spin!`}</h6>
-                  </div>
-                  <div className="intro-next">
-                    <button className="popup" onClick={() => {setNextIntroStep()}}>next</button>
-                  </div>
+              <div>
+                <div className="intro-text">
+                  <h5>Step 4 <br /> Enjoy!</h5>
+                  <h6>{'That\'s it, now give it spin!'}</h6>
                 </div>
-              );
+                <div className="intro-next">
+                  <button className="popup" onClick={() => setNextIntroStep()}>next</button>
+                </div>
+              </div>);
             default: return (
               <div>
                 <div id="header">
@@ -182,6 +193,8 @@ export default class FocusContainer extends Component {
                     toggleNotificationSound={toggleNotificationSound}
                     notification={notification}
                     ticking={ticking}
+                    toggleNightMode={toggleNightMode}
+                    ui={ui}
                   />
                 </div>
 

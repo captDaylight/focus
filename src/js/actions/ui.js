@@ -4,3 +4,10 @@ export function setNextIntroStep() {
     type: SET_NEXT_INTRO_STEP,
   };
 }
+
+export const TOGGLE_NIGHT_MODE = 'TOGGLE_NIGHT_MODE';
+export function toggleNightMode() {
+  return {
+    type: TOGGLE_NIGHT_MODE,
+  };
+}
