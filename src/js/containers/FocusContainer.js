@@ -10,6 +10,7 @@ import Todos from '../components/Todos';
 import { websitesData } from '../websitesData';
 
 const actions = wrapActionsWithMessanger([
+  'addWebsite',
   'clearTimer',
   'countDown',
   'toggleShowSites',

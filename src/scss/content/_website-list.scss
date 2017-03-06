@@ -78,6 +78,9 @@
 
 .night-mode-toggle {
   font-size: 18px;
-  cursor: pointer;
   text-align: right;
+}
+
+.night-mode-toggle > span {
+  cursor: pointer;
 }
