@@ -12,7 +12,6 @@ import { websitesData } from '../websitesData';
 const actions = wrapActionsWithMessanger([
   'clearTimer',
   'countDown',
-  'addWebsite',
   'toggleShowSites',
   'removeWebsite',
   'addTodo',
@@ -22,14 +21,13 @@ const actions = wrapActionsWithMessanger([
   'editTodo',
   'toggleTodoWorking',
   'register',
-  'login',
-  'logout',
   'setNextIntroStep',
   'toggleAskCancelTimer',
   'setTimerLength',
   'toggleTicking',
   'toggleNotificationSound',
   'updateTodoOrder',
+  'toggleNightMode',
 ]);
 
 let oldState = {};
@@ -67,10 +65,10 @@ export default class FocusContainer extends Component {
 
   render() {
     const {
-      clearTimer, countDown, addWebsite, removeWebsite, addTodo, toggleTodoCompletion,
+      clearTimer, countDown, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
-      editTodo, logout, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
-      toggleNotificationSound, updateTodoOrder
+      editTodo, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
+      toggleNotificationSound, updateTodoOrder, toggleNightMode,
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, notification,
@@ -178,6 +176,8 @@ export default class FocusContainer extends Component {
                       )
                     }
                   </div>
+                  <div onClick={() => toggleNightMode()}>Toggle Night Mode.</div>
+                  <div>{ui.nightMode ? 'night mode is ON' : 'night mode is off'}</div>
                   <Profile
                     showSites={showSites}
                     websites={websites}
