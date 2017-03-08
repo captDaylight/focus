@@ -2,8 +2,8 @@ import formatAMPM from '../utils/formatAMPM';
 import doubleDigit from '../utils/doubleDigit';
 
 let countdownInterval;
-const tickingSound = new Audio(`dist/sound/tick.mp3`);
-const audio = new Audio(`dist/sound/chime.mp3`);
+const tickingSound = new Audio('dist/sound/tick.mp3');
+const audio = new Audio('dist/sound/chime.mp3');
 tickingSound.loop = true;
 
 export const SET_TIMER = 'SET_TIMER';
