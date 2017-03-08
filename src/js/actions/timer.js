@@ -95,7 +95,8 @@ export function startCountDown(date, duration, notification, ticking) {
         setTime(countdownInterval); // set times each interval
       }, 1000);
 
-      setTime(countdownInterval); // set time first after timeout
+      // set time first after timeout
+      setTime(countdownInterval);
       dispatch(setCountdownInterval(countdownInterval));
     }, (dateEnd - Date.now()) % SECOND);
 
@@ -105,7 +106,22 @@ export function startCountDown(date, duration, notification, ticking) {
 }
 
 export function countDown(date, duration, notification, ticking = false) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { user: { id } } = getState();
+    const payload = {
+      userId: id,
+      date,
+      duration,
+    };
+    fetch('https://1691mjv22h.execute-api.us-east-1.amazonaws.com/dev/session', {
+      body: JSON.stringify(payload),
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+
     dispatch(setTimer(date));
     dispatch(startCountDown(date, duration, notification, ticking));
   };
