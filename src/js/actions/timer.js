@@ -15,12 +15,31 @@ export function setTimer(date) {
 }
 
 export const CLEAR_TIMER = 'CLEAR_TIMER';
-export function clearTimer() {
+export function reduxClearTimer() {
   clearInterval(countdownInterval);
   tickingSound.pause();
   return {
     type: CLEAR_TIMER,
   };
+}
+
+export function clearTimer() {
+  return (dispatch, getState) => {
+    const { timer: { sessions }, user: { id } } = getState();
+    const currentSession = sessions[sessions.length - 1];
+    dispatch(reduxClearTimer());
+
+    fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
+      body: JSON.stringify({
+        UserId: parseInt(id, 10),
+      }),
+      method: 'PUT',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
 }
 
 export const SET_TIME_LEFT = 'SET_TIME_LEFT';
@@ -108,9 +127,9 @@ export function startCountDown(date, duration, notification, ticking) {
 export function countDown(date, duration, notification, ticking = false) {
   return (dispatch, getState) => {
     const { user: { id } } = getState();
-    fetch('https://1691mjv22h.execute-api.us-east-1.amazonaws.com/dev/session', {
+    fetch(`${process.env.API_URL}api/session`, {
       body: JSON.stringify({
-        userId: id,
+        UserId: id,
         date,
         duration,
       }),
@@ -119,7 +138,7 @@ export function countDown(date, duration, notification, ticking = false) {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-    })
+    });
 
     dispatch(setTimer(date));
     dispatch(startCountDown(date, duration, notification, ticking));

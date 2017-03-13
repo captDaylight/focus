@@ -15,7 +15,7 @@ export function addWebsite(url, favicon) {
       method: 'POST',
       mode: 'cors',
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
         UserId: id,
@@ -23,10 +23,10 @@ export function addWebsite(url, favicon) {
       }),
     })
     .then(res => res.json())
-    .then(res => {
+    .then((res) => {
       console.log('websites', res);
-    })
-  }
+    });
+  };
 }
 
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
