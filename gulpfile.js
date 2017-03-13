@@ -20,6 +20,14 @@ gulp.task('javascript', function() {
     .pipe(named())
     .pipe(webpackStream({
       watch: true,
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env': {
+            'NODE_ENV': JSON.stringify('development'),
+            'API_URL': JSON.stringify('http://localhost:3000/'),
+          }
+        }),
+      ],
       module: {
         loaders: [{
           loader: 'babel-loader',
@@ -48,12 +56,13 @@ gulp.task('javascriptProd', function() {
     .pipe(plumber())
     .pipe(named())
     .pipe(webpackStream({
-      watch: true,
+      watch: false,
       plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin({
           'process.env': {
-            'NODE_ENV': JSON.stringify('production')
+            'NODE_ENV': JSON.stringify('production'),
+            'API_URL': JSON.stringify('https://focus-server.herokuapp.com/'),
           }
         }),
         new webpack.optimize.UglifyJsPlugin({

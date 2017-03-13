@@ -56,8 +56,9 @@ const init = (initState) => {
   const storageSync = createStorageSync(store.getState());
 
   const { timer: { sessions, duration, sound }, user } = store.getState();
-  if (user && (!('id' in user) || user.id === '')) {
-    fetch('https://1691mjv22h.execute-api.us-east-1.amazonaws.com/dev/user', {
+  if (user && (!('id' in user) || user.id.length > 6)) {
+    // TODO remove the < 10 check once enough people have signed up
+    fetch(`${process.env.API_URL}api/user`, {
       method: 'POST',
       mode: 'cors',
       headers: new Headers({
@@ -65,7 +66,9 @@ const init = (initState) => {
       }),
     })
     .then(res => res.json())
-    .then(data => store.dispatch(userActions.addUser(data.id)));
+    .then(res => {
+      store.dispatch(userActions.addUser(res.data.user.id))
+    });
   }
 
   if (sessions.length > 0) {
