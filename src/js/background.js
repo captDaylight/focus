@@ -3,10 +3,10 @@ import thunkMiddleware from 'redux-thunk';
 import { groupBy } from 'lodash';
 import rootReducer from './reducers';
 import createStorageSync from './utils/storageSync';
-import * as timer from './actions/timer';
-import * as websites from './actions/websites';
-import * as todos from './actions/todos';
-import * as ui from './actions/ui';
+import * as timerActions from './actions/timer';
+import * as websiteActions from './actions/websites';
+import * as todoActions from './actions/todos';
+import * as uiActions from './actions/ui';
 import * as userActions from './actions/user';
 import cleanUp from './utils/cleanUp';
 
@@ -55,7 +55,8 @@ const init = (initState) => {
 
   const storageSync = createStorageSync(store.getState());
 
-  const { timer: { sessions, duration, sound }, user } = store.getState();
+  const { timer: { sessions, duration, sound }, user, websites } = store.getState();
+
   if (user && (!('id' in user) || user.id.length > 6)) {
     // TODO remove the < 10 check once enough people have signed up
     fetch(`${process.env.API_URL}api/user`, {
@@ -66,8 +67,24 @@ const init = (initState) => {
       }),
     })
     .then(res => res.json())
-    .then(res => {
+    .then((res) => {
       store.dispatch(userActions.addUser(res.data.user.id))
+      // add websites to server
+      fetch(`${process.env.API_URL}api/website`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+          UserId: res.data.user.id,
+          urls: websites.websites.map((w) => w.url),
+        }),
+      })
+      .then(res => res.json())
+      .then(res => {
+        console.log('websites',res);
+      })
     });
   }
 
@@ -75,10 +92,10 @@ const init = (initState) => {
     if (sessionCheck(sessions, duration)) {
       // if timer is still going on init, restart countdown
       const { date } = sessions[sessions.length - 1];
-      store.dispatch(timer.startCountDown(date, (date + duration) - Date.now(), sound));
+      store.dispatch(timerActions.startCountDown(date, (date + duration) - Date.now(), sound));
     } else {
       // clear timer info
-      store.dispatch(timer.clearCountdownInterval());
+      store.dispatch(timerActions.clearCountdownInterval());
       chrome.storage.sync.set(store.getState());
     }
   } else {
@@ -89,7 +106,7 @@ const init = (initState) => {
   store.subscribe(() => {
     const state = store.getState();
     const statePayload = { type: 'STATE_UPDATE', data: state };
-    // console.log('----STATE CHANGE');
+
     if (state.timer.date) {
       const {duration, date} = state.timer;
       const timeLeft = (date + duration) - Date.now();
@@ -133,10 +150,9 @@ const init = (initState) => {
   // TODO: switch this to long-lived connection
   // https://developer.chrome.com/extensions/messaging#connect
   chrome.extension.onMessage.addListener((req, sender, sendRes) => {
-    const actions = { ...timer, ...websites, ...todos, ...ui };
+    const actions = { ...timerActions, ...websiteActions, ...todoActions, ...uiActions };
     // console.log('STATE', req.action, req.data);
     // const {token} = store.getState().user;
-    // console.log(token);
     if (req.type === 'ACTION') {
       // console.log('req action');
       store.dispatch(actions[req.action](...req.data));

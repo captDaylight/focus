@@ -108,13 +108,12 @@ export function startCountDown(date, duration, notification, ticking) {
 export function countDown(date, duration, notification, ticking = false) {
   return (dispatch, getState) => {
     const { user: { id } } = getState();
-    const payload = {
-      userId: id,
-      date,
-      duration,
-    };
     fetch('https://1691mjv22h.execute-api.us-east-1.amazonaws.com/dev/session', {
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        userId: id,
+        date,
+        duration,
+      }),
       method: 'POST',
       mode: 'cors',
       headers: new Headers({

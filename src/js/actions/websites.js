@@ -1,10 +1,32 @@
 export const ADD_WEBSITE = 'ADD_WEBSITE';
-export function addWebsite(url, favicon) {
+export function reduxAddWebsite(url, favicon) {
   return {
     type: ADD_WEBSITE,
     url,
     favicon,
   };
+}
+
+export function addWebsite(url, favicon) {
+  return (dispatch, getState) => {
+    const { user: { id } } = getState();
+    dispatch(reduxAddWebsite(url, favicon));
+    fetch(`${process.env.API_URL}api/website`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        UserId: id,
+        urls: [url],
+      }),
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log('websites', res);
+    })
+  }
 }
 
 export const REMOVE_WEBSITE = 'REMOVE_WEBSITE';
