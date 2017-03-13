@@ -1,9 +1,27 @@
 export const ADD_TODO = 'ADD_TODO';
-export function addTodo(todo) {
+export function reduxAddTodo(todo) {
   return {
     type: ADD_TODO,
     todo,
   };
+}
+
+export function addTodo(todo) {
+  return (dispatch, getState) => {
+    const { user: { id } } = getState();
+    dispatch(reduxAddTodo(todo));
+    fetch(`${process.env.API_URL}api/todo`, {
+      body: JSON.stringify({
+        UserId: id,
+        text: todo,
+      }),
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
 }
 
 export const REMOVE_TODO = 'REMOVE_TODO';
