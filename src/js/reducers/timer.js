@@ -47,6 +47,7 @@ export default function timer(state = initialState, action) {
       const session = {
         date: action.date,
         duration: state.duration,
+        distractions: 0,
       };
       return {
         ...state,

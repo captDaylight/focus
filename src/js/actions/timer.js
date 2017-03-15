@@ -172,3 +172,22 @@ export function toggleTicking() {
     type: TOGGLE_TICKING,
   };
 }
+
+export function addDistraction() {
+  return (dispatch, getState) => {
+    const { timer: { sessions }, user: { id } } = getState();
+    const currentSession = sessions[sessions.length - 1];
+
+    fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
+      body: JSON.stringify({
+        UserId: parseInt(id, 10),
+        distraction: 1,
+      }),
+      method: 'PUT',
+      mode: 'cors',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
+}

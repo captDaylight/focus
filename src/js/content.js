@@ -3,6 +3,11 @@ import url from 'url';
 import { template, filter } from 'lodash';
 import FocusContainer from './containers/FocusContainer';
 import checkShouldBlock from './utils/checkShouldBlock';
+import wrapActionsWithMessanger from './utils/wrapActionsWithMessanger';
+
+const actions = wrapActionsWithMessanger([
+  'addDistraction',
+]);
 
 let mounted = false;
 
@@ -42,6 +47,7 @@ function mountOrNot(siteChecker) {
 
     if (date && date < Date.now()) {
       if (shouldBlockSite && !mounted) {
+        actions.addDistraction();
         mountBlocker(state);
       }
     } else if (mounted) {
