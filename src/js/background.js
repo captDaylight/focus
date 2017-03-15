@@ -57,7 +57,7 @@ const init = (initState) => {
 
   const { timer: { sessions, duration, sound }, user, websites } = store.getState();
 
-  if (user && (!('id' in user) || user.id.length > 6)) {
+  if (user && (!('id' in user) || user.id.length > 6 || user.id.length === 0)) {
     // TODO remove the < 10 check once enough people have signed up
     fetch(`${process.env.API_URL}api/user`, {
       method: 'POST',
