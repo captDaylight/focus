@@ -22,6 +22,14 @@ const init = (initState) => {
   )(createStore);
 
   // adding new values to timer, should figure out a better way to do this
+  if (initState) {
+    initState.timer.sessions = initState.timer.sessions.map((s) => {
+      if ('distractions' in s) {
+        return s;
+      }
+      return { ...s, distractions: 0 };
+    });
+  }
   if (initState && !('notification' in initState.timer)) {
     initState.timer.notification = true;
   }

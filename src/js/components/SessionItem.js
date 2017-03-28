@@ -20,6 +20,7 @@ export default class SessionsList extends Component {
       dateEnd,
       working,
       finished,
+      distractions,
     } = this.props;
 
     return (
@@ -34,6 +35,10 @@ export default class SessionsList extends Component {
           </div>
           <div className="session-date">
             {/*blocked &#10005; 3 */}
+            {
+              distractions > 0
+              && `blocked distraction x ${distractions}`
+            }
           </div>
         </div>
         {

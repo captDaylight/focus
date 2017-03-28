@@ -173,10 +173,19 @@ export function toggleTicking() {
   };
 }
 
+export const ADD_DISTRACTION = 'ADD_DISTRACTION';
+export function reduxAddDistraction() {
+  return {
+    type: ADD_DISTRACTION,
+  }
+}
+
 export function addDistraction() {
   return (dispatch, getState) => {
     const { timer: { sessions }, user: { id } } = getState();
     const currentSession = sessions[sessions.length - 1];
+
+    dispatch(reduxAddDistraction());
 
     fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
       body: JSON.stringify({

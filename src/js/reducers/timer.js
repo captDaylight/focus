@@ -9,6 +9,7 @@ import {
   SET_TIMER_LENGTH,
   TOGGLE_NOTIFICATION_SOUND,
   TOGGLE_TICKING,
+  ADD_DISTRACTION,
 } from '../actions/timer';
 
 const MINUTE = 60000;
@@ -101,6 +102,20 @@ export default function timer(state = initialState, action) {
 
     case TOGGLE_TICKING:
       return { ...state, ticking: !state.ticking };
+
+    case ADD_DISTRACTION: {
+      const last = state.sessions[state.sessions.length - 1];
+      return {
+        ...state,
+        sessions: [
+          ...removeLast(state.sessions),
+          {
+            ...last,
+            distractions: last.distractions + 1,
+          },
+        ],
+      };
+    }
 
     default:
       return state;

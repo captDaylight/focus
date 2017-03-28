@@ -40,7 +40,7 @@ export default class SessionsList extends Component {
           {
             sessionDayKeys.reverse().map((day) => {
               const sessionsItems = sessionDays[day].reverse().map((session) => {
-                const { date, duration } = session;
+                const { date, duration, distractions } = session;
                 const dateEnd = date + duration;
                 const sessionCheck = betweenDates(date, dateEnd);
                 const current = sessionCheck(now);
@@ -65,6 +65,7 @@ export default class SessionsList extends Component {
                     current={current}
                     date={date}
                     dateEnd={dateEnd}
+                    distractions={distractions}
                     working={working}
                     finished={finished}
                   />
