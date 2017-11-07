@@ -1,10 +1,12 @@
 # focus
 
-Simply run ```gulp``` to develop.
+Simply run `gulp` to develop.
 
 and
 
-```gulp build```
+```
+gulp build
+```
 
 to build for publishing.
 

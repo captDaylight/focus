@@ -1,12 +1,12 @@
 export const websitesData = [
   {
-    favicon: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
-    url: 'www.youtube.com'
+    favicon: 'https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico',
+    url: 'facebook.com'
   },
 
   {
-    favicon: 'https://i.vimeocdn.com/favicon/main-touch_180',
-    url: 'www.vimeo.com'
+    favicon: 'https://s.ytimg.com/yts/img/favicon_32-vfl8NGn4k.png',
+    url: 'www.youtube.com'
   },
 
   {
@@ -15,8 +15,23 @@ export const websitesData = [
   },
 
   {
+    favicon: 'https://abs.twimg.com/favicons/favicon.ico',
+    url: 'twitter.com'
+  },
+
+  {
+    favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
+    url: 'medium.com'
+  },
+
+  {
     favicon: 'https://s.imgur.com/images/favicon-32x32.png',
     url: 'imgur.com'
+  },
+
+  {
+    favicon: 'https://i.vimeocdn.com/favicon/main-touch_180',
+    url: 'www.vimeo.com'
   },
 
   {
@@ -75,23 +90,8 @@ export const websitesData = [
   },
 
   {
-    favicon: 'https://abs.twimg.com/favicons/favicon.ico',
-    url: 'twitter.com'
-  },
-
-  {
-    favicon: 'https://cdn-static-1.medium.com/_/fp/icons/favicon-new.TAS6uQ-Y7kcKgi0xjcYHXw.ico',
-    url: 'medium.com'
-  },
-
-  {
     favicon: 'https://cdn2.vox-cdn.com/community_logos/52517/voxv.png',
     url: 'vox.com'
-  },
-
-  {
-    favicon: 'https://static.xx.fbcdn.net/rsrc.php/yl/r/H3nktOa7ZMg.ico',
-    url: 'facebook.com'
   },
 
   {
