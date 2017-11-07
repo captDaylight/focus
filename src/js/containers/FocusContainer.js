@@ -121,8 +121,7 @@ export default class FocusContainer extends Component {
                 <div className="intro-text">
                   <h5>Step 3 <br /> Start Focusing</h5>
                   <h6>
-                    A focus session lasts for 25 minutes. The site will go red
-                    and countdown until you can take a break.
+                    Go to settings in the top right and set your focus time (default 25 minutes). Then click "Start Focusing".
                   </h6>
                 </div>
                 <img alt="" className="intro-image" src="dist/img/25m.png" />
@@ -135,8 +134,7 @@ export default class FocusContainer extends Component {
                 <div className="intro-text">
                   <h5>Step 3 <br /> Add Todos</h5>
                   <h6>
-                    Break your task into the smallest units possible and write
-                    them out. Cross them off as you go.
+                    Break your task into small units list them.
                   </h6>
                 </div>
                 <img alt="" className="intro-image" src="dist/img/todo.png" />
