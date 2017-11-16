@@ -4,6 +4,17 @@ import WebsiteList from './WebsiteList';
 
 const MINUTE = 60000;
 
+const displayTime = (duration) => {
+  if (duration < (MINUTE * 60)) {
+    const minutes = duration / MINUTE;
+    return <span>{minutes.toString().length < 2 ? `0${minutes}` : minutes}<span className="smaller">m</span></span>;
+  }
+
+  const hours = Math.floor(duration / (MINUTE * 60));
+  const minutes = (duration % (MINUTE * 60)) / MINUTE;
+  return <span>{hours}<span className="smaller">h</span> {minutes.toString().length < 2 ? `0${minutes}` : minutes}<span className="smaller">m</span></span>;
+};
+
 export default class Profile extends Component {
   render() {
     const {
@@ -39,13 +50,13 @@ export default class Profile extends Component {
                 >
                   -
                 </h1>
-                  <h1>{duration / MINUTE} Min</h1>
                 <h1
-                  className="margin-left-sm pointer no-select"
+                  className="margin-right-sm pointer no-select"
                   onClick={() => setTimerLength('INCREMENT')}
                 >
                   +
                 </h1>
+                <h1 className="margin-left-sm">{displayTime(duration)}</h1>
               </div>
             </div>
 

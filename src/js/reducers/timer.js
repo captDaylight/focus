@@ -84,15 +84,23 @@ export default function timer(state = initialState, action) {
 
     case SET_TIMER_LENGTH: {
       const { incOrDec } = action;
-      let newDuration;
+      let newDuration = state.duration;
 
       if (incOrDec === 'INCREMENT') {
         // can't be greater than 60 minutes
-        newDuration = state.duration < 3600000
-          ? state.duration + MINUTE : state.duration;
+        if (state.duration < 3600000) {
+          newDuration = state.duration + MINUTE;
+        } else {
+          newDuration = state.duration + (MINUTE * 5);
+        }
       } else {
-        newDuration = state.duration > MINUTE
-          ? state.duration - MINUTE : state.duration;
+        if (state.duration > MINUTE) {
+          if (state.duration <= 3600000) {
+            newDuration = state.duration - MINUTE;
+          } else {
+            newDuration = state.duration - (MINUTE * 5);
+          }
+        }
       }
       return { ...state, duration: newDuration };
     }
