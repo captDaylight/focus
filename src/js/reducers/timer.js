@@ -20,6 +20,7 @@ const timerInitial = {
   minutes: null,
   seconds: null,
   countdownInterval: null,
+  distractions: 0,
 };
 
 // meta data does not get cleared

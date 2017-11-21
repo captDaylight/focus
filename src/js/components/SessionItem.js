@@ -37,7 +37,7 @@ export default class SessionsList extends Component {
             {/*blocked &#10005; 3 */}
             {
               distractions > 0
-              && `blocked distraction x ${distractions}`
+              && <span className="small-text">blocked <span className="session-block-number">{distractions}</span> time{distractions > 1 ? 's' : ''}</span>
             }
           </div>
         </div>
