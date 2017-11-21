@@ -17,6 +17,7 @@ const centerStyling = 'display: -webkit-box;display: -moz-box;display: box;displ
     align-items: center;-ms-flex-align: center;'
 
 const timeTpl = template('<%= minutes %> : <%= seconds%>');
+const hourTpl = template('<%= hours %> : <%= minutes %> : <%= seconds%>');
 const todosTpl = template(' \
   <% todos.map(function (todo) {%> \
     <li class="focus-content-todo"><%= todo.todo %></li> \
@@ -105,6 +106,12 @@ function updateBlocker(data) {
   const {minutes, seconds} = data.timer;
   const workingOnTodos = filter(data.todos.todos, todo => todo.workingOn && !todo.completed)
   const todos = workingOnTodos.length !== 0 ? workingOnTodos : filter(data.todos.todos, todo => !todo.completed);
-  $('#focus-content-time').html(timeTpl({minutes,seconds}));
+  if (minutes < 60) {
+    $('#focus-content-time').html(timeTpl({minutes,seconds}));
+  } else {
+    const hours = Math.floor(minutes / 60);
+    const newMinutes = (minutes % 60);
+    $('#focus-content-time').html(hourTpl({hours, minutes: newMinutes, seconds}));
+  }
   $('#focus-content-todos').html(todosTpl({todos}));
 }
