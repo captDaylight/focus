@@ -13,14 +13,18 @@
     border-width: 2px;
     border-style: solid;
     background-color: $red;
-    color: white;
     border-top: $red;
     border-right: $red;
     border-left: $red;
     border-bottom: $red;
   }
-  .session-day-header {
-
+}
+.current {
+  color: white;
+}
+.night-red {
+  .current {
+    color: #6C0E0E;
   }
 }
 .session-day-header {
