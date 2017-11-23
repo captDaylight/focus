@@ -19,6 +19,14 @@ export default function storageSync(initState) {
       chrome.storage.sync.set(state);
     }
 
+    if (state.timer.sessions.length !== 0) {
+      const currentLast = state.timer.sessions[state.timer.sessions.length - 1]
+      const previousLast = prevState.timer.sessions[prevState.timer.sessions.length - 1]
+      if (currentLast.distractions !== previousLast.distractions) {
+        chrome.storage.sync.set(state);
+      }
+    }
+
     // set previous state
     prevState = state;
   }

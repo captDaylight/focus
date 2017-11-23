@@ -113,6 +113,7 @@ export default function timer(state = initialState, action) {
       return { ...state, ticking: !state.ticking };
 
     case ADD_DISTRACTION: {
+      console.log('ADDING A DISTRACTION TO TEH REDUCER');
       const last = state.sessions[state.sessions.length - 1];
       return {
         ...state,

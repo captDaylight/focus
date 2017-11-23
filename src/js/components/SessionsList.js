@@ -2,8 +2,53 @@ import React, { Component } from 'react';
 import { filter, groupBy } from 'lodash';
 import SessionItem from './SessionItem';
 
+const MINUTE = 60000;
+
 function betweenDates(begin, end) {
   return date => date > begin && date < end;
+}
+
+class TotalTime extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      isCurrent: false,
+      minutes: 0,
+    };
+
+    this.updateMinutes = this.updateMinutes.bind(this);
+  }
+
+  componentWillMount() {
+    const { sessions } = this.props;
+    this.updateMinutes(sessions);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.sessions.length !== nextProps.sessions.length) {
+      this.updateMinutes(nextProps.sessions);
+    }
+  }
+
+  updateMinutes(sessions) {
+    const now = Date.now();
+
+    const sessionsAmount = sessions.reduce((acc, cur) => {
+      const { date, duration } = cur;
+      const dateEnd = date + duration;
+      const sessionCheck = betweenDates(date, dateEnd);
+      const current = sessionCheck(now);
+
+      return acc + cur.duration;
+    }, 0);
+
+    this.setState({ minutes: sessionsAmount / MINUTE });
+  }
+
+  render() {
+    return <span>{this.state.minutes}</span>
+  }
 }
 
 export default class SessionsList extends Component {
@@ -25,16 +70,28 @@ export default class SessionsList extends Component {
     });
 
     const sessionDayKeys = Object.keys(sessionDays);
+    let sessionCount = '';
+    let sessionAmount = '';
+    let sessionsToday = [];
+
+    if (
+      sessionDayKeys.length > 0
+      && parseInt(sessionDayKeys[sessionDayKeys.length - 1]) === midnight
+      && sessionDays[sessionDayKeys[sessionDayKeys.length - 1]].length > 0
+    ) {
+      sessionsToday = sessionDays[sessionDayKeys[sessionDayKeys.length - 1]];
+      sessionCount = sessionsToday.length;
+      sessionAmount = sessionsToday.reduce((acc, cur) => {
+        return acc + cur.duration;
+      }, 0);
+    }
 
     return (
       <div id="sessions-container">
         <h5>
-          WORK LOG {
-            sessionDayKeys.length > 0
-            && parseInt(sessionDayKeys[sessionDayKeys.length - 1]) === midnight
-            && sessionDays[sessionDayKeys[sessionDayKeys.length - 1]].length > 0
-            && `(${sessionDays[sessionDayKeys[sessionDayKeys.length - 1]].length})`
-          }
+          WORK LOG
+          {sessionCount && <span>({sessionCount})</span>}
+          {sessionsToday.length > 0 && <TotalTime sessions={sessionsToday} />}
         </h5>
         <ul id="sessions-list">
           {

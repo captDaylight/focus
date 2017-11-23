@@ -29,16 +29,16 @@ export function clearTimer() {
     const currentSession = sessions[sessions.length - 1];
     dispatch(reduxClearTimer());
 
-    fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
-      body: JSON.stringify({
-        UserId: parseInt(id, 10),
-      }),
-      method: 'PUT',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    });
+    // fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
+    //   body: JSON.stringify({
+    //     UserId: parseInt(id, 10),
+    //   }),
+    //   method: 'PUT',
+    //   mode: 'cors',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    // });
   }
 }
 
@@ -127,18 +127,18 @@ export function startCountDown(date, duration, notification, ticking) {
 export function countDown(date, duration, notification, ticking = false) {
   return (dispatch, getState) => {
     const { user: { id } } = getState();
-    fetch(`${process.env.API_URL}api/session`, {
-      body: JSON.stringify({
-        UserId: id,
-        date,
-        duration,
-      }),
-      method: 'POST',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    });
+    // fetch(`${process.env.API_URL}api/session`, {
+    //   body: JSON.stringify({
+    //     UserId: id,
+    //     date,
+    //     duration,
+    //   }),
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    // });
 
     dispatch(setTimer(date));
     dispatch(startCountDown(date, duration, notification, ticking));
@@ -187,16 +187,16 @@ export function addDistraction() {
 
     dispatch(reduxAddDistraction());
 
-    fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
-      body: JSON.stringify({
-        UserId: parseInt(id, 10),
-        distraction: 1,
-      }),
-      method: 'PUT',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    });
+    // fetch(`${process.env.API_URL}api/session/${currentSession.date}`, {
+    //   body: JSON.stringify({
+    //     UserId: parseInt(id, 10),
+    //     distraction: 1,
+    //   }),
+    //   method: 'PUT',
+    //   mode: 'cors',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    // });
   }
 }
