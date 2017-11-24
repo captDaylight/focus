@@ -12,6 +12,8 @@ class TotalTime extends Component {
   constructor() {
     super();
 
+    this.timeout = null;
+
     this.state = {
       isCurrent: false,
       minutes: 0,
@@ -33,17 +35,34 @@ class TotalTime extends Component {
 
   updateMinutes(sessions) {
     const now = Date.now();
+    let foundCurrent = false;
 
     const sessionsAmount = sessions.reduce((acc, cur) => {
       const { date, duration } = cur;
       const dateEnd = date + duration;
       const sessionCheck = betweenDates(date, dateEnd);
-      const current = sessionCheck(now);
+      foundCurrent = sessionCheck(now);
+
+      if (current) {
+        if (!this.state.isCurrent) {
+          this.setState({ isCurrent: true });
+          this.timeout = setTimeout(() => this.updateMinutes, MINUTE);
+        }
+        return acc + (now - date);
+      }
+
+      if (this.state.isCurrent && !foundCurrent) {
+        clearTimeout(this.timeout);
+        this.timeout = null;
+        this.setState({
+          isCurrent: false,
+        });
+      }
 
       return acc + cur.duration;
     }, 0);
 
-    this.setState({ minutes: sessionsAmount / MINUTE });
+    this.setState({ minutes: Math.floor(sessionsAmount / MINUTE) });
   }
 
   render() {
