@@ -20,6 +20,7 @@ class TotalTime extends Component {
     };
 
     this.updateMinutes = this.updateMinutes.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +34,15 @@ class TotalTime extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.clear();
+  }
+
+  clear() {
+    clearInterval(this.timeout);
+    this.timeout = null;
+  }
+
   updateMinutes(sessions) {
     const now = Date.now();
     let foundCurrent = false;
@@ -41,19 +51,21 @@ class TotalTime extends Component {
       const { date, duration } = cur;
       const dateEnd = date + duration;
       const sessionCheck = betweenDates(date, dateEnd);
-      foundCurrent = sessionCheck(now);
+      const current = sessionCheck(now);
 
       if (current) {
+        foundCurrent = true;
         if (!this.state.isCurrent) {
           this.setState({ isCurrent: true });
-          this.timeout = setTimeout(() => this.updateMinutes, MINUTE);
+          this.timeout = setInterval(() => {
+            this.updateMinutes(sessions);
+          }, MINUTE / 6);
         }
         return acc + (now - date);
       }
 
       if (this.state.isCurrent && !foundCurrent) {
-        clearTimeout(this.timeout);
-        this.timeout = null;
+        this.clear();
         this.setState({
           isCurrent: false,
         });
@@ -62,7 +74,7 @@ class TotalTime extends Component {
       return acc + cur.duration;
     }, 0);
 
-    this.setState({ minutes: Math.floor(sessionsAmount / MINUTE) });
+    this.setState({ minutes: Math.ceil(sessionsAmount / MINUTE) });
   }
 
   render() {
