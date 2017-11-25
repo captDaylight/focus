@@ -138,3 +138,15 @@ button:focus {
 .small-text {
   font-size: 10px;
 }
+
+.medium-text {
+  font-size: 1.4rem;
+}
+
+.space-between {
+  @include justify-content(space-between);
+}
+
+.align-center {
+  @include align-items(center);
+}

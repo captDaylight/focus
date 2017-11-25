@@ -78,7 +78,11 @@ class TotalTime extends Component {
   }
 
   render() {
-    return <span>{this.state.minutes}</span>
+    return (<span>
+        <span className="small-text margin-right-sm">Focus Total</span>
+        <span>{this.state.minutes}</span>
+        <span className="small-text">m</span>
+    </span>);
   }
 }
 
@@ -119,10 +123,16 @@ export default class SessionsList extends Component {
 
     return (
       <div id="sessions-container">
-        <h5>
-          WORK LOG
-          {sessionCount && <span>({sessionCount})</span>}
-          {sessionsToday.length > 0 && <TotalTime sessions={sessionsToday} />}
+        <h5 className="flex align-center space-between">
+          <span className="flex align-center">
+            <span>WORK LOG</span>
+            {sessionCount && <span className="flex align-center margin-left-sm"> <span className="medium-text">x</span> <span>{sessionCount}</span></span>}
+          </span>
+
+          <span>
+            {sessionsToday.length > 0 && <TotalTime sessions={sessionsToday} />}
+          </span>
+
         </h5>
         <ul id="sessions-list">
           {
