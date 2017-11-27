@@ -57,7 +57,7 @@ export default class FocusContainer extends Component {
     const { ui } = this.state;
 
     return (
-      <section id="popup" className={classnames({focusing: minutes})}>
+      <section id="popup" className={classnames({ focusing: minutes })}>
         {
           ui.introStep < 5 ?
           (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { filter, groupBy } from 'lodash';
 import SessionItem from './SessionItem';
+import TwitterSvg from './TwitterSvg';
 
 const MINUTE = 60000;
 
@@ -91,7 +92,8 @@ class TotalTime extends Component {
 
   render() {
     return (
-      <span>
+      <span className="social-outer">
+        <span className="margin-right-sm social-icon"><TwitterSvg /></span>
         <span className="small-text margin-right-sm">Focus Total</span>
         {displayHoursAndMinutes(this.state.minutes)}
       </span>

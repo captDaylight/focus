@@ -150,3 +150,31 @@ button:focus {
 .align-center {
   @include align-items(center);
 }
+
+svg path {
+  fill: $blue;
+}
+
+.focusing svg path {
+  fill: $red;
+}
+
+.social-icon {
+  display: none;
+}
+
+.social-outer {
+  &:hover {
+    .social-icon {
+      display: inline-block;
+    }
+  }
+}
+
+.focusing .social-outer {
+  &:hover {
+    .social-icon{
+      display: none;
+    }
+  }
+}
