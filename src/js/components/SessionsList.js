@@ -8,6 +8,17 @@ function betweenDates(begin, end) {
   return date => date > begin && date < end;
 }
 
+function displayHoursAndMinutes(minutes) {
+  if (minutes < 60) {
+    return (<span>{minutes}<span className="small-text">m</span></span>);
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const newMinutes = (minutes % 60);
+  return (<span>{hours}<span className="small-text">h</span> {newMinutes.toString().length < 2 ? `0${newMinutes}` : newMinutes}<span className="small-text">m</span></span>);
+}
+
+
 class TotalTime extends Component {
   constructor() {
     super();
@@ -77,12 +88,14 @@ class TotalTime extends Component {
     this.setState({ minutes: Math.ceil(sessionsAmount / MINUTE) });
   }
 
+
   render() {
-    return (<span>
+    return (
+      <span>
         <span className="small-text margin-right-sm">Focus Total</span>
-        <span>{this.state.minutes}</span>
-        <span className="small-text">m</span>
-    </span>);
+        {displayHoursAndMinutes(this.state.minutes)}
+      </span>
+    );
   }
 }
 
