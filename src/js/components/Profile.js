@@ -37,7 +37,7 @@ export default class Profile extends Component {
       <div>
         <div className={classnames({blurring: showSites})}>
           <b className="pointer" onClick={() => toggleShowSites()}>Settings</b>
-          <div className="night-mode-toggle">{ui.nightMode ? <span onClick={() => toggleNightMode()}>☀</span> : <span onClick={() => toggleNightMode()}>☾</span>}</div>
+          <div className="night-mode-toggle">{ui.nightMode ? <span onClick={() => toggleNightMode()}><i className="material-icons">wb_sunny</i></span> : <span onClick={() => toggleNightMode()}><i className="material-icons">brightness_2</i></span>}</div>
         </div>
         <div className={classnames('profile-wrapper', {display: showSites})}>
           <div className="profile">
