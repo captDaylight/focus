@@ -147,6 +147,10 @@ button:focus {
   @include justify-content(space-between);
 }
 
+.flex-end {
+  @include justify-content(flex-end);
+}
+
 .align-center {
   @include align-items(center);
 }
@@ -160,13 +164,18 @@ svg path {
 }
 
 .social-icon {
-  display: none;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0;
 }
 
 .social-outer {
   &:hover {
     .social-icon {
       display: inline-block;
+      pointer-events: all;
+      cursor: pointer;
+      opacity: 1;
     }
   }
 }

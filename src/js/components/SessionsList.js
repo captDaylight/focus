@@ -95,12 +95,12 @@ class TotalTime extends Component {
     const text = `I focused for ${hoursMinutes[0] ? `${hoursMinutes[0]} hours `: ''}${hoursMinutes[1]} minutes today with this website blocker!`
 
     return (
-      <span className="social-outer">
+      <span>
         <span className="margin-right-sm social-icon">
           <TwitterSvg text={text}/>
         </span>
         <span className="small-text margin-right-sm">Focus Total</span>
-        {hoursMinutes[0] && <span>{hoursMinutes[0]}<span className="small-text">h</span></span>}
+        {hoursMinutes[0] && <span>{hoursMinutes[0]}<span className="small-text">h </span></span>}
         <span>{hoursMinutes[1]}<span className="small-text">m</span></span>
       </span>
     );
@@ -144,7 +144,7 @@ export default class SessionsList extends Component {
 
     return (
       <div id="sessions-container">
-        <h5 className="flex align-center space-between">
+        <h5 className="flex align-center space-between social-outer">
           <span className="flex align-center">
             <span>WORK LOG</span>
             {sessionCount && <span className="flex align-center margin-left-sm"> <span className="medium-text">x</span> <span>{sessionCount}</span></span>}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import formatAMPM from '../utils/formatAMPM';
+import TwitterSvg from './TwitterSvg';
 
 function isTodayOrDate(time) {
   const date = new Date(time);
@@ -24,7 +25,7 @@ export default class SessionsList extends Component {
     } = this.props;
 
     return (
-      <li className={classnames('session', {current: current})}>
+      <li className={classnames('session social-outer', {current: current})}>
         <div className="session-header">
           <div>
             <h5>
@@ -37,7 +38,16 @@ export default class SessionsList extends Component {
             {/*blocked &#10005; 3 */}
             {
               distractions > 0
-              && <span className="small-text">blocked <span className="session-block-number">{distractions}</span> time{distractions > 1 ? 's' : ''}</span>
+              && (
+                <span className="flex flex-end align-center">
+                  <span className="social-icon margin-right-sm">
+                    <TwitterSvg text={`Just stopped from being distracted${distractions === 1 ? '' : ` ${distractions} times`} when my mind wandered with this chrome extension!`} />
+                  </span>
+                  <span className="small-text">
+                    blocked <span className="session-block-number">{distractions}</span> time{distractions > 1 ? 's' : ''}
+                  </span>
+                </span>
+              )
             }
           </div>
         </div>
