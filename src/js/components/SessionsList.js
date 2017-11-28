@@ -9,14 +9,14 @@ function betweenDates(begin, end) {
   return date => date > begin && date < end;
 }
 
-function displayHoursAndMinutes(minutes) {
+function getHoursAndMinutes(minutes) {
   if (minutes < 60) {
-    return (<span>{minutes}<span className="small-text">m</span></span>);
+    return [null, minutes];
   }
 
   const hours = Math.floor(minutes / 60);
   const newMinutes = (minutes % 60);
-  return (<span>{hours}<span className="small-text">h</span> {newMinutes.toString().length < 2 ? `0${newMinutes}` : newMinutes}<span className="small-text">m</span></span>);
+  return [hours, newMinutes];
 }
 
 
@@ -91,11 +91,17 @@ class TotalTime extends Component {
 
 
   render() {
+    const hoursMinutes = getHoursAndMinutes(this.state.minutes);
+    const text = `I focused for ${hoursMinutes[0] ? `${hoursMinutes[0]} hours `: ''}${hoursMinutes[1]} minutes today with this website blocker!`
+
     return (
       <span className="social-outer">
-        <span className="margin-right-sm social-icon"><TwitterSvg /></span>
+        <span className="margin-right-sm social-icon">
+          <TwitterSvg text={text}/>
+        </span>
         <span className="small-text margin-right-sm">Focus Total</span>
-        {displayHoursAndMinutes(this.state.minutes)}
+        {hoursMinutes[0] && <span>{hoursMinutes[0]}<span className="small-text">h</span></span>}
+        <span>{hoursMinutes[1]}<span className="small-text">m</span></span>
       </span>
     );
   }

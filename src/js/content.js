@@ -48,7 +48,6 @@ function mountOrNot(siteChecker) {
 
     if (date && date < Date.now()) {
       if (shouldBlockSite && !mounted) {
-        console.log('CALLING ADD DISTRACTION');
         actions.addDistraction();
         mountBlocker(state);
       }
