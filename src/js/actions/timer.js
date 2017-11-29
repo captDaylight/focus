@@ -200,3 +200,11 @@ export function addDistraction() {
     // });
   }
 }
+
+
+/*
+- check for latest
+- clear ALL intervals (cancel timer could be a clue...)
+- change session info
+- restart ALL timers
+*/

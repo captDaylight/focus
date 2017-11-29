@@ -25,12 +25,16 @@ export default function AskCancel(props) {
           </div>
         )
         : (
-          <div
-            className="pointer pink-hover-red"
-            onClick={() => toggleAskCancelTimer()}
-          >
-            Cancel Session
-          </div>
+          <span>
+            <button
+              className="button-small"
+              onClick={() => toggleAskCancelTimer()}
+            >
+              Cancel Session
+            </button>
+            <button className="button-small margin-left-sm">+ 5 minutes</button>
+          </span>
+
         )
       }
     </div>
