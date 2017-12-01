@@ -39,7 +39,17 @@ export function clearTimer() {
     //     'Content-Type': 'application/json',
     //   }),
     // });
-  }
+  };
+}
+
+export const UPDATE_TIMER = 'UPDATE_TIMER';
+export function updateTimer(amount) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_TIMER,
+      amount,
+    });
+  };
 }
 
 export const SET_TIME_LEFT = 'SET_TIME_LEFT';
@@ -119,7 +129,7 @@ export function startCountDown(date, duration, notification, ticking) {
       dispatch(setCountdownInterval(countdownInterval));
     }, (dateEnd - Date.now()) % SECOND);
 
-    chrome.browserAction.setIcon({path: 'dist/img/logo-sm-red.png'});
+    chrome.browserAction.setIcon({ path: 'dist/img/logo-sm-red.png' });
     setTime(); // initial time before timeout
   };
 }

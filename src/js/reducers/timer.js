@@ -83,6 +83,12 @@ export default function timer(state = initialState, action) {
         askCancelTimer: false,
       };
 
+    case UPDATE_TIMER:
+      return {
+        ...state,
+
+      }
+
     case SET_TIMER_LENGTH: {
       const { incOrDec } = action;
       let newDuration = state.duration;
