@@ -10,17 +10,17 @@ export function addTodo(todo) {
   return (dispatch, getState) => {
     const { user: { id } } = getState();
     dispatch(reduxAddTodo(todo));
-    fetch(`${process.env.API_URL}api/todo`, {
-      body: JSON.stringify({
-        UserId: id,
-        text: todo,
-      }),
-      method: 'POST',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    });
+    // fetch(`${process.env.API_URL}api/todo`, {
+    //   body: JSON.stringify({
+    //     UserId: id,
+    //     text: todo,
+    //   }),
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    // });
   }
 }
 

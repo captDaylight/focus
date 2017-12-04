@@ -65,36 +65,36 @@ const init = (initState) => {
 
   const { timer: { sessions, duration, sound }, user, websites } = store.getState();
 
-  if (user && (!('id' in user) || user.id.length > 6 || user.id.length === 0)) {
-    // TODO remove the < 10 check once enough people have signed up
-    fetch(`${process.env.API_URL}api/user`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-    })
-    .then(res => res.json())
-    .then((res) => {
-      store.dispatch(userActions.addUser(res.data.user.id))
-      // add websites to server
-      fetch(`${process.env.API_URL}api/website`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-          UserId: res.data.user.id,
-          urls: websites.websites.map((w) => w.url),
-        }),
-      })
-      .then(res => res.json())
-      .then(res => {
-        console.log('websites',res);
-      })
-    });
-  }
+  // if (user && (!('id' in user) || user.id.length > 6 || user.id.length === 0)) {
+  //   // TODO remove the < 10 check once enough people have signed up
+  //   fetch(`${process.env.API_URL}api/user`, {
+  //     method: 'POST',
+  //     mode: 'cors',
+  //     headers: new Headers({
+  //       'Content-Type': 'application/json'
+  //     }),
+  //   })
+  //   .then(res => res.json())
+  //   .then((res) => {
+  //     store.dispatch(userActions.addUser(res.data.user.id))
+  //     // add websites to server
+  //     fetch(`${process.env.API_URL}api/website`, {
+  //       method: 'POST',
+  //       mode: 'cors',
+  //       headers: new Headers({
+  //         'Content-Type': 'application/json'
+  //       }),
+  //       body: JSON.stringify({
+  //         UserId: res.data.user.id,
+  //         urls: websites.websites.map((w) => w.url),
+  //       }),
+  //     })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log('websites',res);
+  //     })
+  //   });
+  // }
 
   if (sessions.length > 0) {
     if (sessionCheck(sessions, duration)) {

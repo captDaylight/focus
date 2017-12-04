@@ -25,7 +25,7 @@ export default class SessionsList extends Component {
     } = this.props;
 
     return (
-      <li className={classnames('session social-outer', {current: current})}>
+      <li className={classnames('session social-outer', { current })}>
         <div className="session-header">
           <div>
             <h5>

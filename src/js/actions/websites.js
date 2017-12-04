@@ -11,21 +11,21 @@ export function addWebsite(url, favicon) {
   return (dispatch, getState) => {
     const { user: { id } } = getState();
     dispatch(reduxAddWebsite(url, favicon));
-    fetch(`${process.env.API_URL}api/website`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify({
-        UserId: id,
-        urls: [url],
-      }),
-    })
-    .then(res => res.json())
-    .then((res) => {
-      console.log('websites', res);
-    });
+    // fetch(`${process.env.API_URL}api/website`, {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    //   body: JSON.stringify({
+    //     UserId: id,
+    //     urls: [url],
+    //   }),
+    // })
+    // .then(res => res.json())
+    // .then((res) => {
+    //   console.log('websites', res);
+    // });
   };
 }
 
