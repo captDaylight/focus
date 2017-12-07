@@ -10,8 +10,6 @@ import * as uiActions from './actions/ui';
 import * as userActions from './actions/user';
 import cleanUp from './utils/cleanUp';
 
-console.log('version', chrome.app.getDetails().version);
-
 function sessionCheck(sessions, duration){
   // console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
   const { date } =  sessions[sessions.length - 1];
@@ -41,6 +39,17 @@ const init = (initState) => {
   if (initState && !('nightMode' in initState.ui)) {
     initState.ui.nightMode = false;
   }
+  if (initState && !('newVersions' in initState.ui)) {
+    // if new user, add current version, thus don't show popup
+    // if not new user and current version isn't in list add "---"
+    // if starting app and you see "---", then show popup if there is corresponding info
+    // if not add version number to the seen list
+    // when user is done with popup, remove "---" and add the current version to the list
+
+
+    initState.ui.newVersions = [chrome.runtime.getManifest().version]; // add current version
+  }
+  console.log('MANIFEST', chrome.runtime.getManifest().version);
   if (initState && initState.todos && initState.todos.todos.length > 0) {
     if (!initState.todos.todos[0].hasOwnProperty('order')) {
       // people with todos that haven't been ordered yet

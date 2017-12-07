@@ -6,6 +6,7 @@ import {
 const initialState = {
   introStep: 0,
   nightMode: false,
+  newVersions: [],
 };
 
 export default function user(state = initialState, action) {
@@ -15,6 +16,9 @@ export default function user(state = initialState, action) {
 
     case TOGGLE_NIGHT_MODE:
       return { ...state, nightMode: !state.nightMode };
+
+    // case ADD_NEW_VERSION:
+    //   return state;
 
     default:
       return state;
