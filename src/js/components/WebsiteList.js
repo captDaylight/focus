@@ -23,7 +23,7 @@ export default class WebsiteList extends Component {
         {
           websites.map((website, idx) => {
             return (
-              <li className="website-item" key={idx}>
+              <li className="website-item smaller-icon" key={idx}>
                 <div className="website-item-container">
                   <div className="left">
                     <img src={website.favicon} />
@@ -31,12 +31,13 @@ export default class WebsiteList extends Component {
                   </div>
 
                   <div
-                    className={classnames('icon-bin', {disabled})}
+                    className={classnames('todo-icon material-icons', {disabled})}
                     onClick={() => {
                       if (!disabled) {
                         removeWebsite(website.url)
                       }
                     }}>
+                    delete
                   </div>
                 </div>
               </li>

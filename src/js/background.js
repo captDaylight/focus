@@ -10,6 +10,8 @@ import * as uiActions from './actions/ui';
 import * as userActions from './actions/user';
 import cleanUp from './utils/cleanUp';
 
+console.log('version', chrome.app.getDetails().version);
+
 function sessionCheck(sessions, duration){
   // console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
   const { date } =  sessions[sessions.length - 1];
