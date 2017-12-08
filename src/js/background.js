@@ -39,17 +39,34 @@ const init = (initState) => {
   if (initState && !('nightMode' in initState.ui)) {
     initState.ui.nightMode = false;
   }
+
+  // * if new user, add current version, thus don't show popup
+  // * if not new user and current version isn't in list add "__ADD_VERSION__"
+  // if starting app and you see "__ADD_VERSION__", then show popup if there is corresponding info
+  // if not add version number to the seen list
+  // when user is done with popup, remove "__ADD_VERSION__" and add the current version to the list
   if (initState && !('newVersions' in initState.ui)) {
-    // if new user, add current version, thus don't show popup
-    // if not new user and current version isn't in list add "---"
-    // if starting app and you see "---", then show popup if there is corresponding info
-    // if not add version number to the seen list
-    // when user is done with popup, remove "---" and add the current version to the list
+    // situation where they are updating from previous versions
+    // but they have never had any versions added before, aka this feature
+    // is brand new, add the flag, and they are shown the popup
 
+    initState.ui.newVersions = ['__ADD_VERSION__']; // add current version
+  } else {
+    // this is the situation where they have the newVersions in redux,
+    // and they just got the latest and greatest
 
-    initState.ui.newVersions = [chrome.runtime.getManifest().version]; // add current version
+    const version = chrome.runtime.getManifest().version;
+    const idx = initState.ui.newVersions.indexOf(version);
+
+    if (initState.ui.newVersions.length === 0) {
+      // this is the situation where it's a BRAND new user, don't show them the new features list
+      initState.ui.newVersions.push(version);
+    } else if (idx < 0) {
+      // they aren't a new user and if you can't find the version set the flag
+      initState.ui.newVersions.push('__ADD_VERSION__');
+    }
   }
-  console.log('MANIFEST', chrome.runtime.getManifest().version);
+
   if (initState && initState.todos && initState.todos.todos.length > 0) {
     if (!initState.todos.todos[0].hasOwnProperty('order')) {
       // people with todos that haven't been ordered yet
