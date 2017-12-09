@@ -78,6 +78,7 @@ export default class FocusContainer extends Component {
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
     const { ui } = this.state;
+    const displayPopup = ui.newVersions.indexOf('__ADD_VERSION__');
 
     return (
       <section
@@ -155,6 +156,8 @@ export default class FocusContainer extends Component {
             default: return (
               <div>
                 <div id="header">
+                  {ui.newVersions.map(v => (<div key={v}>{v}</div>))}
+                  {displayPopup < 0 ? 'nope': 'display'}
                   <div id="main-action" className={classnames({ blurring: showSites })}>
                     {
                       minutes

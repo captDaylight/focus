@@ -58,12 +58,14 @@ const init = (initState) => {
     const version = chrome.runtime.getManifest().version;
     const idx = initState.ui.newVersions.indexOf(version);
 
-    if (initState.ui.newVersions.length === 0) {
+    if (initState.ui.introStep === 0) {
       // this is the situation where it's a BRAND new user, don't show them the new features list
       initState.ui.newVersions.push(version);
+      initState.ui.websites.showSites = false;
     } else if (idx < 0) {
       // they aren't a new user and if you can't find the version set the flag
       initState.ui.newVersions.push('__ADD_VERSION__');
+      initState.ui.websites.showSites = false;
     }
   }
 
