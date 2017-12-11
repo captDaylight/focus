@@ -156,8 +156,19 @@ export default class FocusContainer extends Component {
             default: return (
               <div>
                 <div id="header">
-                  {ui.newVersions.map(v => (<div key={v}>{v}</div>))}
-                  {displayPopup < 0 ? 'nope': 'display'}
+                  {
+                    displayPopup < 0 ? null : (
+                      <div className="profile-wrapper display">
+                        <div className="profile">
+                          HI THERE
+                        </div>
+
+                        <div id="hide-sites">
+                          <b className="pointer icon-cross"></b>
+                        </div>
+                      </div>
+                    )
+                  }
                   <div id="main-action" className={classnames({ blurring: showSites })}>
                     {
                       minutes
