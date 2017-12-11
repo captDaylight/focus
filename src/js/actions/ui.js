@@ -11,3 +11,11 @@ export function toggleNightMode() {
     type: TOGGLE_NIGHT_MODE,
   };
 }
+
+export const ADD_VERSION = 'ADD_VERSION';
+export function addVersion(version) {
+  return {
+    type: ADD_VERSION,
+    version,
+  }
+}

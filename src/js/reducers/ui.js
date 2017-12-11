@@ -1,6 +1,7 @@
 import {
   SET_NEXT_INTRO_STEP,
   TOGGLE_NIGHT_MODE,
+  ADD_VERSION,
 } from '../actions/ui';
 
 const initialState = {
@@ -17,8 +18,11 @@ export default function user(state = initialState, action) {
     case TOGGLE_NIGHT_MODE:
       return { ...state, nightMode: !state.nightMode };
 
-    // case ADD_NEW_VERSION:
-    //   return state;
+    case ADD_VERSION:
+      return {
+        ...state,
+        newVersions: [action.version, ...state.newVersions],
+      };
 
     default:
       return state;
