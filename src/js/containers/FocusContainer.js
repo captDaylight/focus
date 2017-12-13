@@ -7,6 +7,7 @@ import AskCancel from '../components/AskCancel';
 import Profile from '../components/Profile';
 import SessionsList from '../components/SessionsList';
 import Todos from '../components/Todos';
+import Versions from '../components/Versions';
 import { websitesData } from '../websitesData';
 
 const actions = wrapActionsWithMessanger([
@@ -32,6 +33,36 @@ const actions = wrapActionsWithMessanger([
 ]);
 
 let oldState = {};
+
+class ExtensionUpdates extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      showUpdates: false,
+    };
+  }
+
+  componentWillMount() {
+    const shouldDisplay = !(ui.newVersions.indexOf('__ADD_VERSION__') < 0);
+    const isThereAnUpdate = Versions[chrome.runtime.getManifest().version];
+    console.log('extension updates', shouldDisplay, isThereAnUpdate);
+  }
+
+  render() {
+    return (
+      <div className="profile-wrapper display">
+        <div className="profile">
+          HI THERE
+        </div>
+
+        <div id="hide-sites">
+          <b className="pointer icon-cross"></b>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default class FocusContainer extends Component {
   constructor(props) {
@@ -78,7 +109,6 @@ export default class FocusContainer extends Component {
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
     const { ui } = this.state;
-    const displayPopup = ui.newVersions.indexOf('__ADD_VERSION__');
 
     return (
       <section
@@ -156,19 +186,7 @@ export default class FocusContainer extends Component {
             default: return (
               <div>
                 <div id="header">
-                  {
-                    displayPopup < 0 ? null : (
-                      <div className="profile-wrapper display">
-                        <div className="profile">
-                          HI THERE
-                        </div>
-
-                        <div id="hide-sites">
-                          <b className="pointer icon-cross"></b>
-                        </div>
-                      </div>
-                    )
-                  }
+                  <ExtensionUpdates />
                   <div id="main-action" className={classnames({ blurring: showSites })}>
                     {
                       minutes
