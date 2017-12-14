@@ -12,6 +12,7 @@ import { websitesData } from '../websitesData';
 
 const actions = wrapActionsWithMessanger([
   'addWebsite',
+  'addVersion',
   'clearTimer',
   'countDown',
   'toggleShowSites',
@@ -40,27 +41,42 @@ class ExtensionUpdates extends Component {
 
     this.state = {
       showUpdates: false,
+      foundUpdates: null,
     };
+
+    this.addVersionAction = this.addVersionAction.bind(this);
   }
 
   componentWillMount() {
-    const shouldDisplay = !(ui.newVersions.indexOf('__ADD_VERSION__') < 0);
-    const isThereAnUpdate = Versions[chrome.runtime.getManifest().version];
-    console.log('extension updates', shouldDisplay, isThereAnUpdate);
+    const { newVersions } = this.props;
+
+    this.setState({
+      shouldUpdates: !(newVersions.indexOf('__ADD_VERSION__') < 0),
+      foundUpdates: Versions[chrome.runtime.getManifest().version],
+    });
+  }
+
+  addVersionAction() {
+    const { addVersion } = this.props;
+
+    addVersion(chrome.runtime.getManifest().version);
   }
 
   render() {
-    return (
+    const { shouldUpdates, foundUpdates } = this.state;
+
+
+    return (shouldUpdates && foundUpdates) ? (
       <div className="profile-wrapper display">
         <div className="profile">
-          HI THERE
+          {foundUpdates}
         </div>
 
-        <div id="hide-sites">
-          <b className="pointer icon-cross"></b>
+        <div id="hide-sites" onClick={this.addVersionAction}>
+          <b className="pointer icon-cross" />
         </div>
       </div>
-    );
+    ) : <span />;
   }
 }
 
@@ -100,7 +116,7 @@ export default class FocusContainer extends Component {
       clearTimer, countDown, removeWebsite, addTodo, toggleTodoCompletion,
       toggleTodoWorking, removeTodo, toggleShowSites, toggleTodoEdit, toggleTicking,
       editTodo, setNextIntroStep, toggleAskCancelTimer, setTimerLength,
-      toggleNotificationSound, updateTodoOrder, toggleNightMode,
+      toggleNotificationSound, updateTodoOrder, toggleNightMode, addVersion
     } = actions;
     const {
       date, minutes, seconds, duration, sessions, ampm, notification,
@@ -186,7 +202,7 @@ export default class FocusContainer extends Component {
             default: return (
               <div>
                 <div id="header">
-                  <ExtensionUpdates />
+                  <ExtensionUpdates newVersions={ui.newVersions} addVersion={addVersion} />
                   <div id="main-action" className={classnames({ blurring: showSites })}>
                     {
                       minutes

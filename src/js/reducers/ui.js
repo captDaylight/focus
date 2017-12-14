@@ -19,10 +19,12 @@ export default function user(state = initialState, action) {
       return { ...state, nightMode: !state.nightMode };
 
     case ADD_VERSION:
-      return {
-        ...state,
-        newVersions: [action.version, ...state.newVersions],
-      };
+      console.log('aadding version!!!', action.version, [action.version, ...state.newVersions]);
+      // return {
+      //   ...state,
+      //   newVersions: [action.version, ...state.newVersions],
+      // };
+      return state;
 
     default:
       return state;
