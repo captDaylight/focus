@@ -7,7 +7,7 @@ import {
 const initialState = {
   introStep: 0,
   nightMode: false,
-  newVersions: [],
+  newVersions: [chrome.runtime.getManifest().version],
 };
 
 export default function user(state = initialState, action) {
@@ -19,12 +19,10 @@ export default function user(state = initialState, action) {
       return { ...state, nightMode: !state.nightMode };
 
     case ADD_VERSION:
-      console.log('aadding version!!!', action.version, [action.version, ...state.newVersions]);
-      // return {
-      //   ...state,
-      //   newVersions: [action.version, ...state.newVersions],
-      // };
-      return state;
+      return {
+        ...state,
+        newVersions: [action.version, ...state.newVersions.filter(v => ((v !== '__ADD_VERSION__') && (typeof v === 'string')))],
+      };
 
     default:
       return state;

@@ -76,7 +76,7 @@ class ExtensionUpdates extends Component {
           <b className="pointer icon-cross" />
         </div>
       </div>
-    ) : <span />;
+    ) : null;
   }
 }
 
@@ -119,8 +119,8 @@ export default class FocusContainer extends Component {
       toggleNotificationSound, updateTodoOrder, toggleNightMode, addVersion
     } = actions;
     const {
-      date, minutes, seconds, duration, sessions, ampm, notification,
-      askCancelTimer, ticking
+      minutes, seconds, duration, sessions, ampm, notification,
+      askCancelTimer, ticking,
     } = this.state.timer;
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
