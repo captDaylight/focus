@@ -1,3 +1,5 @@
+const filterOutVersion = version => version !== '__ADD_VERSION__';
+
 export default function storageSync(initState) {
   let prevState = initState;
   return (state) => {
@@ -16,6 +18,10 @@ export default function storageSync(initState) {
     // between tabs the timer state was not being maintained if you have the settings opened
     if (state.timer.duration !== prevState.timer.duration) {
       // console.log('SHOULD STORAGE here');
+      chrome.storage.sync.set(state);
+    }
+    // console.log('versions', state.ui.newVersions, prevState.ui.newVersions);
+    if (state.ui.newVersions.length !== prevState.ui.newVersions.length) {
       chrome.storage.sync.set(state);
     }
 

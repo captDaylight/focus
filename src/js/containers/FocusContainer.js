@@ -51,7 +51,7 @@ class ExtensionUpdates extends Component {
     const { newVersions } = this.props;
 
     this.setState({
-      shouldUpdates: !(newVersions.indexOf('__ADD_VERSION__') < 0),
+      shouldUpdate: !(newVersions.indexOf('__ADD_VERSION__') < 0),
       foundUpdates: Versions[chrome.runtime.getManifest().version],
     });
   }
@@ -63,10 +63,9 @@ class ExtensionUpdates extends Component {
   }
 
   render() {
-    const { shouldUpdates, foundUpdates } = this.state;
+    const { shouldUpdate, foundUpdates } = this.state;
 
-
-    return (shouldUpdates && foundUpdates) ? (
+    return (shouldUpdate && foundUpdates) ? (
       <div className="profile-wrapper display">
         <div className="profile">
           {foundUpdates}
@@ -125,7 +124,7 @@ export default class FocusContainer extends Component {
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
     const { ui } = this.state;
-
+    console.log('updating', this.state);
     return (
       <section
         id="focus-container"
