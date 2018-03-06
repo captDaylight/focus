@@ -39,43 +39,25 @@ class ExtensionUpdates extends Component {
   constructor() {
     super();
 
-    this.state = {
-      showUpdates: false,
-      foundUpdates: null,
-    };
-
     this.addVersionAction = this.addVersionAction.bind(this);
   }
 
-  componentWillMount() {
-    const { newVersions } = this.props;
-
-    this.setState({
-      shouldUpdate: !(newVersions.indexOf('__ADD_VERSION__') < 0),
-      foundUpdates: Versions[chrome.runtime.getManifest().version],
-    });
-  }
-
   addVersionAction() {
-    const { addVersion } = this.props;
-
-    addVersion(chrome.runtime.getManifest().version);
+    this.props.addVersion();
   }
 
   render() {
-    const { shouldUpdate, foundUpdates } = this.state;
-
-    return (shouldUpdate && foundUpdates) ? (
+    return (
       <div className="profile-wrapper display">
         <div className="profile">
-          {foundUpdates}
+          {Versions[chrome.runtime.getManifest().version]}
         </div>
 
         <div id="hide-sites" onClick={this.addVersionAction}>
           <b className="pointer icon-cross" />
         </div>
       </div>
-    ) : null;
+    );
   }
 }
 
@@ -124,7 +106,7 @@ export default class FocusContainer extends Component {
     const { websites, showSites } = this.state.websites;
     const { todos } = this.state.todos;
     const { ui } = this.state;
-    console.log('updating', this.state);
+
     return (
       <section
         id="focus-container"
@@ -201,7 +183,11 @@ export default class FocusContainer extends Component {
             default: return (
               <div>
                 <div id="header">
-                  <ExtensionUpdates newVersions={ui.newVersions} addVersion={addVersion} />
+                  {
+                    ui.showPopup
+                    && <ExtensionUpdates newVersions={ui.newVersions} addVersion={addVersion} />
+                  }
+
                   <div id="main-action" className={classnames({ blurring: showSites })}>
                     {
                       minutes

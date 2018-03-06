@@ -20,8 +20,8 @@ export default function storageSync(initState) {
       // console.log('SHOULD STORAGE here');
       chrome.storage.sync.set(state);
     }
-    // console.log('versions', state.ui.newVersions, prevState.ui.newVersions);
-    if (state.ui.newVersions.length !== prevState.ui.newVersions.length) {
+
+    if (state.ui.showPopup !== prevState.ui.showPopup) {
       chrome.storage.sync.set(state);
     }
 

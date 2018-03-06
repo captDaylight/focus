@@ -9,6 +9,7 @@ import * as todoActions from './actions/todos';
 import * as uiActions from './actions/ui';
 import * as userActions from './actions/user';
 import cleanUp from './utils/cleanUp';
+import Versions from './components/Versions';
 
 function sessionCheck(sessions, duration){
   // console.log(sessions[sessions.length - 1].date, Date.now(), sessions[sessions.length - 1].date > Date.now());
@@ -46,22 +47,22 @@ const init = (initState) => {
   // if not add version number to the seen list
   // when user is done with popup, remove "__ADD_VERSION__" and add the current version to the list
   if (initState ) {
+    const version = chrome.runtime.getManifest().version;
+
     if (!('newVersions' in initState.ui)) {
-      // situation where they are updating from previous versions
-      // but they have never had any versions added before, aka this feature
-      // is brand new, add the flag, and they are shown the popup
-
-      initState.ui.newVersions = ['__ADD_VERSION__']; // add current version
+      // user who doesn't have newVersions in redux
+      if (!!Versions[version]) {
+        initState.ui.showPopup = true;
+        initState.ui.newVersions = '0';
+      } else {
+        initState.ui.showPopup = false;
+        initState.ui.newVersions = version;
+      }
     } else {
-      // this is the situation where they have the newVersions in redux,
-      // and they just got the latest and greatest
-      const version = chrome.runtime.getManifest().version;
-      const idx = initState.ui.newVersions.indexOf(version);
-
-      if (idx < 0) {
-        // they aren't a new user and if you can't find the version set the flag
-        initState.ui.newVersions.push('__ADD_VERSION__');
-        initState.websites.showSites = false;
+      // if this is a user who has newVersions in redux
+      if ((initState.ui.newVersions !== version) && !!Versions[version]) {
+        // if the versions don't match and there is an update to show
+        initState.ui.showPopup = true;
       }
     }
   }
@@ -91,37 +92,6 @@ const init = (initState) => {
   const storageSync = createStorageSync(store.getState());
 
   const { timer: { sessions, duration, sound }, user, websites } = store.getState();
-
-  // if (user && (!('id' in user) || user.id.length > 6 || user.id.length === 0)) {
-  //   // TODO remove the < 10 check once enough people have signed up
-  //   fetch(`${process.env.API_URL}api/user`, {
-  //     method: 'POST',
-  //     mode: 'cors',
-  //     headers: new Headers({
-  //       'Content-Type': 'application/json'
-  //     }),
-  //   })
-  //   .then(res => res.json())
-  //   .then((res) => {
-  //     store.dispatch(userActions.addUser(res.data.user.id))
-  //     // add websites to server
-  //     fetch(`${process.env.API_URL}api/website`, {
-  //       method: 'POST',
-  //       mode: 'cors',
-  //       headers: new Headers({
-  //         'Content-Type': 'application/json'
-  //       }),
-  //       body: JSON.stringify({
-  //         UserId: res.data.user.id,
-  //         urls: websites.websites.map((w) => w.url),
-  //       }),
-  //     })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       console.log('websites',res);
-  //     })
-  //   });
-  // }
 
   if (sessions.length > 0) {
     if (sessionCheck(sessions, duration)) {
