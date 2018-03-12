@@ -45,7 +45,7 @@ export default class Profile extends Component {
             }
           </div>
         </div>
-        <div className={classnames('profile-wrapper', {display: showSites})}>
+        <div className={classnames('profile-wrapper', { display: showSites })}>
           <div className="profile">
             <div className="margin-bottom">
               <h5>FOCUS LENGTH</h5>

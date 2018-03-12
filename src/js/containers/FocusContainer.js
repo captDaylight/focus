@@ -188,7 +188,7 @@ export default class FocusContainer extends Component {
                     && <ExtensionUpdates newVersions={ui.newVersions} addVersion={addVersion} />
                   }
 
-                  <div id="main-action" className={classnames({ blurring: showSites })}>
+                  <div id="main-action" className={classnames({ blurring: showSites || ui.showPopup })}>
                     {
                       minutes
                       ? (<div>
@@ -212,24 +212,26 @@ export default class FocusContainer extends Component {
                       )
                     }
                   </div>
-                  <Profile
-                    showSites={showSites}
-                    websites={websites}
-                    toggleShowSites={toggleShowSites}
-                    removeWebsite={removeWebsite}
-                    disabled={!!minutes}
-                    setTimerLength={setTimerLength}
-                    duration={duration}
-                    toggleTicking={toggleTicking}
-                    toggleNotificationSound={toggleNotificationSound}
-                    notification={notification}
-                    ticking={ticking}
-                    toggleNightMode={toggleNightMode}
-                    ui={ui}
-                  />
+                  <div className={classnames({ blurring: ui.showPopup })}>
+                    <Profile
+                      showSites={showSites}
+                      websites={websites}
+                      toggleShowSites={toggleShowSites}
+                      removeWebsite={removeWebsite}
+                      disabled={!!minutes}
+                      setTimerLength={setTimerLength}
+                      duration={duration}
+                      toggleTicking={toggleTicking}
+                      toggleNotificationSound={toggleNotificationSound}
+                      notification={notification}
+                      ticking={ticking}
+                      toggleNightMode={toggleNightMode}
+                      ui={ui}
+                    />
+                  </div>
                 </div>
 
-                <div id="spread" className={classnames({ blurring: showSites })}>
+                <div id="spread" className={classnames({ blurring: showSites || ui.showPopup })}>
                   <Todos
                     addTodo={addTodo}
                     toggleTodoWorking={toggleTodoWorking}
