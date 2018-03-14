@@ -97,7 +97,7 @@ class TotalTime extends Component {
     return (
       <span>
         <span className="margin-right-sm social-icon">
-          <TwitterSvg text={text}/>
+          <TwitterSvg text={text} />
         </span>
         <span className="small-text margin-right-sm">Total Focus</span>
         {hoursMinutes[0] && <span>{hoursMinutes[0]}<span className="small-text">h </span></span>}
