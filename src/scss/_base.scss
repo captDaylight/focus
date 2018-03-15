@@ -189,3 +189,12 @@ svg path {
     }
   }
 }
+
+.version {
+  a {
+    color: $blue;
+    &:visited {
+      color: $blue;
+    }
+  }
+}

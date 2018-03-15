@@ -67,7 +67,7 @@
   @include column-gap(50px);
   @include column-rule(solid $blue 1px);
   > li {
-    padding: 5px 0px;
+    padding: 5px 0px 0px 0px;
     display: inline-block;
     width: 100%;
     &.blocked {
